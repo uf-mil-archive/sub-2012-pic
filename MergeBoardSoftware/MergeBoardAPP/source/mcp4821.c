@@ -8,7 +8,7 @@
 // reconfigure SPI for itself and then put it back how it found it
 // when its done.
 
-#if defined(DAC_CS_IO)
+#if defined(DAC16_CS_IO) || defined(DAC32_CS_IO)
 
 INT16 DAC_IsInited = 0;
 
@@ -47,10 +47,16 @@ void DAC_configSPI(void)
     // Make sure the DAC pins have been initialized correctly
     if(!DAC_IsInited)
     {
-        DAC_LD_TRIS = OUTPUT_PIN;
-        DAC_LD_IO = AL_FALSE;
-        DAC_CS_TRIS = OUTPUT_PIN;
-        DAC_CS_IO = AL_FALSE;
+        #ifdef DAC_LD_IO
+            DAC_LD_TRIS = OUTPUT_PIN;
+            DAC_LD_IO = AL_FALSE;
+        #endif
+
+        DAC16_CS_TRIS = OUTPUT_PIN;
+        DAC16_CS_IO = AL_FALSE;
+
+        DAC32_CS_TRIS = OUTPUT_PIN;
+        DAC32_CS_IO = AL_FALSE;
 
         DAC_IsInited = TRUE;
     }
@@ -58,10 +64,11 @@ void DAC_configSPI(void)
     // Disable the SPI to reconfigure for the DAC
     DAC_SPIxSTATbits.SPIEN = 0;
 
-    DAC_saveSPI();
+    //DAC_saveSPI();
 
     // This assumes a 40Mhz instruction clock to get 5MHz on SPI
-    DAC_SPIxCON1 = 0x0523;
+    // DAC_SPIxCON1 = 0x0523;
+      DAC_SPIxCON1 = 0x0522;        //slower SPI for debugging (1.25 MHz)
     // Bits 15-13 = 000  Unimplemented
     // Bit 12 = 0        SCK pin is controlled by SPI
     // Bit 11 = 0        SDO pin is controlled by SPI
@@ -73,7 +80,7 @@ void DAC_configSPI(void)
     // Bit 5 = 1         SPI is in master mode
     // Bits 4-2 = 000    Secondary clock prescalar 8:1
     // Bits 1-0 = 11     Primary clock prescalar 1:1
-    
+
     DAC_SPIxCON2 = 0x0000;  // Framing is not used, keep this register cleared
                             // for it to stay disabled
 
@@ -81,15 +88,17 @@ void DAC_configSPI(void)
     DAC_SPIxSTAT = 0x8000;
 }
 
-void DAC_SetOutput(float voltage)
+void DAC_SetOutput(float voltage, int dacSel)
 {
-    DAC_LD_IO = AL_TRUE;    // Load when CS is deasserted
+    #ifdef DAC_LD_IO
+        DAC_LD_IO = AL_TRUE;    // Load when CS is deasserted
+    #endif
 
     DAC_configSPI();
 
     if(voltage > DAC_MAXVOLTAGE)    // Silently cap the max voltage
         voltage = DAC_MAXVOLTAGE;
-    
+
     UINT16 dacReg = 0;
     if(voltage > DAC_VMODESWITCH)
     {
@@ -99,47 +108,65 @@ void DAC_SetOutput(float voltage)
     else
     {
        dacReg = ((DAC_LVCBITS)|((UINT16)(voltage*2000)));
-    }  
+    }
 
     while(DAC_SPIxSTATbits.SPITBF);     // Make sure the buffer is ready
 
-    DAC_CS_IO = AL_TRUE;
+    if (dacSel == 1 || dacSel == 16)
+        DAC16_CS_IO = AL_TRUE;
+    else
+        DAC32_CS_IO = AL_TRUE;
 
     // Send out the voltage and command nibble
     DAC_SPIxBUF = dacReg;
-    
+
     while(!DAC_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
 
     volatile UINT16 dummy = DAC_SPIxBUF; // This ensures the overflow flag
                                          // stays clear
 
-    DAC_CS_IO = AL_FALSE;   // DAC has new voltage
-    DAC_LD_IO = AL_FALSE;    // Leave this high to help with current draw
-    
+    if (dacSel == 1 || dacSel == 16)     //voltage is now set
+       DAC16_CS_IO = AL_FALSE;
+    else
+       DAC32_CS_IO = AL_FALSE;
+
+
+    #ifdef DAC_LD_IO
+        DAC_LD_IO = AL_FALSE;    // Leave this high to help with current draw
+    #endif
     // Put the SPI back how it was
     DAC_restoreSPI();
 }
 
-void DAC_Shutdown()
+void DAC_Shutdown(int dacSel)
 {
-    DAC_LD_IO = AL_TRUE;    // Load when CS is deasserted
-
+    #ifdef DAC_LD_IO
+        DAC_LD_IO = AL_TRUE;    // Load when CS is deasserted
+    #endif
     DAC_configSPI();
 
     while(DAC_SPIxSTATbits.SPITBF);     // Make sure the buffer is ready
 
-    DAC_CS_IO = AL_TRUE;
+    if (dacSel == 1 || dacSel == 16)
+        DAC16_CS_IO = AL_TRUE;
+    else
+        DAC32_CS_IO = AL_TRUE;
 
     // Send out the turn off command
     DAC_SPIxBUF = 0x2000;
 
     while(!DAC_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
 
-    DAC_CS_IO = AL_FALSE;   // DAC is now off
-    DAC_LD_IO = AL_FALSE;    // Leave this high to help with current draw
+    if (dacSel == 1 || dacSel == 16)   // DAC is now off
+        DAC16_CS_IO = AL_FALSE;
+    else
+        DAC32_CS_IO = AL_FALSE;
 
+#ifdef DAC_LD_IO
+        DAC_LD_IO = AL_FALSE;    // Leave this high to help with current draw
+    #endif
     // Put the SPI back how it was
-    DAC_restoreSPI();
+    //DAC_restoreSPI();
 }
 
 #endif
