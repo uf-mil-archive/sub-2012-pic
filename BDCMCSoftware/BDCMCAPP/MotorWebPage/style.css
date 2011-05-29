@@ -1,0 +1,437 @@
+body, html {
+background-color: #4f5c4f;
+margin: 0px;
+padding: 0px;
+height: 100%;
+}
+a:link {
+color: #487d4f;
+}
+a:visited {
+color: #7c607d;
+}
+a:active {
+color: #7c607d;
+}
+a:hover {
+color: #2b4a2f;
+}
+.page {
+position: relative;
+width: 1000px;
+margin: 0px auto;
+padding: 0px 0px 0px 0px;
+background-color: #ffffff;
+background-image: url('images/ContentBorderWithSidebarMiddle.png');
+min-height: 100%;
+overflow: auto;
+*-overflow: inherit; /*IE6 only*/
+}
+
+/*For Firefox 2*/
+.page, x:-moz-any-link {min-height: 0px;}
+.page, x:-moz-any-link, x:default {min-height: 100%;}
+
+.page .pageTop {
+background-image: url('images/ContentBorderWithSidebarTop.png');
+height: 28px;
+}
+.home .pageTop
+{
+background-image: url('images/ContentBorderWithSidebarTopHome.png');
+}
+.page .pageBottom {
+position: absolute;
+bottom: 0px;
+*-bottom: -1px; /*IE6 only*/
+background-image: url('images/ContentBorderWithSidebarBottom.png');
+clear: both;
+width: 1000px;
+height: 32px;
+}
+.floatingImage {
+margin-bottom: 3px;
+}
+.floatRight {
+float: right;
+padding: 5px;
+}
+.floatLeft {
+float: left;
+padding: 5px;
+}
+.content {
+display: inline;
+float: right;
+width: 705px;
+margin: 0px 19px 32px 0px;
+font-family: Helvetica, Arial;
+font-size: 13px;
+padding-left: 5px;
+}
+.infobox {
+padding: 5px;
+background-color: #ffffff;
+color: #555;
+line-height: 22px;
+}
+.infobox .text {
+width: 555px;
+margin: 0px auto 10px auto;
+clear: both;
+}
+.infobox .header {
+padding: 2px;
+font-size: 20px;
+text-align: center;
+margin-bottom: 15px;
+color: #555;
+}
+.infobox .header h1 {
+font-size: 28px;
+padding: 0px;
+margin: 0px;
+margin-top: 6px;
+}
+.infobox .header h5 {
+font-size: 15px;
+font-weight: normal;
+margin: 0px;
+margin-top: 6px;
+color: #555;
+}
+.infobox .bottom {
+clear: both;
+}
+.linkBoxContainer
+{
+margin: 0px auto;
+width: 460px;
+overflow: auto;
+}
+.features .linkBoxContainer
+{
+margin-top: 10px;
+}
+a.linkBox {
+display: block;
+float: left;
+text-align: center;
+width: 198px;
+height: 50px;
+border: 1px solid #cccccc;
+background-color: #f5f5f5;
+margin: 10px;
+padding: 4px 4px 4px 6px;
+text-decoration: none;
+}
+a.linkBox:hover {
+background-color: #ffffff;
+}
+a.linkBox img {
+display: block;
+float: left;
+}
+a.linkBox h4
+{
+margin: 0px;
+font-size: 14px;
+font-weight: bold;
+line-height: 16px;
+}
+a.linkBox h5
+{
+margin: 0px;
+font-size: 12px;
+font-weight: normal;
+line-height: 16px;
+}
+.sideBar {
+width: 240px;
+margin-left: 11px;
+margin-bottom: 28px;
+}
+.bottomMenu {
+padding: 2px;
+text-align: center;
+font-family: helvetica, arial;
+font-size: 12px;
+color: #555;
+}
+.copyright {
+padding: 2px;
+text-align: center;
+font-family: helvetica, arial;
+font-size: 12px;
+color: #555;
+}
+.question {
+margin-bottom: 2px;
+font-family: helvetica, arial;
+font-size: 14px;
+}
+.answer {
+margin-top: 25px;
+padding: 4px;
+border-top: 1px dotted #999999;
+}
+.answer .question {
+font-weight: bold;
+font-family: helvetica, arial;
+font-size: 13px;
+padding: 3px 0px;
+}
+.aboutBar {
+text-align: left;
+margin-left: auto;
+margin-right: auto;
+width: 500px;
+clear: both;
+}
+.aboutBar .title {
+vertical-align: middle;
+height: 32px;
+text-align: center;
+}
+.sideBox {
+width: 239px;
+}
+.sideBox + .sideBox {
+margin-top: 80px;
+}
+ul.menu {
+list-style: none;
+display: block;
+padding: 0px;
+margin: 0px;
+}
+ul.menu li {
+display: block;
+width: 249px;
+vertical-align: middle;
+font-family: Helvetica, Arial;
+font-size: 16px;
+line-height: 36px;
+color: #555;
+}
+ul.menu li a {
+text-decoration: none;
+}
+ul.menu li.selected {
+border: none;
+height: 43px;
+position: relative;
+}
+ul.menu li:hover {
+background-image: url(images/ContentBorderWithSidebarHoveredItemBackground.png);
+background-repeat: repeat-y;
+}
+ul.menu li.home a:hover {
+border-top: 1px solid #cccccc;
+padding-top: 3px;
+}
+ul.menu li img {
+display: block;
+float: left;
+margin-right: 20px;
+opacity: 0.5;
+border-width: 0px;
+}
+/* Opacity must be 0.99 or else images disappear in Safari 2 */
+ul.menu li.selected img {
+opacity: 0.99;
+}
+ul.menu li.home img {
+opacity: 0.99;
+}
+ul.menu li a:hover img {
+opacity: 0.99;
+}
+ul.menu li.home img {
+margin-right: 4px;
+}
+ul.menu li .itemContent {
+display: block;
+width: 238px;
+height: 38px;
+padding-top: 4px;
+padding-left: 10px;
+border-bottom: 1px solid #cccccc;
+}
+.sideBox + .sideBox ul.menu li:first-child .itemContent {
+border-top: 1px solid #cccccc;
+}
+.sideBox + .sideBox ul.menu li.selected:first-child .itemContent {
+border-top: none;
+}
+ul.menu li.selected .itemContent {
+background-image: url(images/ContentBorderWithSidebarSelectedItemBackground.png);
+position: absolute;
+top: -4px;
+height: 43px;
+width: 239px;
+padding-top: 8px;
+border-bottom: none;
+}
+ul.menu li.home {
+height: 61px;
+font-size: 20px;
+font-weight: bold;
+line-height: 54px;
+}
+.home ul.menu li.home {
+background-image: url('images/ContentBorderWithSidebarLogoBackground.png');
+background-position: bottom right;
+}
+.home ul.menu li.home .itemContent {
+background-image: none;
+position: static;
+padding-top: 4px;
+}
+ul.menu li.home .itemContent {
+height: 56px;
+}
+ul.menu li a:hover {
+}
+ul.menu li.subitem {
+}
+.caption {
+float: right;
+width: 260px;
+padding-left: 10px;
+font-size: 12px;
+text-align: center;
+clear: right;
+margin-bottom: 20px;
+}
+.caption a {
+text-decoration: none;
+}
+.clear {
+clear: both;
+}
+.error {
+color: #7c0000;
+font-weight: bold;
+}
+.screenshot {
+float: left;
+text-align: center;
+width: 230px;
+height: 230px;
+}
+.complibscreenshot {
+float: left;
+text-align: center;
+width: 185px;
+height: 132px;
+}
+.screenshot a, .complibscreenshot a {
+text-decoration: none;
+}
+.screenshot blockquote, .complibscreenshot blockquote {
+display: none;
+}
+ul.bulleted {
+margin: 0px;
+padding: 0px 0px 0px 5px;
+list-style: none;
+}
+ul.bulleted li {
+padding-left: 10px;
+background-repeat: no-repeat;
+background-position: 0px 9px;
+background-image: url(images/circlebullet2.gif);
+}
+.tacodownload {
+text-align: center;
+}
+.tacodownload h3 {
+margin: 2px;
+}
+.faq h5 {
+font-size: 14px;
+font-weight: bold;
+margin: 20px 0px 20px 0px;
+}
+.features h5 {
+font-size: 16px;
+margin: 20px 0px 4px 0px;
+color: #888;
+font-weight: normal;
+}
+.features .links {
+float: right;
+font-size: 12px;
+line-height: 16px;
+width: 90px;
+height: 90px;
+padding-left: 30px;
+}
+.features .links h5 {
+font-size: 12px;
+margin: 0px;
+text-align: center;
+}
+.contactus {
+font-size: 14px;
+width: 200px;
+margin: 0px auto;
+}
+.beta label, .unsubscribe label {
+font-weight: bold;
+}
+
+.formbox2 {
+margin:5px auto 10px auto;
+padding: 8px;
+border: 1px dotted #333;
+text-align:center;
+background:#ddd;
+vertical-align: middle;
+width: 450px;
+}
+.formleft {
+float: left;
+width: 200px;
+}
+
+.formright{
+float: right;
+width: 300px;
+}
+
+.center {
+width: 601px;
+margin: auto;
+}
+
+.realtimeinfo {
+float: left;
+width: 300px;
+}
+
+fieldset legend {
+color:#30519c;
+}
+
+.setting {
+  position:relative;
+  margin-bottom:.453em;
+  line-height:1.993em;
+  width:100%;
+  text-align: left;
+  /*background: #ddd;*/
+}
+.setting .label {
+  float:left;
+  width:120px;
+  /*background: #bbb;*/
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+}
+
+fieldset .setting .label {
+  width:150px;
+}

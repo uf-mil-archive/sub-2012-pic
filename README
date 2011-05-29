@@ -1,0 +1,3 @@
+This is the root directory for any projects that depend on FreeRTOS or the Microchip Stack Applications. This way, we can control which source updates we accept, and can easily diff our changes into the newest versions( I like WinDiff because its pretty). Modifications to the stack ARE GENERIC ONLY! Not for your specific project.
+
+REMEMBER: This stack is modified to work with FreeRTOS, if you want to use your own scheduler/whatever, GET YOUR OWN STACK TREE.

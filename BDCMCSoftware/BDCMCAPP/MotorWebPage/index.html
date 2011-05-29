@@ -1,0 +1,85 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head> 
+<title>BDCMC Administration Panel</title> 
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head> 
+
+<body> 
+<div class="page home"> 
+<div class="pageTop"></div> 
+<div class="content"> 
+ 
+	<div class="infobox"> 
+		<div class="header"><h1>BDCMC Administration Panel</h1><h5>~hostname~ @ ~config_ip~</h5></div>	
+			<div class="text">This website allows for the display of active status information about the motor driver, a configuration interface for viewing and changing motor parameters, calibration methods and documentation and support pages.</div>		
+			
+			<div class="center">
+			<div class="realtimeinfo">
+			<fieldset> 
+			<legend>Real-Time Status Information</legend>
+				<div class="setting"><div class="label">RPM</div>{{rpm}}</div>
+				<div class="setting"><div class="label">Current</div>~motor_current~</div>
+				<div class="setting"><div class="label">Voltage</div>~motor_railvoltage~</div>
+				<div class="setting"><div class="label">Direction</div>~motor_direction~</div>
+				<div class="setting"><div class="label">Up-time</div>{{uptime}}</div>
+			</fieldset>
+			</div>
+			<div class="realtimeinfo">
+			<fieldset> 
+			<legend>Component Information</legend>
+				<div class="setting"><div class="label">Host Name</div>~hostname~</div>
+				<div class="setting"><div class="label">IP Address</div>~config_ip~</div>
+				<div class="setting"><div class="label">MAC Address</div>~config_mac~</div>
+				<div class="setting"><div class="label">TCP/IP Stack Version</div>~version~</div>
+				<div class="setting"><div class="label">Build Date</div>~builddate~</div>
+			</fieldset>			
+			</div>	
+			</div>
+		
+			<div class="text">&nbsp;
+			<div class="formbox2">
+				<form accept-charset="UTF-8" method="post" action="index.html">&nbsp;
+				<strong>Assign Effort</strong>
+				<input type="text" name="effort" maxlength="3" size="3" style="font-size: 15px;">
+				<input type="radio" name="force" id="forward" value="action" />
+				<label for="forward">Forward</label>
+				<input type="radio" name="force" id="reverse" value="action" />
+				<label for="reverse">Reverse</label>
+				<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" name="effortsubmit" value="Set">Set</button><br/>
+				<div style="font-size: 9px;">Mapping to the appropriate voltage occurs internally using the polynomial assigned in the configuration.</div>
+				</form>
+			</div>
+			
+			<div class="formbox2">
+				<form accept-charset="UTF-8" method="post" action="index.html">&nbsp;
+				<button style="color: #900; font-weight: bold; font-size: 150%; text-transform: uppercase;" type="submit" value="stopsubmit">Stop Motor</button>
+				</form>
+			</div>
+			
+			</div>
+			
+ 
+		<div class="bottom"></div> 
+	</div> 
+	
+	<!--<div class="bottomMenu">Home | <a href="aboutus.php">About Us</a> | <a href="contactus.php">Contact Us</a> | <a href="privacy.php">Privacy Policy</a></div>-->
+	<div class="copyright">Copyright &copy; 2011 University of Florida</div> 
+</div> 
+ 
+<div class="sideBar"> 
+	<div class="sideBox"> 
+		<ul class="menu">
+			<li class="main selected home"><span class="itemContent"><img src="images/menuicons/info.png" alt="Status" width="32" height="32" style="padding-right: 14px; padding-top: 10px;"/>Home/Status</span></li>
+			<li class="main"><a class="itemContent" href="configuration.html"><img src="images/menuicons/config.png" alt="Configuration" width="32" height="32"/>Configuration</a></li>
+			<li class="main"><a class="itemContent" href="calibration.html"><img src="images/menuicons/calibrate.png" alt="Calibration" width="32" height="32"/>Calibration</a></li>
+			<li class="main"><a class="itemContent" href="support.html"><img src="images/menuicons/help.png" alt="Support &amp; FAQ" width="32" height="32"/>Support &amp; FAQ</a></li>
+		</ul> 
+	</div>	
+</div> 
+<div class="pageBottom"></div> 
+</div>
+
+
+</body>
+</html>
