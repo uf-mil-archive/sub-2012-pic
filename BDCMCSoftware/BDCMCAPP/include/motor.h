@@ -51,6 +51,7 @@ typedef struct MotorDataDefinition
     INT16 InterruptCount;
     INT16 ReferenceInput;
     INT16 ReferenceDuty;
+    INT16 PresentOutput;
     INT16 PresentDuty;
     INT16 VRail;
     INT16 Current;

@@ -1,6 +1,6 @@
 #include "messages.h"
 
-CHAR8 outBuffers[MSG_NUM_OUTGOING_BUFFERS][MSG_MAX_LENGTH*2];
+BYTE outBuffers[MSG_NUM_OUTGOING_BUFFERS][MSG_MAX_LENGTH*2];
 volatile UINT16 currentOutBuffer = 0;
 volatile UINT16 packetCount = 0;
 
@@ -115,121 +115,118 @@ void ParseBROLPacket(CHAR8 buffer[], UINT16 sender)
     return;
 }
 
-INT16 AddByteToPacket(BYTE* buf, BYTE data, INT16 currentCount)
+inline void AddByteToPacket(BYTE* buf, BYTE data, INT16* currentCount)
 {
     if(data == MSG_FLAG || data == MSG_ESCAPE)
     {
         *buf++ = MSG_ESCAPE;
-        currentCount++;
+        (*currentCount)++;
         data ^= MSG_ESCAPE_XOR;
     }
 
     *buf++ = data;
-    currentCount++;
-
-    return currentCount;
+    (*currentCount)++;
 }
 
-INT16 BuildOutgoingBROLPacket(const MotorData* mData, INT16 tickCount, CHAR8** pkt)
+// Adds little endian int to a packet
+inline void AddLEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
+{
+    AddByteToPacket(buf,
+            (BYTE)(data & 0xFF),
+            currentCount);
+    AddByteToPacket(buf,
+            (BYTE)((data >> 8) & 0xFF),
+            currentCount);
+}
+
+// Adds big endian int to a packet
+inline void AddBEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
+{
+    AddByteToPacket(buf,
+            (BYTE)((data >> 8) & 0xFF),
+            currentCount);
+    AddByteToPacket(buf,
+            (BYTE)(data & 0xFF),
+            currentCount);
+}
+
+INT16 BuildOutgoingBROLPacket(const MotorData* mData, INT16 tickCount, BYTE** pkt)
 {
     INT16 tmplength = 0;
     INT16 temp = 0;
+    BYTE* buf;
 
     // Handle buffer switching first
     currentOutBuffer = ((currentOutBuffer + 1) % MSG_NUM_OUTGOING_BUFFERS);
+    buf = &outBuffers[currentOutBuffer][0];
 
     // Increment the current packet number
     packetCount++;
 
     // Start with the source address - its never the escape character so add it directly
-    outBuffers[currentOutBuffer][tmplength++] = mData->Address;
+    *buf++ = mData->Address;
     // Next add the destination address - its never the escape character so add it directly
-    outBuffers[currentOutBuffer][tmplength++] = mData->Address;
+    *buf++ = mData->Address;
     
-    tmplength++;    // Skip over the packet length variable
+    buf++; tmplength += 3;    // Skip over the packet length variable
 
-/*
     if(!(mData->Flags.Endianess)) // Big Endian
     {
         // Insert the packet number
-        tmplength = AddByteToPacket(&&(outBuffers[currentOutBuffer][tmplength]),
-                (BYTE)((packetCount >> 8) & 0xFF), tmplength);
-        buf[tmplength++] = (CHAR8)(packetCount & 0xFF);
+        AddBEIntToPacket(buf, packetCount, &tmplength);
 
         // Insert the tick count
-        buf[tmplength++] = (CHAR8)((tickCount >> 8) & 0xFF);
-        buf[tmplength++] = (CHAR8)(tickCount & 0xFF);
+        AddBEIntToPacket(buf, tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        temp = (mData->Flags.All);
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
+        AddBEIntToPacket(buf, mData->Flags.All, &tmplength);
 
-        temp = mData->ReferenceInput;    // Insert reference input
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
+        // Insert reference input
+        AddBEIntToPacket(buf, mData->ReferenceInput, &tmplength);
 
-        temp = mData->VRail;    // Insert voltage rail
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
+        // Insert voltage rail
+        AddBEIntToPacket(buf, mData->VRail, &tmplength);
 
-        temp = mData->Current;    // Insert motor current
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
-        buf[tmplength] = (CHAR8)(temp & 0xFF);
+        // Insert motor current
+        AddBEIntToPacket(buf, mData->Current, &tmplength);
     }
     else    // Little Endian
     {
         // Insert the packet number
-        buf[tmplength++] = (CHAR8)(packetCount & 0xFF);
-        buf[tmplength++] = (CHAR8)((packetCount >> 8) & 0xFF);
+        AddLEIntToPacket(buf, packetCount, &tmplength);
 
         // Insert the tick count
-        buf[tmplength++] = (CHAR8)(tickCount & 0xFF);
-        buf[tmplength++] = (CHAR8)((tickCount >> 8) & 0xFF);
+        AddLEIntToPacket(buf, tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        temp = (mData->Flags.All);
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
+        AddLEIntToPacket(buf, mData->Flags.All, &tmplength);
 
-        temp = mData->ReferenceInput;    // Insert reference input
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
+        // Insert reference input
+        AddLEIntToPacket(buf, mData->ReferenceInput, &tmplength);
 
-        temp = mData->VRail;    // Insert voltage rail
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
+        // Insert voltage rail
+        AddLEIntToPacket(buf, mData->VRail, &tmplength);
 
-        temp = mData->Current;    // Insert motor current
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
-        buf[tmplength] = (CHAR8)((temp >> 8) & 0xFF);
+        // Insert motor current
+        AddLEIntToPacket(buf, mData->Current, &tmplength);
     }
 
     // Insert tmplength into packet
-    buf[1] = (CHAR8)(tmplength & 0xFF);
+    outBuffers[currentOutBuffer][2] = (BYTE)(tmplength & 0xFF);
 
     // Calculate the checksum
-    temp = CRC16ChecksumWord(((UINT16 *)&buf[0]), tmplength, 0);
-
-    tmplength++; // Increment to where the checksum goes in.
+    temp = CRC16ChecksumWord(((UINT16 *)(&outBuffers[currentOutBuffer][0])),
+            tmplength,
+            0);
 
     if(!(mData->Flags.Endianess)) // Big Endian
-    {
-        buf[tmplength++] = (CHAR8)((temp >> 8) & 0xFF);
-        buf[tmplength] = (CHAR8)(temp & 0xFF);
-    }
+        AddBEIntToPacket(buf, temp, &tmplength);
     else
-    {
-        buf[tmplength++] = (CHAR8)(temp & 0xFF);
-        buf[tmplength] = (CHAR8)((temp >> 8) & 0xFF);
-    }
-
-    temp = BuildEscapedPacket(&buf[0],&(outBuffers[currentOutBuffer][0]), tmplength);
-
+        AddLEIntToPacket(buf, temp, &tmplength);
+    
     *pkt = &(outBuffers[currentOutBuffer][0]);
-*/
 
-    return temp;
+    return tmplength;
 }
 
 

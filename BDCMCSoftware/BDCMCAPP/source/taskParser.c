@@ -46,7 +46,6 @@ void taskParser(void* pvParameter)
     The NULL parameter passed to the vTaskDelete() function indicates that
     the task to be deleted is the calling (this) task. */
     vTaskDelete( NULL );
-
 }
 
 void SearchForPacket(xParserState *state, CHAR8 buffer[], xSimpleQueueHandle rQueue, UINT16 sender)

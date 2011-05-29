@@ -13,7 +13,7 @@ void xPublisherTaskInit(void)
 
     gPublishPeriod = ((1000 / rate) / portTICK_RATE_MS);
 
-    xTaskCreate(taskPublisher, (CHAR*)"PUBLISH", STACK_SIZE_PUBLISHER,
+    xTaskCreate(taskPublisher, (CHAR*)"UARTPUB", STACK_SIZE_PUBLISHER,
                 NULL, tskIDLE_PRIORITY + 1, &hPublisherTask);
 
     return;
@@ -32,7 +32,7 @@ void taskPublisher(void* pvParameter)
         // Block here until the timeout has passed
         vTaskDelayUntil(&previousWakeTime, gPublishPeriod);
 
-        CHAR8* pkt = NULL;
+        BYTE* pkt = NULL;
 
         if(!hMotorData) // Nothing to publish
             continue;
@@ -40,6 +40,6 @@ void taskPublisher(void* pvParameter)
         INT16 length = BuildOutgoingBROLPacket(hMotorData, previousWakeTime, &pkt);
 
         // Publish to who?
-        COMPut(pkt, length, UART_DONT_FREE_BUFFER);
+        COMPut((CHAR8*)pkt, length, UART_DONT_FREE_BUFFER);
     }
 }
