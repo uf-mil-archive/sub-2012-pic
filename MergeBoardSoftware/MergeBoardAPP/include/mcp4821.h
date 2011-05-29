@@ -10,12 +10,12 @@
  * Parameters:
  *  voltage:  0V - 4.096V
  */
-void DAC_SetOutput(float voltage);
+void DAC_SetOutput(float voltage, int dacSel);
 
 /*
  * Turns off DAC Output voltage. To turn it back on, write a new voltage
  * using DAC_SetOutput
  */
-void DAC_Shutdown();
+void DAC_Shutdown(int dacSel);
 
 #endif // MCP4821_H
