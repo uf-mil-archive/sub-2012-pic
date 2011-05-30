@@ -258,7 +258,7 @@ void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
         hMotorData->Flags.Heartbeat = 0;
         hMotorData->ReferenceInput = 0;
     }
-    else if(hMotorData.MinVoltage > hMotorData.VRail)
+    else if(hMotorData->MinVoltage > hMotorData->VRail)
     {
         hMotorData->Flags.UnderVoltage = 1;
         hMotorData->ReferenceInput = 0;
@@ -363,7 +363,7 @@ INT16 MotorGetAmpsString(MotorData* data, BYTE* buf)
     {
         float amps = data->Current*MTR_AMPS_SCALE;
 
-        //res = sprintf((CHAR8*)buf, "%2.4f", amps);
+        res = sprintf((CHAR8*)buf, "%2.4f", amps);
     }
     
     return res;
@@ -381,7 +381,7 @@ INT16 MotorGetRailVoltsString(MotorData* data, BYTE* buf)
     {
         float volts = data->VRail*MTR_RAILVOLTS_SCALE;
 
-        //res = sprintf((CHAR8*)buf, "%2.4f", volts);
+        res = sprintf((CHAR8*)buf, "%2.4f", volts);
     }
 
     return res;

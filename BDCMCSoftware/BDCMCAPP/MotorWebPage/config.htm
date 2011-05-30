@@ -11,58 +11,32 @@
 <div class="content"> 
  
 	<div class="infobox"> 
-		<div class="header"><h1>DUAC Administration Panel</h1><h5>{{Name}} @ {{IpAddress}}</h5></div>
-		<div class="text">This page allows for custom configuration information to be applied to the DUAC. Please use caution when changing DUAC parameters without knowledge of the device. Detailed information regarding the custom configuration options found on this page are listed in the <a href="support.html">Support</a> section.</div>
-		<center><h2>DUAC Network Configuration</h2></center>
+		<div class="header"><h1>BDCMC Administration Panel</h1><h5>~hostname~ @ ~config_ip~</h5></div>
+		<div class="text">This page allows for custom configuration information to be applied to the DUAC. Please use caution when changing DUAC parameters without knowledge of the device. Detailed information regarding the custom configuration options found on this page are listed in the <a href="support.htm">Support</a> section.</div>
+		<center><h2>BDCMC Network Configuration</h2></center>
 		<div class="formbox2">
-			<form accept-charset="UTF-8" method="post" action="index.html">
-			
+			<form accept-charset="UTF-8" method="post" action="index.htm">			
 			<div class="setting">
-				<div class="label">IP Address:</div>
-				<input type="text" name="ip1" id="ip" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ip1}}"><strong>.</strong>
-				<input type="text" name="ip2" id="ip" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ip2}}"><strong>.</strong>
-				<input type="text" name="ip3" id="ip" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ip3}}"><strong>.</strong>
-				<input type="text" name="ip4" id="ip" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ip4}}"><br/>
-			</div>
-
-			<div class="setting">
-				<div class="label">Subnet Mask</div>
-				<input type="text" name="subnet1" id="subnet" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{sn1}}"><strong>.</strong>
-				<input type="text" name="subnet2" id="subnet" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{sn2}}"><strong>.</strong>
-				<input type="text" name="subnet3" id="subnet" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{sn3}}"><strong>.</strong>
-				<input type="text" name="subnet4" id="subnet" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{sn4}}"><br/>
-			</div>
-
-			<div class="setting">
-				<div class="label">Default Gateway</div>
-				<input type="text" name="gateway1" id="gateway" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{dg1}}"><strong>.</strong>
-				<input type="text" name="gateway2" id="gateway" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{dg2}}"><strong>.</strong>
-				<input type="text" name="gateway3" id="gateway" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{dg3}}"><strong>.</strong>
-				<input type="text" name="gateway4" id="gateway" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{dg4}}"><br/>
-			</div>
-
-			<div class="setting">
-				<div class="label">DNS Server:</div>
-				<input type="text" name="dns1" id="dns" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ds1}}"><strong>.</strong>
-				<input type="text" name="dns2" id="dns" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ds2}}"><strong>.</strong>
-				<input type="text" name="dns3" id="dns" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ds3}}"><strong>.</strong>
-				<input type="text" name="dns4" id="dns" maxlength="3" size="3" style="font-size: 15px; font-weight: bold;" value="{{ds4}}">
-			</div>
-
-			<div class="setting">
-				<div class="label">Network Name:</div>
-				<input type="text" name="networkname" id="networkname" maxlength="20" size="20" style="font-size: 15px; font-weight: bold;" value="{{name}}">
-			</div>
-			
-			
-
+				<div class = "label">Host Name:</div>
+				<input type="text" name="host" value="~hostname~" /><br>
+				<div class="label"><label>IP Address:</label></div>
+				<input type="text" name="ip" value="~config_ip~" /><br>
+				<div class="label"><label>Subnet Mask</label></div>
+				<input type="text" name="sub" value="~config_subnet~" /><br>
+				<div class="label"><label>Default Gateway</label></div>
+				<input type="text" name="gw" value="~config_gw~" /><br>
+				<div class="label"><label>Primary DNS Server:</label></div>
+				<input type="text" name="dns1" value="~config_dns1~" /><br>
+				<div class="label"><label>Secondary DNS Server:</label></div>
+				<input type="text" name="dns2" value="~config_dns2~" /><br>
+			</div>		
 			<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" value="networksubmit">Apply</button><br/>
 			</form>
 		</div>
 
 		<center><h2>Controller Configuration</h2></center>
 		<div class="formbox2" style="width: 450px;">
-			<form accept-charset="UTF-8" method="post" action="configuration.html">
+			<form accept-charset="UTF-8" method="post" action="config.htm">
 			<div class="setting">
 				<div class="label">Motor Type:</div>
 				<input type="radio" name="motortype" id="brushed" value="action" {{brushed}}/>
@@ -90,7 +64,7 @@
 		<center><h2>Thrust Curve Profile</h2></center>
 		<div class="formbox2" style="width: 630px;">
 			Enter the coefficients for the fifth order polynomial fit which maps force to voltage:<br/>
-			<form accept-charset="UTF-8" method="post" action="configuration.html">				
+			<form accept-charset="UTF-8" method="post" action="config.htm">				
 				<div class="setting">
 					<div class="label" style="width: 70px;">Forward:</div>
 					<input type="text" name="curvefor1" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor1}}">x^4 +
@@ -113,7 +87,7 @@
 
 		<center><h2>Electrical Limits</h2></center>
 		<div class="formbox2" style="width: 280px;">
-			<form accept-charset="UTF-8" method="post" action="configuration.html">
+			<form accept-charset="UTF-8" method="post" action="config.htm">
 			
 			<div class="setting">
 				<div class="label">Max Voltage:</div>
@@ -139,10 +113,10 @@
 <div class="sideBar"> 
 	<div class="sideBox"> 
 		<ul class="menu">
-			<li class="main home"><a class="itemContent" href="index.html"><img src="images/menuicons/info.png" alt="Status" width="32" height="32" style="padding-right: 14px; padding-top: 10px;"/>Home/Status</a></li>
+			<li class="main home"><a class="itemContent" href="index.htm"><img src="images/menuicons/info.png" alt="Status" width="32" height="32" style="padding-right: 14px; padding-top: 10px;"/>Home/Status</a></li>
 			<li class="main selected"><span class="itemContent"><img src="images/menuicons/config.png" alt="Configuration" width="32" height="32"/>Configuration</span></li>
-			<li class="main"><a class="itemContent" href="calibration.html"><img src="images/menuicons/calibrate.png" alt="Calibration" width="32" height="32"/>Calibration</a></li>
-			<li class="main"><a class="itemContent" href="support.html"><img src="images/menuicons/help.png" alt="Support &amp; FAQ" width="32" height="32"/>Support &amp; FAQ</a></li>
+			<li class="main"><a class="itemContent" href="calibration.htm"><img src="images/menuicons/calibrate.png" alt="Calibration" width="32" height="32"/>Calibration</a></li>
+			<li class="main"><a class="itemContent" href="support.htm"><img src="images/menuicons/help.png" alt="Support &amp; FAQ" width="32" height="32"/>Support &amp; FAQ</a></li>
 		</ul> 
 	</div>	
 </div> 

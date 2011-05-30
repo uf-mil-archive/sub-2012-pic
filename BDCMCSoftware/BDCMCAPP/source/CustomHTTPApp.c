@@ -131,18 +131,6 @@ HTTP_IO_RESULT HTTPExecuteGet(void)
     }
 
     // If it's the LED updater file
-    else if(!memcmppgm2ram(filename, "cookies.htm", 11))
-    {
-            // This is very simple.  The names and values we want are already in
-            // the data array.  We just set the hasArgs value to indicate how many
-            // name/value pairs we want stored as cookies.
-            // To add the second cookie, just increment this value.
-            // remember to also add a dynamic variable callback to control the printout.
-            curHTTP.hasArgs = 0x01;
-    }
-
-
-    // If it's the LED updater file
     else if(!memcmppgm2ram(filename, "leds.cgi", 8))
     {
             // Determine which LED to toggle
@@ -203,7 +191,7 @@ HTTP_IO_RESULT HTTPExecutePost(void)
 
 
 #if defined(STACK_USE_HTTP_APP_RECONFIG)
-    if(!memcmppgm2ram(filename, "protect/config.htm", 18))
+    if(!memcmppgm2ram(filename, "config.htm", 18))
             return HTTPPostConfig();
 #endif
 
