@@ -16,48 +16,60 @@
 		<center><h2>BDCMC Network Configuration</h2></center>
 		<div class="formbox2">
 			<form accept-charset="UTF-8" method="post" action="index.htm">			
-			<div class="setting">
+			<div class="settingNetworkConfig">
 				<div class = "label">Host Name:</div>
-				<input type="text" name="host" value="~hostname~" /><br>
-				<div class="label"><label>IP Address:</label></div>
-				<input type="text" name="ip" value="~config_ip~" /><br>
-				<div class="label"><label>Subnet Mask</label></div>
-				<input type="text" name="sub" value="~config_subnet~" /><br>
-				<div class="label"><label>Default Gateway</label></div>
-				<input type="text" name="gw" value="~config_gw~" /><br>
+				<input type="text" name="host" value="~hostname~" />
+			</div>
+			<div class="settingNetworkConfig">
+				<div class="label">IP Address:</div>
+				<input type="text" name="ip" value="~config_ip~" />
+			</div>
+			<div class="settingNetworkConfig">
+				<div class="label"><label>Subnet Mask:</label></div>
+				<input type="text" name="sub" value="~config_subnet~" />
+			</div>
+			<div class="settingNetworkConfig">
+				<div class="label"><label>Default Gateway:</label></div>
+				<input type="text" name="gw" value="~config_gw~" />
+			</div>
+			<div class="settingNetworkConfig">
 				<div class="label"><label>Primary DNS Server:</label></div>
-				<input type="text" name="dns1" value="~config_dns1~" /><br>
+				<input type="text" name="dns1" value="~config_dns1~" />
+			</div>
+			<div class="settingNetworkConfig">
 				<div class="label"><label>Secondary DNS Server:</label></div>
 				<input type="text" name="dns2" value="~config_dns2~" /><br>
-			</div>		
+			</div>
 			<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" value="networksubmit">Apply</button><br/>
+			<input type="hidden" name="sendForm" value="NetworkConfig">
 			</form>
 		</div>
 
 		<center><h2>Controller Configuration</h2></center>
 		<div class="formbox2" style="width: 450px;">
 			<form accept-charset="UTF-8" method="post" action="config.htm">
-			<div class="setting">
+			<div class="settingConfig" align="left">
 				<div class="label">Motor Type:</div>
 				<input type="radio" name="motortype" id="brushed" value="action" {{brushed}}/>
 				<label for="brushed">Brushed</label>
 				<input type="radio" name="motortype" id="brushless" value="action" {{brushess}}/>
 				<label for="brushless">Brushless</label>
 			</div>
-			<div class="setting">
+			<div class="settingConfig" align="left">
 				<div class="label">Control Type:</div>
 				<input type="radio" name="controltype" id="open" value="action" {{open}}/>
 				<label for="open">Open</label>
 				<input type="radio" name="controltype" id="closed" value="action" {{closed}}/>
 				<label for="closed">Closed</label>
 			</div>
-			<div class="setting">
+			<div class="settingConfig" align="left">
 				<div class="label">PID Gains:</div>
 				<strong>Kp:</strong><input type="text" name="gainp" maxlength="4" size="3" style="font-size: 15px; font-weight: bold;" value="{{gainp}}">
 				<strong>&nbsp;Kd:</strong><input type="text" name="gaind" maxlength="4" size="3" style="font-size: 15px; font-weight: bold;" value="{{gaind}}">
 				<strong>&nbsp;Ki:</strong><input type="text" name="gaini" maxlength="4" size="3" style="font-size: 15px; font-weight: bold;" value="{{gaini}}">
 			</div>
 			<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" value="controllersubmit">Apply</button>
+			<input type="hidden" name="sendForm" value="ControllerConfig">
 			</form>
 		</div>
 
@@ -65,7 +77,7 @@
 		<div class="formbox2" style="width: 630px;">
 			Enter the coefficients for the fifth order polynomial fit which maps force to voltage:<br/>
 			<form accept-charset="UTF-8" method="post" action="config.htm">				
-				<div class="setting">
+				<div class="settingConfig">
 					<div class="label" style="width: 70px;">Forward:</div>
 					<input type="text" name="curvefor1" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor1}}">x^4 +
 					<input type="text" name="curvefor2" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor2}}">x^3 +
@@ -73,7 +85,7 @@
 					<input type="text" name="curvefor4" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor4}}">x +
 					<input type="text" name="curvefor5" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor5}}"><br/>
 				</div>
-				<div class="setting">
+				<div class="settingConfig">
 					<div class="label" style="width: 70px;">Reverse:</div>
 					<input type="text" name="curverev1" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curverev1}}">x^4 +
 					<input type="text" name="curverev2" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curverev2}}">x^3 +
@@ -89,15 +101,15 @@
 		<div class="formbox2" style="width: 280px;">
 			<form accept-charset="UTF-8" method="post" action="config.htm">
 			
-			<div class="setting">
+			<div class="settingConfig">
 				<div class="label">Max Voltage:</div>
 				<input type="text" name="maxvoltage" maxlength="10" size="10" style="font-size: 15px; font-weight: bold;" value="{{maxvolt}}">
 			</div>
-			<div class="setting">
+			<div class="settingConfig">
 				<div class="label">Max Current:</div>
 				<input type="text" name="maxcurrent" maxlength="10" size="10" style="font-size: 15px; font-weight: bold;" value="{{maxcur}}">
 			</div>
-			<div class="setting">
+			<div class="settingConfig">
 				<div class="label">Cutoff Voltage:</div>
 				<input type="text" name="cutoffvoltage" maxlength="10" size="10" style="font-size: 15px; font-weight: bold;" value="{{cutoffvolt}}">
 			</div>

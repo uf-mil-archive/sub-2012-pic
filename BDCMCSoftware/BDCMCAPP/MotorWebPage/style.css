@@ -402,13 +402,18 @@ width: 300px;
 }
 
 .center {
-width: 601px;
+width: 300px;
+margin: auto;
+}
+
+.centerWide {
+width: 500px;
 margin: auto;
 }
 
 .realtimeinfo {
-float: left;
-width: 300px;
+text-align: center;
+width: 500;
 }
 
 fieldset legend {
@@ -423,15 +428,41 @@ color:#30519c;
   text-align: left;
   /*background: #ddd;*/
 }
-.setting .label {
+.settingNetworkConfig .label {
   float:left;
-  width:120px;
-  /*background: #bbb;*/
+  width:180px;
   text-align: left;
   padding-left: 20px;
   font-weight: bold;
 }
 
-fieldset .setting .label {
+.settingConfig .label {
+  float:left;
+  width:120px;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+}
+
+.settingRealTimeStatus .label {
+  float:left;
+  width:90px;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+}
+
+.settingComponentInfo .label {
+  float:left;
+  width:180px;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+}
+
+fieldset .settingRealTimeStatus .label {
+  width:100px;
+}
+fieldset .settingComponentInfo .label {
   width:150px;
 }
