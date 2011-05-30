@@ -33,11 +33,12 @@ typedef struct tagMotorFlags
         INT16 All;
         struct
         {
-            unsigned :10;
+            unsigned :9;
 
             unsigned Endianess:1;        // Endianess of published packet
             unsigned ReferenceChanged:1; // Reference has been changed
             unsigned OverCurrent:1;      // Over current detected
+            unsigned UnderVoltage:1;     // Voltage too low
             unsigned Heartbeat:1;        // Heartbeat valid
             unsigned MotorType:2;
         };
@@ -57,7 +58,10 @@ typedef struct MotorDataDefinition
     INT16 Current;
     INT16 RPM;
     INT16 MaxSlew;          // PWM max slew change
-    INT16 MaxVoltage;
+    INT16 MaxVoltage;       // The desired running maximum voltage, this will 
+                            // actually scale effor to not distort the 
+                            // linearization plot
+    INT16 HardMaxVoltage;   // The maximum voltage used when the thruster was plotted
     INT16 MinVoltage;
     INT16 MaxCurrent;
     float FCoeff[6];

@@ -258,6 +258,11 @@ void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
         hMotorData->Flags.Heartbeat = 0;
         hMotorData->ReferenceInput = 0;
     }
+    else if(hMotorData.MinVoltage > hMotorData.VRail)
+    {
+        hMotorData->Flags.UnderVoltage = 1;
+        hMotorData->ReferenceInput = 0;
+    }
 
     // Call the controller
     controller();
