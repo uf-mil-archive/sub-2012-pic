@@ -27,7 +27,7 @@
 #define MSG_ESCAPE      0x7D
 #define MSG_ESCAPE_XOR  0x20
 
-#define MSG_MAX_LENGTH  64      // The longest message is 30 bytes not including
+#define MSG_MAX_LENGTH  30      // The longest message is 30 bytes not including
                                 // flags or escape characters.
 #define MSG_NUM_OUTGOING_BUFFERS   5    // Number of outgoing buffers
 
@@ -47,21 +47,6 @@ void CRC16Init(void);
 
 void ParseNewPacket(CHAR8 rawPkt[], UINT16 length, UINT16 sender);
 
-/*
- * BIG ENDIAN BY DEFAULT
- * The outgoing packet looks like the following:
- * ADDR: This drivers address (1 byte)
- * PKT_LENGTH: The length of the packet (1 byte) (Includes all bytes listed here)
- *                                       DOES NOT INCLUDE 2 BYTES FOR CHECKSUM
- * PKT_NUMBER: The number of the current packet (2 bytes, it rolls over)
- * TICKS: The tick count (2 bytes)
- * FLAGS: The current flags (motor type and heartbeat status) (2 bytes)
- * REFINPUT: The current signed reference input (2 bytes)
- * CUROUTPUT: The actual signed output (2 bytes)
- * VRAIL: The voltage input (2 bytes)
- * IMOTOR: The signed current draw of the motor (2 bytes)
- * 
- */
-INT16 BuildOutgoingBROLPacket(const MotorData* mData, INT16 tickCount, CHAR8** pkt);
+INT16 BuildOutgoingBROLPacket(const MotorData* mData, INT16 tickCount, BYTE** pkt);
 
 #endif // MESSAGES_H
