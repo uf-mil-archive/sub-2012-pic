@@ -139,7 +139,7 @@
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="enable-short-double" value="true"/>
         <property key="enable-procedural-abstraction" value="false"/>
-        <property key="optimization-level" value="1"/>
+        <property key="optimization-level" value="0"/>
         <property key="enable-ansi-warnings" value="false"/>
         <property key="enable-fatal-warnings" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
@@ -185,8 +185,8 @@
         <property key="enable-handles" value="true"/>
         <property key="enable-data-init" value="true"/>
         <property key="secure-flash" value="no_flash"/>
-        <property key="boot-write-protect" value="no_write_protect"/>
         <property key="boot-flash" value="no_flash"/>
+        <property key="boot-write-protect" value="no_write_protect"/>
         <property key="report-memory-usage" value="true"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="input-libraries" value=""/>
@@ -200,6 +200,8 @@
         <appendMe value="-ldsp"/>
       </C30-LD>
       <C30Global>
+        <property key="fast-math" value="false"/>
+        <property key="legacy-libc" value="false"/>
       </C30Global>
       <RealICEPlatformTool>
         <property key="UART 2" value="true"/>

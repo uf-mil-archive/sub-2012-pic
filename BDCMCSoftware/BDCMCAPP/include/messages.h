@@ -42,7 +42,7 @@
 #define MSG_SET_REFERENCE       3   // Set a new duty cycle
 
 
-UINT16 CRC16ChecksumWord(UINT16* data, UINT16 numberOfWords, UINT16 prevCRC);
+UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes, UINT16 prevCRC);
 void CRC16Init(void);
 
 void ParseNewPacket(CHAR8 rawPkt[], UINT16 length, UINT16 sender);

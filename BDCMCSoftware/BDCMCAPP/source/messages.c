@@ -7,36 +7,45 @@ volatile UINT16 packetCount = 0;
 inline INT16 ValidateType(CHAR8 type);
 void ParseBROLPacket(CHAR8 buffer[], UINT16 sender);
 
+#define MSG_FORCE_CRC   1
+#define MSG_CRC_ENDIAN  2
+
 void CRC16Init(void)
 {
     CRCXOR = 0x8005;    // CRC16-IBM x^16+x^15+x^2+1
-    CRCCON = 0xF;   // Polynomial is 16 bits long
+    CRCCON = 0xf;   // Polynomial is 16 bits long
 }
 
-UINT16 CRC16ChecksumWord(UINT16* data, UINT16 numberOfWords, UINT16 prevCRC)
+UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes, UINT16 prevCRC)
 {
-    CRCWDAT = prevCRC; // Initialize the CRC result with the previous value
-    CRCCONbits.CRCGO = 1 ;
-    do
-    {
-        while(1 != CRCCONbits.CRCMPT);
+   CRCWDAT =prevCRC;
 
-        while((!CRCCONbits.CRCFUL) && (numberOfWords > 0))
-        {
-            CRCDAT= *data;
-            data++;
-            numberOfWords--;
-        }
-    }while (0 < numberOfWords);
+   CRCCONbits.CRCGO = 1 ; 
 
-   while(CRCCONbits.CRCFUL==1); // Wait until the register isn't full
+	INT16 temp = numberOfBytes;
+        	
+  do                                
+   {
+     while(1 != CRCCONbits.CRCMPT);
+
+       while((0 == CRCCONbits.CRCFUL)  && (0 < temp))
+       {
+          CRCDAT= *data++;
+		  CRCDAT= *data++;
+          temp -= 2;
+       }
+  }while (0 < temp);
+   
+
+	while(CRCCONbits.CRCFUL==1);        
+
    CRCDAT = 0x0000;	/* Do this to shift the last word out of the 	*/
 			/* CRC shift register		        	*/
 
-   while(!CRCCONbits.CRCMPT);
-   CRCCONbits.CRCGO = 0;
+   while(1 != CRCCONbits.CRCMPT);
+	CRCCONbits.CRCGO = 0;             
 
-   return CRCWDAT;
+	return(CRCWDAT);
 }
 
 inline INT16 ValidateType(CHAR8 type)
@@ -59,7 +68,7 @@ void ParseNewPacket(CHAR8 rawPkt[], UINT16 length, UINT16 sender)
         return;     // Because of CRC constraints packets must be multiples of
                     // 2 bytes
     // First, validate the checksum
-    if(CRC16ChecksumWord(((UINT16 *)&rawPkt), ((length - 2)/2), 0)
+    if(CRC16Checksum(&rawPkt[0], length - 2, 0)
             != (*((UINT16 *)(&rawPkt[length - 1]))))
         return;
 
@@ -219,7 +228,7 @@ INT16 BuildOutgoingBROLPacket(const MotorData* mData, INT16 tickCount, BYTE** pk
     buf[2] = (BYTE)(tmplength & 0xFF);
 
     // Calculate the checksum
-    temp = CRC16ChecksumWord(((UINT16 *)(&buf[0])),
+    temp = CRC16Checksum(&buf[0],
             tmplength,
             0);
 

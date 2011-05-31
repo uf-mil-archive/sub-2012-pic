@@ -46,18 +46,22 @@ void _ISR __attribute__((__no_auto_psv__)) _StackError(void)
 
 int main(void)
 {
+	UINT16 res = 0;
+
     clockInit();
     ioMap();
-
-    CHAR8 test[] = "1234567890";
-
+    
     CRC16Init();
 
-    INT16 res = CRC16ChecksumWord(((UINT16 *)&test[0]), (10/2), 0);
+    BYTE test[] = "1234567890";
 
-    (void)res;
+    res = CRC16Checksum(&test[0], 10, 0);
+	if(res != 0xBB3D)
+		xUARTTaskInit();
+	else
+		xTCPIPTaskInit();
 
-    while(1)Nop();
+	while(1) Nop();
 
     // This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.
