@@ -49,6 +49,16 @@ int main(void)
     clockInit();
     ioMap();
 
+    CHAR8 test[] = "1234567890";
+
+    CRC16Init();
+
+    INT16 res = CRC16ChecksumWord(((UINT16 *)&test[0]), (10/2), 0);
+
+    (void)res;
+
+    while(1)Nop();
+
     // This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.
     xUARTTaskInit();

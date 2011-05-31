@@ -115,13 +115,6 @@ void taskTCPIP(void* pvParameter) {
 
         // call the stack related applications (including HTTP server)
         StackApplications();
-
-        // if the DHCP lease has changed then display the new value
-        // on the UART and display
-        if (dwLastIP != AppConfig.MyIPAddr.Val) {
-            dwLastIP = AppConfig.MyIPAddr.Val;
-            DisplayIPValue(AppConfig.MyIPAddr);
-        }
     }
 }
 
@@ -232,26 +225,6 @@ static void InitAppConfig(void)
     {
         SaveAppConfig(&AppConfig);
     }
-}
-
-/*********************************************************************
- * Function:        static void DisplayIPValue(IP_ADDR IPVal)
- *
- * PreCondition:    None
- *
- * Input:           4 byte IP address
- *                  
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        Print the IP address on the UART
- *
- * Note:            
- ********************************************************************/
-static void DisplayIPValue(IP_ADDR IPVal) 
-{
-
 }
 
 /*********************************************************************
