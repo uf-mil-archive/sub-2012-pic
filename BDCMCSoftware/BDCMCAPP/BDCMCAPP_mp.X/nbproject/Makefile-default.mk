@@ -95,7 +95,7 @@ ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o: ../source/mcp25XX640A.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ../source/mcp25XX640A.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ../source/mcp25XX640A.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d > ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d 
@@ -110,7 +110,7 @@ endif
 ${OBJECTDIR}/_ext/1757024747/port.o: ../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC/port.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1757024747 
 	${RM} ${OBJECTDIR}/_ext/1757024747/port.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1757024747/port.o.d -o ${OBJECTDIR}/_ext/1757024747/port.o ../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC/port.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1757024747/port.o.d -o ${OBJECTDIR}/_ext/1757024747/port.o ../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC/port.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1757024747/port.o.d > ${OBJECTDIR}/_ext/1757024747/port.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1757024747/port.o.d 
@@ -125,7 +125,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/DHCP.o: ../../../Microchip/TCPIP\ Stack/DHCP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/DHCP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DHCP.o.d -o ${OBJECTDIR}/_ext/1954962658/DHCP.o ../../../Microchip/TCPIP\ Stack/DHCP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DHCP.o.d -o ${OBJECTDIR}/_ext/1954962658/DHCP.o ../../../Microchip/TCPIP\ Stack/DHCP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/DHCP.o.d > ${OBJECTDIR}/_ext/1954962658/DHCP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/DHCP.o.d 
@@ -140,7 +140,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/main.o: ../source/main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/main.o.d -o ${OBJECTDIR}/_ext/812168374/main.o ../source/main.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/main.o.d -o ${OBJECTDIR}/_ext/812168374/main.o ../source/main.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/main.o.d > ${OBJECTDIR}/_ext/812168374/main.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.d 
@@ -155,7 +155,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskPublisher.o: ../source/taskPublisher.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d -o ${OBJECTDIR}/_ext/812168374/taskPublisher.o ../source/taskPublisher.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d -o ${OBJECTDIR}/_ext/812168374/taskPublisher.o ../source/taskPublisher.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d > ${OBJECTDIR}/_ext/812168374/taskPublisher.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d 
@@ -170,7 +170,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/MPFS2.o: ../../../Microchip/TCPIP\ Stack/MPFS2.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d -o ${OBJECTDIR}/_ext/1954962658/MPFS2.o ../../../Microchip/TCPIP\ Stack/MPFS2.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d -o ${OBJECTDIR}/_ext/1954962658/MPFS2.o ../../../Microchip/TCPIP\ Stack/MPFS2.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d > ${OBJECTDIR}/_ext/1954962658/MPFS2.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d 
@@ -185,7 +185,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/mcp4821.o: ../source/mcp4821.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp4821.o.d > ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
@@ -200,7 +200,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/simplequeue.o: ../source/simplequeue.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/simplequeue.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/simplequeue.o.d -o ${OBJECTDIR}/_ext/812168374/simplequeue.o ../source/simplequeue.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/simplequeue.o.d -o ${OBJECTDIR}/_ext/812168374/simplequeue.o ../source/simplequeue.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/simplequeue.o.d > ${OBJECTDIR}/_ext/812168374/simplequeue.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/simplequeue.o.d 
@@ -215,7 +215,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o: ../../../Microchip/TCPIP\ Stack/UDPPerformanceTest.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/UDPPerformanceTest.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/UDPPerformanceTest.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d > ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d 
@@ -230,7 +230,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o: ../source/CustomHTTPApp.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d -o ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o ../source/CustomHTTPApp.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d -o ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o ../source/CustomHTTPApp.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d > ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d 
@@ -245,7 +245,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/ARP.o: ../../../Microchip/TCPIP\ Stack/ARP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/ARP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ARP.o.d -o ${OBJECTDIR}/_ext/1954962658/ARP.o ../../../Microchip/TCPIP\ Stack/ARP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ARP.o.d -o ${OBJECTDIR}/_ext/1954962658/ARP.o ../../../Microchip/TCPIP\ Stack/ARP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/ARP.o.d > ${OBJECTDIR}/_ext/1954962658/ARP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/ARP.o.d 
@@ -260,7 +260,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/Tick.o: ../source/Tick.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/Tick.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/Tick.o.d -o ${OBJECTDIR}/_ext/812168374/Tick.o ../source/Tick.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/Tick.o.d -o ${OBJECTDIR}/_ext/812168374/Tick.o ../source/Tick.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/Tick.o.d > ${OBJECTDIR}/_ext/812168374/Tick.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/Tick.o.d 
@@ -275,7 +275,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o: ../../../Microchip/TCPIP\ Stack/TCPPerformanceTest.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/TCPPerformanceTest.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/TCPPerformanceTest.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d > ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d 
@@ -290,7 +290,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/NBNS.o: ../../../Microchip/TCPIP\ Stack/NBNS.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/NBNS.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/NBNS.o.d -o ${OBJECTDIR}/_ext/1954962658/NBNS.o ../../../Microchip/TCPIP\ Stack/NBNS.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/NBNS.o.d -o ${OBJECTDIR}/_ext/1954962658/NBNS.o ../../../Microchip/TCPIP\ Stack/NBNS.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/NBNS.o.d > ${OBJECTDIR}/_ext/1954962658/NBNS.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/NBNS.o.d 
@@ -305,7 +305,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskTCPIP.o: ../source/taskTCPIP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d -o ${OBJECTDIR}/_ext/812168374/taskTCPIP.o ../source/taskTCPIP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d -o ${OBJECTDIR}/_ext/812168374/taskTCPIP.o ../source/taskTCPIP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d > ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d 
@@ -320,7 +320,7 @@ endif
 ${OBJECTDIR}/_ext/190470153/list.o: ../../../FreeRTOS/Source/list.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/190470153 
 	${RM} ${OBJECTDIR}/_ext/190470153/list.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/list.o.d -o ${OBJECTDIR}/_ext/190470153/list.o ../../../FreeRTOS/Source/list.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/list.o.d -o ${OBJECTDIR}/_ext/190470153/list.o ../../../FreeRTOS/Source/list.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/190470153/list.o.d > ${OBJECTDIR}/_ext/190470153/list.o.tmp
 	${RM} ${OBJECTDIR}/_ext/190470153/list.o.d 
@@ -335,7 +335,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/UDP.o: ../../../Microchip/TCPIP\ Stack/UDP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDP.o.d -o ${OBJECTDIR}/_ext/1954962658/UDP.o ../../../Microchip/TCPIP\ Stack/UDP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDP.o.d -o ${OBJECTDIR}/_ext/1954962658/UDP.o ../../../Microchip/TCPIP\ Stack/UDP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/UDP.o.d > ${OBJECTDIR}/_ext/1954962658/UDP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDP.o.d 
@@ -350,7 +350,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskUART.o: ../source/taskUART.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskUART.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskUART.o.d -o ${OBJECTDIR}/_ext/812168374/taskUART.o ../source/taskUART.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskUART.o.d -o ${OBJECTDIR}/_ext/812168374/taskUART.o ../source/taskUART.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskUART.o.d > ${OBJECTDIR}/_ext/812168374/taskUART.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskUART.o.d 
@@ -365,7 +365,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/messages.o: ../source/messages.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/messages.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/messages.o.d -o ${OBJECTDIR}/_ext/812168374/messages.o ../source/messages.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/messages.o.d -o ${OBJECTDIR}/_ext/812168374/messages.o ../source/messages.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/messages.o.d > ${OBJECTDIR}/_ext/812168374/messages.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/messages.o.d 
@@ -380,7 +380,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/ENC28J60.o: ../../../Microchip/TCPIP\ Stack/ENC28J60.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d -o ${OBJECTDIR}/_ext/1954962658/ENC28J60.o ../../../Microchip/TCPIP\ Stack/ENC28J60.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d -o ${OBJECTDIR}/_ext/1954962658/ENC28J60.o ../../../Microchip/TCPIP\ Stack/ENC28J60.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d > ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d 
@@ -395,7 +395,7 @@ endif
 ${OBJECTDIR}/_ext/190470153/tasks.o: ../../../FreeRTOS/Source/tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/190470153 
 	${RM} ${OBJECTDIR}/_ext/190470153/tasks.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/tasks.o.d -o ${OBJECTDIR}/_ext/190470153/tasks.o ../../../FreeRTOS/Source/tasks.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/tasks.o.d -o ${OBJECTDIR}/_ext/190470153/tasks.o ../../../FreeRTOS/Source/tasks.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/190470153/tasks.o.d > ${OBJECTDIR}/_ext/190470153/tasks.o.tmp
 	${RM} ${OBJECTDIR}/_ext/190470153/tasks.o.d 
@@ -410,7 +410,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/DNS.o: ../../../Microchip/TCPIP\ Stack/DNS.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/DNS.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DNS.o.d -o ${OBJECTDIR}/_ext/1954962658/DNS.o ../../../Microchip/TCPIP\ Stack/DNS.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DNS.o.d -o ${OBJECTDIR}/_ext/1954962658/DNS.o ../../../Microchip/TCPIP\ Stack/DNS.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/DNS.o.d > ${OBJECTDIR}/_ext/1954962658/DNS.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/DNS.o.d 
@@ -425,7 +425,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/StackTsk.o: ../../../Microchip/TCPIP\ Stack/StackTsk.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d -o ${OBJECTDIR}/_ext/1954962658/StackTsk.o ../../../Microchip/TCPIP\ Stack/StackTsk.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d -o ${OBJECTDIR}/_ext/1954962658/StackTsk.o ../../../Microchip/TCPIP\ Stack/StackTsk.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d > ${OBJECTDIR}/_ext/1954962658/StackTsk.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d 
@@ -440,7 +440,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/adc.o: ../source/adc.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/adc.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/adc.o.d -o ${OBJECTDIR}/_ext/812168374/adc.o ../source/adc.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/adc.o.d -o ${OBJECTDIR}/_ext/812168374/adc.o ../source/adc.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/adc.o.d > ${OBJECTDIR}/_ext/812168374/adc.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/adc.o.d 
@@ -455,7 +455,7 @@ endif
 ${OBJECTDIR}/_ext/190470153/queue.o: ../../../FreeRTOS/Source/queue.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/190470153 
 	${RM} ${OBJECTDIR}/_ext/190470153/queue.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/queue.o.d -o ${OBJECTDIR}/_ext/190470153/queue.o ../../../FreeRTOS/Source/queue.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/queue.o.d -o ${OBJECTDIR}/_ext/190470153/queue.o ../../../FreeRTOS/Source/queue.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/190470153/queue.o.d > ${OBJECTDIR}/_ext/190470153/queue.o.tmp
 	${RM} ${OBJECTDIR}/_ext/190470153/queue.o.d 
@@ -470,7 +470,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskParser.o: ../source/taskParser.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskParser.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskParser.o.d -o ${OBJECTDIR}/_ext/812168374/taskParser.o ../source/taskParser.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskParser.o.d -o ${OBJECTDIR}/_ext/812168374/taskParser.o ../source/taskParser.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskParser.o.d > ${OBJECTDIR}/_ext/812168374/taskParser.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskParser.o.d 
@@ -485,7 +485,7 @@ endif
 ${OBJECTDIR}/_ext/636803636/heap_3.o: ../../../FreeRTOS/Source/portable/MemMang/heap_3.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/636803636 
 	${RM} ${OBJECTDIR}/_ext/636803636/heap_3.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/636803636/heap_3.o.d -o ${OBJECTDIR}/_ext/636803636/heap_3.o ../../../FreeRTOS/Source/portable/MemMang/heap_3.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/636803636/heap_3.o.d -o ${OBJECTDIR}/_ext/636803636/heap_3.o ../../../FreeRTOS/Source/portable/MemMang/heap_3.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/636803636/heap_3.o.d > ${OBJECTDIR}/_ext/636803636/heap_3.o.tmp
 	${RM} ${OBJECTDIR}/_ext/636803636/heap_3.o.d 
@@ -500,7 +500,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/Announce.o: ../../../Microchip/TCPIP\ Stack/Announce.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/Announce.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Announce.o.d -o ${OBJECTDIR}/_ext/1954962658/Announce.o ../../../Microchip/TCPIP\ Stack/Announce.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Announce.o.d -o ${OBJECTDIR}/_ext/1954962658/Announce.o ../../../Microchip/TCPIP\ Stack/Announce.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/Announce.o.d > ${OBJECTDIR}/_ext/1954962658/Announce.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/Announce.o.d 
@@ -515,7 +515,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/motor.o: ../source/motor.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/motor.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/motor.o.d -o ${OBJECTDIR}/_ext/812168374/motor.o ../source/motor.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/motor.o.d -o ${OBJECTDIR}/_ext/812168374/motor.o ../source/motor.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/motor.o.d > ${OBJECTDIR}/_ext/812168374/motor.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/motor.o.d 
@@ -530,7 +530,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/TCP.o: ../../../Microchip/TCPIP\ Stack/TCP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCP.o.d -o ${OBJECTDIR}/_ext/1954962658/TCP.o ../../../Microchip/TCPIP\ Stack/TCP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCP.o.d -o ${OBJECTDIR}/_ext/1954962658/TCP.o ../../../Microchip/TCPIP\ Stack/TCP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/TCP.o.d > ${OBJECTDIR}/_ext/1954962658/TCP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCP.o.d 
@@ -545,7 +545,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/HTTP2.o: ../../../Microchip/TCPIP\ Stack/HTTP2.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d -o ${OBJECTDIR}/_ext/1954962658/HTTP2.o ../../../Microchip/TCPIP\ Stack/HTTP2.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d -o ${OBJECTDIR}/_ext/1954962658/HTTP2.o ../../../Microchip/TCPIP\ Stack/HTTP2.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d > ${OBJECTDIR}/_ext/1954962658/HTTP2.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d 
@@ -560,7 +560,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/ICMP.o: ../../../Microchip/TCPIP\ Stack/ICMP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/ICMP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ICMP.o.d -o ${OBJECTDIR}/_ext/1954962658/ICMP.o ../../../Microchip/TCPIP\ Stack/ICMP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ICMP.o.d -o ${OBJECTDIR}/_ext/1954962658/ICMP.o ../../../Microchip/TCPIP\ Stack/ICMP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/ICMP.o.d > ${OBJECTDIR}/_ext/1954962658/ICMP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/ICMP.o.d 
@@ -575,7 +575,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/Helpers.o: ../../../Microchip/TCPIP\ Stack/Helpers.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/Helpers.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Helpers.o.d -o ${OBJECTDIR}/_ext/1954962658/Helpers.o ../../../Microchip/TCPIP\ Stack/Helpers.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Helpers.o.d -o ${OBJECTDIR}/_ext/1954962658/Helpers.o ../../../Microchip/TCPIP\ Stack/Helpers.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/Helpers.o.d > ${OBJECTDIR}/_ext/1954962658/Helpers.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/Helpers.o.d 
@@ -590,7 +590,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/IP.o: ../../../Microchip/TCPIP\ Stack/IP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/IP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/IP.o.d -o ${OBJECTDIR}/_ext/1954962658/IP.o ../../../Microchip/TCPIP\ Stack/IP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/IP.o.d -o ${OBJECTDIR}/_ext/1954962658/IP.o ../../../Microchip/TCPIP\ Stack/IP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/IP.o.d > ${OBJECTDIR}/_ext/1954962658/IP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/IP.o.d 
@@ -606,7 +606,7 @@ else
 ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o: ../source/mcp25XX640A.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ../source/mcp25XX640A.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ../source/mcp25XX640A.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d > ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d 
@@ -621,7 +621,7 @@ endif
 ${OBJECTDIR}/_ext/1757024747/port.o: ../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC/port.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1757024747 
 	${RM} ${OBJECTDIR}/_ext/1757024747/port.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1757024747/port.o.d -o ${OBJECTDIR}/_ext/1757024747/port.o ../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC/port.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1757024747/port.o.d -o ${OBJECTDIR}/_ext/1757024747/port.o ../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC/port.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1757024747/port.o.d > ${OBJECTDIR}/_ext/1757024747/port.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1757024747/port.o.d 
@@ -636,7 +636,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/DHCP.o: ../../../Microchip/TCPIP\ Stack/DHCP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/DHCP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DHCP.o.d -o ${OBJECTDIR}/_ext/1954962658/DHCP.o ../../../Microchip/TCPIP\ Stack/DHCP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DHCP.o.d -o ${OBJECTDIR}/_ext/1954962658/DHCP.o ../../../Microchip/TCPIP\ Stack/DHCP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/DHCP.o.d > ${OBJECTDIR}/_ext/1954962658/DHCP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/DHCP.o.d 
@@ -651,7 +651,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/main.o: ../source/main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/main.o.d -o ${OBJECTDIR}/_ext/812168374/main.o ../source/main.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/main.o.d -o ${OBJECTDIR}/_ext/812168374/main.o ../source/main.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/main.o.d > ${OBJECTDIR}/_ext/812168374/main.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.d 
@@ -666,7 +666,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskPublisher.o: ../source/taskPublisher.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d -o ${OBJECTDIR}/_ext/812168374/taskPublisher.o ../source/taskPublisher.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d -o ${OBJECTDIR}/_ext/812168374/taskPublisher.o ../source/taskPublisher.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d > ${OBJECTDIR}/_ext/812168374/taskPublisher.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskPublisher.o.d 
@@ -681,7 +681,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/MPFS2.o: ../../../Microchip/TCPIP\ Stack/MPFS2.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d -o ${OBJECTDIR}/_ext/1954962658/MPFS2.o ../../../Microchip/TCPIP\ Stack/MPFS2.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d -o ${OBJECTDIR}/_ext/1954962658/MPFS2.o ../../../Microchip/TCPIP\ Stack/MPFS2.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d > ${OBJECTDIR}/_ext/1954962658/MPFS2.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/MPFS2.o.d 
@@ -696,7 +696,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/mcp4821.o: ../source/mcp4821.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp4821.o.d > ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
@@ -711,7 +711,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/simplequeue.o: ../source/simplequeue.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/simplequeue.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/simplequeue.o.d -o ${OBJECTDIR}/_ext/812168374/simplequeue.o ../source/simplequeue.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/simplequeue.o.d -o ${OBJECTDIR}/_ext/812168374/simplequeue.o ../source/simplequeue.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/simplequeue.o.d > ${OBJECTDIR}/_ext/812168374/simplequeue.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/simplequeue.o.d 
@@ -726,7 +726,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o: ../../../Microchip/TCPIP\ Stack/UDPPerformanceTest.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/UDPPerformanceTest.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/UDPPerformanceTest.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d > ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDPPerformanceTest.o.d 
@@ -741,7 +741,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o: ../source/CustomHTTPApp.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d -o ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o ../source/CustomHTTPApp.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d -o ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o ../source/CustomHTTPApp.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d > ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o.d 
@@ -756,7 +756,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/ARP.o: ../../../Microchip/TCPIP\ Stack/ARP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/ARP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ARP.o.d -o ${OBJECTDIR}/_ext/1954962658/ARP.o ../../../Microchip/TCPIP\ Stack/ARP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ARP.o.d -o ${OBJECTDIR}/_ext/1954962658/ARP.o ../../../Microchip/TCPIP\ Stack/ARP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/ARP.o.d > ${OBJECTDIR}/_ext/1954962658/ARP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/ARP.o.d 
@@ -771,7 +771,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/Tick.o: ../source/Tick.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/Tick.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/Tick.o.d -o ${OBJECTDIR}/_ext/812168374/Tick.o ../source/Tick.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/Tick.o.d -o ${OBJECTDIR}/_ext/812168374/Tick.o ../source/Tick.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/Tick.o.d > ${OBJECTDIR}/_ext/812168374/Tick.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/Tick.o.d 
@@ -786,7 +786,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o: ../../../Microchip/TCPIP\ Stack/TCPPerformanceTest.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/TCPPerformanceTest.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d -o ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o ../../../Microchip/TCPIP\ Stack/TCPPerformanceTest.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d > ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCPPerformanceTest.o.d 
@@ -801,7 +801,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/NBNS.o: ../../../Microchip/TCPIP\ Stack/NBNS.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/NBNS.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/NBNS.o.d -o ${OBJECTDIR}/_ext/1954962658/NBNS.o ../../../Microchip/TCPIP\ Stack/NBNS.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/NBNS.o.d -o ${OBJECTDIR}/_ext/1954962658/NBNS.o ../../../Microchip/TCPIP\ Stack/NBNS.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/NBNS.o.d > ${OBJECTDIR}/_ext/1954962658/NBNS.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/NBNS.o.d 
@@ -816,7 +816,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskTCPIP.o: ../source/taskTCPIP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d -o ${OBJECTDIR}/_ext/812168374/taskTCPIP.o ../source/taskTCPIP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d -o ${OBJECTDIR}/_ext/812168374/taskTCPIP.o ../source/taskTCPIP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d > ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskTCPIP.o.d 
@@ -831,7 +831,7 @@ endif
 ${OBJECTDIR}/_ext/190470153/list.o: ../../../FreeRTOS/Source/list.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/190470153 
 	${RM} ${OBJECTDIR}/_ext/190470153/list.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/list.o.d -o ${OBJECTDIR}/_ext/190470153/list.o ../../../FreeRTOS/Source/list.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/list.o.d -o ${OBJECTDIR}/_ext/190470153/list.o ../../../FreeRTOS/Source/list.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/190470153/list.o.d > ${OBJECTDIR}/_ext/190470153/list.o.tmp
 	${RM} ${OBJECTDIR}/_ext/190470153/list.o.d 
@@ -846,7 +846,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/UDP.o: ../../../Microchip/TCPIP\ Stack/UDP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDP.o.d -o ${OBJECTDIR}/_ext/1954962658/UDP.o ../../../Microchip/TCPIP\ Stack/UDP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/UDP.o.d -o ${OBJECTDIR}/_ext/1954962658/UDP.o ../../../Microchip/TCPIP\ Stack/UDP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/UDP.o.d > ${OBJECTDIR}/_ext/1954962658/UDP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/UDP.o.d 
@@ -861,7 +861,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskUART.o: ../source/taskUART.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskUART.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskUART.o.d -o ${OBJECTDIR}/_ext/812168374/taskUART.o ../source/taskUART.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskUART.o.d -o ${OBJECTDIR}/_ext/812168374/taskUART.o ../source/taskUART.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskUART.o.d > ${OBJECTDIR}/_ext/812168374/taskUART.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskUART.o.d 
@@ -876,7 +876,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/messages.o: ../source/messages.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/messages.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/messages.o.d -o ${OBJECTDIR}/_ext/812168374/messages.o ../source/messages.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/messages.o.d -o ${OBJECTDIR}/_ext/812168374/messages.o ../source/messages.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/messages.o.d > ${OBJECTDIR}/_ext/812168374/messages.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/messages.o.d 
@@ -891,7 +891,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/ENC28J60.o: ../../../Microchip/TCPIP\ Stack/ENC28J60.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d -o ${OBJECTDIR}/_ext/1954962658/ENC28J60.o ../../../Microchip/TCPIP\ Stack/ENC28J60.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d -o ${OBJECTDIR}/_ext/1954962658/ENC28J60.o ../../../Microchip/TCPIP\ Stack/ENC28J60.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d > ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/ENC28J60.o.d 
@@ -906,7 +906,7 @@ endif
 ${OBJECTDIR}/_ext/190470153/tasks.o: ../../../FreeRTOS/Source/tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/190470153 
 	${RM} ${OBJECTDIR}/_ext/190470153/tasks.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/tasks.o.d -o ${OBJECTDIR}/_ext/190470153/tasks.o ../../../FreeRTOS/Source/tasks.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/tasks.o.d -o ${OBJECTDIR}/_ext/190470153/tasks.o ../../../FreeRTOS/Source/tasks.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/190470153/tasks.o.d > ${OBJECTDIR}/_ext/190470153/tasks.o.tmp
 	${RM} ${OBJECTDIR}/_ext/190470153/tasks.o.d 
@@ -921,7 +921,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/DNS.o: ../../../Microchip/TCPIP\ Stack/DNS.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/DNS.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DNS.o.d -o ${OBJECTDIR}/_ext/1954962658/DNS.o ../../../Microchip/TCPIP\ Stack/DNS.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/DNS.o.d -o ${OBJECTDIR}/_ext/1954962658/DNS.o ../../../Microchip/TCPIP\ Stack/DNS.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/DNS.o.d > ${OBJECTDIR}/_ext/1954962658/DNS.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/DNS.o.d 
@@ -936,7 +936,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/StackTsk.o: ../../../Microchip/TCPIP\ Stack/StackTsk.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d -o ${OBJECTDIR}/_ext/1954962658/StackTsk.o ../../../Microchip/TCPIP\ Stack/StackTsk.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d -o ${OBJECTDIR}/_ext/1954962658/StackTsk.o ../../../Microchip/TCPIP\ Stack/StackTsk.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d > ${OBJECTDIR}/_ext/1954962658/StackTsk.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/StackTsk.o.d 
@@ -951,7 +951,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/adc.o: ../source/adc.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/adc.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/adc.o.d -o ${OBJECTDIR}/_ext/812168374/adc.o ../source/adc.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/adc.o.d -o ${OBJECTDIR}/_ext/812168374/adc.o ../source/adc.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/adc.o.d > ${OBJECTDIR}/_ext/812168374/adc.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/adc.o.d 
@@ -966,7 +966,7 @@ endif
 ${OBJECTDIR}/_ext/190470153/queue.o: ../../../FreeRTOS/Source/queue.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/190470153 
 	${RM} ${OBJECTDIR}/_ext/190470153/queue.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/queue.o.d -o ${OBJECTDIR}/_ext/190470153/queue.o ../../../FreeRTOS/Source/queue.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/190470153/queue.o.d -o ${OBJECTDIR}/_ext/190470153/queue.o ../../../FreeRTOS/Source/queue.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/190470153/queue.o.d > ${OBJECTDIR}/_ext/190470153/queue.o.tmp
 	${RM} ${OBJECTDIR}/_ext/190470153/queue.o.d 
@@ -981,7 +981,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/taskParser.o: ../source/taskParser.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/taskParser.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskParser.o.d -o ${OBJECTDIR}/_ext/812168374/taskParser.o ../source/taskParser.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/taskParser.o.d -o ${OBJECTDIR}/_ext/812168374/taskParser.o ../source/taskParser.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/taskParser.o.d > ${OBJECTDIR}/_ext/812168374/taskParser.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/taskParser.o.d 
@@ -996,7 +996,7 @@ endif
 ${OBJECTDIR}/_ext/636803636/heap_3.o: ../../../FreeRTOS/Source/portable/MemMang/heap_3.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/636803636 
 	${RM} ${OBJECTDIR}/_ext/636803636/heap_3.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/636803636/heap_3.o.d -o ${OBJECTDIR}/_ext/636803636/heap_3.o ../../../FreeRTOS/Source/portable/MemMang/heap_3.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/636803636/heap_3.o.d -o ${OBJECTDIR}/_ext/636803636/heap_3.o ../../../FreeRTOS/Source/portable/MemMang/heap_3.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/636803636/heap_3.o.d > ${OBJECTDIR}/_ext/636803636/heap_3.o.tmp
 	${RM} ${OBJECTDIR}/_ext/636803636/heap_3.o.d 
@@ -1011,7 +1011,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/Announce.o: ../../../Microchip/TCPIP\ Stack/Announce.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/Announce.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Announce.o.d -o ${OBJECTDIR}/_ext/1954962658/Announce.o ../../../Microchip/TCPIP\ Stack/Announce.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Announce.o.d -o ${OBJECTDIR}/_ext/1954962658/Announce.o ../../../Microchip/TCPIP\ Stack/Announce.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/Announce.o.d > ${OBJECTDIR}/_ext/1954962658/Announce.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/Announce.o.d 
@@ -1026,7 +1026,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/motor.o: ../source/motor.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/motor.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/motor.o.d -o ${OBJECTDIR}/_ext/812168374/motor.o ../source/motor.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/812168374/motor.o.d -o ${OBJECTDIR}/_ext/812168374/motor.o ../source/motor.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/motor.o.d > ${OBJECTDIR}/_ext/812168374/motor.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/motor.o.d 
@@ -1041,7 +1041,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/TCP.o: ../../../Microchip/TCPIP\ Stack/TCP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCP.o.d -o ${OBJECTDIR}/_ext/1954962658/TCP.o ../../../Microchip/TCPIP\ Stack/TCP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/TCP.o.d -o ${OBJECTDIR}/_ext/1954962658/TCP.o ../../../Microchip/TCPIP\ Stack/TCP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/TCP.o.d > ${OBJECTDIR}/_ext/1954962658/TCP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/TCP.o.d 
@@ -1056,7 +1056,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/HTTP2.o: ../../../Microchip/TCPIP\ Stack/HTTP2.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d -o ${OBJECTDIR}/_ext/1954962658/HTTP2.o ../../../Microchip/TCPIP\ Stack/HTTP2.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d -o ${OBJECTDIR}/_ext/1954962658/HTTP2.o ../../../Microchip/TCPIP\ Stack/HTTP2.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d > ${OBJECTDIR}/_ext/1954962658/HTTP2.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/HTTP2.o.d 
@@ -1071,7 +1071,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/ICMP.o: ../../../Microchip/TCPIP\ Stack/ICMP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/ICMP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ICMP.o.d -o ${OBJECTDIR}/_ext/1954962658/ICMP.o ../../../Microchip/TCPIP\ Stack/ICMP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/ICMP.o.d -o ${OBJECTDIR}/_ext/1954962658/ICMP.o ../../../Microchip/TCPIP\ Stack/ICMP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/ICMP.o.d > ${OBJECTDIR}/_ext/1954962658/ICMP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/ICMP.o.d 
@@ -1086,7 +1086,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/Helpers.o: ../../../Microchip/TCPIP\ Stack/Helpers.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/Helpers.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Helpers.o.d -o ${OBJECTDIR}/_ext/1954962658/Helpers.o ../../../Microchip/TCPIP\ Stack/Helpers.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/Helpers.o.d -o ${OBJECTDIR}/_ext/1954962658/Helpers.o ../../../Microchip/TCPIP\ Stack/Helpers.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/Helpers.o.d > ${OBJECTDIR}/_ext/1954962658/Helpers.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/Helpers.o.d 
@@ -1101,7 +1101,7 @@ endif
 ${OBJECTDIR}/_ext/1954962658/IP.o: ../../../Microchip/TCPIP\ Stack/IP.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1954962658 
 	${RM} ${OBJECTDIR}/_ext/1954962658/IP.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/IP.o.d -o ${OBJECTDIR}/_ext/1954962658/IP.o ../../../Microchip/TCPIP\ Stack/IP.c  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -fno-short-double -Wall -DMPLAB_DSPIC_PORT -D__C30__ -I"../include" -I"../../../Microchip/Include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -I"../../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -msmart-io=2 -MMD -MF ${OBJECTDIR}/_ext/1954962658/IP.o.d -o ${OBJECTDIR}/_ext/1954962658/IP.o ../../../Microchip/TCPIP\ Stack/IP.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1954962658/IP.o.d > ${OBJECTDIR}/_ext/1954962658/IP.o.tmp
 	${RM} ${OBJECTDIR}/_ext/1954962658/IP.o.d 

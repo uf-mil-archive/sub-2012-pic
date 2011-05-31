@@ -1,5 +1,7 @@
 #include "mcp25XX640A.h"
 #include "p33FJ128MC804.h"
+#include <stdlib.h>
+#include <string.h>
 
 // This driver doesn't know anything about FreeRTOS!
 // You should put semaphores around driver function calls
@@ -245,6 +247,24 @@ BYTE EROM_readSPI()
     while(!EROM_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
 
     return (EROM_SPIxBUF & 0xFF);
+}
+
+INT8 EROM_Clear()
+{
+    INT16 i = 0;
+    INT8 res = 0;
+
+    BYTE* erase = malloc(sizeof(BYTE)*EROM_PAGE_SIZE);
+    memset(erase, 0xFF , EROM_PAGE_SIZE);
+   
+    for(i = 0; i < EROM_SIZE_BYTES / EROM_PAGE_SIZE; i++)
+    {
+        res |= EROM_WriteBytes(i*EROM_PAGE_SIZE, EROM_PAGE_SIZE, erase);
+    }
+
+    free(erase);
+
+    return res;
 }
 
 INT16 EROM_ReadInt16(UINT16 address)

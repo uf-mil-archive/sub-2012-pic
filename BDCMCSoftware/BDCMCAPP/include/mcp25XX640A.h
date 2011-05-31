@@ -20,10 +20,10 @@
 #define EROM_CC_WRSR    0x01        // Write STATUS Register
 
 //********************* ADDRESS MAP *********************************/
-#define ETH_EROM_BASE   0x00  // First two pages reserved for Ethernet settings
-#define MTR_EROM_BASE   (EROM_PAGE_SIZE*2 - 1)  // Third page starts motor settings
+// First two pages blank
+#define ETH_EROM_BASE   (EROM_PAGE_SIZE*2) // 1k reserved for Ethernet settings
+#define MTR_EROM_BASE   (EROM_PAGE_SIZE*32 + ETH_EROM_BASE)  // 1k reserved for motor settings
 //********************* ~ADDRESS MAPS *******************************/
-
 
 INT8 EROM_ReadBytes(UINT16 address, UINT16 length, BYTE* const buf);
 INT8 EROM_WriteBytes(UINT16 address, UINT16 length, BYTE* const buf);

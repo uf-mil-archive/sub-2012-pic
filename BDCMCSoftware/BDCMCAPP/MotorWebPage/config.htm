@@ -12,36 +12,44 @@
  
 	<div class="infobox"> 
 		<div class="header"><h1>BDCMC Administration Panel</h1><h5>~hostname~ @ ~config_ip~</h5></div>
-		<div class="text">This page allows for custom configuration information to be applied to the DUAC. Please use caution when changing DUAC parameters without knowledge of the device. Detailed information regarding the custom configuration options found on this page are listed in the <a href="support.htm">Support</a> section.</div>
+		<div class="text">This page allows for custom configuration information to be applied to the BDCMC. Please use caution when changing BDCMC parameters without knowledge of the device. Detailed information regarding the custom configuration options found on this page are listed in the <a href="support.htm">Support</a> section.</div>
 		<center><h2>BDCMC Network Configuration</h2></center>
 		<div class="formbox2">
-			<form accept-charset="UTF-8" method="post" action="index.htm">			
+			<form accept-charset="UTF-8" method="post" action="config.htm" name="netConfig">	
+			<input type="hidden" name="sendForm" value="netConfig">
+			<div class="settingConfig">
+				<div class = "label">Enable DHCP:</div>
+				<div><input type="checkbox" name="dhcp" value="1" onclick="configIPBoxes()" checked="~config_dhcpchecked~"/> <br></div>
+			</div>			
 			<div class="settingNetworkConfig">
 				<div class = "label">Host Name:</div>
 				<input type="text" name="host" value="~hostname~" />
+			</div>
+			<div class="settingNetworkConfig">
+				<div class="label">MAC:</div>
+				<input type="text" name="mac" value="~config_mac~" />
 			</div>
 			<div class="settingNetworkConfig">
 				<div class="label">IP Address:</div>
 				<input type="text" name="ip" value="~config_ip~" />
 			</div>
 			<div class="settingNetworkConfig">
-				<div class="label"><label>Subnet Mask:</label></div>
+				<div class="label">Subnet Mask:</div>
 				<input type="text" name="sub" value="~config_subnet~" />
 			</div>
 			<div class="settingNetworkConfig">
-				<div class="label"><label>Default Gateway:</label></div>
+				<div class="label">Default Gateway:</div>
 				<input type="text" name="gw" value="~config_gw~" />
 			</div>
 			<div class="settingNetworkConfig">
-				<div class="label"><label>Primary DNS Server:</label></div>
+				<div class="label">Primary DNS Server:</div>
 				<input type="text" name="dns1" value="~config_dns1~" />
 			</div>
 			<div class="settingNetworkConfig">
-				<div class="label"><label>Secondary DNS Server:</label></div>
-				<input type="text" name="dns2" value="~config_dns2~" /><br>
+				<div class="label">Secondary DNS Server:</div>
+				<input type="text" name="dns2" value="~config_dns2~" />
 			</div>
 			<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" value="networksubmit">Apply</button><br/>
-			<input type="hidden" name="sendForm" value="NetworkConfig">
 			</form>
 		</div>
 
@@ -137,4 +145,21 @@
 <div class="pageBottom"></div> 
 </div> 
 </body>
+
+<script language="javascript">
+<!--
+function configIPBoxes() {
+	e = document.forms.netConfig;
+	st = e.dhcp.checked;
+	e.ip.disabled = st;
+	e.gw.disabled = st;
+	e.sub.disabled = st;
+	e.dns1.disabled = st;
+	e.dns2.disabled = st;
+}
+
+configIPBoxes();
+//-->
+</script>
+
 </html>

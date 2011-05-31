@@ -191,9 +191,44 @@ HTTP_IO_RESULT HTTPExecutePost(void)
 
 
 #if defined(STACK_USE_HTTP_APP_RECONFIG)
-    if(!memcmppgm2ram(filename, "config.htm", 18))
-            return HTTPPostConfig();
+    if(!memcmppgm2ram(filename, "config.htm", 10))
+    {
+        // Figure out which form submitted. The hidden variable designating
+        // the form should be the first name/value pair.
+        // Read the hidden field name
+        if(HTTPReadPostName(curHTTP.data, 10) != HTTP_READ_OK)
+                goto ConfigFailure;
+
+        // Read the hidden field value
+        if(HTTPReadPostValue(curHTTP.data + 10, sizeof(curHTTP.data)-10-2) != HTTP_READ_OK)
+                goto ConfigFailure;
+
+        // Parse the value that was read
+        if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"sendForm"))
+        {
+            if(!strcmppgm2ram((char*)(curHTTP.data + 10), (ROM char*)"netConfig"))
+                curHTTP.smPost = 0x01;
+            else
+                curHTTP.smPost = 0x00;
+        }
+        
+        switch(curHTTP.smPost)
+        {
+            case 0x01:
+                return HTTPPostConfig();
+                break;
+            default:
+                break;
+        }
+    }
 #endif
+
+    return HTTP_IO_DONE;
+
+ConfigFailure:
+    lastFailure = TRUE;
+    strcpypgm2ram((char*)curHTTP.data, "/protect/config.htm");
+    curHTTP.httpStatus = HTTP_REDIRECT;
 
     return HTTP_IO_DONE;
 }
@@ -267,7 +302,7 @@ static HTTP_IO_RESULT HTTPPostConfig(void)
 
 
     // Use current config in non-volatile memory as defaults
-    EROM_ReadBytes(ETH_EROM_BASE+1, sizeof(newAppConfig),(BYTE*)&newAppConfig);
+    EROM_ReadBytes(ETH_EROM_BASE+1, sizeof(APP_CONFIG),(BYTE*)&newAppConfig);
 
 
     // Start out assuming that DHCP is disabled.  This is necessary since the
@@ -370,7 +405,7 @@ static HTTP_IO_RESULT HTTPPostConfig(void)
     SaveAppConfig(&newAppConfig);
 
     // Set the board to reboot and display reconnecting information
-    strcpypgm2ram((char*)curHTTP.data, "/protect/reboot.htm?");
+    strcpypgm2ram((char*)curHTTP.data, "reboot.htm?");
     memcpy((void*)(curHTTP.data+20), (void*)newAppConfig.NetBIOSName, 16);
     curHTTP.data[20+16] = 0x00;	// Force null termination
     for(i = 20; i < 20u+16u; i++)
@@ -379,6 +414,7 @@ static HTTP_IO_RESULT HTTPPostConfig(void)
                     curHTTP.data[i] = 0x00;
     }
     curHTTP.httpStatus = HTTP_REDIRECT;
+    curHTTP.smPost = 0x00;
 
     return HTTP_IO_DONE;
 
@@ -387,7 +423,7 @@ ConfigFailure:
     lastFailure = TRUE;
     strcpypgm2ram((char*)curHTTP.data, "/protect/config.htm");
     curHTTP.httpStatus = HTTP_REDIRECT;
-
+    curHTTP.smPost = 0x00;
     return HTTP_IO_DONE;
 }
 
