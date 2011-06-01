@@ -34,7 +34,7 @@ void xUARTTaskInit(void)
 void taskUART(void* pvParameter)
 {
     UARTMsg msg;
-    const CHAR8* pByte;
+    const BYTE* pByte;
 
     for(;;)
     {
@@ -128,7 +128,7 @@ void COMReadBaudFromEE(void)
 // The COMPut functions expect the data buffer to exist
 // AFTER they return. IE, malloc them when you make a msg
 // and the taskUART function will free the used memory.
-void COMPut(CHAR8* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+void COMPut(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
 {
     UARTMsg msg;
 
@@ -146,7 +146,7 @@ void COMPut(CHAR8* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
     xQueueSendToBack(hUARTTxQueue, &msg, 0);
 }
 
-void COMPutFromISR(CHAR8* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+void COMPutFromISR(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
 {
     UARTMsg msg;
 

@@ -92,8 +92,7 @@ void SearchForPacket(xParserState *state, CHAR8 buffer[], xSimpleQueueHandle rQu
                     else	// End of packet. Change mode back to search for new one.
                     {
                     	state->mode = PKT_SEARCH_HDR;
-                        COMPut("Packet Found\n\r", 14, 0);
-                        ParseNewPacket(buffer, state->pktIndex, sender);
+                        ParseNewPacket((BYTE *)buffer, state->pktIndex, sender);
                     }
                     state->pktIndex = 0;
                 }

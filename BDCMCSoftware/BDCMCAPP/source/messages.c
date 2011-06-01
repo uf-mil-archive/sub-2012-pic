@@ -1,152 +1,6 @@
 #include "messages.h"
 
-BYTE outBuffers[MSG_NUM_OUTGOING_BUFFERS][(MSG_MAX_LENGTH*2 + 2)];
-volatile UINT16 currentOutBuffer = 0;
-volatile UINT16 packetCount = 0;
-
-inline INT16 ValidateType(CHAR8 type);
-void ParseBROLPacket(CHAR8 buffer[], UINT16 sender);
-
-#define MSG_FORCE_CRC   1
-#define MSG_CRC_ENDIAN  2
-
-void CRC16Init(void)
-{
-    CRCXOR = 0x8005;    // CRC16-IBM x^16+x^15+x^2+1
-    CRCCON = 0xf;   // Polynomial is 16 bits long
-}
-
-UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes, UINT16 prevCRC)
-{
-   CRCWDAT =prevCRC;
-
-   CRCCONbits.CRCGO = 1 ; 
-
-	INT16 temp = numberOfBytes;
-        	
-  do                                
-   {
-     while(1 != CRCCONbits.CRCMPT);
-
-       while((0 == CRCCONbits.CRCFUL)  && (0 < temp))
-       {
-          CRCDAT= *data++;
-		  CRCDAT= *data++;
-          temp -= 2;
-       }
-  }while (0 < temp);
-   
-
-	while(CRCCONbits.CRCFUL==1);        
-
-   CRCDAT = 0x0000;	/* Do this to shift the last word out of the 	*/
-			/* CRC shift register		        	*/
-
-   while(1 != CRCCONbits.CRCMPT);
-	CRCCONbits.CRCGO = 0;             
-
-	return(CRCWDAT);
-}
-
-inline INT16 ValidateType(CHAR8 type)
-{
-    if(!hMotorData)
-        return -1;
-
-    if(MSG_FEED_HEARTBEAT == type)
-        return 0;
-
-    if((hMotorData->Flags.MotorType) != type)
-        return -1;
-
-    return 0;
-}
-
-void ParseNewPacket(CHAR8 rawPkt[], UINT16 length, UINT16 sender)
-{
-    if((length % 2) != 0)
-        return;     // Because of CRC constraints packets must be multiples of
-                    // 2 bytes
-    // First, validate the checksum
-    if(CRC16Checksum(&rawPkt[0], length - 2, 0)
-            != (*((UINT16 *)(&rawPkt[length - 1]))))
-        return;
-
-    /* It's a valid packet. Read the Motor type code and make sure its
-       the current motor type */
-
-    if(ValidateType(rawPkt[0]))
-        return;
-    
-    switch(rawPkt[0])
-    {
-        case MTR_TYPE_BROL: // Brushed open loop packet
-            ParseBROLPacket(rawPkt, sender);
-            break;
-        case MTR_TYPE_BRCL: // Brushed closed loop packet
-
-            break;
-        case MTR_TYPE_BLOL: // Brushless open loop packet
-
-            break;
-        case MTR_TYPE_BLCL: // Brushless closed loop packet
-
-            break;
-        case MSG_FEED_HEARTBEAT:
-            FeedHeartbeat();
-        default:
-            // unknown motor type, do nothing
-            break;
-    }
-}
-
-void ParseBROLPacket(CHAR8 buffer[], UINT16 sender)
-{
-    // What's the command code? At this point the buffer
-    // still has the motor code; that was not removed. So, the command code
-    // lives at the second byte.
-    if(buffer[1] == MSG_BEGIN_PUBLISH)
-    {
-        // This command is to begin publishing packets
-
-    }
-    else if(buffer[1] == MSG_STOP_PUBLISH)
-    {
-        // This command is to stop publishing packets
-
-    }
-    else if(buffer[1] == MSG_SET_REFERENCE)
-    {
-        // Set a new duty cycle
-        
-    }
-
-    return;
-}
-
-inline INT16 BuildEscapedPacket(BYTE* src, BYTE* dest, INT16 inCount)
-{
-    INT16 i = 0;
-    INT16 escCount = inCount + 2;
-
-    // Add in the beginning flag
-    *dest++ = MSG_FLAG;
-
-    for(i = 0; i < inCount; i++)
-    {
-        if(*src == MSG_FLAG || *src == MSG_ESCAPE)
-        {
-            *dest++ = (MSG_ESCAPE_XOR ^ (*src));
-            escCount++;
-        }
-        *dest++ = *src++;
-    }
-
-    // End message flag
-    *dest++ = MSG_FLAG;
-
-    return escCount;
-}
+MessagingData gMessagingData;
 
 // Adds little endian int to a packet
 inline void AddLEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
@@ -164,84 +18,244 @@ inline void AddBEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
     (*currentCount) += 2 ;
 }
 
-INT16 BuildOutgoingBROLPacket(const MotorData* mData, INT16 tickCount, BYTE** pkt)
+inline INT16 ReadLEIntFromPacket(BYTE* buf)
+{
+    // The pic is little endian
+    return *((INT16 *)buf);
+}
+
+inline INT16 ReadBEIntFromPacket(BYTE* buf)
+{
+    return (((INT16)(*(buf)) << 8) | (*(buf+1)));
+}
+
+void CRC16Init(void)
+{
+    CRCXOR = MSG_CRC_POLY;    
+    CRCCON = 0xf;   // Polynomial is 16 bits long
+}
+
+UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes)
+{
+    INT16 i=0, Carry;
+
+    BYTE Flag;
+    BYTE *ptr=(BYTE *)&CRCDAT;
+
+    CRCWDAT = 0x0000;  // start new calculation
+    Flag=0x00;
+
+    while(numberOfBytes!=0)
+    {
+        while(CRCCONbits.CRCFUL==1)//check if FIFO is full
+        CRCCONbits.CRCGO=1; //start CRC engine
+        *ptr=*data++;
+        numberOfBytes--;
+        Flag=Flag^0x01;
+    }
+    if(CRCCONbits.CRCGO!=1)
+        CRCCONbits.CRCGO=1; //start CRC engine
+
+    while(CRCCONbits.CRCFUL==1);//check if FIFO is full
+    if(Flag==0)
+        CRCDAT = 0x0000; //appending PLEN+1 zeros (multiply by 2^16)
+    else
+        *ptr=0x00;  //append (PLEN+1)/2 zeros
+
+    while(CRCCONbits.CRCMPT!=1);//check if FIFO is empty
+    CRCCONbits.CRCGO=0; //stop CRC engine
+
+    Nop();
+    Nop();
+    
+    if(Flag==1)
+    {
+        for(i = 0; i < 8; i ++) //compute CRC in software by
+        {
+            //appending (PLEN+1)/2 zeros
+            Carry =( CRCWDAT & 0x8000);
+            CRCWDAT <<= 1;
+            if(Carry)
+                CRCWDAT ^= MSG_CRC_POLY;
+        }
+    }
+    Nop();
+
+    return CRCWDAT;
+}
+
+void ParseNewPacket(BYTE rawPkt[], INT16 length, INT16 transport)
+{
+    UINT16 checkSum = (gMessagingData.Endianess) ?
+        ReadBEIntFromPacket(&rawPkt[length - 1]) :
+        ReadLEIntFromPacket(&rawPkt[length - 1]);
+        
+    // First, validate the checksum
+    if(CRC16Checksum(&rawPkt[0], length - 2) != checkSum)
+        return;
+
+    /* It's a valid packet. Check to make sure we are the intended recipient. */
+    if(gMessagingData.Address == rawPkt[1])
+        gMessagingData.IncomingPacketCount++;
+    else if(gMessagingData.MultiCastAddress == rawPkt[1])
+        gMessagingData.MulticastPacketCount++;
+    else // Not for us
+        return;
+
+    // The next two bytes are packet count of the transmitter
+
+    // From now on it's motor specific. Ensure we have a motor instance
+    if(!hMotorData)
+        return;
+        
+    // Do the motor types line up?
+    if(hMotorData->Flags.MotorType != rawPkt[4])
+        return;
+
+    // Okay, they're talking to us and its a validated motor type. Is the message
+    // a heartbeat or ESTOP?
+    if(rawPkt[4] == MSG_FEED_HEARTBEAT)
+    {
+        // Is the sender the guy in charge of me?
+        if(rawPkt[0] == gMessagingData.ControllerAdd)
+            FeedHeartbeat();
+        return;
+    }
+    else if(rawPkt[4] == MSG_ESTOP)
+    {
+        // Stop!
+        return;
+    }
+
+    // Nope, they're either subscribing/unsubscribing or commanding a new
+    // motor reference.
+    switch(rawPkt[5])
+    {
+        case MSG_START_PUBLISH:
+            gMessagingData.Subscribers |= transport;
+            break;
+        case MSG_STOP_PUBLISH:
+            gMessagingData.Subscribers &= (~transport);
+            break;
+        case MSG_SET_REFERENCE:
+            // Is the sender the guy in charge of me?
+            if(rawPkt[0] == gMessagingData.ControllerAdd)
+            {
+                    hMotorData->ReferenceInput = (gMessagingData.Endianess) ?
+                        ReadBEIntFromPacket(&rawPkt[6]):
+                        ReadLEIntFromPacket(&rawPkt[6]);
+            }
+            break;
+        default:
+            break; // Unrecognized
+    }
+}
+
+inline INT16 BuildEscapedPacket(BYTE* src, BYTE* dest, INT16 inCount)
+{
+    INT16 i = 0;
+    INT16 escCount = inCount + 2;
+
+    // Add in the beginning flag
+    *dest++ = MSG_FLAG;
+
+    for(i = 0; i < inCount; i++)
+    {
+        BYTE temp = *src++;
+        if(temp == MSG_FLAG || temp == MSG_ESCAPE)
+        {
+            temp = (MSG_ESCAPE_XOR ^ temp);
+            *dest++ = MSG_ESCAPE;
+            escCount++;
+        }
+        *dest++ = temp;
+    }
+
+    // End message flag
+    *dest++ = MSG_FLAG;
+
+    return escCount;
+}
+
+INT16 BuildOutgoingPacket(INT16 tickCount)
 {
     INT16 tmplength = 0;
     INT16 temp = 0;
-    BYTE buf[MSG_MAX_LENGTH];
 
     // Handle buffer switching first
-    currentOutBuffer = ((currentOutBuffer + 1) % MSG_NUM_OUTGOING_BUFFERS);
+    gMessagingData.CurrentOutBuffer = 
+            ((gMessagingData.CurrentOutBuffer + 1) % MSG_NUM_OUTGOING_BUFFERS);
  
     // Increment the current packet number
-    packetCount++;
+    gMessagingData.OutgoingPacketCount++;
 
     // Start with the source address - its never the escape character so add it directly
-    buf[tmplength++] = mData->Address;
+    gMessagingData.scratchBuf[tmplength++] = gMessagingData.Address;    // I'm the source
     // Next add the destination address - its never the escape character so add it directly
-    buf[tmplength++] = mData->Address;
+    gMessagingData.scratchBuf[tmplength++] = gMessagingData.ControllerAdd;
     
     tmplength++;    // Skip over the packet length variable
 
-    if(!(mData->Flags.Endianess)) // Big Endian
+    if(gMessagingData.Endianess) // Big Endian
     {
         // Insert the packet number
-        AddBEIntToPacket(&buf[tmplength], packetCount, &tmplength);
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength],
+                gMessagingData.OutgoingPacketCount,
+                &tmplength);
 
         // Insert the tick count
-        AddBEIntToPacket(&buf[tmplength], tickCount, &tmplength);
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        AddBEIntToPacket(&buf[tmplength], mData->Flags.All, &tmplength);
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
 
         // Insert reference input
-        AddBEIntToPacket(&buf[tmplength], mData->ReferenceInput, &tmplength);
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
 
         // Insert voltage rail
-        AddBEIntToPacket(&buf[tmplength], mData->VRail, &tmplength);
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
 
         // Insert motor current
-        AddBEIntToPacket(&buf[tmplength], mData->Current, &tmplength);
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Current, &tmplength);
     }
     else    // Little Endian
     {
         // Insert the packet number
-        AddLEIntToPacket(&buf[tmplength], packetCount, &tmplength);
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength],
+                gMessagingData.OutgoingPacketCount,
+                &tmplength);
 
         // Insert the tick count
-        AddLEIntToPacket(&buf[tmplength], tickCount, &tmplength);
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        AddLEIntToPacket(&buf[tmplength], mData->Flags.All, &tmplength);
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
 
         // Insert reference input
-        AddLEIntToPacket(&buf[tmplength], mData->ReferenceInput, &tmplength);
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
 
         // Insert voltage rail
-        AddLEIntToPacket(&buf[tmplength], mData->VRail, &tmplength);
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
 
         // Insert motor current
-        AddLEIntToPacket(&buf[tmplength], mData->Current, &tmplength);
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Current, &tmplength);
     }
 
     // Insert tmplength into packet
-    buf[2] = (BYTE)(tmplength & 0xFF);
+    gMessagingData.scratchBuf[2] = (BYTE)(tmplength & 0xFF);
 
     // Calculate the checksum
-    temp = CRC16Checksum(&buf[0],
-            tmplength,
-            0);
-
-    if(!(mData->Flags.Endianess)) // Big Endian
-        AddBEIntToPacket(&buf[tmplength], temp, &tmplength);
-    else
-        AddLEIntToPacket(&buf[tmplength], temp, &tmplength);
-
-    tmplength = BuildEscapedPacket(&buf[0],
-            &(outBuffers[currentOutBuffer][0]),
+    temp = CRC16Checksum(&gMessagingData.scratchBuf[0],
             tmplength);
 
-    *pkt = &(outBuffers[currentOutBuffer][0]);
+    if(gMessagingData.Endianess) // Big Endian
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], temp, &tmplength);
+    else
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], temp, &tmplength);
+
+    tmplength = BuildEscapedPacket(&gMessagingData.scratchBuf[0],
+            &(gMessagingData.OutBuffers[gMessagingData.CurrentOutBuffer][0]),
+            tmplength);
 
     // This function returns the total count of bytes in the buffer
     return tmplength;

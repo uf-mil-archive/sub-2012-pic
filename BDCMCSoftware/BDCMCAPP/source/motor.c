@@ -12,7 +12,6 @@ MotorData BROLMotorData =
 
 void (*controller)(void) = NULL;
 MotorData *hMotorData = NULL;
-BYTE MotorInited = FALSE;
 
 INT16 MTR_FTable[101];
 INT16 MTR_RTable[101];
@@ -24,7 +23,7 @@ inline void EnableMotorInterrupts(void);
 inline void DisableMotorInterrupts(void);
 void BROLInit(MotorData** motor);
 
-inline BYTE ReadMotorTypeEE()
+BYTE ReadMotorTypeEE()
 {
    BYTE result;
    EROM_ReadBytes(MTR_EROM_BASE, 1, &result);
@@ -270,26 +269,16 @@ void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
 
 inline void FeedHeartbeat(void)
 {
-    if(hMotorData)
-    {
-        hMotorData->InterruptCount = 0;
-        hMotorData->Flags.Heartbeat = 1;
-    }
+    hMotorData->InterruptCount = 0;
+    hMotorData->Flags.Heartbeat = 1;
 }
 
 void BROLInit(MotorData** motor)
-{
-    
-    BYTE result;
+{    
     INT16 address = 1;
     
     BROLMotorData.Flags.MotorType = MTR_TYPE_BROL;
-            
-    // The first byte after the motor type is this motor's address
-    EROM_ReadBytes(address++, 1, &BROLMotorData.Address);
-    // Next is the desired endianess
-    EROM_ReadBytes(address++, 1, &result);
-    BROLMotorData.Flags.Endianess = (result != 0) ? 1: 0;
+
     // Then the 2 byte max slew, stored little endian
     BROLMotorData.MaxSlew =  EROM_ReadInt16(address);
     address += sizeof(INT16);
@@ -347,8 +336,6 @@ void BROLInit(MotorData** motor)
     }
 
     *motor = &BROLMotorData;
-
-    MotorInited = TRUE;
 }
 
 INT16 MotorGetAmpsString(MotorData* data, BYTE* buf)
