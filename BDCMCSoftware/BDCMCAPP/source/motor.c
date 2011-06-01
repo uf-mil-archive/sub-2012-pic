@@ -1,6 +1,7 @@
 #include "motor.h"
 #include "p33FJ128MC804.h"
 #include <stdio.h>
+#include "dsp.h"
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
 
@@ -13,8 +14,8 @@ MotorData BROLMotorData =
 void (*controller)(void) = NULL;
 MotorData *hMotorData = NULL;
 
-INT16 MTR_FTable[101];
-INT16 MTR_RTable[101];
+fractional MTR_FTable[101];
+fractional MTR_RTable[101];
 
 void PWMInit(void);
 void motorSetupTimer(void);
@@ -35,30 +36,34 @@ void MotorInit(void)
     PWMInit();  // Initialize the PWM module
 
     // Pull in settings from EROM
+/*
     switch(ReadMotorTypeEE())
     {
         case MTR_TYPE_BROL:
-            BROLInit(&hMotorData);
-            // Set the controller callback
-            controller = &BrushedDCOpenLoop;
+
             break;
 
         default:
             return; // No motor settings, don't turn anything on
     }
+*/
+
+    BROLInit(&hMotorData);
+    // Set the controller callback
+    controller = &BrushedDCOpenLoop;
 
     DisableMotorInterrupts();
 
     // Setup the controller timer
     motorSetupTimer();
 
-/*
+
     // Charge the boot straps. This leaves the low side fets turned on.
-    ChargeBootStraps();
+   // ChargeBootStraps();
     
     // Now start firing controller events
     EnableMotorInterrupts();
-*/
+
 
     return;
 }
@@ -94,6 +99,17 @@ void PWMInit(void)
 
 void BrushedDCOpenLoop(void)
 {
+    // The table holds 12 bit voltages
+
+
+    // Scale the desired input based on the voltages
+    if(hMotorData->HardMaxVoltage > hMotorData.VRail)
+    {
+        float rangeScale = ((MTR_MAX_PERCENT - MTR_MIN_PERCENT) / 100.0) * MTR_MAX_DUTY;
+        float offsetScale = (MTR_MIN_PERCENT / 100.0) * MTR_MAX_DUTY;
+
+    }
+
     if(hMotorData->Flags.ReferenceChanged)
     {
         // If the reference has changed, do the table lookup
@@ -145,6 +161,7 @@ DONE:   // Clear the reference changed flag
     }
 
 
+
     if(hMotorData->ReferenceDuty != hMotorData->PresentDuty)
     {
         // Motor speed is changing. Use the slew to find the new
@@ -167,18 +184,21 @@ DONE:   // Clear the reference changed flag
         if( hMotorData->PresentDuty < 0)
         {
             duty = -1*hMotorData->PresentDuty;
-            P1OVDCON = MTR_BR_BACKWARD;
+            Nop();//P1OVDCON = MTR_BR_BACKWARD;
         }
         else
         {
             duty =  hMotorData->PresentDuty;
-            P1OVDCON = MTR_BR_FORWARD;
+            Nop();//P1OVDCON = MTR_BR_FORWARD;
         }
 
         // Set the duty cycles correctly (absolute value of output)
-        P1DC1 = duty;
-        P1DC2 = duty;
+        Nop();//P1DC1 = duty;
+        Nop();//P1DC2 = duty;
     }
+
+    // End Measurement
+    LED = LED_OFF;
 }
 
 void ChargeBootStraps(void)
@@ -247,6 +267,7 @@ void motorSetupTimer(void)
 
 void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
 {
+    LED = LED_ON;
     /* Clear the timer interrupt. */
     IFS1bits.T4IF = 0;
 
@@ -304,21 +325,20 @@ void BROLInit(MotorData** motor)
         address += sizeof(float);
     }   
 
-    float rangeScale = ((MTR_MAX_PERCENT - MTR_MIN_PERCENT) / 100.0) * MTR_MAX_DUTY;
-    float offsetScale = (MTR_MIN_PERCENT / 100.0) * MTR_MAX_DUTY;
+    // Scale the normalized 0->1 voltages to the Q15 voltage range
+    float rangeScale = 
 
     MTR_FTable[0] = 0;
     // Build the forward table
     for(i = 1; i <= 100; i++)
     {
-        MTR_FTable[i] = (INT16)(rangeScale*
-                (BROLMotorData.FCoeff[5]*pow(i,5) +
+        MTR_FTable[i] = Float2Fract(
+                BROLMotorData.FCoeff[5]*pow(i,5) +
                 BROLMotorData.FCoeff[4]*pow(i,4) +
                 BROLMotorData.FCoeff[3]*pow(i,3) +
                 BROLMotorData.FCoeff[2]*pow(i,2) +
                 BROLMotorData.FCoeff[1]*i +
-                BROLMotorData.FCoeff[0])
-                + offsetScale); 
+                BROLMotorData.FCoeff[0]); 
     }
 
     MTR_RTable[0] = 0;

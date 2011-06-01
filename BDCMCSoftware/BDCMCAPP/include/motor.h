@@ -58,6 +58,7 @@ typedef struct MotorDataDefinition
     INT16 MaxVoltage;       // The desired running maximum voltage, this will 
                             // actually scale effor to not distort the 
                             // linearization plot
+    INT16 SoftMaxVoltage;
     INT16 HardMaxVoltage;   // The maximum voltage used when the thruster was plotted
     INT16 MinVoltage;
     INT16 MaxCurrent;

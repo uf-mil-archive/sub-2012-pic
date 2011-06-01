@@ -47,9 +47,12 @@ void _ISR __attribute__((__no_auto_psv__)) _StackError(void)
  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ***/
 int main(void)
 {
+    /* These should be the first two calls in main - always!*/
     clockInit();
     ioMap();
-   
+    
+    LED_TRIS = OUTPUT_PIN;
+
     CRC16Init();    // Just get this ready for later. Doesn't hurt to be called here
 
     // This task is started first(!) so the UART Queue exists and we can begin

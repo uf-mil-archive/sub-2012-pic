@@ -54,13 +54,17 @@
 #define __CUSTOMHTTPAPP_C
 
 #include "TCPIPConfig.h"
+#include "taskPublisher.h"
 
 #if defined(STACK_USE_HTTP2_SERVER)
 
+#include "FreeRTOS.h"
 #include "TCPIP Stack/TCPIP.h"
 #include "taskTCPIP.h"
 #include "mcp25XX640A.h"
 #include "motor.h"
+#include "taskUART.h"
+#include "taskParser.h"
 
 /****************************************************************************
   Section:
@@ -727,6 +731,46 @@ void HTTPPrint_status_fail(void)
     else
             TCPPutROMString(sktHTTP, (ROM BYTE*)"none");
     lastFailure = FALSE;
+}
+
+void HTTPPrint_task_stack(WORD num)
+{
+    BYTE used[8];
+    BYTE max[8];
+
+    switch(num)
+    {
+        case 0:
+            uitoa(uxTaskGetStackHighWaterMark(hTCPIPTask)*sizeof(portSTACK_TYPE), used);
+            TCPPutString(sktHTTP, used);
+            TCPPut(sktHTTP, '/');
+            uitoa(STACK_SIZE_TCPIP*sizeof(portSTACK_TYPE), max);
+            TCPPutString(sktHTTP, max);
+            break;
+        case 1:
+            uitoa(uxTaskGetStackHighWaterMark(hUARTTask)*sizeof(portSTACK_TYPE), used);
+            TCPPutString(sktHTTP, used);
+            TCPPut(sktHTTP, '/');
+            uitoa(STACK_SIZE_UART*sizeof(portSTACK_TYPE), max);
+            TCPPutString(sktHTTP, max);
+            break;
+        case 2:
+            uitoa(uxTaskGetStackHighWaterMark(hPublisherTask)*sizeof(portSTACK_TYPE), used);
+            TCPPutString(sktHTTP, used);
+            TCPPut(sktHTTP, '/');
+            uitoa(STACK_SIZE_PUBLISHER*sizeof(portSTACK_TYPE), max);
+            TCPPutString(sktHTTP, max);
+            break;
+        case 3:
+            uitoa(uxTaskGetStackHighWaterMark(hUARTParserTask)*sizeof(portSTACK_TYPE), used);
+            TCPPutString(sktHTTP, used);
+            TCPPut(sktHTTP, '/');
+            uitoa(STACK_SIZE_PARSER*sizeof(portSTACK_TYPE), max);
+            TCPPutString(sktHTTP, max);
+            break;
+        default:
+            break;
+    }
 }
 
 #endif

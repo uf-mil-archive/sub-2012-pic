@@ -21,6 +21,7 @@ void HTTPPrint(DWORD callbackID);
 void HTTPPrint_hostname(void);
 void HTTPPrint_config_ip(void);
 void HTTPPrint_config_dhcpchecked(void);
+void HTTPPrint_config_mac(void);
 void HTTPPrint_config_subnet(void);
 void HTTPPrint_config_gw(void);
 void HTTPPrint_config_dns1(void);
@@ -28,9 +29,9 @@ void HTTPPrint_config_dns2(void);
 void HTTPPrint_motor_current(void);
 void HTTPPrint_motor_railvoltage(void);
 void HTTPPrint_motor_direction(void);
-void HTTPPrint_config_mac(void);
 void HTTPPrint_version(void);
 void HTTPPrint_builddate(void);
+void HTTPPrint_task_stack(WORD);
 
 void HTTPPrint(DWORD callbackID)
 {
@@ -46,34 +47,49 @@ void HTTPPrint(DWORD callbackID)
 			HTTPPrint_config_dhcpchecked();
 			break;
         case 0x00000003:
-			HTTPPrint_config_subnet();
+			HTTPPrint_config_mac();
 			break;
         case 0x00000004:
-			HTTPPrint_config_gw();
+			HTTPPrint_config_subnet();
 			break;
         case 0x00000005:
-			HTTPPrint_config_dns1();
+			HTTPPrint_config_gw();
 			break;
         case 0x00000006:
-			HTTPPrint_config_dns2();
+			HTTPPrint_config_dns1();
 			break;
         case 0x00000007:
-			HTTPPrint_motor_current();
+			HTTPPrint_config_dns2();
 			break;
         case 0x00000008:
-			HTTPPrint_motor_railvoltage();
+			HTTPPrint_motor_current();
 			break;
         case 0x00000009:
-			HTTPPrint_motor_direction();
+			HTTPPrint_motor_railvoltage();
 			break;
         case 0x0000000a:
-			HTTPPrint_config_mac();
+			HTTPPrint_motor_direction();
 			break;
         case 0x0000000b:
 			HTTPPrint_version();
 			break;
         case 0x0000000c:
 			HTTPPrint_builddate();
+			break;
+        case 0x0000000d:
+			HTTPPrint_task_stack(0);
+			break;
+        case 0x0000000e:
+			HTTPPrint_task_stack(1);
+			break;
+        case 0x0000000f:
+			HTTPPrint_task_stack(2);
+			break;
+        case 0x00000010:
+			HTTPPrint_task_stack(3);
+			break;
+        case 0x00000011:
+			HTTPIncFile((ROM BYTE*)"menu.inc");
 			break;
 		default:
 			// Output notification for undefined values
