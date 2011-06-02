@@ -1,7 +1,7 @@
 #include "motor.h"
 #include "p33FJ128MC804.h"
 #include <stdio.h>
-#include "dsp.h"
+#include "adc.h"
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
 
@@ -14,8 +14,8 @@ MotorData BROLMotorData =
 void (*controller)(void) = NULL;
 MotorData *hMotorData = NULL;
 
-fractional MTR_FTable[101];
-fractional MTR_RTable[101];
+UINT16 MTR_FTable[101];
+UINT16 MTR_RTable[101];
 
 void PWMInit(void);
 void motorSetupTimer(void);
@@ -102,13 +102,15 @@ void BrushedDCOpenLoop(void)
     // The table holds 12 bit voltages
 
 
+/*
     // Scale the desired input based on the voltages
-    if(hMotorData->HardMaxVoltage > hMotorData.VRail)
+    if(hMotorData->HardMaxVoltage > hMotorData->VRail)
     {
         float rangeScale = ((MTR_MAX_PERCENT - MTR_MIN_PERCENT) / 100.0) * MTR_MAX_DUTY;
         float offsetScale = (MTR_MIN_PERCENT / 100.0) * MTR_MAX_DUTY;
 
     }
+*/
 
     if(hMotorData->Flags.ReferenceChanged)
     {
@@ -325,34 +327,31 @@ void BROLInit(MotorData** motor)
         address += sizeof(float);
     }   
 
-    // Scale the normalized 0->1 voltages to the Q15 voltage range
-    float rangeScale = 
-
     MTR_FTable[0] = 0;
+    float hMax = (float)BROLMotorData.HardMaxVoltage / ADC_MAX_VAL;
     // Build the forward table
     for(i = 1; i <= 100; i++)
     {
-        MTR_FTable[i] = Float2Fract(
-                BROLMotorData.FCoeff[5]*pow(i,5) +
+        MTR_FTable[i] = 
+               hMax*(BROLMotorData.FCoeff[5]*pow(i,5) +
                 BROLMotorData.FCoeff[4]*pow(i,4) +
                 BROLMotorData.FCoeff[3]*pow(i,3) +
                 BROLMotorData.FCoeff[2]*pow(i,2) +
                 BROLMotorData.FCoeff[1]*i +
-                BROLMotorData.FCoeff[0]); 
+                BROLMotorData.FCoeff[0]);
     }
 
     MTR_RTable[0] = 0;
     // Build the reverse table
     for(i = 1; i <= 100; i++)
     {
-        MTR_RTable[i] = (INT16)(rangeScale*
-                (BROLMotorData.RCoeff[5]*pow(i,5) +
+        MTR_RTable[i] = Float2Fract(
+                BROLMotorData.RCoeff[5]*pow(i,5) +
                 BROLMotorData.RCoeff[4]*pow(i,4) +
                 BROLMotorData.RCoeff[3]*pow(i,3) +
                 BROLMotorData.RCoeff[2]*pow(i,2) +
                 BROLMotorData.RCoeff[1]*i +
-                BROLMotorData.RCoeff[0])
-                + offsetScale);
+                BROLMotorData.RCoeff[0]);
     }
 
     *motor = &BROLMotorData;

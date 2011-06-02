@@ -21,7 +21,7 @@ inline void AddBEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
 inline INT16 ReadLEIntFromPacket(BYTE* buf)
 {
     // The pic is little endian
-    return *((INT16 *)buf);
+    return (((INT16)(*(buf+1)) << 8) | (*(buf)));
 }
 
 inline INT16 ReadBEIntFromPacket(BYTE* buf)
@@ -87,8 +87,8 @@ UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes)
 void ParseNewPacket(BYTE rawPkt[], INT16 length, INT16 transport)
 {
     UINT16 checkSum = (gMessagingData.Endianess) ?
-        ReadBEIntFromPacket(&rawPkt[length - 1]) :
-        ReadLEIntFromPacket(&rawPkt[length - 1]);
+        ReadBEIntFromPacket(&rawPkt[length - 2]) :
+        ReadLEIntFromPacket(&rawPkt[length - 2]);
         
     // First, validate the checksum
     if(CRC16Checksum(&rawPkt[0], length - 2) != checkSum)
