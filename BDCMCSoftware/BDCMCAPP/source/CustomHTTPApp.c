@@ -231,7 +231,7 @@ HTTP_IO_RESULT HTTPExecutePost(void)
 
 ConfigFailure:
     lastFailure = TRUE;
-    strcpypgm2ram((char*)curHTTP.data, "/protect/config.htm");
+    strcpypgm2ram((char*)curHTTP.data, "config.htm");
     curHTTP.httpStatus = HTTP_REDIRECT;
 
     return HTTP_IO_DONE;
@@ -425,7 +425,7 @@ static HTTP_IO_RESULT HTTPPostConfig(void)
 
 ConfigFailure:
     lastFailure = TRUE;
-    strcpypgm2ram((char*)curHTTP.data, "/protect/config.htm");
+    strcpypgm2ram((char*)curHTTP.data, "config.htm");
     curHTTP.httpStatus = HTTP_REDIRECT;
     curHTTP.smPost = 0x00;
     return HTTP_IO_DONE;
@@ -677,9 +677,9 @@ void HTTPPrint_config_mac(void)
 
 void HTTPPrint_motor_current(void)
 {
-    BYTE buf[7];
+    BYTE buf[20];
 
-    MotorGetAmpsString(hMotorData, &buf[0]);
+    sprintf(buf, "%*.*d", 6,10)
 
     TCPPutString(sktHTTP, buf);
 }
