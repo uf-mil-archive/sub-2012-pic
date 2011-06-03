@@ -9,6 +9,8 @@
 #include "taskParser.h"
 #include "taskTCPIP.h"
 #include "taskPublisher.h"
+#include "messages.h"
+#include "motor.h"
 
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
@@ -43,21 +45,15 @@ void _ISR __attribute__((__no_auto_psv__)) _StackError(void)
  take over the ADC after they have been called via StackInit(). However,
  StackInit() uses RTOS calls, and thus, the scheduler must be running!
  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ***/
-
 int main(void)
 {
+    /* These should be the first two calls in main - always!*/
     clockInit();
     ioMap();
+    
+    LED_TRIS = OUTPUT_PIN;
 
-    CHAR8 test[] = "1234567890";
-
-    CRC16Init();
-
-    INT16 res = CRC16ChecksumWord(((UINT16 *)&test[0]), (10/2), 0);
-
-    (void)res;
-
-    while(1)Nop();
+    CRC16Init();    // Just get this ready for later. Doesn't hurt to be called here
 
     // This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.

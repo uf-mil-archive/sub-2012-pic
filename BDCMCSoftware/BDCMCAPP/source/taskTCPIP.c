@@ -51,12 +51,10 @@
 
 // Declare AppConfig structure to store information on the tcpip configuration
 APP_CONFIG AppConfig;
-static DWORD dwLastIP = 0;
 
 ///////////////////////////////////////////////////////////////////
 // private helper functions
 static void InitAppConfig(void);
-static void DisplayIPValue(IP_ADDR IPVal);
 
 // semaphore to regulate access to the FLASH, the touchscreen
 // task will access it initially and then hand over control to

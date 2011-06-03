@@ -31,22 +31,42 @@
                                 // flags or escape characters.
 #define MSG_NUM_OUTGOING_BUFFERS   5    // Number of outgoing buffers
 
-#define MSG_SENDER_UART     0   
-#define MSG_SENDER_TCPIP    1  
+#define MSG_SENDER_UART     1
+#define MSG_SENDER_ETH      2
 
-#define MSG_FEED_HEARTBEAT  100   // Heartbeat packet
+#define MSG_FEED_HEARTBEAT  100   // Heartbeat Packet
+#define MSG_ESTOP           101   // ESTOP Packet
 
 // Brushed Open-Loop Message Defines
-#define MSG_BEGIN_PUBLISH       1   // Start publishing data
+#define MSG_START_PUBLISH       1   // Start publishing data
 #define MSG_STOP_PUBLISH        2   // Stop publishing data
 #define MSG_SET_REFERENCE       3   // Set a new duty cycle
 
+#define MSG_CRC_POLY    0x1021      // The CRC-16 Polynomial CRC16-XMODEM
 
-UINT16 CRC16ChecksumWord(UINT16* data, UINT16 numberOfWords, UINT16 prevCRC);
+typedef struct tagMessagingData
+{
+    BYTE Address;
+    BYTE MultiCastAddress;
+    BYTE ControllerAdd;   // Who's allowed to give input to me?
+    INT16 PublishRate;
+    INT16 Endianess;    // 0 = Little Endian
+    INT16 IncomingPacketCount;
+    INT16 MulticastPacketCount;
+    INT16 OutgoingPacketCount;
+    BYTE OutBuffers[MSG_NUM_OUTGOING_BUFFERS][(MSG_MAX_LENGTH*2 + 2)];
+    INT16 CurrentOutBuffer;
+    INT16 Subscribers;
+    BYTE  scratchBuf[MSG_MAX_LENGTH];
+} MessagingData;
+
+extern MessagingData gMessagingData;
+
+UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes);
 void CRC16Init(void);
 
-void ParseNewPacket(CHAR8 rawPkt[], UINT16 length, UINT16 sender);
+void ParseNewPacket(BYTE rawPkt[], INT16 length, INT16 sender);
 
-INT16 BuildOutgoingBROLPacket(const MotorData* mData, INT16 tickCount, BYTE** pkt);
+INT16 BuildOutgoingPacket(INT16 tickCount);
 
 #endif // MESSAGES_H

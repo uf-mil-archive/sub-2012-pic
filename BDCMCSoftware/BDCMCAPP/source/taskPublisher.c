@@ -6,12 +6,12 @@ portBASE_TYPE gPublishPeriod;
 void xPublisherTaskInit(void)
 {
     // Read in publish rate from ROM and convert to ticks period
-    INT16 rate = 0xFF;
-    
-    if(rate == 0xFF)        // Rate is empty
-        rate = PBL_DEFAULT_RATE;
 
-    gPublishPeriod = ((1000 / rate) / portTICK_RATE_MS);
+    
+    if(gMessagingData.PublishRate == 0x00)        // Rate is empty
+        gMessagingData.PublishRate = PBL_DEFAULT_RATE;
+
+    gPublishPeriod = ((1000 / gMessagingData.PublishRate) / portTICK_RATE_MS);
 
     xTaskCreate(taskPublisher, (CHAR*)"UARTPUB", STACK_SIZE_PUBLISHER,
                 NULL, tskIDLE_PRIORITY + 1, &hPublisherTask);
@@ -21,6 +21,7 @@ void xPublisherTaskInit(void)
 
 void taskPublisher(void* pvParameter)
 {
+    INT16 length;
     portTickType previousWakeTime;
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
@@ -32,14 +33,21 @@ void taskPublisher(void* pvParameter)
         // Block here until the timeout has passed
         vTaskDelayUntil(&previousWakeTime, gPublishPeriod);
 
-        BYTE* pkt = NULL;
-
-        if(!hMotorData) // Nothing to publish
+        if(!hMotorData) // Nothing to publish - this is also necessary since
+                        // the packet builders don't check if motor data is valid.
             continue;
-
-        INT16 length = BuildOutgoingBROLPacket(hMotorData, previousWakeTime, &pkt);
+        
+        if(hMotorData->Flags.MotorType == MTR_TYPE_NONE)
+            continue;
+        
+        length = BuildOutgoingPacket(previousWakeTime);
 
         // Publish to who?
-        COMPut((CHAR8*)pkt, length, UART_DONT_FREE_BUFFER);
+        if(gMessagingData.Subscribers & MSG_SENDER_UART)
+            COMPut(&gMessagingData.OutBuffers[gMessagingData.CurrentOutBuffer][0],
+                    length, UART_DONT_FREE_BUFFER); // Send over UART
+
+        if(gMessagingData.Subscribers & MSG_SENDER_ETH)
+            continue; // Send over UDP
     }
 }

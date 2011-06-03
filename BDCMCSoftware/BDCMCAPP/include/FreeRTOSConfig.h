@@ -88,16 +88,16 @@
 #define configCHECK_FOR_STACK_OVERFLOW          2
 
 /* Co-routine definitions. */
-#define configUSE_CO_ROUTINES           0
-#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )
+#define configUSE_CO_ROUTINES                   0
+#define configMAX_CO_ROUTINE_PRIORITIES       ( 2 )
 
 /* Set the following definitions to 1 to include the API function, or zero
 to exclude the API function. */
 
 #define INCLUDE_vTaskPrioritySet		1
 #define INCLUDE_uxTaskPriorityGet		0
-#define INCLUDE_vTaskDelete			    0
-#define INCLUDE_vTaskCleanUpResources   0
+#define INCLUDE_vTaskDelete			0
+#define INCLUDE_vTaskCleanUpResources           0
 #define INCLUDE_vTaskSuspend			1
 #define INCLUDE_vTaskDelayUntil			1
 #define INCLUDE_vTaskDelay			1

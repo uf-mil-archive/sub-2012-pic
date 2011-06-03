@@ -23,7 +23,7 @@
 typedef struct
 {
     portBASE_TYPE count;
-    CHAR8* buffer;
+    BYTE* buffer;
     portBASE_TYPE flags;    // bit 1 is the buffer free instruction
 } UARTMsg;
 
@@ -37,7 +37,7 @@ void xUARTTaskInit(void);
 
 void taskUART(void* pvParameter);
 
-void COMPut(CHAR8* data, portBASE_TYPE length, portBASE_TYPE shouldFree);
-void COMPutFromISR(CHAR8* data, portBASE_TYPE length, portBASE_TYPE shouldFree);
+void COMPut(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree);
+void COMPutFromISR(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree);
 
 #endif

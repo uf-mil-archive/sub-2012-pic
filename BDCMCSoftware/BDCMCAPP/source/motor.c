@@ -1,8 +1,10 @@
 #include "motor.h"
 #include "p33FJ128MC804.h"
 #include <stdio.h>
+#include "adc.h"
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
+
 
 MotorData BROLMotorData =
 {
@@ -12,10 +14,9 @@ MotorData BROLMotorData =
 
 void (*controller)(void) = NULL;
 MotorData *hMotorData = NULL;
-BYTE MotorInited = FALSE;
 
-INT16 MTR_FTable[101];
-INT16 MTR_RTable[101];
+Q6_26 MTR_FTable[101];
+Q6_26 MTR_RTable[101];
 
 void PWMInit(void);
 void motorSetupTimer(void);
@@ -24,7 +25,7 @@ inline void EnableMotorInterrupts(void);
 inline void DisableMotorInterrupts(void);
 void BROLInit(MotorData** motor);
 
-inline BYTE ReadMotorTypeEE()
+BYTE ReadMotorTypeEE()
 {
    BYTE result;
    EROM_ReadBytes(MTR_EROM_BASE, 1, &result);
@@ -36,30 +37,34 @@ void MotorInit(void)
     PWMInit();  // Initialize the PWM module
 
     // Pull in settings from EROM
+/*
     switch(ReadMotorTypeEE())
     {
         case MTR_TYPE_BROL:
-            BROLInit(&hMotorData);
-            // Set the controller callback
-            controller = &BrushedDCOpenLoop;
+
             break;
 
         default:
             return; // No motor settings, don't turn anything on
     }
+*/
+
+    BROLInit(&hMotorData);
+    // Set the controller callback
+    controller = &BrushedDCOpenLoop;
 
     DisableMotorInterrupts();
 
     // Setup the controller timer
     motorSetupTimer();
 
-/*
+
     // Charge the boot straps. This leaves the low side fets turned on.
-    ChargeBootStraps();
+   // ChargeBootStraps();
     
     // Now start firing controller events
     EnableMotorInterrupts();
-*/
+
 
     return;
 }
@@ -95,58 +100,89 @@ void PWMInit(void)
 
 void BrushedDCOpenLoop(void)
 {
-    if(hMotorData->Flags.ReferenceChanged)
+    /* If the reference input has changed, we calculate a new PWM reference.
+     * The required PWM duty cycle is calculated by taking the percentage of
+     * rail voltage we need to output, and then mapping this into the PWM duty
+     * cycle range. First, we do a table lookup to get the desired voltage
+     */
+    if(BROLMotorData.Flags.ReferenceChanged)
     {
-        // If the reference has changed, do the table lookup
-        // to find the new duty cycle
-        INT16 index = hMotorData->ReferenceInput / 10;
+        // Get the unsigned value and the direction flag
+        QS7_8 unsDesired = (BROLMotorData.ReferenceInput & 0x7FFF);
+        INT16 direction = (INT16)(BROLMotorData.ReferenceInput & 0x8000);
 
-        // Check for cases we don't interpolate
-        if(index > -1 && index < 1)
+        // Check for 0 reference, no interpolation
+        if(unsDesired == 0)
         {
-            hMotorData->ReferenceDuty = 0; 
-            goto DONE;
-        }
-
-        if(index <= -100)
-        {
-            hMotorData->ReferenceDuty = MTR_RTable[100];
-            goto DONE;
+            BROLMotorData.ReferenceDuty = 0;
+            goto REFDONE;
         }
         
-        if(index >= 100)
+        // Check for saturating a table, no interpolation
+        if(unsDesired > MTR_100PERC_Q7_8)
         {
-            hMotorData->ReferenceDuty = MTR_FTable[100];
-            goto DONE;
+            // The tables hold Q6_26 voltages. The VRail is a Q6_10.
+            // The result will be a QX_16 percentage, and we multiply this
+            // by the max range of the PWM duty cycle, then shift away the
+            // fractional portion.
+            if(direction != 0)  // Reverse - append the sign correctly
+            {
+                BROLMotorData.ReferenceDuty = 
+                (INT16)
+                (-1*(((MTR_RTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16));
+            }
+            else    // Forward
+            {
+                BROLMotorData.ReferenceDuty =
+                (INT16)
+                (((MTR_FTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
+            }
+
+            goto REFDONE;
         }
-        
+
         // The point isn't on a table boundary, interpolation is necessary
-        if(index < 0)
+        // The reference input is in QS7_8. So.. eliminate the sign and
+        // shift to find the correct table index.
+        INT16 index = (INT16)(unsDesired >> 8);
+
+        // unsDesired and x0 should be in the same format so subtraction works.
+        QS7_8 x0 = index << 8;  // The lower table entry, in QS7_8
+        QS7_8 xdel0 = unsDesired - x0;
+
+
+        // QS7_8 xdel1 = 256; // Table entries are always 1 << 8 apart.
+
+        // Now check the sign to use the proper table
+        if(direction != 0)  // Reverse - append the sign correctly
         {
-            index = -1*index;     
-            INT16 x0 = index * 10;
-            INT16 x1 = (index + 1) * 10;
-            INT16 xdel0 = -1*hMotorData->ReferenceInput - x0;
-            hMotorData->ReferenceDuty =
-                MTR_RTable[index] + 
-                (xdel0*(MTR_RTable[index+1] - MTR_RTable[index]) / (x1 - x0));
+            // Interpolate to get the right voltage - the result should be in Q6_26 format
+            // (Q6_26 / Q7_8)= QX_18*Q7_8 = QX_26
+            Q6_26 interpV = MTR_RTable[index] +
+                (xdel0*((MTR_RTable[index+1] - MTR_RTable[index]) >> 8));
+
+            BROLMotorData.ReferenceDuty =
+                (INT16)
+                (-1*(((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16));
         }
-        else
+        else    // Forward
         {
-            INT16 x0 = index * 10;
-            INT16 x1 = (index + 1) * 10;
-            INT16 xdel0 = hMotorData->ReferenceInput - x0;
-            hMotorData->ReferenceDuty =
-                MTR_FTable[index] +
-                (xdel0*(MTR_FTable[index+1] - MTR_FTable[index]) / (x1 - x0));
+            // Interpolate to get the right voltage - the result should be in Q6_26 format
+            // (Q6_26 / Q7_8)= QX_18*Q7_8 = QX_26
+            Q6_26 interpV = MTR_FTable[index] +
+                (xdel0*((MTR_FTable[index+1] - MTR_FTable[index]) >> 8));
+
+            BROLMotorData.ReferenceDuty =
+            (INT16)
+            (((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
         }
-        
-DONE:   // Clear the reference changed flag
+
+REFDONE:   // Clear the reference changed flag
         hMotorData->Flags.ReferenceChanged = 0;
+        
     }
 
-
-    if(hMotorData->ReferenceDuty != hMotorData->PresentDuty)
+     if(hMotorData->ReferenceDuty != hMotorData->PresentDuty)
     {
         // Motor speed is changing. Use the slew to find the new
         // duty cycle
@@ -163,23 +199,26 @@ DONE:   // Clear the reference changed flag
             hMotorData->PresentDuty = (duty > hMotorData->ReferenceDuty)
                     ? hMotorData->ReferenceDuty : duty;
         }
-        
+
         // And set the direction overrides
         if( hMotorData->PresentDuty < 0)
         {
             duty = -1*hMotorData->PresentDuty;
-            P1OVDCON = MTR_BR_BACKWARD;
+            Nop();//P1OVDCON = MTR_BR_BACKWARD;
         }
         else
         {
             duty =  hMotorData->PresentDuty;
-            P1OVDCON = MTR_BR_FORWARD;
+            Nop();//P1OVDCON = MTR_BR_FORWARD;
         }
 
         // Set the duty cycles correctly (absolute value of output)
-        P1DC1 = duty;
-        P1DC2 = duty;
+        Nop();//P1DC1 = duty;
+        Nop();//P1DC2 = duty;
     }
+
+    // End Measurement
+    LED = LED_OFF;
 }
 
 void ChargeBootStraps(void)
@@ -248,6 +287,7 @@ void motorSetupTimer(void)
 
 void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
 {
+    LED = LED_ON;
     /* Clear the timer interrupt. */
     IFS1bits.T4IF = 0;
 
@@ -270,26 +310,16 @@ void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
 
 inline void FeedHeartbeat(void)
 {
-    if(hMotorData)
-    {
-        hMotorData->InterruptCount = 0;
-        hMotorData->Flags.Heartbeat = 1;
-    }
+    hMotorData->InterruptCount = 0;
+    hMotorData->Flags.Heartbeat = 1;
 }
 
 void BROLInit(MotorData** motor)
-{
-    
-    BYTE result;
+{    
     INT16 address = 1;
     
     BROLMotorData.Flags.MotorType = MTR_TYPE_BROL;
-            
-    // The first byte after the motor type is this motor's address
-    EROM_ReadBytes(address++, 1, &BROLMotorData.Address);
-    // Next is the desired endianess
-    EROM_ReadBytes(address++, 1, &result);
-    BROLMotorData.Flags.Endianess = (result != 0) ? 1: 0;
+
     // Then the 2 byte max slew, stored little endian
     BROLMotorData.MaxSlew =  EROM_ReadInt16(address);
     address += sizeof(INT16);
@@ -315,40 +345,37 @@ void BROLInit(MotorData** motor)
         address += sizeof(float);
     }   
 
-    float rangeScale = ((MTR_MAX_PERCENT - MTR_MIN_PERCENT) / 100.0) * MTR_MAX_DUTY;
-    float offsetScale = (MTR_MIN_PERCENT / 100.0) * MTR_MAX_DUTY;
-
     MTR_FTable[0] = 0;
+    // HardMax is a Q6_10 in the structure, but we use Q6_26 in the
+    // tables. This is for precision when dividing later.
+    float hMax = (float)(BROLMotorData.HardMaxVoltage << 16 );
+
     // Build the forward table
     for(i = 1; i <= 100; i++)
     {
-        MTR_FTable[i] = (INT16)(rangeScale*
-                (BROLMotorData.FCoeff[5]*pow(i,5) +
+        MTR_FTable[i] = 
+               (Q6_26)(hMax*(BROLMotorData.FCoeff[5]*pow(i,5) +
                 BROLMotorData.FCoeff[4]*pow(i,4) +
                 BROLMotorData.FCoeff[3]*pow(i,3) +
                 BROLMotorData.FCoeff[2]*pow(i,2) +
                 BROLMotorData.FCoeff[1]*i +
-                BROLMotorData.FCoeff[0])
-                + offsetScale); 
+                BROLMotorData.FCoeff[0]));
     }
 
     MTR_RTable[0] = 0;
     // Build the reverse table
     for(i = 1; i <= 100; i++)
     {
-        MTR_RTable[i] = (INT16)(rangeScale*
-                (BROLMotorData.RCoeff[5]*pow(i,5) +
+        MTR_RTable[i] = 
+                (Q6_26)(BROLMotorData.RCoeff[5]*pow(i,5) +
                 BROLMotorData.RCoeff[4]*pow(i,4) +
                 BROLMotorData.RCoeff[3]*pow(i,3) +
                 BROLMotorData.RCoeff[2]*pow(i,2) +
                 BROLMotorData.RCoeff[1]*i +
-                BROLMotorData.RCoeff[0])
-                + offsetScale);
+                BROLMotorData.RCoeff[0]);
     }
 
     *motor = &BROLMotorData;
-
-    MotorInited = TRUE;
 }
 
 INT16 MotorGetAmpsString(MotorData* data, BYTE* buf)

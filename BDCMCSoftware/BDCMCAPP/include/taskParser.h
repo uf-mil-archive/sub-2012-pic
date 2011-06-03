@@ -14,7 +14,7 @@
 
 #define STACK_SIZE_PARSER     (configMINIMAL_STACK_SIZE * 3)
 
-extern xTaskHandle hParserTask;
+extern xTaskHandle hUARTParserTask;
 
 void xParserTaskInit(void);
 void taskParser(void* pvParameter);
