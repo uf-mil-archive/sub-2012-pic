@@ -11,35 +11,13 @@
 <div class="content"> 
  
 	<div class="infobox"> 
-		<div class="header"><h1>DUAC Administration Panel</h1><h5>{{Name}} @ {{IpAddress}}</h5></div>
-		<div class="text">This page provides access to calibration routines for the DUAC. Detailed information regarding each of the calibration procedures is listed in the <a href="support.htm">Support</a> section.</div>
-		<br/>
-		<center><h2>Thrust Curve Calibration</h2></center>
-		<div class="text">This calibration procedure will power the motor and command it to incrementally traverse its entire voltage range in the forward direction and then the reverse direction while logging data. After the calibration routine has completed, a dump file of the logged data will be available for download.</div>
-		<div class="formbox2">
-			<form accept-charset="UTF-8" method="post" action="calibration.htm">
-			<button style="color: #006600; font-weight: bold; font-size: 150%; text-transform: uppercase;" type="submit" value="calibcurvestart">Start Calibration</button>
-			<button style="color: #900; font-weight: bold; font-size: 150%; text-transform: uppercase;" type="submit" value="calibcurvestop">Stop Calibration</button>
-			</form>
-			<div style="font-size: 9px;">WARNING: Starting this calibration routine will power the motors.</div>
-		</div>
-
-
+		<div class="header"><h1>BDCMC Administration Panel</h1><h5>~hostname~ @ ~config_ip~</h5></div>
+		<div class="text">Calibration is done through the external calibration GUI.</div>
 	</div>
 	<div class="copyright">Copyright &copy; 2011 University of Florida</div> 
 </div> 
  
-<div class="sideBar"> 
-	<div class="sideBox"> 
-		<ul class="menu">
-			<li class="main home"><a class="itemContent" href="index.htm"><img src="images/menuicons/info.png" alt="Status" width="32" height="32" style="padding-right: 14px; padding-top: 10px;"/>Home/Status</a></li>
-			<li class="main"><a class="itemContent" href="config.htm"><img src="images/menuicons/config.png" alt="Configuration" width="32" height="32"/>Configuration</a></li>
-			<li class="main selected"><span class="itemContent"><img src="images/menuicons/calibrate.png" alt="Calibration" width="32" height="32"/>Calibration</span></li>
-			<li class="main"><a class="itemContent" href="support.htm"><img src="images/menuicons/help.png" alt="Support &amp; FAQ" width="32" height="32"/>Support &amp; FAQ</a></li>
-		</ul> 
-	</div>	
-</div> 
-
+~inc:menu.inc~
 
 <div class="pageBottom"></div> 
 </div> 

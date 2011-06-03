@@ -37,7 +37,7 @@ void taskPublisher(void* pvParameter)
                         // the packet builders don't check if motor data is valid.
             continue;
         
-        if(hMotorData->Flags.MotorType == MTR_TYPE_NONE)
+        if((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) == MTR_CODE_NONE)
             continue;
         
         length = BuildOutgoingPacket(previousWakeTime);

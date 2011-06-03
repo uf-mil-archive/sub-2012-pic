@@ -1,10 +1,8 @@
 #include "motor.h"
 #include "p33FJ128MC804.h"
-#include <stdio.h>
-#include "adc.h"
+
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
-
 
 MotorData BROLMotorData =
 {
@@ -24,6 +22,12 @@ void BrushedDCOpenLoop(void);
 inline void EnableMotorInterrupts(void);
 inline void DisableMotorInterrupts(void);
 void BROLInit(MotorData** motor);
+
+__attribute__((__const__)) int isNaN (const float* f)
+ {
+        const int* rep = ((const int*) f) + 1;
+        return ((*rep & 0x7F00) == 0x7F00);
+ }
 
 BYTE ReadMotorTypeEE()
 {
@@ -105,7 +109,7 @@ void BrushedDCOpenLoop(void)
      * rail voltage we need to output, and then mapping this into the PWM duty
      * cycle range. First, we do a table lookup to get the desired voltage
      */
-    if(BROLMotorData.Flags.ReferenceChanged)
+    if(BROLMotorData.Flags & MTR_FLAGMASK_REFCHANGED)
     {
         // Get the unsigned value and the direction flag
         QS7_8 unsDesired = (BROLMotorData.ReferenceInput & 0x7FFF);
@@ -129,7 +133,7 @@ void BrushedDCOpenLoop(void)
             {
                 BROLMotorData.ReferenceDuty = 
                 (INT16)
-                (-1*(((MTR_RTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16));
+                (((MTR_RTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
             }
             else    // Forward
             {
@@ -163,7 +167,7 @@ void BrushedDCOpenLoop(void)
 
             BROLMotorData.ReferenceDuty =
                 (INT16)
-                (-1*(((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16));
+                (((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
         }
         else    // Forward
         {
@@ -177,8 +181,20 @@ void BrushedDCOpenLoop(void)
             (((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
         }
 
-REFDONE:   // Clear the reference changed flag
-        hMotorData->Flags.ReferenceChanged = 0;
+REFDONE:  
+        // Clamp the reference value between
+        // the acceptable PWM range which is limited by hardware
+        if(BROLMotorData.ReferenceDuty > MTR_MAX_PWM_PERC)
+            BROLMotorData.ReferenceDuty = MTR_MAX_PWM_PERC;
+        else if(BROLMotorData.ReferenceDuty < MTR_MIN_PWM_PERC)
+            BROLMotorData.ReferenceDuty = MTR_MIN_PWM_PERC;
+
+        // Set the required direction sign - this helps with slew later
+        if(direction != 0)
+            BROLMotorData.ReferenceDuty *= -1;
+
+        //Clear the reference changed flag
+        hMotorData->Flags &= ~MTR_FLAGMASK_REFCHANGED;
         
     }
 
@@ -225,12 +241,12 @@ void ChargeBootStraps(void)
 {
     const UINT16 delayTicks = (((GetInstructionClock() / 8)/1000) * 10) ;
 
-    if(hMotorData->Flags.MotorType == MTR_TYPE_BROL
-            || hMotorData->Flags.MotorType == MTR_TYPE_BRCL)
+    // Brushed motors have zero in their motortype flag
+    if((hMotorData->Flags & MTR_FLAGMASK_MOTORTYPE) == 0)
     {
          P1OVDCON = 0x0005;    // Turn on low side fets so bootstraps can charge
     }
-    else
+    else    // Brushless
     {
         P1OVDCON = 0x0015;    // Turn on low side fets so bootstraps can charge
     }
@@ -293,14 +309,14 @@ void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
 
     // No valid heartbeat, override the desired speed
     if((++(hMotorData->InterruptCount) > HEARTBEAT_TIMEOUT_TICKS) ||
-       !(hMotorData->Flags.Heartbeat))
+       !(hMotorData->Flags & MTR_FLAGMASK_HEARTBEAT))
     {
-        hMotorData->Flags.Heartbeat = 0;
+        hMotorData->Flags  &= ~MTR_FLAGMASK_HEARTBEAT;  // Clear the heartbeat flag
         hMotorData->ReferenceInput = 0;
     }
     else if(hMotorData->MinVoltage > hMotorData->VRail)
     {
-        hMotorData->Flags.UnderVoltage = 1;
+        hMotorData->Flags  |= MTR_FLAGMASK_UNDERVOLTAGE;
         hMotorData->ReferenceInput = 0;
     }
 
@@ -311,45 +327,57 @@ void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
 inline void FeedHeartbeat(void)
 {
     hMotorData->InterruptCount = 0;
-    hMotorData->Flags.Heartbeat = 1;
+    hMotorData->Flags |= MTR_FLAGMASK_HEARTBEAT;
+}
+
+inline void ReferenceChanged(void)
+{
+    hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
 }
 
 void BROLInit(MotorData** motor)
 {    
     INT16 address = 1;
-    
-    BROLMotorData.Flags.MotorType = MTR_TYPE_BROL;
+    INT16 i;
+    UINT16 tempInt;
+    float tempFloat;
 
-    // Then the 2 byte max slew, stored little endian
-    BROLMotorData.MaxSlew =  EROM_ReadInt16(address);
+    // HardMax is a Q6_10 in the structure, but we use Q6_26 in the
+    // tables. This is for precision when dividing later.
+    float hMax = (float)(((Q6_26)BROLMotorData.HardMaxVoltage) << 16 );
+
+    BROLMotorData.Flags |= (MTR_FLAGMASK_MOTORCODE & MTR_CODE_BROL);
+
+    // Then the 2 byte max slew
+    tempInt = (UINT16)EROM_ReadInt16(address);
+    BROLMotorData.MaxSlew = (tempInt > MTR_MAX_DUTY) ? 0 : tempInt;
     address += sizeof(INT16);
     // Then the 2 byte max voltage
-    BROLMotorData.MaxVoltage = EROM_ReadInt16(address);
+    tempInt = (UINT16)EROM_ReadInt16(address);
+    BROLMotorData.MaxVoltage = (tempInt > MTR_PCB_MAX_VOLTAGE) ? 0 : tempInt;
     address += sizeof(INT16);
     // Then the 2 byte max current
-    BROLMotorData.MaxCurrent = EROM_ReadInt16(address);
+    tempInt = (UINT16)EROM_ReadInt16(address);
+    BROLMotorData.MaxCurrent = (tempInt > MTR_PCB_MAX_CURRENT) ? 0 : tempInt;
     address += sizeof(INT16);
 
     // Followed by 6 floats for the forward coefficients
-    INT16 i;
     for(i = 0; i < 5; i++)
     {
-        BROLMotorData.FCoeff[i] = EROM_ReadFloat(address);
+        tempFloat = EROM_ReadFloat(address);
+        BROLMotorData.FCoeff[i] = (isNaN(&tempFloat)) ? 0.0 : tempFloat;
         address += sizeof(float);
     }
 
     // And 6 floats for the reverse coefficients
     for(i = 0; i < 5; i++)
     {
-        BROLMotorData.RCoeff[i] = EROM_ReadFloat(address);
+        tempFloat = EROM_ReadFloat(address);
+        BROLMotorData.RCoeff[i] = (isNaN(&tempFloat)) ? 0.0 : tempFloat;
         address += sizeof(float);
     }   
 
     MTR_FTable[0] = 0;
-    // HardMax is a Q6_10 in the structure, but we use Q6_26 in the
-    // tables. This is for precision when dividing later.
-    float hMax = (float)(BROLMotorData.HardMaxVoltage << 16 );
-
     // Build the forward table
     for(i = 1; i <= 100; i++)
     {
@@ -378,38 +406,3 @@ void BROLInit(MotorData** motor)
     *motor = &BROLMotorData;
 }
 
-INT16 MotorGetAmpsString(MotorData* data, BYTE* buf)
-{
-    INT16 res;
-
-    if(!data)
-    {
-        res = sprintf((CHAR8*)buf, "0.0");
-    }
-    else
-    {
-        float amps = data->Current*MTR_AMPS_SCALE;
-
-        res = sprintf((CHAR8*)buf, "%2.4f", amps);
-    }
-    
-    return res;
-}
-
-INT16 MotorGetRailVoltsString(MotorData* data, BYTE* buf)
-{
-    INT16 res;
-
-    if(!data)
-    {
-        res = sprintf((CHAR8*)buf, "0.0");
-    }
-    else
-    {
-        float volts = data->VRail*MTR_RAILVOLTS_SCALE;
-
-        res = sprintf((CHAR8*)buf, "%2.4f", volts);
-    }
-
-    return res;
-}

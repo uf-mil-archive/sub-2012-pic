@@ -22,7 +22,6 @@
         <itemPath>../../../Microchip/Include/TCPIP Stack/DHCP.h</itemPath>
         <itemPath>../../../Microchip/Include/TCPIP Stack/ENC28J60.h</itemPath>
         <itemPath>../../../Microchip/Include/TCPIP Stack/HTTP2.h</itemPath>
-        <itemPath>../include/HTTPPrint.h</itemPath>
         <itemPath>../../../Microchip/Include/TCPIP Stack/MPFS2.h</itemPath>
         <itemPath>../../../Microchip/Include/TCPIP Stack/NBNS.h</itemPath>
         <itemPath>../../../Microchip/Include/TCPIP Stack/Reboot.h</itemPath>
@@ -36,6 +35,7 @@
       </logicalFolder>
       <itemPath>../include/FreeRTOSConfig.h</itemPath>
       <itemPath>../../../Microchip/Include/GenericTypeDefs.h</itemPath>
+      <itemPath>../include/HTTPPrint.h</itemPath>
       <itemPath>../include/HardwareProfile.h</itemPath>
       <itemPath>../include/TCPIPConfig.h</itemPath>
       <itemPath>../include/adc.h</itemPath>

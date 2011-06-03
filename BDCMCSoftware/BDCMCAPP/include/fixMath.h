@@ -1,6 +1,8 @@
 #ifndef FIXMATH_H
 #define FIXMATH_H
 
+#include "GenericTypeDefs.h"
+
 // These help me keep straight what I'm doing in fixed point
 #define Q1_15   UINT16
 #define Q6_10   UINT16
@@ -15,5 +17,6 @@
 // nomenclature. This is just used as a flag, then removed before doing
 // standard unsigned fixed point math
 #define QS7_8   UINT16
+
 
 #endif //FIXMATH_H

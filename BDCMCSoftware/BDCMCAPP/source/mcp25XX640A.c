@@ -255,7 +255,7 @@ INT8 EROM_Clear()
     INT8 res = 0;
 
     BYTE* erase = malloc(sizeof(BYTE)*EROM_PAGE_SIZE);
-    memset(erase, 0xFF , EROM_PAGE_SIZE);
+    memset(erase, 0xFF , EROM_PAGE_SIZE);   // An erased EEPROM cell returns 0xFF (uncharged)
    
     for(i = 0; i < EROM_SIZE_BYTES / EROM_PAGE_SIZE; i++)
     {

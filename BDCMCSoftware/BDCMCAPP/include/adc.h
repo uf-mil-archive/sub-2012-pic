@@ -22,12 +22,12 @@
 // The calculated maximum measurable voltage for VRail
 #define ADC_VRAIL_MMV           (ADC_REFV/ADC_VRAIL_GAIN)
 // The amount of volts per bit for VRail measurements
-#define ADC_VRAIL_BPV           ((Q1_15)((ADC_VRAIL_MMV / ADC_MAX_VAL) << 15))
+#define ADC_VRAIL_BPV           ((Q1_15)((ADC_VRAIL_MMV / ADC_MAX_VAL) * 32768))
 
 // The calculated maximum measurable amperage for Current
 #define ADC_CURRENT_MMA         (ADC_REFV/ADC_CURRENT_GAIN)
 // The amount of amps per bit for Current measurements
-#define ADC_CURRENT_BPA         ((Q1_15)((ADC_CURRENT_MMA / ADC_MAX_VAL) << 15))
+#define ADC_CURRENT_BPA         ((Q1_15)((ADC_CURRENT_MMA / ADC_MAX_VAL) * 32768))
 
 void ADCInit(void);
 

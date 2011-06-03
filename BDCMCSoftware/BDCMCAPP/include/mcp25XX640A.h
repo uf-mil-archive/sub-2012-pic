@@ -31,5 +31,6 @@ INT16 EROM_ReadInt16(UINT16 address);
 float EROM_ReadFloat(UINT16 address);
 INT8 EROM_WriteInt16(UINT16 address, INT16 value);
 INT8 EROM_WriteFloat(UINT16 address, float value);
+INT8 EROM_Clear();  // Erases the entire EEPROM
 
 #endif // 25XX640A_H

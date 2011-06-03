@@ -26,6 +26,14 @@ void HTTPPrint_config_subnet(void);
 void HTTPPrint_config_gw(void);
 void HTTPPrint_config_dns1(void);
 void HTTPPrint_config_dns2(void);
+void HTTPPrint_config_mtrType(WORD);
+void HTTPPrint_config_cntType(WORD);
+void HTTPPrint_fcurve(WORD);
+void HTTPPrint_rcurve(WORD);
+void HTTPPrint_maxvolt(void);
+void HTTPPrint_minvolt(void);
+void HTTPPrint_maxcur(void);
+void HTTPPrint_maxslew(void);
 void HTTPPrint_motor_current(void);
 void HTTPPrint_motor_railvoltage(void);
 void HTTPPrint_motor_direction(void);
@@ -44,52 +52,112 @@ void HTTPPrint(DWORD callbackID)
 			HTTPPrint_config_ip();
 			break;
         case 0x00000002:
-			HTTPPrint_config_dhcpchecked();
+			HTTPIncFile((ROM BYTE*)"menu.inc");
 			break;
         case 0x00000003:
-			HTTPPrint_config_mac();
+			HTTPPrint_config_dhcpchecked();
 			break;
         case 0x00000004:
-			HTTPPrint_config_subnet();
+			HTTPPrint_config_mac();
 			break;
         case 0x00000005:
-			HTTPPrint_config_gw();
+			HTTPPrint_config_subnet();
 			break;
         case 0x00000006:
-			HTTPPrint_config_dns1();
+			HTTPPrint_config_gw();
 			break;
         case 0x00000007:
-			HTTPPrint_config_dns2();
+			HTTPPrint_config_dns1();
 			break;
         case 0x00000008:
-			HTTPPrint_motor_current();
+			HTTPPrint_config_dns2();
 			break;
         case 0x00000009:
-			HTTPPrint_motor_railvoltage();
+			HTTPPrint_config_mtrType(0);
 			break;
         case 0x0000000a:
-			HTTPPrint_motor_direction();
+			HTTPPrint_config_mtrType(4);
 			break;
         case 0x0000000b:
-			HTTPPrint_version();
+			HTTPPrint_config_cntType(0);
 			break;
         case 0x0000000c:
-			HTTPPrint_builddate();
+			HTTPPrint_config_cntType(2);
 			break;
         case 0x0000000d:
-			HTTPPrint_task_stack(0);
+			HTTPPrint_fcurve(5);
 			break;
         case 0x0000000e:
-			HTTPPrint_task_stack(1);
+			HTTPPrint_fcurve(4);
 			break;
         case 0x0000000f:
-			HTTPPrint_task_stack(2);
+			HTTPPrint_fcurve(3);
 			break;
         case 0x00000010:
-			HTTPPrint_task_stack(3);
+			HTTPPrint_fcurve(2);
 			break;
         case 0x00000011:
-			HTTPIncFile((ROM BYTE*)"menu.inc");
+			HTTPPrint_fcurve(1);
+			break;
+        case 0x00000012:
+			HTTPPrint_fcurve(0);
+			break;
+        case 0x00000013:
+			HTTPPrint_rcurve(5);
+			break;
+        case 0x00000014:
+			HTTPPrint_rcurve(4);
+			break;
+        case 0x00000015:
+			HTTPPrint_rcurve(3);
+			break;
+        case 0x00000016:
+			HTTPPrint_rcurve(2);
+			break;
+        case 0x00000017:
+			HTTPPrint_rcurve(1);
+			break;
+        case 0x00000018:
+			HTTPPrint_rcurve(0);
+			break;
+        case 0x00000019:
+			HTTPPrint_maxvolt();
+			break;
+        case 0x0000001a:
+			HTTPPrint_minvolt();
+			break;
+        case 0x0000001b:
+			HTTPPrint_maxcur();
+			break;
+        case 0x0000001c:
+			HTTPPrint_maxslew();
+			break;
+        case 0x0000001d:
+			HTTPPrint_motor_current();
+			break;
+        case 0x0000001e:
+			HTTPPrint_motor_railvoltage();
+			break;
+        case 0x0000001f:
+			HTTPPrint_motor_direction();
+			break;
+        case 0x00000020:
+			HTTPPrint_version();
+			break;
+        case 0x00000021:
+			HTTPPrint_builddate();
+			break;
+        case 0x00000022:
+			HTTPPrint_task_stack(0);
+			break;
+        case 0x00000023:
+			HTTPPrint_task_stack(1);
+			break;
+        case 0x00000024:
+			HTTPPrint_task_stack(2);
+			break;
+        case 0x00000025:
+			HTTPPrint_task_stack(3);
 			break;
 		default:
 			// Output notification for undefined values

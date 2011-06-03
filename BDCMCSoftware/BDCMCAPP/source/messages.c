@@ -109,7 +109,7 @@ void ParseNewPacket(BYTE rawPkt[], INT16 length, INT16 transport)
         return;
         
     // Do the motor types line up?
-    if(hMotorData->Flags.MotorType != rawPkt[4])
+    if((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) != rawPkt[4])
         return;
 
     // Okay, they're talking to us and its a validated motor type. Is the message
@@ -207,7 +207,7 @@ INT16 BuildOutgoingPacket(INT16 tickCount)
         AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
+//        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
 
         // Insert reference input
         AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
@@ -229,7 +229,7 @@ INT16 BuildOutgoingPacket(INT16 tickCount)
         AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
+//        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
 
         // Insert reference input
         AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);

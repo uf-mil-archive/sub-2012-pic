@@ -38,8 +38,8 @@ ASFLAGS=
 LDLIBSOPTIONS=
 
 # Path to java used to run MPLAB X when this makefile was created
-MP_JAVA_PATH=/usr/lib/jvm/ia32-java-6-sun-1.6.0.24/jre/bin/
-OS_ORIGINAL="Linux"
+MP_JAVA_PATH=C:\\Program\ Files\ \(x86\)\\Java\\jre6/bin/
+OS_ORIGINAL="MINGW32_NT-6.1"
 OS_CURRENT="$(shell uname -s)"
 ############# Tool locations ##########################################
 # If you copy a project from one host to another, the path where the  #
@@ -47,17 +47,17 @@ OS_CURRENT="$(shell uname -s)"
 # If you open this project with MPLAB X in the new host, this         #
 # makefile will be regenerated and the paths will be corrected.       #
 #######################################################################
-MP_CC=/opt/microchip/mplabc30/v3.24/bin/pic30-gcc
+MP_CC=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-gcc.exe
 # MP_BC is not defined
-MP_AS=/opt/microchip/mplabc30/v3.24/bin/pic30-as
-MP_LD=/opt/microchip/mplabc30/v3.24/bin/pic30-ld
-MP_AR=/opt/microchip/mplabc30/v3.24/bin/pic30-ar
+MP_AS=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-as.exe
+MP_LD=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-ld.exe
+MP_AR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-ar.exe
 # MP_BC is not defined
-MP_CC_DIR=/opt/microchip/mplabc30/v3.24/bin
+MP_CC_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
 # MP_BC_DIR is not defined
-MP_AS_DIR=/opt/microchip/mplabc30/v3.24/bin
-MP_LD_DIR=/opt/microchip/mplabc30/v3.24/bin
-MP_AR_DIR=/opt/microchip/mplabc30/v3.24/bin
+MP_AS_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
+MP_LD_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
+MP_AR_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
 # MP_BC_DIR is not defined
 .build-conf: ${BUILD_SUBPROJECTS}
 ifneq ($(OS_CURRENT),$(OS_ORIGINAL))
@@ -1125,7 +1125,7 @@ else
 dist/${CND_CONF}/${IMAGE_TYPE}/BDCMCAPP_mp.X.${IMAGE_TYPE}.elf: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
 	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf  -mcpu=$(MP_PROCESSOR_OPTION)  -o dist/${CND_CONF}/${IMAGE_TYPE}/BDCMCAPP_mp.X.${IMAGE_TYPE}.elf ${OBJECTFILES}        -Wl,--defsym=__MPLAB_BUILD=1,--heap=8092,--stack=4096,--no-check-sections,-L"..",-Map="$(BINDIR_)$(TARGETBASE).map",--report-mem,--report-mem$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION)
-	${MP_CC_DIR}/pic30-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/BDCMCAPP_mp.X.${IMAGE_TYPE}.elf -omf=elf
+	${MP_CC_DIR}\\pic30-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/BDCMCAPP_mp.X.${IMAGE_TYPE}.elf -omf=elf
 endif
 
 

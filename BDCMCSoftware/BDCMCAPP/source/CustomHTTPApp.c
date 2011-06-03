@@ -54,17 +54,19 @@
 #define __CUSTOMHTTPAPP_C
 
 #include "TCPIPConfig.h"
-#include "taskPublisher.h"
+
 
 #if defined(STACK_USE_HTTP2_SERVER)
 
 #include "FreeRTOS.h"
 #include "TCPIP Stack/TCPIP.h"
 #include "taskTCPIP.h"
+
 #include "mcp25XX640A.h"
 #include "motor.h"
 #include "taskUART.h"
 #include "taskParser.h"
+#include "taskPublisher.h"
 
 /****************************************************************************
   Section:
@@ -91,6 +93,12 @@ static BOOL lastSuccess = FALSE;
 
 // Stick status message variable.  See lastSuccess for details.
 static BOOL lastFailure = FALSE;
+
+
+void HTTPPrintZero(TCP_SOCKET tcp)
+{
+    TCPPutROMString(sktHTTP, (ROM BYTE*)"0.0");
+}
 
 /****************************************************************************
   Section:
@@ -212,6 +220,8 @@ HTTP_IO_RESULT HTTPExecutePost(void)
         {
             if(!strcmppgm2ram((char*)(curHTTP.data + 10), (ROM char*)"netConfig"))
                 curHTTP.smPost = 0x01;
+            else if(!strcmppgm2ram((char*)(curHTTP.data + 10), (ROM char*)"netConfig"))
+                curHTTP.smPost = 0x02;
             else
                 curHTTP.smPost = 0x00;
         }
@@ -677,20 +687,32 @@ void HTTPPrint_config_mac(void)
 
 void HTTPPrint_motor_current(void)
 {
-    BYTE buf[20];
+    BYTE buf[10];
 
-    sprintf(buf, "%*.*d", 6,10)
-
-    TCPPutString(sktHTTP, buf);
+    if(hMotorData)
+    {
+        UINT16 num = (hMotorData->Current >> 12);
+        UINT32 frac = (((INT32)(hMotorData->Current) - (num << 12)) *1000) >> 12;
+        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
+        TCPPutString(sktHTTP, buf);
+    }
+    else
+        HTTPPrintZero(sktHTTP);
 }
 
 void HTTPPrint_motor_railvoltage(void)
 {
-    BYTE buf[7];
+    BYTE buf[10];
 
-    MotorGetAmpsString(hMotorData, &buf[0]);
-
-    TCPPutString(sktHTTP, buf);
+    if(hMotorData)
+    {
+        UINT16 num = (hMotorData->VRail >> 10);
+        UINT32 frac = (((INT32)(hMotorData->VRail) - (num << 10)) *1000) >> 10;
+        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
+        TCPPutString(sktHTTP, buf);
+    }
+    else
+        HTTPPrintZero(sktHTTP);
 }
 
 void HTTPPrint_motor_direction(void)
@@ -770,6 +792,109 @@ void HTTPPrint_task_stack(WORD num)
             break;
         default:
             break;
+    }
+}
+
+void HTTPPrint_fcurve(WORD index)
+{
+    BYTE buf[10];
+
+    if(hMotorData)
+    {
+        if(index < 6)
+        {
+            sprintf((CHAR8 *)buf, "%2.4f", hMotorData->FCoeff[index]);
+            TCPPutString(sktHTTP, buf);
+        }
+    }
+    else
+        HTTPPrintZero(sktHTTP);
+}
+
+void HTTPPrint_rcurve(WORD index)
+{
+    BYTE buf[10];
+    if(hMotorData)
+    {
+        if(index < 6)
+        {
+            sprintf((CHAR8 *)buf, "%2.4f", hMotorData->RCoeff[index]);
+            TCPPutString(sktHTTP, buf);
+        }
+    }
+    else
+        HTTPPrintZero(sktHTTP);
+}
+
+void HTTPPrint_maxvolt(void)
+{
+    BYTE buf[10];
+
+    if(hMotorData)
+    {
+        UINT16 num = (hMotorData->MaxVoltage >> 10);
+        UINT32 frac = (((INT32)(hMotorData->MaxVoltage) - (num << 10)) *1000) >> 10;
+        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
+        TCPPutString(sktHTTP, buf);
+    }
+    else
+        HTTPPrintZero(sktHTTP);
+}
+
+void HTTPPrint_minvolt(void)
+{
+    BYTE buf[10];
+
+    if(hMotorData)
+    {
+        UINT16 num = (hMotorData->MinVoltage >> 10);
+        UINT32 frac = (((INT32)(hMotorData->MinVoltage) - (num << 10)) *1000) >> 10;
+        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
+        TCPPutString(sktHTTP, buf);
+    }
+    else
+        HTTPPrintZero(sktHTTP);
+}
+void HTTPPrint_maxcur(void)
+{
+    BYTE buf[10];
+
+    if(hMotorData)
+    {
+        UINT16 num = (hMotorData->MaxCurrent >> 12);
+        UINT32 frac = (((INT32)(hMotorData->MaxCurrent) - (num << 12)) *1000) >> 12;
+        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
+        TCPPutString(sktHTTP, buf);
+    }
+    else
+        HTTPPrintZero(sktHTTP);
+}
+
+void HTTPPrint_maxslew(void)
+{
+    BYTE buf[10];
+
+    if(hMotorData)
+        uitoa(hMotorData->MaxSlew, buf);
+    else
+        TCPPut(sktHTTP, '0');
+}
+
+void HTTPPrint_config_mtrType(WORD type)
+{
+    if(hMotorData)
+    {
+        if(((hMotorData->Flags & MTR_FLAGMASK_MOTORTYPE) > 0) == type)
+            TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
+    }
+}
+
+void HTTPPrint_config_cntType(WORD type)
+{
+    if(hMotorData)
+    {
+        if(((hMotorData->Flags & MTR_FLAGMASK_CONTROLTYPE) > 0) == type)
+            TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
     }
 }
 

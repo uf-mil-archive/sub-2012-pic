@@ -56,28 +56,28 @@
 		<center><h2>Controller Configuration</h2></center>
 		<div class="formbox2" style="width: 450px;">
 			<form accept-charset="UTF-8" method="post" action="config.htm">
+			<input type="hidden" name="sendForm" value="cntConfig">
 			<div class="settingConfig" align="left">
 				<div class="label">Motor Type:</div>
-				<input type="radio" name="motortype" id="brushed" value="action" {{brushed}}/>
+				<input type="radio" name="motortype" id="brushed" value="action" ~config_mtrType(0)~/>
 				<label for="brushed">Brushed</label>
-				<input type="radio" name="motortype" id="brushless" value="action" {{brushess}}/>
+				<input type="radio" name="motortype" id="brushless" value="action" ~config_mtrType(4)~/>
 				<label for="brushless">Brushless</label>
 			</div>
 			<div class="settingConfig" align="left">
 				<div class="label">Control Type:</div>
-				<input type="radio" name="controltype" id="open" value="action" {{open}}/>
+				<input type="radio" name="controltype" id="open" value="action" ~config_cntType(0)~/>
 				<label for="open">Open</label>
-				<input type="radio" name="controltype" id="closed" value="action" {{closed}}/>
+				<input type="radio" name="controltype" id="closed" value="action" ~config_cntType(2)~/>
 				<label for="closed">Closed</label>
 			</div>
 			<div class="settingConfig" align="left">
 				<div class="label">PID Gains:</div>
-				<strong>Kp:</strong><input type="text" name="gainp" maxlength="4" size="3" style="font-size: 15px; font-weight: bold;" value="{{gainp}}">
-				<strong>&nbsp;Kd:</strong><input type="text" name="gaind" maxlength="4" size="3" style="font-size: 15px; font-weight: bold;" value="{{gaind}}">
-				<strong>&nbsp;Ki:</strong><input type="text" name="gaini" maxlength="4" size="3" style="font-size: 15px; font-weight: bold;" value="{{gaini}}">
+				<strong>Kp:</strong><input type="text" name="gainp" maxlength="4" size="3" style="font-size: 15px;" value="{{gainp}}">
+				<strong>&nbsp;Kd:</strong><input type="text" name="gaind" maxlength="4" size="3" style="font-size: 15px;" value="{{gaind}}">
+				<strong>&nbsp;Ki:</strong><input type="text" name="gaini" maxlength="4" size="3" style="font-size: 15px;" value="{{gaini}}">
 			</div>
 			<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" value="controllersubmit">Apply</button>
-			<input type="hidden" name="sendForm" value="ControllerConfig">
 			</form>
 		</div>
 
@@ -87,19 +87,21 @@
 			<form accept-charset="UTF-8" method="post" action="config.htm">				
 				<div class="settingConfig">
 					<div class="label" style="width: 70px;">Forward:</div>
-					<input type="text" name="curvefor1" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor1}}">x^4 +
-					<input type="text" name="curvefor2" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor2}}">x^3 +
-					<input type="text" name="curvefor3" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor3}}">x^2 +
-					<input type="text" name="curvefor4" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor4}}">x +
-					<input type="text" name="curvefor5" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curvefor5}}"><br/>
+					<input type="text" name="curvefor5" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~fcurve(5)~">x^5 +
+					<input type="text" name="curvefor4" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~fcurve(4)~">x^4 +
+					<input type="text" name="curvefor3" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~fcurve(3)~">x^3 +
+					<input type="text" name="curvefor2" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~fcurve(2)~">x^2 +
+					<input type="text" name="curvefor1" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~fcurve(1)~">x +
+					<input type="text" name="curvefor0" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~fcurve(0)~"><br/>
 				</div>
 				<div class="settingConfig">
 					<div class="label" style="width: 70px;">Reverse:</div>
-					<input type="text" name="curverev1" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curverev1}}">x^4 +
-					<input type="text" name="curverev2" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curverev2}}">x^3 +
-					<input type="text" name="curverev3" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curverev3}}">x^2 +
-					<input type="text" name="curverev4" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curverev4}}">x +
-					<input type="text" name="curverev5" id="thrust" maxlength="7" size="5" style="font-size: 15px; font-weight: bold;" value="{{curverev5}}"><br/>
+					<input type="text" name="curverev5" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~rcurve(5)~">x^5 +
+					<input type="text" name="curverev4" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~rcurve(4)~">x^4 +
+					<input type="text" name="curverev3" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~rcurve(3)~">x^3 +
+					<input type="text" name="curverev2" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~rcurve(2)~">x^2 +
+					<input type="text" name="curverev1" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~rcurve(1)~">x +
+					<input type="text" name="curverev0" id="thrust" maxlength="7" size="5" style="font-size: 15px;" value="~rcurve(0)~"><br/>
 				</div>
 				<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" value="thrustcurvesubmit">Apply</button>
 			</form>
@@ -111,37 +113,27 @@
 			
 			<div class="settingConfig">
 				<div class="label">Max Voltage:</div>
-				<input type="text" name="maxvoltage" maxlength="10" size="10" style="font-size: 15px; font-weight: bold;" value="{{maxvolt}}">
+				<input type="text" name="maxvoltage" maxlength="10" size="10" style="font-size: 15px;" value="~maxvolt~">
+			</div>
+			<div class="settingConfig">
+				<div class="label">Minimum Voltage:</div>
+				<input type="text" name="minvoltage" maxlength="10" size="10" style="font-size: 15px;" value="~minvolt~">
 			</div>
 			<div class="settingConfig">
 				<div class="label">Max Current:</div>
-				<input type="text" name="maxcurrent" maxlength="10" size="10" style="font-size: 15px; font-weight: bold;" value="{{maxcur}}">
+				<input type="text" name="maxcurrent" maxlength="10" size="10" style="font-size: 15px;" value="~maxcur~">
 			</div>
 			<div class="settingConfig">
-				<div class="label">Cutoff Voltage:</div>
-				<input type="text" name="cutoffvoltage" maxlength="10" size="10" style="font-size: 15px; font-weight: bold;" value="{{cutoffvolt}}">
+				<div class="label">Integer Max Slew:</div>
+				<input type="text" name="maxslew" maxlength="10" size="10" style="font-size: 15px;" value="~maxslew~">
 			</div>
 			<button style="color: #006600; font-weight: bold; font-size: 130%; text-transform: uppercase;" type="submit" value="limitssubmit">Apply</button>
 			</form>
 		</div>
-
-
 	</div>
 	<div class="copyright">Copyright &copy; 2011 University of Florida</div>
 </div> 
- 
-<div class="sideBar"> 
-	<div class="sideBox"> 
-		<ul class="menu">
-			<li class="main home"><a class="itemContent" href="index.htm"><img src="images/menuicons/info.png" alt="Status" width="32" height="32" style="padding-right: 14px; padding-top: 10px;"/>Home/Status</a></li>
-			<li class="main selected"><span class="itemContent"><img src="images/menuicons/config.png" alt="Configuration" width="32" height="32"/>Configuration</span></li>
-			<li class="main"><a class="itemContent" href="calibration.htm"><img src="images/menuicons/calibrate.png" alt="Calibration" width="32" height="32"/>Calibration</a></li>
-			<li class="main"><a class="itemContent" href="support.htm"><img src="images/menuicons/help.png" alt="Support &amp; FAQ" width="32" height="32"/>Support &amp; FAQ</a></li>
-		</ul> 
-	</div>	
-</div> 
-
-
+~inc:menu.inc~
 <div class="pageBottom"></div> 
 </div> 
 </body>

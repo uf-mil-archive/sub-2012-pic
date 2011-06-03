@@ -139,10 +139,10 @@ void __attribute__((interrupt, no_auto_psv)) _DMA5Interrupt(void)
     {
         // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q6_10 in the motor
         // struct, so shift to generate final result
-        hMotorData->VRail = (Q6_10)(vrail*ADC_VRAIL_BPV >> 5);
+        hMotorData->VRail = (Q6_10)((vrail*ADC_VRAIL_BPV) >> 5);
         // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q4_12 in the motor
         // struct, so shift to generate final result
-        hMotorData->Current = (Q4_12)(current*ADC_CURRENT_BPA >> 3);
+        hMotorData->Current = (Q4_12)((current*ADC_CURRENT_BPA) >> 3);
     }
 
     ADCCurrentDMABuffer ^= 1; // Toggle to other buffer
