@@ -12,6 +12,9 @@
 #include "messages.h"
 #include "motor.h"
 
+
+#include "math.h"
+
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_OFF & POSCMD_EC)

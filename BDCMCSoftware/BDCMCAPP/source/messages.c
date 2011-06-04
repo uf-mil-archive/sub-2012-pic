@@ -1,6 +1,10 @@
 #include "messages.h"
 
-MessagingData gMessagingData;
+MessagingData gMessagingData =
+{
+    .Address = 2,
+    .ControllerAdd = 1,
+};
 
 // Adds little endian int to a packet
 inline void AddLEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
@@ -107,45 +111,58 @@ void ParseNewPacket(BYTE rawPkt[], INT16 length, INT16 transport)
     // From now on it's motor specific. Ensure we have a motor instance
     if(!hMotorData)
         return;
-        
-    // Do the motor types line up?
-    if((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) != rawPkt[4])
-        return;
 
-    // Okay, they're talking to us and its a validated motor type. Is the message
-    // a heartbeat or ESTOP?
+    // Okay, they're talking to us. Is the message a heartbeat or ESTOP?
     if(rawPkt[4] == MSG_FEED_HEARTBEAT)
     {
-        // Is the sender the guy in charge of me?
-        if(rawPkt[0] == gMessagingData.ControllerAdd)
-            FeedHeartbeat();
+        if(length == MSG_FEED_HEARTBEAT_LENGTH)
+        {
+            // Is the sender the guy in charge of me?
+            if(rawPkt[0] == gMessagingData.ControllerAdd)
+                FeedHeartbeat();
+        }
         return;
     }
     else if(rawPkt[4] == MSG_ESTOP)
     {
-        // Stop!
+        if(length == MSG_ESTOP_LENGTH)
+        {
+            // Handle estop
+        }
         return;
     }
 
-    // Nope, they're either subscribing/unsubscribing or commanding a new
+    // Do the motor types line up?
+    if(((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1) != rawPkt[4])
+        return;
+
+    // They're either subscribing/unsubscribing or commanding a new
     // motor reference.
     switch(rawPkt[5])
     {
         case MSG_START_PUBLISH:
-            if(rawPkt[6] < PBL_MAX_RATE)
-                gPublishPeriod = ((1000 / rawPkt[6]) / portTICK_RATE_MS);
-            gMessagingData.Subscribers |= transport;
+            if(length == MSG_START_PUBLISH_LENGTH)
+            {
+                if(rawPkt[6] < PBL_MAX_RATE)
+                    gPublishPeriod = ((1000 / rawPkt[6]) / portTICK_RATE_MS);
+                gMessagingData.Subscribers |= transport;
+            }
             break;
         case MSG_STOP_PUBLISH:
-            gMessagingData.Subscribers &= (~transport);
+            if(length == MSG_STOP_PUBLISH_LENGTH)
+                gMessagingData.Subscribers &= (~transport);
             break;
         case MSG_SET_REFERENCE:
-            // Is the sender the guy in charge of me?
-            if(rawPkt[0] == gMessagingData.ControllerAdd)
+            if(length == MSG_SET_REFERENCE_LENGTH)
             {
-                    hMotorData->ReferenceInput = (gMessagingData.Endianess) ?
-                        ReadBEIntFromPacket(&rawPkt[6]):
-                        ReadLEIntFromPacket(&rawPkt[6]);
+                // Is the sender the guy in charge of me?
+                if(rawPkt[0] == gMessagingData.ControllerAdd)
+                {
+                        hMotorData->ReferenceInput = (gMessagingData.Endianess) ?
+                            ReadBEIntFromPacket(&rawPkt[6]):
+                            ReadLEIntFromPacket(&rawPkt[6]);
+                        ReferenceChanged();
+                }
             }
             break;
         default:
@@ -195,8 +212,7 @@ INT16 BuildOutgoingPacket(INT16 tickCount)
     gMessagingData.scratchBuf[tmplength++] = gMessagingData.Address;    // I'm the source
     // Next add the destination address - its never the escape character so add it directly
     gMessagingData.scratchBuf[tmplength++] = gMessagingData.ControllerAdd;
-    
-    tmplength++;    // Skip over the packet length variable
+
 
     if(gMessagingData.Endianess) // Big Endian
     {
@@ -205,14 +221,20 @@ INT16 BuildOutgoingPacket(INT16 tickCount)
                 gMessagingData.OutgoingPacketCount,
                 &tmplength);
 
+        // Insert TypeCode
+        gMessagingData.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+
         // Insert the tick count
         AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-//        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags, &tmplength);
 
         // Insert reference input
         AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
+
+        // Insert present output
+        AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
 
         // Insert voltage rail
         AddBEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
@@ -227,14 +249,20 @@ INT16 BuildOutgoingPacket(INT16 tickCount)
                 gMessagingData.OutgoingPacketCount,
                 &tmplength);
 
+        // Insert TypeCode
+        gMessagingData.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+
         // Insert the tick count
         AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-//        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags.All, &tmplength);
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Flags, &tmplength);
 
         // Insert reference input
         AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
+
+        // Insert present output
+        AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
 
         // Insert voltage rail
         AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
@@ -242,9 +270,6 @@ INT16 BuildOutgoingPacket(INT16 tickCount)
         // Insert motor current
         AddLEIntToPacket(&gMessagingData.scratchBuf[tmplength], hMotorData->Current, &tmplength);
     }
-
-    // Insert tmplength into packet
-    gMessagingData.scratchBuf[2] = (BYTE)(tmplength & 0xFF);
 
     // Calculate the checksum
     temp = CRC16Checksum(&gMessagingData.scratchBuf[0],

@@ -35,13 +35,19 @@
 #define MSG_SENDER_UART     1
 #define MSG_SENDER_ETH      2
 
-#define MSG_FEED_HEARTBEAT  100   // Heartbeat Packet
-#define MSG_ESTOP           101   // ESTOP Packet
+#define MSG_FEED_HEARTBEAT  100         // Heartbeat Packet
+#define MSG_FEED_HEARTBEAT_LENGTH   7   // Length of the packet including 2 byte checksum
+
+#define MSG_ESTOP           101     // ESTOP Packet
+#define MSG_ESTOP_LENGTH    7       // Length of the packet including 2 byte checksum
 
 // Brushed Open-Loop Message Defines
-#define MSG_START_PUBLISH       1   // Start publishing data
-#define MSG_STOP_PUBLISH        2   // Stop publishing data
-#define MSG_SET_REFERENCE       3   // Set a new duty cycle
+#define MSG_START_PUBLISH           1   // Start publishing data
+#define MSG_START_PUBLISH_LENGTH    9   // Length of the packet including 2 byte checksum
+#define MSG_STOP_PUBLISH            2   // Stop publishing data
+#define MSG_STOP_PUBLISH_LENGTH     8   // Length of the packet including 2 byte checksum
+#define MSG_SET_REFERENCE           3   // Set a new duty cycle
+#define MSG_SET_REFERENCE_LENGTH    10  // Length of the packet including 2 byte checksum
 
 #define MSG_CRC_POLY    0x1021      // The CRC-16 Polynomial CRC16-XMODEM
 

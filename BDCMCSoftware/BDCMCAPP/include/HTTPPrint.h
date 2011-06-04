@@ -34,6 +34,7 @@ void HTTPPrint_maxvolt(void);
 void HTTPPrint_minvolt(void);
 void HTTPPrint_maxcur(void);
 void HTTPPrint_maxslew(void);
+void HTTPPrint_motor_manufacturer(void);
 void HTTPPrint_motor_current(void);
 void HTTPPrint_motor_railvoltage(void);
 void HTTPPrint_motor_direction(void);
@@ -133,30 +134,33 @@ void HTTPPrint(DWORD callbackID)
 			HTTPPrint_maxslew();
 			break;
         case 0x0000001d:
-			HTTPPrint_motor_current();
+			HTTPPrint_motor_manufacturer();
 			break;
         case 0x0000001e:
-			HTTPPrint_motor_railvoltage();
+			HTTPPrint_motor_current();
 			break;
         case 0x0000001f:
-			HTTPPrint_motor_direction();
+			HTTPPrint_motor_railvoltage();
 			break;
         case 0x00000020:
-			HTTPPrint_version();
+			HTTPPrint_motor_direction();
 			break;
         case 0x00000021:
-			HTTPPrint_builddate();
+			HTTPPrint_version();
 			break;
         case 0x00000022:
-			HTTPPrint_task_stack(0);
+			HTTPPrint_builddate();
 			break;
         case 0x00000023:
-			HTTPPrint_task_stack(1);
+			HTTPPrint_task_stack(0);
 			break;
         case 0x00000024:
-			HTTPPrint_task_stack(2);
+			HTTPPrint_task_stack(1);
 			break;
         case 0x00000025:
+			HTTPPrint_task_stack(2);
+			break;
+        case 0x00000026:
 			HTTPPrint_task_stack(3);
 			break;
 		default:

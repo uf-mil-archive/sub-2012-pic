@@ -7,6 +7,8 @@
 #include "fixMath.h"
 #include "adc.h"
 #include <math.h> // for pow()
+#include <string.h> // for memset
+#include "Compiler.h"
 
 // The motor control module uses Timer4
 #define MTR_TICK_RATE     1000      // 1    kHz control loop
@@ -34,6 +36,12 @@
 #define MTR_MAX_PWM_PERC    (3849)  // 96% of 4095
 #define MTR_MIN_PWM_PERC    (246)   // 6% of 4095
 
+#define MTR_DEFAULT_MANUFACTURER    "SEABOTIX"
+#define MTR_DEFAULT_HMAXV           ((Q6_10)(25 << 10))
+#define MTR_DEFAULT_MINV            ((Q6_10)(25 << 10))
+#define MTR_DEFAULT_MAXCURRENT      ((Q4_12)(4 << 12))
+#define MTR_DEFAULT_MAXSLEW         (250)
+
 // Flags
 // Bits 210 = Motor Type
 //  Bit 0 - indicates valid motor config
@@ -58,6 +66,13 @@
 typedef struct MotorDataDefinition
 {
     INT16 Flags;
+    BYTE  Manufacturer[16]; // The manufacturer of the motor controlled
+    Q6_10 HardMaxVoltage;   // The maximum voltage used when the thruster was plotted
+    Q6_10 MinVoltage;       // The minimum voltage the motor controller will operate to
+    Q4_12 MaxCurrent;       // The maximum current the motor is allowed to draw
+    INT16 MaxSlew;          // PWM max slew change
+    float FCoeff[6];
+    float RCoeff[6];
     INT16 InterruptCount;
     INT16 ReferenceInput;
     INT16 ReferenceDuty;
@@ -65,15 +80,6 @@ typedef struct MotorDataDefinition
     INT16 PresentDuty;
     Q6_10 VRail;
     Q6_10 Current;
-    Q6_10 MaxVoltage;       // The desired running maximum voltage, this will
-                            // actually scale effor to not distort the 
-                            // linearization plot
-    Q6_10 HardMaxVoltage;   // The maximum voltage used when the thruster was plotted
-    Q6_10 MinVoltage;
-    Q4_12 MaxCurrent;
-    INT16 MaxSlew;          // PWM max slew change
-    float FCoeff[6];
-    float RCoeff[6];
 } MotorData;
 
 extern MotorData *hMotorData;   // Pointer to motor data in use by controller

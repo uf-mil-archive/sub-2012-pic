@@ -685,44 +685,6 @@ void HTTPPrint_config_mac(void)
     return;
 }
 
-void HTTPPrint_motor_current(void)
-{
-    BYTE buf[10];
-
-    if(hMotorData)
-    {
-        UINT16 num = (hMotorData->Current >> 12);
-        UINT32 frac = (((INT32)(hMotorData->Current) - (num << 12)) *1000) >> 12;
-        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
-        TCPPutString(sktHTTP, buf);
-    }
-    else
-        HTTPPrintZero(sktHTTP);
-}
-
-void HTTPPrint_motor_railvoltage(void)
-{
-    BYTE buf[10];
-
-    if(hMotorData)
-    {
-        UINT16 num = (hMotorData->VRail >> 10);
-        UINT32 frac = (((INT32)(hMotorData->VRail) - (num << 10)) *1000) >> 10;
-        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
-        TCPPutString(sktHTTP, buf);
-    }
-    else
-        HTTPPrintZero(sktHTTP);
-}
-
-void HTTPPrint_motor_direction(void)
-{
-    if(hMotorData)
-        TCPPut(sktHTTP, ((hMotorData->PresentDuty < 0) ? 'B':'F'));
-    else
-        TCPPut(sktHTTP, 'N');
-}
-
 void HTTPPrint_reboot(void)
 {
     // This is not so much a print function, but causes the board to reboot
@@ -832,8 +794,8 @@ void HTTPPrint_maxvolt(void)
 
     if(hMotorData)
     {
-        UINT16 num = (hMotorData->MaxVoltage >> 10);
-        UINT32 frac = (((INT32)(hMotorData->MaxVoltage) - (num << 10)) *1000) >> 10;
+        UINT16 num = (hMotorData->HardMaxVoltage >> 10);
+        UINT32 frac = (((INT32)(hMotorData->HardMaxVoltage) - (num << 10)) *1000) >> 10;
         sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
         TCPPutString(sktHTTP, buf);
     }
@@ -896,6 +858,50 @@ void HTTPPrint_config_cntType(WORD type)
         if(((hMotorData->Flags & MTR_FLAGMASK_CONTROLTYPE) > 0) == type)
             TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
     }
+}
+
+void HTTPPrint_motor_current(void)
+{
+    BYTE buf[10];
+
+    if(hMotorData)
+    {
+        UINT16 num = (hMotorData->Current >> 12);
+        UINT32 frac = (((INT32)(hMotorData->Current) - (num << 12)) *1000) >> 12;
+        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
+        TCPPutString(sktHTTP, buf);
+    }
+    else
+        HTTPPrintZero(sktHTTP);
+}
+
+void HTTPPrint_motor_railvoltage(void)
+{
+    BYTE buf[10];
+
+    if(hMotorData)
+    {
+        UINT16 num = (hMotorData->VRail >> 10);
+        UINT32 frac = (((INT32)(hMotorData->VRail) - (num << 10)) *1000) >> 10;
+        sprintf((CHAR8 *)buf, "%u.%lu", num, frac);
+        TCPPutString(sktHTTP, buf);
+    }
+    else
+        HTTPPrintZero(sktHTTP);
+}
+
+void HTTPPrint_motor_direction(void)
+{
+    if(hMotorData)
+        TCPPut(sktHTTP, ((hMotorData->PresentDuty < 0) ? 'B':'F'));
+    else
+        TCPPut(sktHTTP, 'N');
+}
+
+void HTTPPrint_motor_manufacturer(void)
+{
+    if(hMotorData)
+        TCPPutString(sktHTTP, hMotorData->Manufacturer);
 }
 
 #endif
