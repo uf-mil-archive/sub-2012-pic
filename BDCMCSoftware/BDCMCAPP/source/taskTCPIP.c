@@ -55,6 +55,8 @@ APP_CONFIG AppConfig;
 ///////////////////////////////////////////////////////////////////
 // private helper functions
 static void InitAppConfig(void);
+static void UDPRXHandler(void);
+static void UDPTXHandler(void);
 
 // semaphore to regulate access to the FLASH, the touchscreen
 // task will access it initially and then hand over control to
@@ -116,7 +118,8 @@ void taskTCPIP(void* pvParameter) {
 
         // I don't like hacking in my functions into the stack files, so call
         // the UDP stuff(specific to us) here.
-
+        UDPRXHandler();
+        UDPTXHandler();
     }
 }
 
@@ -247,4 +250,45 @@ static void InitAppConfig(void)
  ********************************************************************/
 void DelayMs(WORD time) {
     vTaskDelay(time / portTICK_RATE_MS);
+}
+
+static void UDPRXHandler(void)
+{
+    UDP_SOCKET rxSocket;
+
+    if(!MACIsLinked())  // No ethernet, no laundry
+        return;
+
+    // If the socket isn't valid, try to reopen it
+    if(rxSocket == INVALID_UDP_SOCKET)
+    {
+
+    }
+}
+
+static void UDPTXHandler(void)
+{
+    static UDP_SOCKET txSocket = INVALID_SOCKET;
+    NODE_INFO txRemote;
+
+    if(!MACIsLinked())  // No ethernet, no laundry
+        return;
+
+    if(txSocket == INVALID_UDP_SOCKET)
+    {
+        memset(&txRemote, 0xFF, sizeof(txRemote));
+
+        txSocket = UDPOpen(0,&txRemote, 9);
+
+        return; // This only skips 1 stack task call
+    }
+
+    // Check we can write to the socket
+    if(!UDPIsPutReady(txSocket))
+        return;
+
+    UDPPutROMString("Hello, UDP!");
+
+    // Send the packet
+    UDPFlush();
 }

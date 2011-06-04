@@ -132,7 +132,7 @@ void ParseNewPacket(BYTE rawPkt[], INT16 length, INT16 transport)
     switch(rawPkt[5])
     {
         case MSG_START_PUBLISH:
-            if(rawPk[6] < PBL_MAX_RATE)
+            if(rawPkt[6] < PBL_MAX_RATE)
                 gPublishPeriod = ((1000 / rawPkt[6]) / portTICK_RATE_MS);
             gMessagingData.Subscribers |= transport;
             break;

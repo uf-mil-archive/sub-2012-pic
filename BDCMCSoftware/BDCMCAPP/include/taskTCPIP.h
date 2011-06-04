@@ -69,4 +69,11 @@ typedef struct
 	unsigned short wCurrentChecksum;		// Checksum of the current EEPROM/Flash data.  This protects against using corrupt values if power failure occurs while writing them and helps detect coding errors in which some other task writes to the EEPROM in the AppConfig area.
 } NVM_VALIDATION_STRUCT;
 
+typedef struct
+{
+    NODE_INFO  TXDestNode;
+    UDP_SOCKET TXSocket;
+    UDP_SOCKET RXSocket;
+}UDPConfigData;
+
 #endif // TASKTCPIP_H
