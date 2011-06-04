@@ -13,7 +13,7 @@ void xPublisherTaskInit(void)
 
     gPublishPeriod = ((1000 / gMessagingData.PublishRate) / portTICK_RATE_MS);
 
-    xTaskCreate(taskPublisher, (CHAR*)"UARTPUB", STACK_SIZE_PUBLISHER,
+    xTaskCreate(taskPublisher, (CHAR*)"PUBLISH", STACK_SIZE_PUBLISHER,
                 NULL, tskIDLE_PRIORITY + 1, &hPublisherTask);
 
     return;

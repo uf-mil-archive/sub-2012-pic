@@ -13,6 +13,7 @@
 
 #define STACK_SIZE_PUBLISHER    (configMINIMAL_STACK_SIZE * 2)
 #define PBL_DEFAULT_RATE    50
+#define PBL_MAX_RATE        200
 
 extern xTaskHandle hPublisherTask;
 extern portBASE_TYPE gPublishPeriod;   // Publishing period in ms

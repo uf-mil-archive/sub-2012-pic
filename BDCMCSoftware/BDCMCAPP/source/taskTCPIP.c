@@ -96,9 +96,9 @@ void xTCPIPTaskInit(void)
 void taskTCPIP(void* pvParameter) {
     //COMPut("TCPIP: Task Started.\r\n", 22, UART_DONT_FREE_BUFFER);
 
-	// Initialize the core stack layers. This makes calls
-	// to the ENC28J60 driver which uses FreeRTOS. The scheduler
-	// must be running to handle this.
+    // Initialize the core stack layers. This makes calls
+    // to the ENC28J60 driver which uses FreeRTOS. The scheduler
+    // must be running to handle this.
     StackInit();
 
     ADCInit();
@@ -113,6 +113,10 @@ void taskTCPIP(void* pvParameter) {
 
         // call the stack related applications (including HTTP server)
         StackApplications();
+
+        // I don't like hacking in my functions into the stack files, so call
+        // the UDP stuff(specific to us) here.
+
     }
 }
 

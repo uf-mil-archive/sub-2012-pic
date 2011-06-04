@@ -182,6 +182,8 @@ void BrushedDCOpenLoop(void)
         }
 
 REFDONE:  
+        // Open-loop control the input is the output
+        BROLMotorData.PresentOutput = BROLMotorData.ReferenceInput;
         // Clamp the reference value between
         // the acceptable PWM range which is limited by hardware
         if(BROLMotorData.ReferenceDuty > MTR_MAX_PWM_PERC)

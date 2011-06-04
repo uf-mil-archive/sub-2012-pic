@@ -34,9 +34,6 @@
 #define MTR_MAX_PWM_PERC    (3849)  // 96% of 4095
 #define MTR_MIN_PWM_PERC    (246)   // 6% of 4095
 
-
-
-
 // Flags
 // Bits 210 = Motor Type
 //  Bit 0 - indicates valid motor config
@@ -84,7 +81,6 @@ extern MotorData BROLMotorData;
 
 void MotorInit(void);
 void ChargeBootStraps(void);
-
 
 // These functions require a valid hMotorData structure before calling!
 inline void FeedHeartbeat(void);
