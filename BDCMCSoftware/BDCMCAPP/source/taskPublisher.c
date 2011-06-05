@@ -3,15 +3,34 @@
 xTaskHandle hPublisherTask;
 portBASE_TYPE gPublishPeriod;
 
+OutgoingMessagingData gOutMsgData =
+{
+    .Common = &gCommonMsgData,
+};
+
+void SetNewPublishRate(INT16 rate)
+{
+    gOutMsgData.PublishRate = rate;
+    gPublishPeriod = ((1000 / rate) / portTICK_RATE_MS);
+}
+
+void SetSubscriber(INT16 transport, BOOL state)
+{
+    if(state == TRUE)
+        gOutMsgData.Subscribers |= transport;
+    else
+        gOutMsgData.Subscribers &= (~transport);
+}
+
 void xPublisherTaskInit(void)
 {
     // Read in publish rate from ROM and convert to ticks period
 
     
-    if(gMessagingData.PublishRate == 0x00)        // Rate is empty
-        gMessagingData.PublishRate = PBL_DEFAULT_RATE;
+    if(gOutMsgData.PublishRate == 0x00)        // Rate is empty
+        gOutMsgData.PublishRate = PBL_DEFAULT_RATE;
 
-    gPublishPeriod = ((1000 / gMessagingData.PublishRate) / portTICK_RATE_MS);
+    gPublishPeriod = ((1000 / gOutMsgData.PublishRate) / portTICK_RATE_MS);
 
     xTaskCreate(taskPublisher, (CHAR*)"PUBLISH", STACK_SIZE_PUBLISHER,
                 NULL, tskIDLE_PRIORITY + 1, &hPublisherTask);
@@ -40,14 +59,14 @@ void taskPublisher(void* pvParameter)
         if((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) == MTR_CODE_NONE)
             continue;
         
-        length = BuildOutgoingPacket(previousWakeTime);
+        length = BuildOutgoingPacket(&gOutMsgData, previousWakeTime);
 
         // Publish to who?
-        if(gMessagingData.Subscribers & MSG_SENDER_UART)
-            COMPut(&gMessagingData.OutBuffers[gMessagingData.CurrentOutBuffer][0],
+        if(gOutMsgData.Subscribers & MSG_SENDER_UART)
+            COMPut(&gOutMsgData.Buffers[gOutMsgData.CurrentBuffer][0],
                     length, UART_DONT_FREE_BUFFER); // Send over UART
 
-        if(gMessagingData.Subscribers & MSG_SENDER_ETH)
+        if(gOutMsgData.Subscribers & MSG_SENDER_ETH)
             continue; // Send over UDP
     }
 }

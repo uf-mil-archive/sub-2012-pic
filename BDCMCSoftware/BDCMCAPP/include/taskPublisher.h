@@ -22,4 +22,7 @@ void xPublisherTaskInit(void);
 
 void taskPublisher(void* pvParameter);
 
+void SetNewPublishRate(INT16 rate);
+void SetSubscriber(INT16 transport, BOOL state);
+
 #endif

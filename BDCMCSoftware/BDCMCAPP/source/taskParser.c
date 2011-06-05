@@ -50,65 +50,6 @@ void taskParser(void* pvParameter)
 
 void SearchForPacket(xParserState *state, CHAR8 buffer[], xSimpleQueueHandle rQueue, UINT16 sender)
 {
-    CHAR8 received; // used to store the latest character
-
-    while(rQueue->count > 0) // Handles if multiple chars on queue
-    {
-        // Check for overrun
-        if(state->pktIndex >= MSG_MAX_LENGTH)
-        {
-            state->mode = PKT_SEARCH_HDR;
-            state->pktIndex = 0;
-        }
-        
-        // Dequeue the character
-        SDequeue(rQueue, &received);
-        
-        switch(state->mode)
-        {
-            case PKT_ESCAPED:
-                /* If the character has been escaped, copy the next byte
-                 * to the data buffer, no matter what. Don't forget to XOR
-                 * to retrieve the real value again.
-                 */
-                buffer[state->pktIndex++] = (received ^ MSG_ESCAPE_XOR);
-                state->mode = PKT_INMSG;
-                break;
-            case PKT_INMSG:
-                /* Here, everything is kept with 2 exceptions. If we hit the escape
-                 * character, then delete the escape character from the queue and
-                 * switch to escape mode.
-                 */
-                if(received == MSG_ESCAPE)
-                {
-                    // The character is already dequeued, just change mode
-                    state->mode = PKT_ESCAPED;
-                }
-                else if(received == MSG_FLAG)
-                {
-                    // Frame could be misaligned. Push back into INMSG
-                    if(state->pktIndex == 0)
-                        state->mode = PKT_INMSG;
-                    else	// End of packet. Change mode back to search for new one.
-                    {
-                    	state->mode = PKT_SEARCH_HDR;
-                        ParseNewPacket((BYTE *)buffer, state->pktIndex, sender);
-                    }
-                    state->pktIndex = 0;
-                }
-                else
-                    buffer[state->pktIndex++] = received; // Copy data to buffer
-                break;
-            default:
-                // Default to looking for packet flag
-                if(received == MSG_FLAG)
-                {
-                    // We found a new flag. Switch to keeping data.
-                    state->mode = PKT_INMSG;
-                    state->pktIndex = 0;
-                }
-                break;
-        }
-    }
+    
 }
 

@@ -28,9 +28,10 @@
 #define MSG_ESCAPE      0x7D
 #define MSG_ESCAPE_XOR  0x20
 
-#define MSG_MAX_LENGTH  30      // The longest message is 30 bytes not including
-                                // flags or escape characters.
+#define MSG_MAX_LENGTH  30              // The longest message is 30 bytes not including
+                                        // flags or escape characters.
 #define MSG_NUM_OUTGOING_BUFFERS   5    // Number of outgoing buffers
+#define MSG_NUM_INCOMING_BUFFERS   5    // Number of incoming buffers per device
 
 #define MSG_SENDER_UART     1
 #define MSG_SENDER_ETH      2
@@ -51,29 +52,38 @@
 
 #define MSG_CRC_POLY    0x1021      // The CRC-16 Polynomial CRC16-XMODEM
 
-typedef struct tagMessagingData
+typedef struct tagCommonMessagingData
 {
     BYTE Address;
     BYTE MultiCastAddress;
-    BYTE ControllerAdd;   // Who's allowed to give input to me?
-    INT16 PublishRate;
+    BYTE ControllerAdd;   // Who's allowed to give input to me? And who do I send to?
     INT16 Endianess;    // 0 = Little Endian
-    INT16 IncomingPacketCount;
-    INT16 MulticastPacketCount;
+}CommonMessagingData;
+
+typedef struct tagOutgoingMessagingData
+{
+    CommonMessagingData *Common;
+    INT16 PublishRate;
     INT16 OutgoingPacketCount;
-    BYTE OutBuffers[MSG_NUM_OUTGOING_BUFFERS][(MSG_MAX_LENGTH*2 + 2)];
-    INT16 CurrentOutBuffer;
+    BYTE Buffers[MSG_NUM_OUTGOING_BUFFERS][(MSG_MAX_LENGTH*2 + 2)]; // The extra room is for escape characters
+    INT16 CurrentBuffer;
     INT16 Subscribers;
     BYTE  scratchBuf[MSG_MAX_LENGTH];
-} MessagingData;
+} OutgoingMessagingData;
 
-extern MessagingData gMessagingData;
+typedef volatile struct tagIncomingBuffers
+{
+    INT16 CurrentBuffer;
+    BYTE Buffers[MSG_NUM_INCOMING_BUFFERS][(MSG_MAX_LENGTH + 2)];   // No escape characters are saved incoming
+}IncomingBuffers;
+
+extern CommonMessagingData  gCommonMsgData;
 
 UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes);
 void CRC16Init(void);
 
-void ParseNewPacket(BYTE rawPkt[], INT16 length, INT16 sender);
+void ParseNewPacket(BYTE buf[], INT16 length, INT16 transport);
 
-INT16 BuildOutgoingPacket(INT16 tickCount);
+INT16 BuildOutgoingPacket(OutgoingMessagingData *data, INT16 tickCount);
 
 #endif // MESSAGES_H

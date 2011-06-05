@@ -1,4 +1,7 @@
 #include "taskUART.h"
+#include "messages.h"
+#include "taskParser.h"
+#include "StackTsk.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -8,8 +11,7 @@ xSemaphoreHandle hUARTRxSemaphore;
 
 xTaskHandle hUARTTask;
 
-xSimpleQueue rxQueue;
-xSimpleQueueHandle hUARTRxQueue = &rxQueue;
+volatile IncomingBuffers gUARTIncBuffers;
 
 void COMInit(void);
 void COMReadBaudFromEE(void);
@@ -165,33 +167,96 @@ void COMPutFromISR(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
 
 void __attribute__((__interrupt__, auto_psv)) _U2RXInterrupt(void)
 {
-    COM_UxRXIFLAG = 0;  // Clear the interrupt flag
+    static INT16 pktIndex = 0;
+    static INT16 mode = PKT_SEARCH_HDR;
+
+    portBASE_TYPE xTaskWoken = pdFALSE;
+    volatile BYTE received;
+    INT16 curBuf = gUARTIncBuffers.CurrentBuffer;
+
     COM_UxSTAbits.OERR = 0; // Clear the overrun flag just in case.
 
     // Check for parity or framing error.
     if((COM_UxSTA & 0xC) > 0)
     {
         // Clear the errors
-        BYTE rByte = COM_UxRXREG;
-        (void)rByte;
-        return;
+        received = COM_UxRXREG;
+
+        goto DONE;
     }
 
-    portBASE_TYPE xTaskWoken = pdFALSE;
-
-    // Read the new bytes from the rx fifo and enqueue them
+    // Read the new bytes from the rx fifo and unescape them
     while(COM_UxSTAbits.URXDA)
     {
-        BYTE rByte = COM_UxRXREG;
-        SEnqueue(hUARTRxQueue, rByte);
-    }    
+        received = COM_UxRXREG;
+
+        // Check for overrun
+        if(pktIndex >= MSG_MAX_LENGTH)
+        {
+            mode = PKT_SEARCH_HDR;
+            pktIndex = 0;
+        }
+
+        switch(mode)
+        {
+            case PKT_ESCAPED:
+                /* If the character has been escaped, copy the next byte
+                 * to the data buffer, no matter what. Don't forget to XOR
+                 * to retrieve the real value again.
+                 */
+                gUARTIncBuffers.Buffers[curBuf][pktIndex++] = (received ^ MSG_ESCAPE_XOR);
+                mode = PKT_INMSG;
+                break;
+            case PKT_INMSG:
+                /* Here, everything is kept with 2 exceptions. If we hit the escape
+                 * character, then delete the escape character from the queue and
+                 * switch to escape mode.
+                 */
+                if(received == MSG_ESCAPE)
+                {
+                    // The character is already dequeued, just change mode
+                    mode = PKT_ESCAPED;
+                }
+                else if(received == MSG_FLAG)
+                {
+                    // Frame could be misaligned. Push back into INMSG
+                    if(pktIndex == 0)
+                        mode = PKT_INMSG;
+                    else	// End of packet. Change mode back to search for new one.
+                    {
+                    	mode = PKT_SEARCH_HDR;
+
+
+                        gUARTIncBuffers.CurrentBuffer =
+                                (gUARTIncBuffers.CurrentBuffer + 1) % MSG_NUM_INCOMING_BUFFERS;
+
+                        // Pass the token to the Parser task
+                        //  ParseNewPacket((BYTE *)buffer, pktIndex, sender);
+                    }
+                    pktIndex = 0;
+                }
+                else
+                    gUARTIncBuffers.Buffers[curBuf][pktIndex++] = received; // Copy data to buffer
+                break;
+            default:
+                // Default to looking for packet flag
+                if(received == MSG_FLAG)
+                {
+                    // We found a new flag. Switch to keeping data.
+                    mode = PKT_INMSG;
+                    pktIndex = 0;
+                }
+                break;
+        }
 
     // Give the semaphore so the parsing task knows a new packet arrived.
     xSemaphoreGiveFromISR(hUARTRxSemaphore, &xTaskWoken);
 
     // Force a context switch if a higher priority task is woken
     // THIS MUST BE THE LAST CALL IN THE ISR!!!!
-    if(xTaskWoken)
+ DONE:
+      COM_UxRXIFLAG = 0;  // Clear the interrupt flag
+      if(xTaskWoken)
         taskYIELD();
 }
 
