@@ -4,11 +4,7 @@
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
 
-MotorData BROLMotorData =
-{
-    .ReferenceInput = 0,
-    .MaxSlew = 250,
-};
+MotorData BROLMotorData;
 
 void (*controller)(void) = NULL;
 MotorData *hMotorData = NULL;
@@ -23,12 +19,6 @@ inline void EnableMotorInterrupts(void);
 inline void DisableMotorInterrupts(void);
 void BROLInit(MotorData** motor);
 
-__attribute__((__const__)) int isNaN (const float* f)
- {
-        const int* rep = ((const int*) f) + 1;
-        return ((*rep & 0x7F00) == 0x7F00);
- }
-
 BYTE ReadMotorTypeEE()
 {
    BYTE result;
@@ -38,8 +28,6 @@ BYTE ReadMotorTypeEE()
 
 void MotorInit(void)
 {
-    PWMInit();  // Initialize the PWM module
-
     // Pull in settings from EROM
     switch(ReadMotorTypeEE())
     {
@@ -55,8 +43,7 @@ void MotorInit(void)
 
     DisableMotorInterrupts();
 
-    // Setup the controller timer
-    motorSetupTimer();
+    PWMInit();  // Initialize the PWM module
 
     // Charge the boot straps. This leaves the low side fets turned on.
     ChargeBootStraps();
@@ -64,14 +51,11 @@ void MotorInit(void)
     // Now start firing controller events
     EnableMotorInterrupts();
 
-
     return;
 }
 
 void PWMInit(void)
 {
-    P1OVDCON = 0x0000;
-
     PWM1CON1 = 0x0033;      // PWM outputs, configure them into
                             // complimentary pairs
     P1DTCON1 = 0x0000;      // Deadtime clock period is Tcy
@@ -83,6 +67,7 @@ void PWMInit(void)
     // To run at the frequency we want (below the hydrophone but above audible)
     // we need a 1:1 prescalar.
     P1TPER = GetInstructionClock()/FPWM - 1;
+    P1TCONbits.PTOPS = 9;   // Set's interrupt rate to 1/10 the PWM frequency
     P1OVDCON = 0x0000;      // Override controls the output pins
                             // clear all the outputs to low
     P1DC1 = 0;              // Initialize the duty cycle registers
@@ -92,7 +77,8 @@ void PWMInit(void)
     PWM1CON2 = 0x0F00;      // 1:16 postscalar on the special event trigger
                             // Synchronized updates, override on clock boundaries
 
-    P1TCON = 0x8000;        // Start PWM module (all pins are still off due to override)
+
+    P1TCONbits.PTEN = 1;    // Start PWM module (all pins are still off due to override)
 
     return;
 }
@@ -226,17 +212,17 @@ REFDONE:
         if( hMotorData->PresentDuty < 0)
         {
             duty = -1*hMotorData->PresentDuty;
-            P1OVDCON = MTR_BACKWARD;
+            Nop();//P1OVDCON = MTR_BACKWARD;
         }
         else
         {
             duty =  hMotorData->PresentDuty;
-            P1OVDCON = MTR_FORWARD;
+            Nop();//P1OVDCON = MTR_FORWARD;
         }
 
         // Set the duty cycles correctly (absolute value of output)
-        P1DC1 = duty;
-        P1DC2 = duty;
+        Nop();//P1DC1 = duty;
+        Nop();//P1DC2 = duty;
     }
 
     // End Measurement
@@ -245,28 +231,18 @@ REFDONE:
 
 void ChargeBootStraps(void)
 {
-    const UINT16 delayTicks = (((GetInstructionClock() / 8)/1000) * 10) ;
-
     // Brushed motors have zero in their motortype flag
     if((hMotorData->Flags & MTR_FLAGMASK_MOTORTYPE) == 0)
     {
-         P1OVDCON = 0x0005;    // Turn on low side fets so bootstraps can charge
+         Nop();//P1OVDCON = 0x0005;    // Turn on low side fets so bootstraps can charge
     }
     else    // Brushless
     {
-        P1OVDCON = 0x0015;    // Turn on low side fets so bootstraps can charge
+        Nop();//P1OVDCON = 0x0015;    // Turn on low side fets so bootstraps can charge
     }
     
     // Pause for 50ms to let the bootstraps charge up
-/*
-    INT16 i = 0; TMR4 = 0;
-    for(i = 0; i < 5; i++)
-    {
-        // Delays 10ms
-        while(TMR4 < delayTicks);
-        TMR4 = 0;
-    }
-*/
+    BlockingDelayms(50);
     
     return;
 }
@@ -274,50 +250,42 @@ void ChargeBootStraps(void)
 inline void EnableMotorInterrupts(void)
 {
     /* Clear the interrupt as a starting condition. */
-    IFS1bits.T4IF = 0;
+    IFS3bits.PWM1IF = 0;
 
     /* Enable the interrupt. */
-    IEC1bits.T4IE = 1;
+    IEC3bits.PWM1IE = 1;
 }
 
 inline void DisableMotorInterrupts(void)
 {
     /* Disable the interrupt. */
-    IEC1bits.T4IE = 0;
+    IEC3bits.PWM1IE = 0;
 
     /* Clear the interrupt just in case */
-    IFS1bits.T4IF = 0;
+    IFS3bits.PWM1IF = 0;
 }
 
-void motorSetupTimer(void)
+static volatile INT16 mtrPWMIntCount = 0;
+
+void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
 {
-    // Prescale is 8
-    const UINT16 delayTime = (GetInstructionClock() / 8) / MTR_TICK_RATE;
+    /* Clear the PWM interrupt. */
+    IFS3bits.PWM1IF = 0;
 
-    /* Prescale of 8. */
-    T4CON = 0;
-    TMR4 = 0;
+    // This interrupt is called 1/10 of the frequency of the PWM. That is too
+    // fast, but it's simplest divisor to work with. To slow down to the desired
+    // rate, we use this counter. Desired is 1/20 of PWM, so every other interrupt
+    // is valid.
+    mtrPWMIntCount = (mtrPWMIntCount + 1) % 2;
 
-    PR4 = delayTime;
+    if(mtrPWMIntCount!= 0)
+        return;
+    
+    LED = LED_ON;   // Used for timing analysis with o-scope
 
-    /* Setup timer 1 interrupt priority. */
-    IPC6bits.T4IP = MTR_INT_PRIORITY;
-
-    /* Setup the prescale value. */
-    T4CONbits.TCKPS0 = 1;
-    T4CONbits.TCKPS1 = 0;
-
-    T4CONbits.TON = 1;  // Turn on the timer
-}
-
-void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
-{
-    LED = LED_ON;
-    /* Clear the timer interrupt. */
-    IFS1bits.T4IF = 0;
 
     // No valid heartbeat, override the desired speed
-    if((hMotorData->Flags & MTR_FLAGMASK_HEARTBEAT))
+    if((hMotorData->Flags & MTR_FLAGMASK_HEARTBEAT) != 0)
     {
         if((++(hMotorData->InterruptCount) > HEARTBEAT_TIMEOUT_TICKS))
         {
@@ -325,17 +293,19 @@ void __attribute__((__interrupt__, auto_psv)) _T4Interrupt( void )
             hMotorData->ReferenceInput = 0;
         }
     }
-/*
+
+    // This is an undervolt condition, override the desired speed
     if(hMotorData->MinVoltage > hMotorData->VRail)
     {
         hMotorData->Flags  |= MTR_FLAGMASK_UNDERVOLTAGE;
         hMotorData->ReferenceInput = 0;
     }
-    else if((hMotorData->Flags &= MTR_FLAGMASK_UNDERVOLTAGE))
+    // Undervolt occurred, but the rail is back above minimum now.
+    // Clear undervolt flag
+    else if((hMotorData->Flags & MTR_FLAGMASK_UNDERVOLTAGE) != 0)
     {
         hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
     }
-*/
 
     // Call the controller
     controller();

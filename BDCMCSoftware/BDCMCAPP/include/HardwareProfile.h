@@ -5,6 +5,11 @@
 #error "Hardware Profile for selected processor does not exist"
 #endif // Allowable processors
 
+/*
+ *  Timers 1,2,3, and 5 are used by FreeRTOS and the tcp/ip stack. Timer 1 is
+ *  also used in the blocking delay routines
+ */
+
 #define GetSystemClock()        (80000000ul) //Hz
 #define GetInstructionClock()   (GetSystemClock() / 2)
 #define GetPeripheralClock()    (GetSystemClock())

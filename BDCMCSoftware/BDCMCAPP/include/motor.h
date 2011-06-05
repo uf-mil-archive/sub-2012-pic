@@ -6,9 +6,12 @@
 #include "mcp25XX640A.h"
 #include "fixMath.h"
 #include "adc.h"
+#include "blockingDelay.h"
+
 #include <math.h> // for pow()
 #include <string.h> // for memset
 #include "Compiler.h"
+
 
 // The motor control module uses Timer4
 #define MTR_TICK_RATE     1000      // 1    kHz control loop
@@ -20,8 +23,8 @@
 #define MTR_CODE_BLOL   5   // Brushless Open Loop Motor
 #define MTR_CODE_BLCL   7   // Brushless Closed Loop Motor
 
-#define MTR_FORWARD     0x0000   // Motor turns forward
-#define MTR_BACKWARD    0x0001   // Motor turns in reverse
+#define MTR_FORWARD     0x0305   // Motor turns forward
+#define MTR_BACKWARD    0x0C05   // Motor turns in reverse
 
 #define HEARTBEAT_TIMEOUT_TICKS     (MTR_TICK_RATE*2)   // 2s Timeout
 
