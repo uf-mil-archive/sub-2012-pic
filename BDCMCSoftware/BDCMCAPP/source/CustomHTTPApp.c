@@ -746,7 +746,7 @@ void HTTPPrint_task_stack(WORD num)
             TCPPutString(sktHTTP, max);
             break;
         case 3:
-            uitoa(uxTaskGetStackHighWaterMark(hUARTParserTask)*sizeof(portSTACK_TYPE), used);
+            uitoa(uxTaskGetStackHighWaterMark(hParserTask)*sizeof(portSTACK_TYPE), used);
             TCPPutString(sktHTTP, used);
             TCPPut(sktHTTP, '/');
             uitoa(STACK_SIZE_PARSER*sizeof(portSTACK_TYPE), max);

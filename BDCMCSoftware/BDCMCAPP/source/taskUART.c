@@ -1,14 +1,12 @@
 #include "taskUART.h"
 #include "messages.h"
 #include "taskParser.h"
-#include "StackTsk.h"
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
 
 xQueueHandle hUARTTxQueue;
-xSemaphoreHandle hUARTRxSemaphore;
-
 xTaskHandle hUARTTask;
 
 volatile IncomingBuffers gUARTIncBuffers;
@@ -20,12 +18,10 @@ void COMSetBaud(UINT16 baud);
 void xUARTTaskInit(void)
 {
     // Allocate the send and receive queues for the task
-    hUARTTxQueue = xQueueCreate(UART_QUEUE_SIZE, sizeof(UARTMsg));
-    vSemaphoreCreateBinary(hUARTRxSemaphore);
+    hUARTTxQueue = xQueueCreate(UART_QUEUE_SIZE, sizeof(RTOSMsg));
 
     // Initialize the UART
     COMInit();
-
 	
     xTaskCreate(taskUART, (CHAR*)"UART", STACK_SIZE_UART,
                 NULL, tskIDLE_PRIORITY + 1, &hUARTTask);
@@ -35,7 +31,7 @@ void xUARTTaskInit(void)
 
 void taskUART(void* pvParameter)
 {
-    UARTMsg msg;
+    RTOSMsg msg;
     const BYTE* pByte;
 
     for(;;)
@@ -43,21 +39,21 @@ void taskUART(void* pvParameter)
         // Block here until a new message is ready to be sent
         xQueueReceive(hUARTTxQueue, &msg, portMAX_DELAY);
 
-        pByte = msg.buffer;
-        while(msg.count > 0)
+        pByte = msg.Buffer;
+        while(msg.Length > 0)
         {
             // Write the bytes to the FIFO. This will at most write 5 bytes in a shot.
             if(COM_UxSTAbits.UTXBF != 1)
             {
-                msg.count--;
+                msg.Length--;
                 COM_UxTXREG = *pByte++;
             }
             else
                 taskYIELD();
         }
 
-        if(msg.flags &= 0x01)
-            free(msg.buffer);
+        if(msg.Free)
+            free(msg.Buffer);
     }
 }
 
@@ -130,38 +126,27 @@ void COMReadBaudFromEE(void)
 // The COMPut functions expect the data buffer to exist
 // AFTER they return. IE, malloc them when you make a msg
 // and the taskUART function will free the used memory.
-void COMPut(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+void COMSend(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
 {
-    UARTMsg msg;
+    RTOSMsg msg;
 
-    // Set the length of the UART message.
-    if(length > UART_ENTRY_SIZE)
-        msg.count = UART_ENTRY_SIZE;
-    else
-        msg.count = length;
+    msg.Length = length;
+    msg.Buffer = data;
+    msg.Free = (shouldFree > 0) ? 1 : 0;
 
-    msg.buffer = data;
-
-    msg.flags = (shouldFree > 0) ? 1 : 0;
-
-    // This memcpy's the UARTMsg to the queue.
+    // This memcpy's the message struct to the queue.
     xQueueSendToBack(hUARTTxQueue, &msg, 0);
 }
 
-void COMPutFromISR(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+void COMSendFromISR(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
 {
-    UARTMsg msg;
+    RTOSMsg msg;
 
-    // Set the length of the UART message.
-    if(length > UART_ENTRY_SIZE)
-        msg.count = UART_ENTRY_SIZE;
-    else
-        msg.count = length;
+    msg.Length = length;
+    msg.Buffer = data;
+    msg.Free = (shouldFree > 0) ? 1 : 0;
 
-	msg.buffer = data;
-
-	msg.flags = (shouldFree > 0) ? 1 : 0;
-
+    // This memcpy's the message struct to the queue.
     xQueueSendToBackFromISR(hUARTTxQueue, &msg, 0);
 }
 
@@ -170,6 +155,7 @@ void __attribute__((__interrupt__, auto_psv)) _U2RXInterrupt(void)
     static INT16 pktIndex = 0;
     static INT16 mode = PKT_SEARCH_HDR;
 
+    RTOSMsg msg;
     portBASE_TYPE xTaskWoken = pdFALSE;
     volatile BYTE received;
     INT16 curBuf = gUARTIncBuffers.CurrentBuffer;
@@ -226,12 +212,16 @@ void __attribute__((__interrupt__, auto_psv)) _U2RXInterrupt(void)
                     {
                     	mode = PKT_SEARCH_HDR;
 
-
+                        // Copy the packet to the parser queue
+                        msg.Sender = MSG_SENDER_UART;
+                        msg.Length = pktIndex;
+                        msg.Buffer = &gUARTIncBuffers.Buffers[gUARTIncBuffers.CurrentBuffer][0];
+                        msg.Free = 0;
                         gUARTIncBuffers.CurrentBuffer =
                                 (gUARTIncBuffers.CurrentBuffer + 1) % MSG_NUM_INCOMING_BUFFERS;
 
-                        // Pass the token to the Parser task
-                        //  ParseNewPacket((BYTE *)buffer, pktIndex, sender);
+                        // This memcpy's the message struct to the queue.
+                        xQueueSendToBackFromISR(hParserQueue, &msg, 0);
                     }
                     pktIndex = 0;
                 }
@@ -248,14 +238,14 @@ void __attribute__((__interrupt__, auto_psv)) _U2RXInterrupt(void)
                 }
                 break;
         }
+    }
 
-    // Give the semaphore so the parsing task knows a new packet arrived.
-    xSemaphoreGiveFromISR(hUARTRxSemaphore, &xTaskWoken);
 
-    // Force a context switch if a higher priority task is woken
-    // THIS MUST BE THE LAST CALL IN THE ISR!!!!
+
  DONE:
       COM_UxRXIFLAG = 0;  // Clear the interrupt flag
+    // Force a context switch if a higher priority task is woken
+    // THIS MUST BE THE LAST CALL IN THE ISR!!!!
       if(xTaskWoken)
         taskYIELD();
 }

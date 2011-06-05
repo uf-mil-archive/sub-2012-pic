@@ -212,17 +212,17 @@ REFDONE:
         if( hMotorData->PresentDuty < 0)
         {
             duty = -1*hMotorData->PresentDuty;
-            Nop();//P1OVDCON = MTR_BACKWARD;
+            P1OVDCON = MTR_BACKWARD;
         }
         else
         {
             duty =  hMotorData->PresentDuty;
-            Nop();//P1OVDCON = MTR_FORWARD;
+            P1OVDCON = MTR_FORWARD;
         }
 
         // Set the duty cycles correctly (absolute value of output)
-        Nop();//P1DC1 = duty;
-        Nop();//P1DC2 = duty;
+        P1DC1 = duty;
+        P1DC2 = duty;
     }
 
     // End Measurement
@@ -234,11 +234,11 @@ void ChargeBootStraps(void)
     // Brushed motors have zero in their motortype flag
     if((hMotorData->Flags & MTR_FLAGMASK_MOTORTYPE) == 0)
     {
-         Nop();//P1OVDCON = 0x0005;    // Turn on low side fets so bootstraps can charge
+         P1OVDCON = 0x0005;    // Turn on low side fets so bootstraps can charge
     }
     else    // Brushless
     {
-        Nop();//P1OVDCON = 0x0015;    // Turn on low side fets so bootstraps can charge
+        P1OVDCON = 0x0015;    // Turn on low side fets so bootstraps can charge
     }
     
     // Pause for 50ms to let the bootstraps charge up
@@ -290,7 +290,7 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
         if((++(hMotorData->InterruptCount) > HEARTBEAT_TIMEOUT_TICKS))
         {
             hMotorData->Flags  &= ~MTR_FLAGMASK_HEARTBEAT;  // Clear the heartbeat flag
-            hMotorData->ReferenceInput = 0;
+            //hMotorData->ReferenceInput = 0;
         }
     }
 

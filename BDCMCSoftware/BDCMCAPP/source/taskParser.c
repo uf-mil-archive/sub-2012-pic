@@ -1,18 +1,15 @@
 #include "taskParser.h"
 
-xTaskHandle hUARTParserTask;
-xParserParameter uartParserParameter;
-
-void SearchForPacket(xParserState *state, CHAR8 buffer[], xSimpleQueueHandle rQueue, UINT16 sender);
+xTaskHandle hParserTask;
+xQueueHandle hParserQueue;
 
 void xParserTaskInit(void)
 {
-    uartParserParameter.hRxSemaphore = hUARTRxSemaphore;
-    uartParserParameter.hRxQueue = hUARTRxQueue;
-    uartParserParameter.sender = MSG_SENDER_UART;
+    // Allocate the receive queue for the task
+    hParserQueue = xQueueCreate(PARSER_QUEUE_SIZE, sizeof(RTOSMsg));
 
-    xTaskCreate(taskParser, (CHAR*)"UARTPARS", STACK_SIZE_PARSER,
-                &uartParserParameter, tskIDLE_PRIORITY + 1, &hUARTParserTask);
+    xTaskCreate(taskParser, (CHAR*)"PARSER", STACK_SIZE_PARSER,
+                NULL, tskIDLE_PRIORITY + 1, &hParserTask);
 
     return;
 }
@@ -20,25 +17,18 @@ void xParserTaskInit(void)
 // @param pvParameter The
 void taskParser(void* pvParameter)
 {
-    xParserParameterHandle passedIn =(xParserParameterHandle)pvParameter;
-
-    // This is the timeout variable. It defaults to infinite blocking
-    portTickType delayTime = portMAX_DELAY;
-
-    xParserState state = {.mode = PKT_SEARCH_HDR, .pktIndex = 0};
-
-    // This preliminary take ensures the semaphore is clear
-    // before the infinite loop is entered.
-    xSemaphoreTake(passedIn->hRxSemaphore, 0);
+    RTOSMsg msg;
 
     for(;;)
     {
-        // Now wait until the character received event happens.
-        xSemaphoreTake(passedIn->hRxSemaphore, delayTime);
+        // Block here until a new message is ready to be sent
+        xQueueReceive(hParserQueue, &msg, portMAX_DELAY);
 
-        // To get here, atleast 1 character has shown up in the
-        // rxQueue.
-        SearchForPacket(&state, passedIn->msgBuffer, passedIn->hRxQueue, passedIn->sender);
+        // To get here, a new message has shown up in the queue
+        ParseNewPacket(msg.Buffer, msg.Length, msg.Sender);
+
+        if(msg.Free)
+            free(msg.Buffer);
     }
 
     /* Should the task implementation ever break out of the above loop
@@ -48,8 +38,4 @@ void taskParser(void* pvParameter)
     vTaskDelete( NULL );
 }
 
-void SearchForPacket(xParserState *state, CHAR8 buffer[], xSimpleQueueHandle rQueue, UINT16 sender)
-{
-    
-}
 

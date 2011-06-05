@@ -52,6 +52,18 @@
 
 #define MSG_CRC_POLY    0x1021      // The CRC-16 Polynomial CRC16-XMODEM
 
+#define MSG_DONT_FREE_BUFFER   0
+#define MSG_FREE_BUFFER        1
+
+// This is the message structure for communicating between RTOS tasks
+typedef struct tagRTOSMessage
+{
+    portBASE_TYPE Sender;
+    portBASE_TYPE Length;
+    BYTE* Buffer;
+    portBASE_TYPE Free;    // bit 1 is the buffer free instruction
+} RTOSMsg;
+
 typedef struct tagCommonMessagingData
 {
     BYTE Address;
@@ -60,16 +72,12 @@ typedef struct tagCommonMessagingData
     INT16 Endianess;    // 0 = Little Endian
 }CommonMessagingData;
 
-typedef struct tagOutgoingMessagingData
+typedef struct tagOutgoingBuffers
 {
-    CommonMessagingData *Common;
-    INT16 PublishRate;
-    INT16 OutgoingPacketCount;
     BYTE Buffers[MSG_NUM_OUTGOING_BUFFERS][(MSG_MAX_LENGTH*2 + 2)]; // The extra room is for escape characters
     INT16 CurrentBuffer;
-    INT16 Subscribers;
     BYTE  scratchBuf[MSG_MAX_LENGTH];
-} OutgoingMessagingData;
+} OutgoingBuffers;
 
 typedef volatile struct tagIncomingBuffers
 {
@@ -77,13 +85,28 @@ typedef volatile struct tagIncomingBuffers
     BYTE Buffers[MSG_NUM_INCOMING_BUFFERS][(MSG_MAX_LENGTH + 2)];   // No escape characters are saved incoming
 }IncomingBuffers;
 
+typedef struct tagOutgoingMessagingData
+{
+    INT16 PublishRate;
+    INT16 OutgoingCount;
+    INT16 Subscribers;
+}OutgoingMessagingData;
+
+typedef struct tagIncomingMessagingData
+{
+    INT16 MessageCount;
+    INT16 MulticastCount;
+}IncomingMessagingData;
+
 extern CommonMessagingData  gCommonMsgData;
+extern IncomingMessagingData gIncomingMsgData;
+extern OutgoingMessagingData gOutgoingMsgData;
 
 UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes);
 void CRC16Init(void);
 
 void ParseNewPacket(BYTE buf[], INT16 length, INT16 transport);
 
-INT16 BuildOutgoingPacket(OutgoingMessagingData *data, INT16 tickCount);
+INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount);
 
 #endif // MESSAGES_H

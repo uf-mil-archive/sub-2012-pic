@@ -6,6 +6,10 @@ CommonMessagingData gCommonMsgData =
     .ControllerAdd = 1,
 };
 
+IncomingMessagingData gIncomingMsgData;
+OutgoingMessagingData gOutgoingMsgData;
+OutgoingBuffers gOutgoingBuffers;
+
 // Adds little endian int to a packet
 inline void AddLEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
 {
@@ -90,7 +94,7 @@ UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes)
 
 void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
 {
-    UINT16 checkSum = (data->Common->Endianess) ?
+    UINT16 checkSum = (gCommonMsgData.Endianess) ?
         ReadBEIntFromPacket(&rBuf[length - 2]) :
         ReadLEIntFromPacket(&rBuf[length - 2]);
         
@@ -99,10 +103,10 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
         return;
 
     /* It's a valid packet. Check to make sure we are the intended recipient. */
-    if(data->Common->Address == data->Buffers[rBuf][1])
-        data->IncomingPacketCount++;
-    else if(data->Common->MultiCastAddress == data->Buffers[rBuf][1])
-        data->MulticastPacketCount++;
+    if(gCommonMsgData.Address == rBuf[1])   // To us
+        gIncomingMsgData.MessageCount++;
+    else if(gCommonMsgData.MultiCastAddress == rBuf[1]) // To our multicast
+        gIncomingMsgData.MulticastCount++;
     else // Not for us
         return;
 
@@ -113,17 +117,17 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
         return;
 
     // Okay, they're talking to us. Is the message a heartbeat or ESTOP?
-    if(data->Buffers[rBuf][4] == MSG_FEED_HEARTBEAT)
+    if(rBuf[4] == MSG_FEED_HEARTBEAT)
     {
         if(length == MSG_FEED_HEARTBEAT_LENGTH)
         {
             // Is the sender the guy in charge of me?
-            if(data->Buffers[rBuf][0] == data->Common->ControllerAdd)
+            if(rBuf[0] == gCommonMsgData.ControllerAdd)
                 FeedHeartbeat();
         }
         return;
     }
-    else if(data->Buffers[rBuf][4] == MSG_ESTOP)
+    else if(rBuf[4] == MSG_ESTOP)
     {
         if(length == MSG_ESTOP_LENGTH)
         {
@@ -133,37 +137,35 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
     }
 
     // Do the motor types line up?
-    if(((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1) != data->Buffers[rBuf][4])
+    if(((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1) != rBuf[4])
         return;
 
     // They're either subscribing/unsubscribing or commanding a new
     // motor reference.
-    switch(data->Buffers[rBuf][4])
+    switch(rBuf[5])
     {
         case MSG_START_PUBLISH:
             if(length == MSG_START_PUBLISH_LENGTH)
             {
-                BYTE rate = data->Buffers[rBuf][6];
-                if(rate < PBL_MAX_RATE)
-                {
-                    SetNewPublishRate(rate);
-                }
-                SetSubscriber(data->Transport, TRUE);
+                BYTE rate = rBuf[6];
+
+                SetNewPublishRate(rate);
+                SetSubscriber(transport, TRUE);
             }
             break;
         case MSG_STOP_PUBLISH:
             if(length == MSG_STOP_PUBLISH_LENGTH)
-                SetSubscriber(data->Transport, FALSE);
+                SetSubscriber(transport, FALSE);
             break;
         case MSG_SET_REFERENCE:
             if(length == MSG_SET_REFERENCE_LENGTH)
             {
                 // Is the sender the guy in charge of me?
-                if(data->Buffers[rBuf][0] == data->Common->ControllerAdd)
+                if(rBuf[0] == gCommonMsgData.ControllerAdd)
                 {
-                        hMotorData->ReferenceInput = (data->Common->Endianess) ?
-                            ReadBEIntFromPacket(&data->Buffers[rBuf][6]):
-                            ReadLEIntFromPacket(&data->Buffers[rBuf][6]);
+                        hMotorData->ReferenceInput = (gCommonMsgData.Endianess) ?
+                            ReadBEIntFromPacket(&rBuf[6]):
+                            ReadLEIntFromPacket(&rBuf[6]);
                         ReferenceChanged();
                 }
             }
@@ -199,93 +201,96 @@ inline INT16 BuildEscapedPacket(BYTE* src, BYTE* dest, INT16 inCount)
     return escCount;
 }
 
-INT16 BuildOutgoingPacket(OutgoingMessagingData *data, INT16 tickCount)
+INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
 {
     INT16 tmplength = 0;
     INT16 temp = 0;
 
     // Handle buffer switching first
-    data->CurrentBuffer =
-            ((data->CurrentBuffer + 1) % MSG_NUM_OUTGOING_BUFFERS);
+    gOutgoingBuffers.CurrentBuffer =
+            ((gOutgoingBuffers.CurrentBuffer + 1) % MSG_NUM_OUTGOING_BUFFERS);
  
     // Increment the current packet number
-    data->OutgoingPacketCount++;
+    gOutgoingMsgData.OutgoingCount++;
 
     // Start with the source address - its never the escape character so add it directly
-    data->scratchBuf[tmplength++] = data->Common->Address;    // I'm the source
+    gOutgoingBuffers.scratchBuf[tmplength++] = gCommonMsgData.Address;    // I'm the source
     // Next add the destination address - its never the escape character so add it directly
-    data->scratchBuf[tmplength++] = data->Common->ControllerAdd;
+    gOutgoingBuffers.scratchBuf[tmplength++] = gCommonMsgData.ControllerAdd;
 
 
-    if(data->Common->Endianess) // Big Endian
+    if(gCommonMsgData.Endianess) // Big Endian
     {
         // Insert the packet number
-        AddBEIntToPacket(&data->scratchBuf[tmplength],
-                data->OutgoingPacketCount,
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength],
+                gOutgoingMsgData.OutgoingCount,
                 &tmplength);
 
         // Insert TypeCode
-        data->scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
 
         // Insert the tick count
-        AddBEIntToPacket(&data->scratchBuf[tmplength], tickCount, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        AddBEIntToPacket(&data->scratchBuf[tmplength], hMotorData->Flags, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Flags, &tmplength);
 
         // Insert reference input
-        AddBEIntToPacket(&data->scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
 
         // Insert present output
-        AddBEIntToPacket(&data->scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
 
         // Insert voltage rail
-        AddBEIntToPacket(&data->scratchBuf[tmplength], hMotorData->VRail, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
 
         // Insert motor current
-        AddBEIntToPacket(&data->scratchBuf[tmplength], hMotorData->Current, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Current, &tmplength);
     }
     else    // Little Endian
     {
         // Insert the packet number
-        AddLEIntToPacket(&data->scratchBuf[tmplength],
-                data->OutgoingPacketCount,
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength],
+                gOutgoingMsgData.OutgoingCount,
                 &tmplength);
 
         // Insert TypeCode
-        data->scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
 
         // Insert the tick count
-        AddLEIntToPacket(&data->scratchBuf[tmplength], tickCount, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Insert flags - clear out anything private
-        AddLEIntToPacket(&data->scratchBuf[tmplength], hMotorData->Flags, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Flags, &tmplength);
 
         // Insert reference input
-        AddLEIntToPacket(&data->scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
 
         // Insert present output
-        AddLEIntToPacket(&data->scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
 
         // Insert voltage rail
-        AddLEIntToPacket(&data->scratchBuf[tmplength], hMotorData->VRail, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
 
         // Insert motor current
-        AddLEIntToPacket(&data->scratchBuf[tmplength], hMotorData->Current, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Current, &tmplength);
     }
 
     // Calculate the checksum
-    temp = CRC16Checksum(&data->scratchBuf[0],
+    temp = CRC16Checksum(&gOutgoingBuffers.scratchBuf[0],
             tmplength);
 
-    if(data->Common->Endianess) // Big Endian
-        AddBEIntToPacket(&data->scratchBuf[tmplength], temp, &tmplength);
+    if(gCommonMsgData.Endianess) // Big Endian
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], temp, &tmplength);
     else
-        AddLEIntToPacket(&data->scratchBuf[tmplength], temp, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], temp, &tmplength);
 
-    tmplength = BuildEscapedPacket(&data->scratchBuf[0],
-            &(data->Buffers[data->CurrentBuffer][0]),
+    tmplength = BuildEscapedPacket(&gOutgoingBuffers.scratchBuf[0],
+            &(gOutgoingBuffers.Buffers[gOutgoingBuffers.CurrentBuffer][0]),
             tmplength);
+
+    // Point to the newly escaped packet
+    *pkt = &(gOutgoingBuffers.Buffers[gOutgoingBuffers.CurrentBuffer][0]);
 
     // This function returns the total count of bytes in the buffer
     return tmplength;
