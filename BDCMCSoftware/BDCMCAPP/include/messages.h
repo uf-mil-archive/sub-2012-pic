@@ -68,8 +68,8 @@ typedef struct tagCommonMessagingData
 {
     BYTE Address;
     BYTE MultiCastAddress;
-    BYTE ControllerAdd;   // Who's allowed to give input to me? And who do I send to?
-    INT16 Endianess;    // 0 = Little Endian
+    BYTE ControllerAdd;     // Who's allowed to give input to me? And who do I send to?
+    INT16 Endianess;        // 0 = Little Endian
 }CommonMessagingData;
 
 typedef struct tagOutgoingBuffers

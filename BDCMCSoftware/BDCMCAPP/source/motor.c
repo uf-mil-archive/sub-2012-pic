@@ -290,7 +290,7 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
         if((++(hMotorData->InterruptCount) > HEARTBEAT_TIMEOUT_TICKS))
         {
             hMotorData->Flags  &= ~MTR_FLAGMASK_HEARTBEAT;  // Clear the heartbeat flag
-            //hMotorData->ReferenceInput = 0;
+            hMotorData->ReferenceInput = 0;
         }
     }
 
@@ -391,6 +391,9 @@ void BROLInit(MotorData** motor)
     if((c & MTR_FLAGMASK_MOTORCODE) == MTR_CODE_BROL)
     {
         EROM_ReadBytes(d, sizeof(MotorData), p);
+
+        // The two bytes after the structure are the checksum
+        INT16 savedChk = EROM_ReadInt16(d + sizeof(MotorData));
     }
     else
         SaveMotorConfig(&BROLMotorData);

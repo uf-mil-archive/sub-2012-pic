@@ -2,3 +2,6 @@ private
 build
 obj
 dist
+*.hex
+*.coff
+*.map

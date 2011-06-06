@@ -1,44 +1,3 @@
-/*****************************************************************************
- * Microchip RTOS and Stacks Demo
- *****************************************************************************
- * FileName:        taskTCPIP.c
- * Dependencies:    
- * Processor:       PIC24, PIC32
- * Compiler:       	MPLAB C30 V3.00, MPLAB C32
- * Linker:          MPLAB LINK30, MPLAB LINK32
- * Company:         Microchip Technology Incorporated
- *
- * Software License Agreement
- *
- * Copyright � 2008 Microchip Technology Inc.  All rights reserved.
- * Microchip licenses to you the right to use, modify, copy and distribute
- * Software only when embedded on a Microchip microcontroller or digital
- * signal controller, which is integrated into your product or third party
- * product (pursuant to the sublicense terms in the accompanying license
- * agreement).  
- *
- * You should refer to the license agreement accompanying this Software
- * for additional information regarding your rights and obligations.
- *
- * SOFTWARE AND DOCUMENTATION ARE PROVIDED �AS IS� WITHOUT WARRANTY OF ANY
- * KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY
- * OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR
- * PURPOSE. IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR
- * OBLIGATED UNDER CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION,
- * BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT
- * DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL,
- * INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA,
- * COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY
- * CLAIMS BY THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF),
- * OR OTHER SIMILAR COSTS.
- *
- * Version  Author               Date        Comment
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * 1.0      D.Wenn               09/29/08    Initial version 
- * 1.1		D.Wenn				 07/02/09	 Modified to use flash on gfx
- *											 board for data storage  
- *****************************************************************************/
-
 // Include all headers for any enabled TCPIP Stack functions
 #include "taskTCPIP.h"
 #include "taskUART.h"
@@ -51,10 +10,16 @@
 
 // Declare AppConfig structure to store information on the tcpip configuration
 APP_CONFIG AppConfig;
+UDPConfigData gUDPConfig;
+
+// The buffers used by the incoming UDP
+volatile IncomingBuffers gUARTIncBuffers;
+xQueueHandle hUDPTxQueue;
 
 ///////////////////////////////////////////////////////////////////
 // private helper functions
 static void InitAppConfig(void);
+static void InitUDPConfig(void);
 static void UDPRXHandler(void);
 static void UDPTXHandler(void);
 
@@ -71,8 +36,11 @@ void xTCPIPTaskInit(void)
     // Initialize the MPFS2 file system
     MPFSInit();
 
-    // initialize the basic application configuration
+    // Initialize the basic application configuration
     InitAppConfig();
+
+    // Initialize the UDP settings
+    InitUDPConfig();
 
     // create the task to handle all TCPIP functions (namely HTTP Server)
     xTaskCreate(taskTCPIP, (signed char*) "TCPIP", STACK_SIZE_TCPIP,
@@ -232,6 +200,44 @@ static void InitAppConfig(void)
     }
 }
 
+static void InitUDPConfig(void)
+{
+    BYTE c;
+    BYTE *p;
+    UINT16 d;
+
+    gUDPConfig.RXSocket = INVALID_SOCKET;
+    gUDPConfig.TXSocket = INVALID_SOCKET;
+
+    gUDPConfig.TXDestNode.IPAddr.Val = MY_DEFAULT_IP_ADDR_BYTE1 |
+            MY_DEFAULT_IP_ADDR_BYTE2 << 8ul |
+            MY_DEFAULT_IP_ADDR_BYTE3 << 16ul |
+            MY_DEFAULT_IP_ADDR_BYTE4 << 24ul;
+
+    memcpypgm2ram((void*) &gUDPConfig.TXDestNode.MACAddr, (ROM void*) SerializedMACAddress,
+            sizeof (MAC_ADDR));
+
+    gUDPConfig.RXPort = UDP_DEFAULT_RXPORT;
+    gUDPConfig.TXRemotePort = UDP_DEFAULT_REMOTE_TXPORT;
+
+    p = (BYTE*)&gUDPConfig;
+    d = ((ETH_EROM_BASE + sizeof(APP_CONFIG)) % EROM_PAGE_SIZE) + EROM_PAGE_SIZE;
+
+    // attempt to read in the config data from FLASH
+    EROM_ReadBytes(d++, 1, &c);
+
+    // read in the data structure from FLASH if it exists if not
+    // just save our default configuration to FLASH
+    if (c == APP_VERSION)
+    {
+        EROM_ReadBytes(d, sizeof(UDPConfigData), p);
+    }
+    else
+    {
+
+    }
+}
+
 /*********************************************************************
  * Function:  void  DelayMs(WORD time)
  *
@@ -254,8 +260,6 @@ void DelayMs(WORD time) {
 
 static void UDPRXHandler(void)
 {
-    UDP_SOCKET rxSocket;
-
     if(!MACIsLinked())  // No ethernet, no laundry
         return;
 
@@ -268,9 +272,6 @@ static void UDPRXHandler(void)
 
 static void UDPTXHandler(void)
 {
-    static UDP_SOCKET txSocket = INVALID_SOCKET;
-    NODE_INFO txRemote;
-
     if(!MACIsLinked())  // No ethernet, no laundry
         return;
 
@@ -291,4 +292,31 @@ static void UDPTXHandler(void)
 
     // Send the packet
     UDPFlush();
+}
+
+// The COMPut functions expect the data buffer to exist
+// AFTER they return. IE, malloc them when you make a msg
+// and the taskUART function will free the used memory.
+void UDPSend(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+{
+    RTOSMsg msg;
+
+    msg.Length = length;
+    msg.Buffer = data;
+    msg.Free = (shouldFree > 0) ? 1 : 0;
+
+    // This memcpy's the message struct to the queue.
+    xQueueSendToBack(hUDPTxQueue, &msg, 0);
+}
+
+void UDPSendFromISR(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+{
+    RTOSMsg msg;
+
+    msg.Length = length;
+    msg.Buffer = data;
+    msg.Free = (shouldFree > 0) ? 1 : 0;
+
+    // This memcpy's the message struct to the queue.
+    xQueueSendToBackFromISR(hUDPTxQueue, &msg, 0);
 }
