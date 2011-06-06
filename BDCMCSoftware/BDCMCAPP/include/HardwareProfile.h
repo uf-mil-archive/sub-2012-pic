@@ -5,6 +5,9 @@
 #error "Hardware Profile for selected processor does not exist"
 #endif // Allowable processors
 
+// The version number of this application number
+#define APP_VERSION		0x01
+
 /*
  *  Timers 1,2,3, and 5 are used by FreeRTOS and the tcp/ip stack. Timer 1 is
  *  also used in the blocking delay routines

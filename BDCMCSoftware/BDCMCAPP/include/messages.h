@@ -33,8 +33,9 @@
 #define MSG_NUM_OUTGOING_BUFFERS   5    // Number of outgoing buffers
 #define MSG_NUM_INCOMING_BUFFERS   5    // Number of incoming buffers per device
 
-#define MSG_SENDER_UART     1
-#define MSG_SENDER_ETH      2
+#define MSG_SENDER_UART         1
+#define MSG_SENDER_ETH          2
+#define MSG_SENDER_BROADCAST    3
 
 #define MSG_FEED_HEARTBEAT  100         // Heartbeat Packet
 #define MSG_FEED_HEARTBEAT_LENGTH   7   // Length of the packet including 2 byte checksum
@@ -54,6 +55,10 @@
 
 #define MSG_DONT_FREE_BUFFER   0
 #define MSG_FREE_BUFFER        1
+
+#define PKT_SEARCH_HDR  0
+#define PKT_ESCAPED     1
+#define PKT_INMSG       2
 
 // This is the message structure for communicating between RTOS tasks
 typedef struct tagRTOSMessage

@@ -5,8 +5,8 @@
 #include "GenericTypeDefs.h"
 #include "mcp25XX640A.h"
 #include "fixMath.h"
-#include "adc.h"
 #include "blockingDelay.h"
+#include "messages.h"   // For CRC-16
 
 #include <math.h> // for pow()
 #include <string.h> // for memset

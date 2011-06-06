@@ -1,19 +1,12 @@
 // Include all headers for any enabled TCPIP Stack functions
 #include "taskTCPIP.h"
-#include "taskUART.h"
-
-#include "adc.h"
-#include "mcp25XX640A.h"
-
-// appconfig version number
-#define APP_VERSION		0x60
 
 // Declare AppConfig structure to store information on the tcpip configuration
 APP_CONFIG AppConfig;
 UDPConfigData gUDPConfig;
 
 // The buffers used by the incoming UDP
-volatile IncomingBuffers gUARTIncBuffers;
+volatile IncomingBuffers gUDPIncBuffers;
 xQueueHandle hUDPTxQueue;
 
 ///////////////////////////////////////////////////////////////////
@@ -42,6 +35,9 @@ void xTCPIPTaskInit(void)
     // Initialize the UDP settings
     InitUDPConfig();
 
+    // Allocate the send and receive queues for the task
+    hUDPTxQueue = xQueueCreate(UDP_QUEUE_SIZE, sizeof(RTOSMsg));
+
     // create the task to handle all TCPIP functions (namely HTTP Server)
     xTaskCreate(taskTCPIP, (signed char*) "TCPIP", STACK_SIZE_TCPIP,
 		NULL, tskIDLE_PRIORITY + 2, &hTCPIPTask);
@@ -63,9 +59,8 @@ void xTCPIPTaskInit(void)
  *
  * Note:            
  ********************************************************************/
-void taskTCPIP(void* pvParameter) {
-    //COMPut("TCPIP: Task Started.\r\n", 22, UART_DONT_FREE_BUFFER);
-
+void taskTCPIP(void* pvParameter)
+{
     // Initialize the core stack layers. This makes calls
     // to the ENC28J60 driver which uses FreeRTOS. The scheduler
     // must be running to handle this.
@@ -200,14 +195,44 @@ static void InitAppConfig(void)
     }
 }
 
+/*********************************************************************
+ * Function:        void SaveAppConfig(void)
+ *
+ * PreCondition:    None
+ *
+ * Input:           None
+ *
+ * Output:          None
+ *
+ * Side Effects:    None
+ *
+ * Overview:        Save the TCPIP configuration
+ *
+ * Note:
+ ********************************************************************/
+void SaveUDPConfig(UDPConfigData* udpCfg)
+{
+    BYTE *p;
+    UINT16 d;
+
+    p = (BYTE*)udpCfg;
+    d = ETH_EROM_BASE + sizeof(APP_CONFIG);
+    BYTE appVers = APP_VERSION;
+
+    // Write the app version
+    EROM_WriteBytes(d++, 1, &appVers);
+
+    // Copy out the AppConfig
+    EROM_WriteBytes(d, sizeof(UDPConfigData), p);
+}
+
 static void InitUDPConfig(void)
 {
     BYTE c;
     BYTE *p;
     UINT16 d;
 
-    gUDPConfig.RXSocket = INVALID_SOCKET;
-    gUDPConfig.TXSocket = INVALID_SOCKET;
+    gUDPConfig.Socket = INVALID_SOCKET;
 
     gUDPConfig.TXDestNode.IPAddr.Val = MY_DEFAULT_IP_ADDR_BYTE1 |
             MY_DEFAULT_IP_ADDR_BYTE2 << 8ul |
@@ -217,8 +242,7 @@ static void InitUDPConfig(void)
     memcpypgm2ram((void*) &gUDPConfig.TXDestNode.MACAddr, (ROM void*) SerializedMACAddress,
             sizeof (MAC_ADDR));
 
-    gUDPConfig.RXPort = UDP_DEFAULT_RXPORT;
-    gUDPConfig.TXRemotePort = UDP_DEFAULT_REMOTE_TXPORT;
+    gUDPConfig.Port = UDP_DEFAULT_PORT;
 
     p = (BYTE*)&gUDPConfig;
     d = ((ETH_EROM_BASE + sizeof(APP_CONFIG)) % EROM_PAGE_SIZE) + EROM_PAGE_SIZE;
@@ -260,63 +284,196 @@ void DelayMs(WORD time) {
 
 static void UDPRXHandler(void)
 {
+    static INT16 pktIndex = 0;
+    static INT16 mode = PKT_SEARCH_HDR;
+
+    RTOSMsg msg;
+    BYTE received;
+    INT16 curBuf = gUDPIncBuffers.CurrentBuffer;
+    INT16 length = 0;
+    
     if(!MACIsLinked())  // No ethernet, no laundry
         return;
 
     // If the socket isn't valid, try to reopen it
-    if(rxSocket == INVALID_UDP_SOCKET)
+    if(gUDPConfig.Socket == INVALID_UDP_SOCKET)
     {
+        // Establish the socket - Default to the controlling device as destination
+        gUDPConfig.Socket =
+                UDPOpen(gUDPConfig.Port, &gUDPConfig.TXDestNode, gUDPConfig.Port);
 
+        return; // This only skips 1 stack task call
+    }
+    
+    length = UDPIsGetReady(gUDPConfig.Socket);
+
+    if(length <= 0) // No data packet
+        return;
+
+    // Read the new bytes from the rx packet and unescape them
+    while(length)
+    {
+        length--;
+
+        UDPGet(&received);
+
+        // Check for overrun
+        if(pktIndex >= MSG_MAX_LENGTH)
+        {
+            mode = PKT_SEARCH_HDR;
+            pktIndex = 0;
+        }
+
+        switch(mode)
+        {
+            case PKT_ESCAPED:
+                /* If the character has been escaped, copy the next byte
+                 * to the data buffer, no matter what. Don't forget to XOR
+                 * to retrieve the real value again.
+                 */
+                gUDPIncBuffers.Buffers[curBuf][pktIndex++] = (received ^ MSG_ESCAPE_XOR);
+                mode = PKT_INMSG;
+                break;
+            case PKT_INMSG:
+                /* Here, everything is kept with 2 exceptions. If we hit the escape
+                 * character, then delete the escape character from the queue and
+                 * switch to escape mode.
+                 */
+                if(received == MSG_ESCAPE)
+                {
+                    // The character is already dequeued, just change mode
+                    mode = PKT_ESCAPED;
+                }
+                else if(received == MSG_FLAG)
+                {
+                    // Frame could be misaligned. Push back into INMSG
+                    if(pktIndex == 0)
+                        mode = PKT_INMSG;
+                    else	// End of packet. Change mode back to search for new one.
+                    {
+                    	mode = PKT_SEARCH_HDR;
+
+                        // Copy the packet to the parser queue
+                        msg.Sender = MSG_SENDER_ETH;
+                        msg.Length = pktIndex;
+                        msg.Buffer = &gUDPIncBuffers.Buffers[gUDPIncBuffers.CurrentBuffer][0];
+                        msg.Free = 0;
+                        gUDPIncBuffers.CurrentBuffer =
+                                (gUDPIncBuffers.CurrentBuffer + 1) % MSG_NUM_INCOMING_BUFFERS;
+
+                        // This memcpy's the message struct to the queue.
+                        xQueueSendToBackFromISR(hParserQueue, &msg, 0);
+                    }
+                    pktIndex = 0;
+                }
+                else
+                    gUDPIncBuffers.Buffers[curBuf][pktIndex++] = received; // Copy data to buffer
+                break;
+            default:
+                // Default to looking for packet flag
+                if(received == MSG_FLAG)
+                {
+                    // We found a new flag. Switch to keeping data.
+                    mode = PKT_INMSG;
+                    pktIndex = 0;
+                }
+                break;
+        }
     }
 }
 
 static void UDPTXHandler(void)
 {
+    static RTOSMsg msg;
+    static RTOSMsg *pMsg;
+
     if(!MACIsLinked())  // No ethernet, no laundry
         return;
 
-    if(txSocket == INVALID_UDP_SOCKET)
+    if(gUDPConfig.Socket == INVALID_UDP_SOCKET)
     {
-        memset(&txRemote, 0xFF, sizeof(txRemote));
-
-        txSocket = UDPOpen(0,&txRemote, 9);
+        // Establish the socket
+        gUDPConfig.Socket =
+                UDPOpen(gUDPConfig.Port, &gUDPConfig.TXDestNode, gUDPConfig.Port);
 
         return; // This only skips 1 stack task call
     }
 
-    // Check we can write to the socket
-    if(!UDPIsPutReady(txSocket))
-        return;
+    while(1)    // Loop to send all queue entries
+    {
+        // Is msg holding a valid msg? This is true if we
+        // dequeued previously, but UDPIsPutReady returned
+        // saying not enough bytes available.
+        if(!pMsg)
+        {
+            if(uxQueueMessagesWaiting(hUDPTxQueue))
+            {
+                pMsg = &msg;
+                // DON'T BLOCK IN THE TCP/IP TASK OR YOU'LL NEVER RECEIVE ANYTHING!!!
+                xQueueReceive(hUDPTxQueue, pMsg, 0);
+            }
+            else    // No more messages on queue, exit
+                return;
+        }
 
-    UDPPutROMString("Hello, UDP!");
+        // Check we can write to the appropriate socket
+        // The UDP Socket remembers who it was last talking to - don't forget!
+        // This means we have to check every time, since the RX task might change
+        // Remote node info if multiple clients are talking on the same port
+        if(msg.Sender == MSG_SENDER_BROADCAST)
+        {
+            //Broadcast outgoing - set the remote data to broadcast
+            memset((void*)&UDPSocketInfo[gUDPConfig.Socket].remoteNode,
+                    0xFF, sizeof(NODE_INFO));
+        }
+        else
+        {
+            // Outgoing to the controlling device
+            memcpy((void*)&UDPSocketInfo[gUDPConfig.Socket].remoteNode,
+                   (void*)&gUDPConfig.TXDestNode, sizeof(NODE_INFO));
+        }
 
-    // Send the packet
-    UDPFlush();
+        // Normal outgoing, check that socket info
+        if(!UDPIsPutReady(gUDPConfig.Socket) >= msg.Length)
+            return; // Not enough room in the buffer to write, exit
+
+        UDPPutArray(msg.Buffer, msg.Length);
+
+        // Send the packet
+        UDPFlush();
+
+        if(msg.Free)
+            free(msg.Buffer);
+
+        pMsg = 0;   // Done with this message, clear and loop again
+    }
 }
 
 // The COMPut functions expect the data buffer to exist
 // AFTER they return. IE, malloc them when you make a msg
 // and the taskUART function will free the used memory.
-void UDPSend(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+void UDPSend(BYTE* data, portBASE_TYPE length, portBASE_TYPE sender, portBASE_TYPE shouldFree)
 {
     RTOSMsg msg;
 
     msg.Length = length;
     msg.Buffer = data;
     msg.Free = (shouldFree > 0) ? 1 : 0;
+    msg.Sender = sender;
 
     // This memcpy's the message struct to the queue.
     xQueueSendToBack(hUDPTxQueue, &msg, 0);
 }
 
-void UDPSendFromISR(BYTE* data, portBASE_TYPE length, portBASE_TYPE shouldFree)
+void UDPSendFromISR(BYTE* data, portBASE_TYPE length,  portBASE_TYPE sender, portBASE_TYPE shouldFree)
 {
     RTOSMsg msg;
 
     msg.Length = length;
     msg.Buffer = data;
     msg.Free = (shouldFree > 0) ? 1 : 0;
-
+    msg.Sender = sender;
+    
     // This memcpy's the message struct to the queue.
     xQueueSendToBackFromISR(hUDPTxQueue, &msg, 0);
 }

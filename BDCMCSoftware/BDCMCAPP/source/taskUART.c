@@ -1,10 +1,4 @@
 #include "taskUART.h"
-#include "messages.h"
-#include "taskParser.h"
-
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 
 xQueueHandle hUARTTxQueue;
 xTaskHandle hUARTTask;

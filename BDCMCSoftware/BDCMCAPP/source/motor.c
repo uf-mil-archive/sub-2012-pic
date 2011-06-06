@@ -1,5 +1,6 @@
 #include "motor.h"
 #include "p33FJ128MC804.h"
+#include "taskTCPIP.h"
 
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
@@ -356,6 +357,7 @@ void BROLInit(MotorData** motor)
     BYTE c;
     BYTE *p;
     UINT16 d;
+    MotorData tmpData;  // Shadow copy to use when checking for valid EROM
 
     // Like app config in the tcp/ip stack, we save this structure to the
     // EEPROM in one shot. First, build a default configuration, then try to
@@ -381,7 +383,7 @@ void BROLInit(MotorData** motor)
     BROLMotorData.FCoeff[1] = 1.0f;
     BROLMotorData.RCoeff[1] = 1.0f;
 
-    p = (BYTE*)&BROLMotorData;
+    p = (BYTE*)&tmpData;
     d = MTR_EROM_BASE;
 
     // Attempt to read in the config data from eeprom
@@ -394,6 +396,11 @@ void BROLInit(MotorData** motor)
 
         // The two bytes after the structure are the checksum
         INT16 savedChk = EROM_ReadInt16(d + sizeof(MotorData));
+
+        if(CRC16Checksum(p, sizeof(MotorData)) == savedChk)
+            memcpy(&BROLMotorData, &tmpData, sizeof(MotorData));
+        else
+            SaveMotorConfig(&BROLMotorData);
     }
     else
         SaveMotorConfig(&BROLMotorData);

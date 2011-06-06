@@ -22,8 +22,5 @@ extern xQueueHandle hParserQueue;
 void xParserTaskInit(void);
 void taskParser(void* pvParameter);
 
-#define PKT_SEARCH_HDR  0
-#define PKT_ESCAPED     1
-#define PKT_INMSG       2
 
 #endif // TASK_PARSER_H

@@ -10,7 +10,12 @@
 #include "queue.h"
 #include "semphr.h"
 
-#include "simplequeue.h"
+#include "messages.h"
+#include "taskParser.h"
+
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
 
 #define UART_QUEUE_SIZE     10
 #define STACK_SIZE_UART     (configMINIMAL_STACK_SIZE * 2)
