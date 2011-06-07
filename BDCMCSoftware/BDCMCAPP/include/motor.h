@@ -43,7 +43,7 @@
 #define MTR_DEFAULT_HMAXV           ((Q6_10)23808)	// ~23.25V
 #define MTR_DEFAULT_MINV            ((Q6_10)(25 << 10))
 #define MTR_DEFAULT_MAXCURRENT      ((Q4_12)(4 << 12))
-#define MTR_DEFAULT_MAXSLEW         (250)
+#define MTR_DEFAULT_MAXSLEW         (15) // 1*1KHz =
 
 // Flags
 // Bits 210 = Motor Type

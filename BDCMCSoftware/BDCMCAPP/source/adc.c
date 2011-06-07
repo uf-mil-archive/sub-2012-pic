@@ -21,7 +21,7 @@ void ADCInit(void)
 {
     AD1CON1bits.ADON = 0;
 
-    AD1CON1 = 0x24E4;
+    AD1CON1 = 0x2464;
     // Bit 15 - 0       ADC module is off while configuring
     // Bit 14 - 0       Unimplemented
     // Bit 13 - 1       Discontinue operation in Idle Mode
@@ -29,7 +29,7 @@ void ADCInit(void)
     // Bit 11 - 0       Unimplemented
     // Bit 10 - 1       12 bit 1 channel
     // Bits 9-8 - 00    Unsigned Integer
-    // Bits 7-5 - 111   Internal counter ends sampling and starts conversion
+    // Bits 7-5 - 011   MCPWM1 Ends sampling and starts conversion
     // Bit 4 - 0        Unimplemented
     // Bit 3 - 0        Don't Care, using single channel since 12 bit
     // Bit 2 - 1        Sampling begins immediately after last conversion

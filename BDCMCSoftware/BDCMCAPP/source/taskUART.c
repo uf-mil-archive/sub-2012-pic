@@ -49,6 +49,12 @@ void taskUART(void* pvParameter)
         if(msg.Free)
             free(msg.Buffer);
     }
+
+    /* Should the task implementation ever break out of the above loop
+    then the task must be deleted before reaching the end of this function.
+    The NULL parameter passed to the vTaskDelete() function indicates that
+    the task to be deleted is the calling (this) task. */
+    vTaskDelete( NULL );
 }
 
 void COMInit(void)

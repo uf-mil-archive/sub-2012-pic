@@ -837,7 +837,10 @@ void HTTPPrint_maxslew(void)
     BYTE buf[10];
 
     if(hMotorData)
+    {
         uitoa(hMotorData->MaxSlew, buf);
+        TCPPutString(sktHTTP, buf);
+    }
     else
         TCPPut(sktHTTP, '0');
 }

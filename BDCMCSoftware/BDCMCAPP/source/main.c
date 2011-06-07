@@ -52,8 +52,7 @@ int main(void)
     ioMap();
 
     LED_TRIS = OUTPUT_PIN;
-
-	ADCInit();
+    LED = LED_OFF;
 
 //	EROM_Clear();  // Erases the entire EEPROM
 
@@ -63,7 +62,7 @@ int main(void)
     //// This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.
     xUARTTaskInit();
-    //xTCPIPTaskInit();
+    xTCPIPTaskInit();
     xParserTaskInit();
     xPublisherTaskInit();
 

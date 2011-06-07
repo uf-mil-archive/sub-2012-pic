@@ -67,4 +67,10 @@ void taskPublisher(void* pvParameter)
         if(gOutgoingMsgData.Subscribers & MSG_SENDER_ETH)
             continue; // Send over UDP
     }
+
+    /* Should the task implementation ever break out of the above loop
+    then the task must be deleted before reaching the end of this function.
+    The NULL parameter passed to the vTaskDelete() function indicates that
+    the task to be deleted is the calling (this) task. */
+    vTaskDelete( NULL );
 }

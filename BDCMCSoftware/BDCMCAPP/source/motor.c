@@ -1,6 +1,7 @@
 #include "motor.h"
 #include "p33FJ128MC804.h"
 #include "taskTCPIP.h"
+#include "mcp4821.h"
 
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
@@ -58,8 +59,8 @@ void PWMInit(void)
     P1DC1 = 0;              // Initialize the duty cycle registers
     P1DC2 = 0;              // to off
     P1DC3 = 0;
-    P1SECMP = P1TPER;
-    PWM1CON2 = 0x0F00;      // 1:16 postscalar on the special event trigger
+    P1SECMP = 0;
+    PWM1CON2 = 0x0000;      // 1:1 postscalar on the special event trigger for A/D
                             // Synchronized updates, override on clock boundaries
 
 
@@ -211,6 +212,9 @@ REFDONE:
         // Set the duty cycles correctly (absolute value of output)
         P1DC1 = duty;
         P1DC2 = duty;
+
+        // Set the new ADC sampling point
+        P1SECMP = duty / 2;
     }
 
     // End Measurement
@@ -384,6 +388,8 @@ void GetMotorDataFromEROM(MotorData** motor)
         if(CRC16Checksum(p, sizeof(MotorData)) != savedChk)
             goto CONFIG_DEFAULT_MOTOR;
 
+        //DAC_SetOutput(((float)BROLMotorData.MaxCurrent) / pow(2,12));   // Set the DAC output voltage
+
         // It's a valid struct if we get here. Switch on the motor type
         type = (tmpData.Flags & MTR_FLAGMASK_MOTORCODE);
         switch(type)
@@ -427,6 +433,7 @@ CONFIG_DEFAULT_MOTOR:
     // Now save this as the default
     SaveMotorConfig(&BROLMotorData);
 
+    //DAC_SetOutput(((float)BROLMotorData.MaxCurrent) / pow(2,12));   // Set the DAC output voltage
     controller = &BrushedDCOpenLoop;// Set the controller callback
     *motor = &BROLMotorData;    // Set the handle to the correct instance
 }

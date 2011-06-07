@@ -34,7 +34,7 @@ void xTCPIPTaskInit(void)
     InitAppConfig();
 
     // Initialize the UDP settings
-  //  InitUDPConfig();
+    InitUDPConfig();
 
     // Allocate the send and receive queues for the task
     hUDPTxQueue = xQueueCreate(UDP_QUEUE_SIZE, sizeof(RTOSMsg));
@@ -62,6 +62,9 @@ void xTCPIPTaskInit(void)
  ********************************************************************/
 void taskTCPIP(void* pvParameter)
 {
+	portTickType previousWakeTime;
+	previousWakeTime = xTaskGetTickCount();
+
     // Initialize the core stack layers. This makes calls
     // to the ENC28J60 driver which uses FreeRTOS. The scheduler
     // must be running to handle this.
@@ -71,7 +74,8 @@ void taskTCPIP(void* pvParameter)
     
     for(;;)
     {
-        vTaskDelay(5 / portTICK_RATE_MS);
+        // Block here until the timeout has passed
+        vTaskDelayUntil(&previousWakeTime, 5 / portTICK_RATE_MS);
 
         // perform normal stack tasks including checking for incoming
         // packets and calling appropriate handlers
@@ -83,11 +87,17 @@ void taskTCPIP(void* pvParameter)
         // I don't like hacking in my functions into the stack files, so call
         // the UDP stuff(specific to us) here.
         if(!MACIsLinked())  // No ethernet, no laundry
-            return;
+            continue;
         
-      //  UDPRXHandler();
-      //  UDPTXHandler();
+       // UDPRXHandler();
+        UDPTXHandler();
     }
+
+	/* Should the task implementation ever break out of the above loop
+    then the task must be deleted before reaching the end of this function.
+    The NULL parameter passed to the vTaskDelete() function indicates that
+    the task to be deleted is the calling (this) task. */
+    vTaskDelete( NULL );
 }
 
 /*********************************************************************

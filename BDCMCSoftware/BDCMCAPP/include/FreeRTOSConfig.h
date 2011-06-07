@@ -71,7 +71,7 @@
 #define configUSE_PREEMPTION			1
 #define configUSE_IDLE_HOOK			0
 #define configUSE_TICK_HOOK			0
-#define configTICK_RATE_HZ			( ( portTickType ) 500 )
+#define configTICK_RATE_HZ			( ( portTickType ) 1000 )
 
 // dsPIC33
 #define configUSE_16_BIT_TICKS			1
@@ -84,7 +84,7 @@
 #define configUSE_TRACE_FACILITY		0
 #define configIDLE_SHOULD_YIELD			1
 #define configUSE_MUTEXES                       1
-#define configCHECK_FOR_STACK_OVERFLOW          2
+#define configCHECK_FOR_STACK_OVERFLOW          0//2
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES                   0
