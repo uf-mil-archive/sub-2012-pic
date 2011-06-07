@@ -1,14 +1,76 @@
 #include "messages.h"
 
-CommonMessagingData gCommonMsgData =
-{
-    .Address = 2,
-    .ControllerAdd = 1,
-};
+CommonMessagingData gCommonMsgData;
 
 IncomingMessagingData gIncomingMsgData;
 OutgoingMessagingData gOutgoingMsgData;
 OutgoingBuffers gOutgoingBuffers;
+
+void InitCommonMessageData(void)
+{
+    BYTE c;
+    BYTE *p;
+    UINT16 d;
+    CommonMessagingData tmpData;    // Shadow copy to use when checking for valid EROM
+
+    // First try to read in a valid CommonMessagingData struct. If it doesn't
+    // exist, or the checksum is invalid(power failure while programming), we
+    // build and save the default template.
+
+    p = (BYTE*)&tmpData;
+    d = COMMON_EROM_BASE;
+
+    // attempt to read in the config data from FLASH
+    EROM_ReadBytes(d++, 1, &c);
+
+    // read in the data structure from FLASH if it exists if not
+    // just save our default configuration to FLASH
+    if (c == APP_VERSION)
+    {
+        EROM_ReadBytes(d, sizeof(CommonMessagingData), p);
+
+        // The two bytes after the structure are the checksum
+        INT16 savedChk = EROM_ReadInt16(d + sizeof(CommonMessagingData));
+
+        if(CRC16Checksum(p, sizeof(CommonMessagingData)) != savedChk)
+            goto CONFIG_DEFAULT_COMMON;
+
+        // it's a valid struct - copy the shadow to the real one
+        memcpy((void *)&gCommonMsgData, (void *)&tmpData, sizeof(CommonMessagingData));
+
+        return;
+    }
+
+CONFIG_DEFAULT_COMMON:
+    gCommonMsgData.Address = DEFAULT_LOCAL_ADDRESS;
+    gCommonMsgData.ControllerAdd = DEFAULT_CONTROLLER_ADDRESS;
+    gCommonMsgData.Endianess = DEFAULT_ENDIANESS;
+
+    SaveCommonMessageData(&gCommonMsgData);
+}
+
+void SaveCommonMessageData(CommonMessagingData *cmnData)
+{
+    BYTE *p;
+    UINT16 d, chk;
+    BYTE appVers = APP_VERSION;
+
+    p = (BYTE*)cmnData;
+
+    d = COMMON_EROM_BASE;
+
+    // Calculate the checksum
+    chk = CRC16Checksum(p, sizeof(CommonMessagingData));
+
+    // Write the app version
+    EROM_WriteBytes(d++, 1, &appVers);
+
+    // Copy out the struct
+    EROM_WriteBytes(d, sizeof(CommonMessagingData), p);
+
+    // Write the checksum
+    EROM_WriteInt16((d + sizeof(CommonMessagingData)), chk);
+}
 
 // Adds little endian int to a packet
 inline void AddLEIntToPacket(BYTE* buf, INT16 data, INT16* currentCount)
@@ -94,7 +156,7 @@ UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes)
 
 void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
 {
-    UINT16 checkSum = (gCommonMsgData.Endianess) ?
+    UINT16 checkSum = (gCommonMsgData.Endianess == MSG_ENDIANESS_BIG) ?
         ReadBEIntFromPacket(&rBuf[length - 2]) :
         ReadLEIntFromPacket(&rBuf[length - 2]);
         
@@ -163,7 +225,8 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
                 // Is the sender the guy in charge of me?
                 if(rBuf[0] == gCommonMsgData.ControllerAdd)
                 {
-                        hMotorData->ReferenceInput = (gCommonMsgData.Endianess) ?
+                        hMotorData->ReferenceInput = 
+                        (gCommonMsgData.Endianess == MSG_ENDIANESS_BIG) ?
                             ReadBEIntFromPacket(&rBuf[6]):
                             ReadLEIntFromPacket(&rBuf[6]);
                         ReferenceChanged();
@@ -219,7 +282,7 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
     gOutgoingBuffers.scratchBuf[tmplength++] = gCommonMsgData.ControllerAdd;
 
 
-    if(gCommonMsgData.Endianess) // Big Endian
+    if(gCommonMsgData.Endianess == MSG_ENDIANESS_BIG) // Big Endian
     {
         // Insert the packet number
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength],
@@ -280,7 +343,7 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
     temp = CRC16Checksum(&gOutgoingBuffers.scratchBuf[0],
             tmplength);
 
-    if(gCommonMsgData.Endianess) // Big Endian
+    if(gCommonMsgData.Endianess == MSG_ENDIANESS_BIG) // Big Endian
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], temp, &tmplength);
     else
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], temp, &tmplength);

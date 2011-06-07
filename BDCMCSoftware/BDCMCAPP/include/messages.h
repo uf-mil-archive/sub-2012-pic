@@ -43,7 +43,7 @@
 #define MSG_ESTOP           101     // ESTOP Packet
 #define MSG_ESTOP_LENGTH    7       // Length of the packet including 2 byte checksum
 
-// Brushed Open-Loop Message Defines
+// Message Defines
 #define MSG_START_PUBLISH           1   // Start publishing data
 #define MSG_START_PUBLISH_LENGTH    9   // Length of the packet including 2 byte checksum
 #define MSG_STOP_PUBLISH            2   // Stop publishing data
@@ -56,9 +56,16 @@
 #define MSG_DONT_FREE_BUFFER   0
 #define MSG_FREE_BUFFER        1
 
-#define PKT_SEARCH_HDR  0
-#define PKT_ESCAPED     1
-#define PKT_INMSG       2
+#define PKT_SEARCH_HDR         0
+#define PKT_ESCAPED            1
+#define PKT_INMSG              2
+
+#define MSG_ENDIANESS_LITTLE        0
+#define MSG_ENDIANESS_BIG           1
+
+#define DEFAULT_LOCAL_ADDRESS           2
+#define DEFAULT_CONTROLLER_ADDRESS      1
+#define DEFAULT_ENDIANESS               MSG_ENDIANESS_LITTLE
 
 // This is the message structure for communicating between RTOS tasks
 typedef struct tagRTOSMessage
@@ -109,9 +116,9 @@ extern OutgoingMessagingData gOutgoingMsgData;
 
 UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes);
 void CRC16Init(void);
-
 void ParseNewPacket(BYTE buf[], INT16 length, INT16 transport);
-
 INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount);
+void InitCommonMessageData(void);
+void SaveCommonMessageData(CommonMessagingData *cmnData);
 
 #endif // MESSAGES_H

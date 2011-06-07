@@ -4,6 +4,7 @@
 // Declare AppConfig structure to store information on the tcpip configuration
 APP_CONFIG AppConfig;
 UDPConfigData gUDPConfig;
+UDPData gUDPData;
 
 // The buffers used by the incoming UDP
 volatile IncomingBuffers gUDPIncBuffers;
@@ -33,7 +34,7 @@ void xTCPIPTaskInit(void)
     InitAppConfig();
 
     // Initialize the UDP settings
-    InitUDPConfig();
+  //  InitUDPConfig();
 
     // Allocate the send and receive queues for the task
     hUDPTxQueue = xQueueCreate(UDP_QUEUE_SIZE, sizeof(RTOSMsg));
@@ -81,8 +82,11 @@ void taskTCPIP(void* pvParameter)
 
         // I don't like hacking in my functions into the stack files, so call
         // the UDP stuff(specific to us) here.
-        UDPRXHandler();
-        UDPTXHandler();
+        if(!MACIsLinked())  // No ethernet, no laundry
+            return;
+        
+      //  UDPRXHandler();
+      //  UDPTXHandler();
     }
 }
 
@@ -104,17 +108,24 @@ void taskTCPIP(void* pvParameter)
 void SaveAppConfig(APP_CONFIG* appCfg)
 {
     BYTE *p;
-    UINT16 d;
+    UINT16 d, chk;
+    BYTE appVers = APP_VERSION;
 
     p = (BYTE*)appCfg;
+    // The base address + the app_config + app_config checksum size
     d = ETH_EROM_BASE;
-    BYTE appVers = APP_VERSION;
+
+    // Calculate the checksum
+    chk = CRC16Checksum(p, sizeof(APP_CONFIG));
 
     // Write the app version
     EROM_WriteBytes(d++, 1, &appVers);
 
-    // Copy out the AppConfig
+    // Copy out the struct
     EROM_WriteBytes(d, sizeof(APP_CONFIG), p);
+
+    // Write the checksum
+    EROM_WriteInt16((d + sizeof(APP_CONFIG)), chk);
 }
 
 /*********************************************************************
@@ -144,7 +155,37 @@ static void InitAppConfig(void)
     BYTE c;
     BYTE *p;
     UINT16 d;
+    APP_CONFIG tmpConfig;
 
+    // First try to read in a valid APP_CONFIG struct. If it doesn't exist,
+    // or the checksum is invalid(power failure while programming), we build
+    // and save the default template.
+
+    p = (BYTE*)&tmpConfig;
+    d = ETH_EROM_BASE;
+
+    // attempt to read in the config data from FLASH
+    EROM_ReadBytes(d++, 1, &c);
+
+    // read in the data structure from FLASH if it exists if not
+    // just save our default configuration to FLASH
+    if (c == APP_VERSION)
+    {
+        EROM_ReadBytes(d, sizeof(APP_CONFIG), p);
+
+        // The two bytes after the structure are the checksum
+        INT16 savedChk = EROM_ReadInt16(d + sizeof(APP_CONFIG));
+
+        if(CRC16Checksum(p, sizeof(APP_CONFIG)) != savedChk)
+            goto CONFIG_DEFAULT_APP_CONFIG;
+
+        // it's a valid UDPConfigData struct - copy the shadow to the real one
+        memcpy((void *)&AppConfig, (void *)&tmpConfig, sizeof(APP_CONFIG));
+
+        return;
+    }
+
+CONFIG_DEFAULT_APP_CONFIG:
     AppConfig.Flags.bIsDHCPEnabled = TRUE;
     AppConfig.Flags.bInConfigMode = TRUE;
     memcpypgm2ram((void*) &AppConfig.MyMACAddr, (ROM void*) SerializedMACAddress,
@@ -177,22 +218,7 @@ static void InitAppConfig(void)
     memcpypgm2ram(AppConfig.NetBIOSName, (ROM void*) MY_DEFAULT_HOST_NAME, 16);
     FormatNetBIOSName(AppConfig.NetBIOSName);
 
-    p = (BYTE*)&AppConfig;
-    d = ETH_EROM_BASE;
-
-    // attempt to read in the config data from FLASH
-    EROM_ReadBytes(d++, 1, &c);
-
-    // read in the data structure from FLASH if it exists if not
-    // just save our default configuration to FLASH
-    if (c == APP_VERSION)
-    {
-        EROM_ReadBytes(d, sizeof(APP_CONFIG), p);
-    } 
-    else
-    {
-        SaveAppConfig(&AppConfig);
-    }
+    SaveAppConfig(&AppConfig);
 }
 
 /*********************************************************************
@@ -213,17 +239,24 @@ static void InitAppConfig(void)
 void SaveUDPConfig(UDPConfigData* udpCfg)
 {
     BYTE *p;
-    UINT16 d;
+    UINT16 d, chk;
+    BYTE appVers = APP_VERSION;
 
     p = (BYTE*)udpCfg;
-    d = ETH_EROM_BASE + sizeof(APP_CONFIG);
-    BYTE appVers = APP_VERSION;
+    // The base address + the app_config + app_config checksum size
+    d = ETH_EROM_BASE + sizeof(APP_CONFIG) + sizeof(INT16);
+    
+    // Calculate the checksum
+    chk = CRC16Checksum(p, sizeof(UDPConfigData));
 
     // Write the app version
     EROM_WriteBytes(d++, 1, &appVers);
 
-    // Copy out the AppConfig
+    // Copy out the UDPConfig
     EROM_WriteBytes(d, sizeof(UDPConfigData), p);
+
+    // Write the checksum
+    EROM_WriteInt16((d + sizeof(UDPConfigData)), chk);
 }
 
 static void InitUDPConfig(void)
@@ -231,21 +264,14 @@ static void InitUDPConfig(void)
     BYTE c;
     BYTE *p;
     UINT16 d;
+    UDPConfigData tmpConfig;    // Shadow copy to use when checking for valid EROM
 
-    gUDPConfig.Socket = INVALID_SOCKET;
+    // First try to read in a valid UDPConfig struct. If it doesn't exist,
+    // or the checksum is invalid(power failure while programming), we build
+    // and save the default template.
 
-    gUDPConfig.TXDestNode.IPAddr.Val = MY_DEFAULT_IP_ADDR_BYTE1 |
-            MY_DEFAULT_IP_ADDR_BYTE2 << 8ul |
-            MY_DEFAULT_IP_ADDR_BYTE3 << 16ul |
-            MY_DEFAULT_IP_ADDR_BYTE4 << 24ul;
-
-    memcpypgm2ram((void*) &gUDPConfig.TXDestNode.MACAddr, (ROM void*) SerializedMACAddress,
-            sizeof (MAC_ADDR));
-
-    gUDPConfig.Port = UDP_DEFAULT_PORT;
-
-    p = (BYTE*)&gUDPConfig;
-    d = ((ETH_EROM_BASE + sizeof(APP_CONFIG)) % EROM_PAGE_SIZE) + EROM_PAGE_SIZE;
+    p = (BYTE*)&tmpConfig;
+    d = (ETH_EROM_BASE + sizeof(APP_CONFIG) + sizeof(INT16));
 
     // attempt to read in the config data from FLASH
     EROM_ReadBytes(d++, 1, &c);
@@ -255,11 +281,23 @@ static void InitUDPConfig(void)
     if (c == APP_VERSION)
     {
         EROM_ReadBytes(d, sizeof(UDPConfigData), p);
-    }
-    else
-    {
 
+        // The two bytes after the structure are the checksum
+        INT16 savedChk = EROM_ReadInt16(d + sizeof(UDPConfigData));
+
+        if(CRC16Checksum(p, sizeof(UDPConfigData)) != savedChk)
+            goto CONFIG_DEFAULT_UDP;
+
+        // it's a valid UDPConfigData struct - copy the shadow to the real one
+        memcpy((void *)&gUDPConfig, (void *)&tmpConfig, sizeof(UDPConfigData));
+
+        return;
     }
+
+CONFIG_DEFAULT_UDP:
+    gUDPConfig.Port = UDP_DEFAULT_PORT;
+
+    SaveUDPConfig(&gUDPConfig);
 }
 
 /*********************************************************************
@@ -292,23 +330,31 @@ static void UDPRXHandler(void)
     INT16 curBuf = gUDPIncBuffers.CurrentBuffer;
     INT16 length = 0;
     
-    if(!MACIsLinked())  // No ethernet, no laundry
-        return;
-
-    // If the socket isn't valid, try to reopen it
-    if(gUDPConfig.Socket == INVALID_UDP_SOCKET)
+    // Always make sure at least one socket is open
+    if(gUDPData.Socket == INVALID_UDP_SOCKET)
     {
-        // Establish the socket - Default to the controlling device as destination
-        gUDPConfig.Socket =
-                UDPOpen(gUDPConfig.Port, &gUDPConfig.TXDestNode, gUDPConfig.Port);
+        gUDPData.Socket = UDPOpen(gUDPConfig.Port, NULL, gUDPConfig.Port);
 
         return; // This only skips 1 stack task call
     }
-    
-    length = UDPIsGetReady(gUDPConfig.Socket);
+
+    // Check for data on the socket
+    length = UDPIsGetReady(gUDPData.Socket);
 
     if(length <= 0) // No data packet
         return;
+
+    if(UDPSocketInfo[activeUDPSocket].remoteNode.IPAddr.v[4] == gCommonMsgData.ControllerAdd)
+    {
+        // The controller is talking to us. Save his IP info.
+         memcpy((void *)&gUDPData.Controller,
+                (void *)&UDPSocketInfo[activeUDPSocket].remoteNode,
+                sizeof(NODE_INFO));
+    }
+
+    // A packet is there, clear the state machine
+    pktIndex = 0;
+    mode = PKT_SEARCH_HDR;
 
     // Read the new bytes from the rx packet and unescape them
     while(length)
@@ -351,7 +397,7 @@ static void UDPRXHandler(void)
                         mode = PKT_INMSG;
                     else	// End of packet. Change mode back to search for new one.
                     {
-                    	mode = PKT_SEARCH_HDR;
+                        mode = PKT_SEARCH_HDR;
 
                         // Copy the packet to the parser queue
                         msg.Sender = MSG_SENDER_ETH;
@@ -387,14 +433,11 @@ static void UDPTXHandler(void)
     static RTOSMsg msg;
     static RTOSMsg *pMsg;
 
-    if(!MACIsLinked())  // No ethernet, no laundry
-        return;
-
-    if(gUDPConfig.Socket == INVALID_UDP_SOCKET)
+    // Always make sure at least one socket is open
+    if(gUDPData.Socket == INVALID_UDP_SOCKET)
     {
-        // Establish the socket
-        gUDPConfig.Socket =
-                UDPOpen(gUDPConfig.Port, &gUDPConfig.TXDestNode, gUDPConfig.Port);
+        // We only every communicate on 1 port
+        gUDPData.Socket = UDPOpen(gUDPConfig.Port, NULL, gUDPConfig.Port);
 
         return; // This only skips 1 stack task call
     }
@@ -416,6 +459,9 @@ static void UDPTXHandler(void)
                 return;
         }
 
+        // Ensure the remote port hasn't been overwritten
+        UDPSocketInfo[gUDPData.Socket].remotePort = gUDPConfig.Port;
+
         // Check we can write to the appropriate socket
         // The UDP Socket remembers who it was last talking to - don't forget!
         // This means we have to check every time, since the RX task might change
@@ -423,18 +469,18 @@ static void UDPTXHandler(void)
         if(msg.Sender == MSG_SENDER_BROADCAST)
         {
             //Broadcast outgoing - set the remote data to broadcast
-            memset((void*)&UDPSocketInfo[gUDPConfig.Socket].remoteNode,
+            memset((void*)&UDPSocketInfo[gUDPData.Socket].remoteNode,
                     0xFF, sizeof(NODE_INFO));
         }
         else
         {
             // Outgoing to the controlling device
-            memcpy((void*)&UDPSocketInfo[gUDPConfig.Socket].remoteNode,
-                   (void*)&gUDPConfig.TXDestNode, sizeof(NODE_INFO));
+            memcpy((void*)&UDPSocketInfo[gUDPData.Socket].remoteNode,
+                   (void*)&gUDPData.Controller, sizeof(NODE_INFO));
         }
 
         // Normal outgoing, check that socket info
-        if(!UDPIsPutReady(gUDPConfig.Socket) >= msg.Length)
+        if(!UDPIsPutReady(gUDPData.Socket) >= msg.Length)
             return; // Not enough room in the buffer to write, exit
 
         UDPPutArray(msg.Buffer, msg.Length);
@@ -477,3 +523,5 @@ void UDPSendFromISR(BYTE* data, portBASE_TYPE length,  portBASE_TYPE sender, por
     // This memcpy's the message struct to the queue.
     xQueueSendToBackFromISR(hUDPTxQueue, &msg, 0);
 }
+
+

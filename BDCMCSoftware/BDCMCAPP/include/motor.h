@@ -40,7 +40,7 @@
 #define MTR_MIN_PWM_PERC    (246)   // 6% of 4095
 
 #define MTR_DEFAULT_MANUFACTURER    "SEABOTIX"
-#define MTR_DEFAULT_HMAXV           ((Q6_10)(25 << 10))
+#define MTR_DEFAULT_HMAXV           ((Q6_10)23808)	// ~23.25V
 #define MTR_DEFAULT_MINV            ((Q6_10)(25 << 10))
 #define MTR_DEFAULT_MAXCURRENT      ((Q4_12)(4 << 12))
 #define MTR_DEFAULT_MAXSLEW         (250)

@@ -20,9 +20,11 @@
 #define EROM_CC_WRSR    0x01        // Write STATUS Register
 
 //********************* ADDRESS MAP *********************************/
-// First two pages blank
-#define ETH_EROM_BASE   (EROM_PAGE_SIZE*2) // 1k reserved for Ethernet settings
-#define MTR_EROM_BASE   (EROM_PAGE_SIZE*32 + ETH_EROM_BASE)  // 1k reserved for motor settings
+// First two pages blank - it seems when you screw up, those are the
+// pages you ruin, so keep them empty.
+#define ETH_EROM_BASE       (EROM_PAGE_SIZE*2) // 1k reserved for Ethernet settings
+#define MTR_EROM_BASE       (EROM_PAGE_SIZE*32 + ETH_EROM_BASE)  // 1k reserved for motor settings
+#define COMMON_EROM_BASE    (EROM_PAGE_SIZE*32 + MTR_EROM_BASE)  //
 //********************* ~ADDRESS MAPS *******************************/
 
 INT8 EROM_ReadBytes(UINT16 address, UINT16 length, BYTE* const buf);

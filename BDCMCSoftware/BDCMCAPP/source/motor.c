@@ -18,29 +18,13 @@ void motorSetupTimer(void);
 void BrushedDCOpenLoop(void);
 inline void EnableMotorInterrupts(void);
 inline void DisableMotorInterrupts(void);
-void BROLInit(MotorData** motor);
-
-BYTE ReadMotorTypeEE()
-{
-   BYTE result;
-   EROM_ReadBytes(MTR_EROM_BASE, 1, &result);
-   return (result & MTR_FLAGMASK_MOTORCODE);
-}
+void BROLInit(void);
+void GetMotorDataFromEROM(MotorData** motor);
 
 void MotorInit(void)
 {
     // Pull in settings from EROM
-    switch(ReadMotorTypeEE())
-    {
-        case MTR_CODE_BRCL:
-            break;
-
-        default:
-            BROLInit(&hMotorData);
-            // Set the controller callback
-            controller = &BrushedDCOpenLoop;
-            break;
-    }
+    GetMotorDataFromEROM(&hMotorData);
 
     DisableMotorInterrupts();
 
@@ -173,8 +157,6 @@ void BrushedDCOpenLoop(void)
         }
 
 REFDONE:  
-        // Open-loop control the input is the output
-        BROLMotorData.PresentOutput = BROLMotorData.ReferenceInput;
         // Clamp the reference value between
         // the acceptable PWM range which is limited by hardware
         if(BROLMotorData.ReferenceDuty > MTR_MAX_PWM_PERC)
@@ -182,6 +164,11 @@ REFDONE:
         else if(BROLMotorData.ReferenceDuty < MTR_MIN_PWM_PERC
                 && BROLMotorData.ReferenceDuty != 0)
             BROLMotorData.ReferenceDuty = MTR_MIN_PWM_PERC;
+
+        // Calculate the actual voltage being put out
+        BROLMotorData.PresentOutput =
+                ((((UINT32)BROLMotorData.ReferenceDuty << 16) / MTR_MAX_DUTY *
+                BROLMotorData.VRail) >> 16);
 
         // Set the required direction sign - this helps with slew later
         if(direction != 0)
@@ -267,6 +254,7 @@ inline void DisableMotorInterrupts(void)
 }
 
 static volatile INT16 mtrPWMIntCount = 0;
+static volatile INT16 voltMonCount = 0;
 
 void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
 {
@@ -281,6 +269,13 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
 
     if(mtrPWMIntCount!= 0)
         return;
+
+    // Once per second force a reference calculation. This is in case
+    // the motor command is long lived, and the battery voltage shifts, the
+    // desired output is still generated.
+    voltMonCount = (voltMonCount + 1) % MTR_TICK_RATE;
+    if(voltMonCount == 0)
+        hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
     
     LED = LED_ON;   // Used for timing analysis with o-scope
 
@@ -288,10 +283,11 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
     // No valid heartbeat, override the desired speed
     if((hMotorData->Flags & MTR_FLAGMASK_HEARTBEAT) != 0)
     {
-        if((++(hMotorData->InterruptCount) > HEARTBEAT_TIMEOUT_TICKS))
+        if((++hMotorData->InterruptCount) > HEARTBEAT_TIMEOUT_TICKS)
         {
             hMotorData->Flags  &= ~MTR_FLAGMASK_HEARTBEAT;  // Clear the heartbeat flag
             hMotorData->ReferenceInput = 0;
+			hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
         }
     }
 
@@ -300,12 +296,13 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
     {
         hMotorData->Flags  |= MTR_FLAGMASK_UNDERVOLTAGE;
         hMotorData->ReferenceInput = 0;
+		hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
     }
     // Undervolt occurred, but the rail is back above minimum now.
     // Clear undervolt flag
     else if((hMotorData->Flags & MTR_FLAGMASK_UNDERVOLTAGE) != 0)
     {
-        hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
+        //hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
     }
 
     // Call the controller
@@ -341,29 +338,71 @@ inline void ReferenceChanged(void)
 void SaveMotorConfig(MotorData* mCfg)
 {
     BYTE *p;
-    UINT16 d;
+    UINT16 d, chk;
+    BYTE appVers = APP_VERSION;
 
     p = (BYTE*)mCfg;
     d = MTR_EROM_BASE;
 
+    // Calculate the checksum
+    chk = CRC16Checksum(p, sizeof(MotorData));
+    
+    // Write the app version
+    EROM_WriteBytes(d++, 1, &appVers);
+
     // Copy out the Motor Config
     EROM_WriteBytes(d, sizeof(MotorData), p);
+
+    // Write the checksum
+    EROM_WriteInt16((d + sizeof(MotorData)), chk);
 }
 
-void BROLInit(MotorData** motor)
+void GetMotorDataFromEROM(MotorData** motor)
 {    
-    INT16 i;
-    float hMax;
     BYTE c;
     BYTE *p;
-    UINT16 d;
+    UINT16 d, type;
     MotorData tmpData;  // Shadow copy to use when checking for valid EROM
 
-    // Like app config in the tcp/ip stack, we save this structure to the
-    // EEPROM in one shot. First, build a default configuration, then try to
-    // read one in if it exists. If it doesn't, we save it to EEPROM.
-    // The default is a Seabotix thruster.
+    // First try to read in a valid motordata struct. If it doesn't exist,
+    // or the checksum is invalid(power failure while programming), we build
+    // and save the default template.
+    p = (BYTE*)&tmpData;
+    d = MTR_EROM_BASE;
 
+    // Attempt to read in the config data from eeprom
+    EROM_ReadBytes(d++, 1, &c);
+
+    // Check if the application version matches
+    if(c  == APP_VERSION)
+    {
+        EROM_ReadBytes(d, sizeof(MotorData), p);
+
+        // The two bytes after the structure are the checksum
+        INT16 savedChk = EROM_ReadInt16(d + sizeof(MotorData));
+
+        if(CRC16Checksum(p, sizeof(MotorData)) != savedChk)
+            goto CONFIG_DEFAULT_MOTOR;
+
+        // It's a valid struct if we get here. Switch on the motor type
+        type = (tmpData.Flags & MTR_FLAGMASK_MOTORCODE);
+        switch(type)
+        {
+            case MTR_CODE_BRCL:
+                break;
+
+            default:
+                memcpy((void *)&BROLMotorData, (void *)&tmpData, sizeof(MotorData));
+                BROLInit();     // This directly operates on the global brushed open loop variable
+                controller = &BrushedDCOpenLoop;// Set the controller callback
+                *motor = &BROLMotorData;    // Set the handle to the correct instance
+                break;
+        }
+
+        return;
+    }
+
+CONFIG_DEFAULT_MOTOR:
     // Clear the structure first, just in case
     memset(&BROLMotorData, 0x0, sizeof(MotorData));
     
@@ -383,27 +422,20 @@ void BROLInit(MotorData** motor)
     BROLMotorData.FCoeff[1] = 1.0f;
     BROLMotorData.RCoeff[1] = 1.0f;
 
-    p = (BYTE*)&tmpData;
-    d = MTR_EROM_BASE;
+    BROLInit();
 
-    // Attempt to read in the config data from eeprom
-    EROM_ReadBytes(d, 1, &c);
+    // Now save this as the default
+    SaveMotorConfig(&BROLMotorData);
 
-    // Check if the motor type code matches
-    if((c & MTR_FLAGMASK_MOTORCODE) == MTR_CODE_BROL)
-    {
-        EROM_ReadBytes(d, sizeof(MotorData), p);
+    controller = &BrushedDCOpenLoop;// Set the controller callback
+    *motor = &BROLMotorData;    // Set the handle to the correct instance
+}
 
-        // The two bytes after the structure are the checksum
-        INT16 savedChk = EROM_ReadInt16(d + sizeof(MotorData));
-
-        if(CRC16Checksum(p, sizeof(MotorData)) == savedChk)
-            memcpy(&BROLMotorData, &tmpData, sizeof(MotorData));
-        else
-            SaveMotorConfig(&BROLMotorData);
-    }
-    else
-        SaveMotorConfig(&BROLMotorData);
+// All that's left in brushed open-loop is to build the voltage tables
+void BROLInit(void)
+{
+    INT16 i;
+    float hMax;
 
     // HardMax is a Q6_10 in the structure, but we use Q6_26 in the
     // tables. This is for precision when dividing later.
@@ -434,7 +466,5 @@ void BROLInit(MotorData** motor)
                 BROLMotorData.RCoeff[1]*i +
                 BROLMotorData.RCoeff[0]) / 100.0);
     }
-
-    *motor = &BROLMotorData;
 }
 

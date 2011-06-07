@@ -53,12 +53,17 @@ int main(void)
 
     LED_TRIS = OUTPUT_PIN;
 
-    CRC16Init();    // Just get this ready for later. Doesn't hurt to be called here
+	ADCInit();
 
-    // This task is started first(!) so the UART Queue exists and we can begin
+//	EROM_Clear();  // Erases the entire EEPROM
+
+    CRC16Init();    // Just get this ready for later. Doesn't hurt to be called here
+    InitCommonMessageData();
+
+    //// This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.
     xUARTTaskInit();
-    xTCPIPTaskInit();
+    //xTCPIPTaskInit();
     xParserTaskInit();
     xPublisherTaskInit();
 
