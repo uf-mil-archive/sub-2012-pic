@@ -46,7 +46,5 @@ void SaveAppConfig(APP_CONFIG* appCfg);
 void DelayMs(WORD time);    // This is a FreeRTOS delay call (sleeps the task)
 void UDPSend(BYTE* data, portBASE_TYPE length, portBASE_TYPE sender, portBASE_TYPE shouldFree);
 void UDPSendFromISR(BYTE* data, portBASE_TYPE length,  portBASE_TYPE sender, portBASE_TYPE shouldFree);
-void UDPCreateConnection(NODE_INFO remote, INT16 port);
-void UDPCloseConnection(INT16 connectionNumber);
 
 #endif // TASKTCPIP_H

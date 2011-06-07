@@ -344,11 +344,11 @@ static void UDPRXHandler(void)
     if(length <= 0) // No data packet
         return;
 
-    if(UDPSocketInfo[activeUDPSocket].remoteNode.IPAddr.v[4] == gCommonMsgData.ControllerAdd)
+    if(UDPSocketInfo[gUDPData.Socket].remoteNode.IPAddr.v[4] == gCommonMsgData.ControllerAdd)
     {
         // The controller is talking to us. Save his IP info.
          memcpy((void *)&gUDPData.Controller,
-                (void *)&UDPSocketInfo[activeUDPSocket].remoteNode,
+                (void *)&UDPSocketInfo[gUDPData.Socket].remoteNode,
                 sizeof(NODE_INFO));
     }
 
