@@ -5,13 +5,13 @@ struct
 {
     UINT16 ADC1CH0[ADC_DMA_BUFFER_SIZE];
     UINT16 ADC1CH1[ADC_DMA_BUFFER_SIZE];
-} ADCBufferA __attribute__((space(dma),aligned(32)));
+} ADCBufferA __attribute__((space(dma),aligned(512)));
 
 struct
 {
     UINT16 ADC1CH0[ADC_DMA_BUFFER_SIZE];
     UINT16 ADC1CH1[ADC_DMA_BUFFER_SIZE];
-} ADCBufferB __attribute__((space(dma),aligned(32)));
+} ADCBufferB __attribute__((space(dma),aligned(512)));
 
 void ADCDMAInit(void);
 
@@ -21,7 +21,7 @@ void ADCInit(void)
 {
     AD1CON1bits.ADON = 0;
 
-    AD1CON1 = 0x2464;
+    AD1CON1 = 0x24E4;
     // Bit 15 - 0       ADC module is off while configuring
     // Bit 14 - 0       Unimplemented
     // Bit 13 - 1       Discontinue operation in Idle Mode
@@ -29,7 +29,7 @@ void ADCInit(void)
     // Bit 11 - 0       Unimplemented
     // Bit 10 - 1       12 bit 1 channel
     // Bits 9-8 - 00    Unsigned Integer
-    // Bits 7-5 - 011   MCPWM1 Ends sampling and starts conversion
+    // Bits 7-5 - 111   Internal timer ends sampling and starts conversion
     // Bit 4 - 0        Unimplemented
     // Bit 3 - 0        Don't Care, using single channel since 12 bit
     // Bit 2 - 1        Sampling begins immediately after last conversion
@@ -47,15 +47,16 @@ void ADCInit(void)
     // Bit 1 - 0        Begin buffer fill at address 0
     // Bit 0 - 0        Always use channel input for Sample A
 
-    AD1CON3 = 0x1F3F;
+    AD1CON3 = 0x0305;
     // Bit 15 - 0       ADC clock derived from system clock
     // Bits 14-13 - 00  Unimplemented
-    // Bits 12-8 - 11111   Auto sample time bits 31*Tad
-    // Bits 7-0 - 00111111 ADC Conversion clock divider 64*Tcy
+    // Bits 12-8 - 00011   Auto sample time bits 3*Tad (450ns)
+    // Bits 7-0 - 00000101 ADC Conversion clock divider 6*Tcy(150ns min is 117.6)
+    // Total time is Conversion+Sampling = 14*Tad + *Tad = 2550ns  or ~196kHz per channel
 
-    AD1CON4 = 0x0003;
+    AD1CON4 = 0x0007;
     // Bits 15-3 - 0    Unimplemented
-    // Bits 2-0 - 011   8 Words per analog input for DMA buffer
+    // Bits 2-0 - 011   128 Words per analog input for DMA buffer
 
     AD1CSSL = 0x0003;
     // Bits 15-9 - 0    Unimplemented
@@ -90,7 +91,7 @@ void ADCDMAInit(void)
     // Bits 1-0 - 10    Continuous Ping Pong Mode
 
     DMA5REQ = 0x0D;         // Select ADC1 as DMA request source
-    DMA5CNT = 15;   // Set the number of transfers before interrupt
+    DMA5CNT = 255;   // Set the number of transfers before interrupt
     DMA5PAD = (volatile unsigned int)&ADC1BUF0;
 
     DMA5STA = __builtin_dmaoffset(&ADCBufferA);
@@ -134,6 +135,8 @@ void __attribute__((interrupt, no_auto_psv)) _DMA5Interrupt(void)
     // facilitate the next calculation
     UINT32 vrail = vrailSum / ADC_DMA_BUFFER_SIZE;
     UINT32 current = currentSum / ADC_DMA_BUFFER_SIZE;
+
+    // Update the moving average
 
     if(hMotorData)
     {

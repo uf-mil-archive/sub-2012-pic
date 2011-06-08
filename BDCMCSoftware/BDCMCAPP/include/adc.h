@@ -6,7 +6,7 @@
 #include "fixMath.h"
 
 /* Configure these for the A/D settings and hardware */
-#define ADC_DMA_BUFFER_SIZE     8
+#define ADC_DMA_BUFFER_SIZE     128
 
 #define ADC_REFV                3.3 // The reference voltage of the ADC
 /* The ADC is configured in 12 bit unsigned integer mode(Q12_0). Hence,
