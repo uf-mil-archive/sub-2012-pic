@@ -1,0 +1,76 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head> 
+<title>BDCMC Administration Panel</title> 
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head> 
+
+<body> 
+<div class="page home"> 
+<div class="pageTop"></div> 
+<div class="content"> 
+ 
+	<div class="infobox"> 
+		<div class="header"><h1>BDCMC Administration Panel</h1><h5>~hostname~ @ ~config_ip~</h5></div>	
+			<div class="text">This website allows for the display of active status information about the motor driver, a configuration interface for viewing and changing motor parameters, calibration methods and documentation and support pages.</div>		
+			
+			<div class="center">
+			<div class="realtimeinfo">
+			<fieldset> 
+			<legend>Real-Time Status Information</legend>
+				<div class="settingRealTimeStatus"><div class="label">Manufacturer</div>~motor_manufacturer~</div>
+				<div class="settingRealTimeStatus"><div class="label">Current</div>~motor_current~</div>
+				<div class="settingRealTimeStatus"><div class="label">Voltage</div>~motor_railvoltage~</div>
+				<div class="settingRealTimeStatus"><div class="label">Direction</div>~motor_direction~</div>
+			</fieldset>
+			</div>
+			</div>			
+			
+			<div class="centerWide">
+			<div class="realtimeinfo">
+			<fieldset> 
+			<legend>Component Information</legend>
+				<div class="settingComponentInfo"><div class="label">Host Name</div>~hostname~</div>
+				<div class="settingComponentInfo"><div class="label">IP Address</div>~config_ip~</div>
+				<div class="settingComponentInfo"><div class="label">MAC Address</div>~config_mac~</div>
+				<div class="settingComponentInfo"><div class="label">TCP/IP Stack Version</div>~version~</div>
+				<div class="settingComponentInfo"><div class="label">Build Date</div>~builddate~</div>
+			</fieldset>			
+			</div>
+			</div>
+			
+			<div class="center">
+			<div class="realtimeinfo">
+			<fieldset> 
+			<legend>Task Stack Information</legend>
+				<div class="settingRealTimeStatus"><div class="label">TCPIP</div>~task_stack(0)~</div>
+				<div class="settingRealTimeStatus"><div class="label">UART</div>~task_stack(1)~</div>
+				<div class="settingRealTimeStatus"><div class="label">Publisher</div>~task_stack(2)~</div>
+				<div class="settingRealTimeStatus"><div class="label">MessageParser</div>~task_stack(3)~</div>
+			</fieldset>			
+			</div>
+			</div>	
+ 
+		<div class="bottom"></div> 
+	</div> 
+	
+	<!--<div class="bottomMenu">Home | <a href="aboutus.php">About Us</a> | <a href="contactus.php">Contact Us</a> | <a href="privacy.php">Privacy Policy</a></div>-->
+	<div class="copyright">Copyright &copy; 2011 University of Florida</div> 
+</div> 
+<div class="sideBar"> 
+	<div class="sideBox"> 
+		<ul class="menu">
+			<li class="main selected home"><span class="itemContent"><img src="images/menuicons/info.png" alt="Status" width="32" height="32" style="padding-right: 14px; padding-top: 10px;"/>Home/Status</span></li>
+			<li class="main"><a class="itemContent" href="config.htm"><img src="images/menuicons/config.png" alt="Configuration" width="32" height="32"/>Configuration</a></li>
+			<li class="main"><a class="itemContent" href="calibration.htm"><img src="images/menuicons/calibrate.png" alt="Calibration" width="32" height="32"/>Calibration</a></li>
+			<li class="main"><a class="itemContent" href="support.htm"><img src="images/menuicons/help.png" alt="Support &amp; FAQ" width="32" height="32"/>Support &amp; FAQ</a></li>
+		</ul> 
+	</div>	
+</div> 
+
+<div class="pageBottom"></div> 
+</div>
+
+
+</body>
+</html>
