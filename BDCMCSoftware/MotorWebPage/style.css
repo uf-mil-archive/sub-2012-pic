@@ -22,7 +22,7 @@ width: 1000px;
 margin: 0px auto;
 padding: 0px 0px 0px 0px;
 background-color: #ffffff;
-background-image: url('images/ContentBorderWithSidebarMiddle.png');
+background-image: url('images/ContentBorderWithSidebarMiddle.gif');
 min-height: 100%;
 overflow: auto;
 *-overflow: inherit; /*IE6 only*/
@@ -33,18 +33,18 @@ overflow: auto;
 .page, x:-moz-any-link, x:default {min-height: 100%;}
 
 .page .pageTop {
-background-image: url('images/ContentBorderWithSidebarTop.png');
+background-image: url('images/ContentBorderWithSidebarTop.gif');
 height: 28px;
 }
 .home .pageTop
 {
-background-image: url('images/ContentBorderWithSidebarTopHome.png');
+background-image: url('images/ContentBorderWithSidebarTopHome.gif');
 }
 .page .pageBottom {
 position: absolute;
 bottom: 0px;
 *-bottom: -1px; /*IE6 only*/
-background-image: url('images/ContentBorderWithSidebarBottom.png');
+background-image: url('images/ContentBorderWithSidebarBottom.gif');
 clear: both;
 width: 1000px;
 height: 32px;
@@ -223,7 +223,7 @@ height: 43px;
 position: relative;
 }
 ul.menu li:hover {
-background-image: url(images/ContentBorderWithSidebarHoveredItemBackground.png);
+background-image: url(images/ContentBorderWithSidebarHoveredItemBackground.gif);
 background-repeat: repeat-y;
 }
 ul.menu li.home a:hover {
@@ -265,7 +265,7 @@ border-top: 1px solid #cccccc;
 border-top: none;
 }
 ul.menu li.selected .itemContent {
-background-image: url(images/ContentBorderWithSidebarSelectedItemBackground.png);
+background-image: url(images/ContentBorderWithSidebarSelectedItemBackground.gif);
 position: absolute;
 top: -4px;
 height: 43px;
@@ -280,7 +280,7 @@ font-weight: bold;
 line-height: 54px;
 }
 .home ul.menu li.home {
-background-image: url('images/ContentBorderWithSidebarLogoBackground.png');
+background-image: url('images/ContentBorderWithSidebarLogoBackground.gif');
 background-position: bottom right;
 }
 .home ul.menu li.home .itemContent {
