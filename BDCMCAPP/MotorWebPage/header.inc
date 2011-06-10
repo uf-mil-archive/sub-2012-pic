@@ -4,6 +4,7 @@
 <head>
 <title>BDCMC - MIL</title>
 <link href="/mil.css" rel="stylesheet" type="text/css" />
+<script src="/mil.js" type="text/javascript"></script>
 </head>
 
 <body>

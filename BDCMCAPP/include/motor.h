@@ -7,15 +7,15 @@
 #include "fixMath.h"
 #include "blockingDelay.h"
 #include "messages.h"   // For CRC-16
+#include "taskPublisher.h" // Since the motor handles the heartbeat,
+                           // we need to be able to unsubscribe people
 
 #include <math.h> // for pow()
 #include <string.h> // for memset
 #include "Compiler.h"
 
-
-// The motor control module uses Timer4
+// The motor control module uses its internal PWM interrupt
 #define MTR_TICK_RATE     1000      // 1    kHz control loop
-#define MTR_INT_PRIORITY   3
 
 #define MTR_CODE_NONE   0
 #define MTR_CODE_BROL   1   // Brushed Open Loop Motor
@@ -33,7 +33,7 @@
 // Q6_10 - This is what the components on the PCB are designed to handle
 #define MTR_PCB_MAX_VOLTAGE ((Q6_10)(50<<10))
 // Q4_12 - This is the max current the PCB can handle
-#define MTR_PCB_MAX_CURRENT ((Q6_10)(10<<12))
+#define MTR_PCB_MAX_CURRENT ((Q4_12)(10<<12))
 
 #define MTR_MAX_DUTY        (4095)
 #define MTR_MAX_PWM_PERC    (3849)  // 96% of 4095
@@ -94,5 +94,6 @@ void ChargeBootStraps(void);
 // These functions require a valid hMotorData structure before calling!
 inline void FeedHeartbeat(void);
 inline void ReferenceChanged(void);
+void SaveMotorConfig(MotorData* mCfg);
 
 #endif // MOTOR_H

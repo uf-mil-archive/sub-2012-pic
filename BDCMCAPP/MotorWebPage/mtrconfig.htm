@@ -5,39 +5,44 @@
 <p>This page provides configuration options for the BDCMC module.
 For any settings to take effect, the board must be reset using the
 reset link on the bottom of the page.</p>
+<!--name strings should be 5 characters or less-->
 
 <center>
 <div class="formbox">
 	<form accept-charset="UTF-8" method="post" action="mtrconfig.htm" name="mtrConf">
 		<div class="status">
+			<div class="label">Manufacturer:</div>
+			<input type="text" name="mtman" value="~motor_manufacturer~" />
+		</div>
+		<div class="status">
 			<div class="label">Motor Type:</div>
-			<input type="radio" name="motortype" id="brushed" value="action" ~config_mtrType(0)~/>
-			<label for="brushed">Brushed</label>
-			<input type="radio" name="motortype" id="brushless" value="action" ~config_mtrType(4)~/>
-			<label for="brushless">Brushless</label>
+			<input type="radio" name="mtrtp" id="br" value="br" ~config_mtrType(0)~/>
+			<label for="br">Brushed</label>
+			<input type="radio" name="mtrtp" id="bl" value="bl" ~config_mtrType(4)~/>
+			<label for="bl">Brushless</label>
 		</div>
 		<div class="status">
 			<div class="label">Control Type:</div>
-			<input type="radio" name="controltype" id="open" value="open" ~config_cntType(0)~/>
-			<label for="open">Open</label>
-			<input type="radio" name="controltype" id="closed" value="closed" ~config_cntType(2)~/>
-			<label for="closed">Closed</label>
+			<input type="radio" name="ctyp" id="op" value="op" ~config_cntType(0)~/>
+			<label for="op">Open</label>
+			<input type="radio" name="ctyp" id="cl" value="cl" ~config_cntType(2)~/>
+			<label for="cl">Closed</label>
 		</div>	
 		<div class="status">
 			<div class="label">Max Voltage:</div>
-			<input type="text" name="maxvoltage" maxlength="15"  value="~maxvolt~">
+			<input type="text" name="mxvol" maxlength="15"  value="~maxvolt~">
 		</div>
 		<div class="status">
 			<div class="label">Minimum Voltage:</div>
-			<input type="text" name="minvoltage" maxlength="15"  value="~minvolt~">
+			<input type="text" name="mnvol" maxlength="15"  value="~minvolt~">
 		</div>	
 		<div class="status">
 			<div class="label">Max Current:</div>
-			<input type="text" name="maxcurrent" maxlength="15"  value="~maxcur~">
+			<input type="text" name="mxcur" maxlength="15"  value="~maxcur~">
 		</div>	
 		<div class="status">
 			<div class="label">Integer Max Slew:</div>
-			<input type="text" name="maxslew" maxlength="15"  value="~maxslew~">
+			<input type="text" name="mxslw" maxlength="15"  value="~maxslew~">
 		</div>	
 		<br><div  style="width:90%;text-align:left;font-weight:bold;font-size:120%">Voltage equations:</div><br>
 		<div class="status">

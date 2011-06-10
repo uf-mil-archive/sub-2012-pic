@@ -27,6 +27,8 @@ void MotorInit(void)
     // Pull in settings from EROM
     GetMotorDataFromEROM(&hMotorData);
 
+    // Initialize the DAC and the comparator here
+
     DisableMotorInterrupts();
 
     PWMInit();  // Initialize the PWM module
@@ -291,6 +293,7 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
             hMotorData->Flags  &= ~MTR_FLAGMASK_HEARTBEAT;  // Clear the heartbeat flag
             hMotorData->ReferenceInput = 0;
 			hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
+            LostSubscribers();  // Turn off the publishing
         }
     }
 
@@ -305,8 +308,10 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
     // Clear undervolt flag
     else if((hMotorData->Flags & MTR_FLAGMASK_UNDERVOLTAGE) != 0)
     {
-        //hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
+        hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
     }
+
+    
 
     // Call the controller
     controller();

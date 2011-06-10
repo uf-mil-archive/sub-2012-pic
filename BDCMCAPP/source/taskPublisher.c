@@ -21,11 +21,14 @@ void SetSubscriber(INT16 transport, BOOL state)
         gOutgoingMsgData.Subscribers &= (~transport);
 }
 
+inline void LostSubscribers(void)
+{
+    gOutgoingMsgData.Subscribers = 0;
+}
+
 void xPublisherTaskInit(void)
 {
-    // Read in publish rate from ROM and convert to ticks period
-
-    
+    // Publish rate is given by the subscriber. Initialize with the default
     if(gOutgoingMsgData.PublishRate == 0x00)        // Rate is empty
         gOutgoingMsgData.PublishRate = PBL_DEFAULT_RATE;
 

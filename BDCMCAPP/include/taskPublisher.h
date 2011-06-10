@@ -24,5 +24,6 @@ void taskPublisher(void* pvParameter);
 
 void SetNewPublishRate(INT16 rate);
 void SetSubscriber(INT16 transport, BOOL state);
+inline void LostSubscribers(void); // Called when the heartbeat is gone - basically stops publishing
 
 #endif
