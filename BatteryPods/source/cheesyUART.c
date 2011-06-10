@@ -77,19 +77,19 @@ void __attribute__((__interrupt__, auto_psv)) _U2RXInterrupt(void)
     switch( rByte )
     {
         case 0  :       RAIL16 = TURN_OFF;
-                        UARTSendString("16V Rail = OFF");
+                        //UARTSendString("16V Rail = OFF");
                         break;
 
         case 1  :       RAIL16 = TURN_ON;
-                        UARTSendString("16V Rail = ON");
+                        //UARTSendString("16V Rail = ON");
                         break;
 
         case 2  :       RAIL32 = TURN_OFF;
-                        UARTSendString("32V Rail = OFF");
+                        //UARTSendString("32V Rail = OFF");
                         break;
 
         case 3  :       RAIL32 = TURN_ON;
-                        UARTSendString("32V Rail = ON");
+                        //UARTSendString("32V Rail = ON");
                         break;
 
                         break;

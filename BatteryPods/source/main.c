@@ -14,9 +14,9 @@
 #include "HardwareProfile.h"
 #include "HallSwitches.h"
 #include "cheesyUART.h"
-//#include "mcp4821.h"
+#include "mcp4821.h"
 
-//#include "adc108s022.h"
+#include "adc108s022.h"
 //#include "I2C_FanControl.h"
 //UINT16 FanMinus;
 //UINT16 FanPlus;
@@ -40,7 +40,7 @@ static void clockInit(void);
 /**********************/
 /*  Global Variables  */
 /**********************/
-//extern UINT16 ADC16Val[5];
+extern UINT16 ADC16Val[5];
 //extern UINT16 ADC32Val[5];
 
 //I2C_DRV i2cfan = I2C_FANDRV_DEFAULTS;
@@ -81,8 +81,8 @@ int main(void)
     UARTInit();                 // initialize UART
 
 
-//    DAC_SetOutput(.5, 1);      //Set 32V Side DAC ouput
-//    DAC_SetOutput(2.0, 2);      //Set 16V Side DAC ouput
+    DAC_SetOutput(.5, 16);      //Set 32V Side DAC ouput
+    DAC_SetOutput(2.0, 32);      //Set 16V Side DAC ouput
 
     BUZZER = BUZZER_OFF;        // initial state of buzzer is off
     LED = LED_OFF;              // initial state of debug LED is off
@@ -107,18 +107,26 @@ int main(void)
     for(;;)
     {
 
-       //ADC_getData(16);
+       ADC_getData(16);
        //ADC_getData(32);
        //DAC_SetOutput(0.5, 16);
        //LED ^= 1  ;
 
        // tachVal = FanReadTach(&i2cfan);
 
+       DAC_SetOutput(2, 16);      //Set 16V Side DAC ouput
+       DAC_SetOutput(2.5, 32);      //Set 32V Side DAC ouput
+
        for (i=0; i<10000; i++){ 
             for (j=0; j<100; j++){  Nop(); }  //delay loop
         }//end delay
 
-       UARTSendChar(0x25);
+        for (j=0; j<5; j++){
+          UARTSendChar( (char)(ADC16Val[j] >> 8) );
+          UARTSendChar( (char)(ADC16Val[j]) );
+        }//end ADC16 UART
+
+       //UARTSendChar(0x25);
        
     }//end MAIN LOOP
 
