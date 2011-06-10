@@ -20,10 +20,15 @@
 
 void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
 {
-    if (KILLSW == 0)
+    if (KILLSW == 0){
         LED = LED_OFF;
-    else
+        RAIL16 = TURN_OFF;
+        RAIL32 = TURN_OFF;
+    }else{
         LED = LED_ON;
+        RAIL16 = TURN_ON;
+        RAIL32 = TURN_ON;
+    }
 
     IFS1bits.CNIF = 0;      // Clear CN interrupt
 }

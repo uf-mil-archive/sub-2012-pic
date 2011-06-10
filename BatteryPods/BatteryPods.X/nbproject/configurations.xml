@@ -6,7 +6,9 @@
                    projectFiles="true">
       <itemPath>../include/HallSwitches.h</itemPath>
       <itemPath>../include/HardwareProfile.h</itemPath>
+      <itemPath>../include/adc108s022.h</itemPath>
       <itemPath>../include/cheesyUART.h</itemPath>
+      <itemPath>../include/mcp4821.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
@@ -24,8 +26,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>../source/HallSwitches.c</itemPath>
+      <itemPath>../source/adc108s022.c</itemPath>
       <itemPath>../source/cheesyUART.c</itemPath>
       <itemPath>../source/main.c</itemPath>
+      <itemPath>../source/mcp4821.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

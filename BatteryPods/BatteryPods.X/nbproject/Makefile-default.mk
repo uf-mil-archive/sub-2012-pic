@@ -30,7 +30,7 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/812168374/HallSwitches.o ${OBJECTDIR}/_ext/812168374/cheesyUART.o ${OBJECTDIR}/_ext/812168374/main.o
+OBJECTFILES=${OBJECTDIR}/_ext/812168374/HallSwitches.o ${OBJECTDIR}/_ext/812168374/cheesyUART.o ${OBJECTDIR}/_ext/812168374/main.o ${OBJECTDIR}/_ext/812168374/adc108s022.o ${OBJECTDIR}/_ext/812168374/mcp4821.o
 
 
 CFLAGS=
@@ -117,6 +117,36 @@ else
 	${CP} ${OBJECTDIR}/_ext/812168374/main.o.tmp ${OBJECTDIR}/_ext/812168374/main.o.d 
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.tmp}
 endif
+${OBJECTDIR}/_ext/812168374/adc108s022.o: ../source/adc108s022.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/812168374 
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -I"../include" -I"../../Microchip/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/adc108s022.o.d -o ${OBJECTDIR}/_ext/812168374/adc108s022.o ../source/adc108s022.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/adc108s022.o.d > ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/812168374/adc108s022.o.d > ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp}
+endif
+${OBJECTDIR}/_ext/812168374/mcp4821.o: ../source/mcp4821.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/812168374 
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -I"../include" -I"../../Microchip/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp4821.o.d > ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/812168374/mcp4821.o.d > ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp}
+endif
 else
 ${OBJECTDIR}/_ext/812168374/HallSwitches.o: ../source/HallSwitches.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
@@ -162,6 +192,36 @@ else
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.d 
 	${CP} ${OBJECTDIR}/_ext/812168374/main.o.tmp ${OBJECTDIR}/_ext/812168374/main.o.d 
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.tmp}
+endif
+${OBJECTDIR}/_ext/812168374/adc108s022.o: ../source/adc108s022.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/812168374 
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${MP_CC}  -omf=elf -x c -c -mcpu=33FJ128MC804 -I"../include" -I"../../Microchip/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/adc108s022.o.d -o ${OBJECTDIR}/_ext/812168374/adc108s022.o ../source/adc108s022.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/adc108s022.o.d > ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/812168374/adc108s022.o.d > ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp ${OBJECTDIR}/_ext/812168374/adc108s022.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/adc108s022.o.tmp}
+endif
+${OBJECTDIR}/_ext/812168374/mcp4821.o: ../source/mcp4821.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/812168374 
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${MP_CC}  -omf=elf -x c -c -mcpu=33FJ128MC804 -I"../include" -I"../../Microchip/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp4821.o.d > ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/812168374/mcp4821.o.d > ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp}
 endif
 endif
 
