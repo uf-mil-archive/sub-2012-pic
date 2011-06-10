@@ -1,0 +1,37 @@
+~inc:header.inc~
+<div id="content">
+
+<h2>Network Settings</h2>
+<p>This page provides serial configuration options for the BDCMC module.
+The communication is always defined to be 8 data bits, 1 stop bit, no parity,
+no flow control, but you can choose the baud rate.</p>
+
+<!--name strings should be 4 characters or less-->
+
+<center>
+<div class="formbox">
+	<form accept-charset="UTF-8" method="post" action="serconfig.htm"  name="serconfig" >
+		<div class="status">
+			<div class="label">Baud Rate:</div>
+			<input type="radio" name="baud" id="b9k" value="b9k" ~config_serbaud(0)~/>
+			<label for="b9k">9600</label>
+			<input type="radio" name="baud" id="b38k" value="b38k" ~config_serbaud(1)~/>
+			<label for="b38k">38400</label>
+			<input type="radio" name="baud" id="b56k" value="b56k" ~config_serbaud(2)~/>
+			<label for="b56k">56000</label>
+			</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="radio" name="baud" id="b115k" value="b115k" ~config_serbaud(3)~/>
+			<label for="b115k">115200</label>
+			<input type="radio" name="baud" id="b250k" value="b250k" ~config_serbaud(4)~/>
+			<label for="b250k">250000</label>
+		</div><br>	
+		<button style="font-weight: bold;" type="submit" value="serialsubmit">Apply</button><br/>
+	</form>
+</div>
+</center>
+
+</div>
+
+~inc:footer.inc~
