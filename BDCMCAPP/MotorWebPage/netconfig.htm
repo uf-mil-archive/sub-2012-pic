@@ -1,0 +1,64 @@
+~inc:header.inc~
+<div id="content">
+
+<h2>Network Settings</h2>
+<p>This page provides configuration options for the BDCMC module.
+For any settings to take effect, the board must be reset using the
+reset link on the bottom of the page. The least significant portion
+of the device and controller IP addresses are used to set the relevant
+local addresses used in packet formation.</p>
+
+<center>
+<div class="formbox">
+	<form accept-charset="UTF-8" method="post" action="netconfig.htm"  name="netconfig" >
+		<div class="status">
+			<div class="label">Host Name:</div>
+			<input type="text" name="host" value="~config_hostname~" />
+		</div>
+		<div class="status">
+			<div class="label">MAC:</div>
+			<input type="text" name="mac" value="~config_mac~" />
+		</div>
+		<div class="status">
+			<div class="label">IP Address:</div>
+			<input type="text" name="ip" value="~config_ip~" />
+		</div>
+		<div class="status">
+			<div class="label">Subnet Mask:</div>
+			<input type="text" name="sub" value="~config_subnet~" />
+		</div>	
+		<div class="status">
+			<div class="label">Default Gateway:</div>
+			<input type="text" name="gw" value="~config_gw~" />
+		</div>	
+		<div class="status">
+			<div class="label">Primary DNS Server:</div>
+			<input type="text" name="dns1" value="~config_dns1~" />
+		</div>	
+		<div class="status">
+			<div class="label">Secondary DNS Server:</div>
+			<input type="text" name="dns2" value="~config_dns2~" />
+		</div>	
+		<div class="status">
+			<div class="label">UDP Port:</div>
+			<input type="text" name="udp" value="~config_udpport~" />
+		</div>	
+		<div class="status">
+			<div class="label">Command IP Address:</div>
+			<input type="text" name="cip" value="~config_controlip~" />
+		</div><br>
+		<div class="status">
+			<div class="label">Endianess:</div>
+			<input type="radio" name="end" id="lit" value="lit" ~config_endian(0)~/>
+			<label for="lit">Little</label>
+			<input type="radio" name="end" id="big" value="big" ~config_endian(1)~/>
+			<label for="big">Big</label>
+		</div>	
+		<button style="font-weight: bold;" type="submit" value="networksubmit">Apply</button><br/>
+	</form>
+</div>
+</center>
+
+</div>
+
+~inc:footer.inc~

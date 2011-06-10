@@ -1,0 +1,98 @@
+~inc:header.inc~
+<div id="content">
+
+<h2>Motor Settings</h2>
+<p>This page provides configuration options for the BDCMC module.
+For any settings to take effect, the board must be reset using the
+reset link on the bottom of the page.</p>
+
+<center>
+<div class="formbox">
+	<form accept-charset="UTF-8" method="post" action="mtrconfig.htm" name="mtrConf">
+		<div class="status">
+			<div class="label">Motor Type:</div>
+			<input type="radio" name="motortype" id="brushed" value="action" ~config_mtrType(0)~/>
+			<label for="brushed">Brushed</label>
+			<input type="radio" name="motortype" id="brushless" value="action" ~config_mtrType(4)~/>
+			<label for="brushless">Brushless</label>
+		</div>
+		<div class="status">
+			<div class="label">Control Type:</div>
+			<input type="radio" name="controltype" id="open" value="open" ~config_cntType(0)~/>
+			<label for="open">Open</label>
+			<input type="radio" name="controltype" id="closed" value="closed" ~config_cntType(2)~/>
+			<label for="closed">Closed</label>
+		</div>	
+		<div class="status">
+			<div class="label">Max Voltage:</div>
+			<input type="text" name="maxvoltage" maxlength="15"  value="~maxvolt~">
+		</div>
+		<div class="status">
+			<div class="label">Minimum Voltage:</div>
+			<input type="text" name="minvoltage" maxlength="15"  value="~minvolt~">
+		</div>	
+		<div class="status">
+			<div class="label">Max Current:</div>
+			<input type="text" name="maxcurrent" maxlength="15"  value="~maxcur~">
+		</div>	
+		<div class="status">
+			<div class="label">Integer Max Slew:</div>
+			<input type="text" name="maxslew" maxlength="15"  value="~maxslew~">
+		</div>	
+		<br><div  style="width:90%;text-align:left;font-weight:bold;font-size:120%">Voltage equations:</div><br>
+		<div class="status">
+			<div class="label">Forward:</div>
+			<input type="text" name="fcrv5"  maxlength="15"  value="~fcurve(5)~"><b>x<sup>5</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="fcrv4"  maxlength="15"  value="~fcurve(4)~"><b>x<sup>4</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="fcrv3"  maxlength="15"  value="~fcurve(3)~"><b>x<sup>3</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="fcrv2"  maxlength="15"  value="~fcurve(2)~"><b>x<sup>2</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="fcrv1"  maxlength="15"  value="~fcurve(1)~"><b>x +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="fcrv0"  maxlength="15"  value="~fcurve(0)~"><br/>
+		</div>
+		<div class="status">
+			<div class="label">Reverse:</div>
+			<input type="text" name="rcrv5"  maxlength="15"  value="~rcurve(5)~"><b>x<sup>5</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="rcrv4"  maxlength="15"  value="~rcurve(4)~"><b>x<sup>4</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="rcrv3"  maxlength="15"  value="~rcurve(3)~"><b>x<sup>3</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="rcrv2"  maxlength="15"  value="~rcurve(2)~"><b>x<sup>2</sup> +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="rcrv1"  maxlength="15"  value="~rcurve(1)~"><b>x +</b>
+		</div>
+		<div class="status">
+			<div class="label">&nbsp</div>
+			<input type="text" name="rcrv0"  maxlength="15"  value="~rcurve(0)~"><br/>
+		</div><br>
+		<button style="font-weight: bold;" type="submit" value="contSubmit">Apply</button><br/>
+	</form>
+</div>
+</center>
+
+</div>
+
+~inc:footer.inc~
