@@ -6,7 +6,7 @@
 #endif // Allowable processors
 
 // The version number of this application number
-#define APP_VERSION		0x05
+#define APP_VERSION		0x01
 
 /*
  *  Timers 1,2,3, and 5 are used by FreeRTOS and the tcp/ip stack. Timer 1 is
@@ -24,6 +24,10 @@
 //  - AN1 - ISense for measurement
 //  - AN2 - ISense for comparator input
 //  - AN3 - IRef for comparator input
+
+// Comparator PPS pins 
+#define COMP2_OUT       2
+#define COMP2_OUT_PIN   RPOR1bits.RP2R
 
 //******************************************************************/
 
@@ -194,12 +198,12 @@
 
 #define BRG_DIV	4	// High speed baud rate generator divisor
 
-#define BAUDREG_9600    (GetInstructionClock()/(BRG_DIV*9600) - 1)// 9600
-#define BAUDREG_38400   (GetInstructionClock()/(BRG_DIV*38400) - 1)// 38400
-#define BAUDREG_56000   (GetInstructionClock()/(BRG_DIV*56000) - 1)// 56000
+#define BAUDREG_9600    (GetInstructionClock()/(BRG_DIV*9600u) - 1u)// 9600
+#define BAUDREG_38400   (GetInstructionClock()/(BRG_DIV*38400u) - 1u)// 38400
+#define BAUDREG_56000   (GetInstructionClock()/(BRG_DIV*56000u) - 1u)// 56000
 // 115200 Has the worst error at .61%
-#define BAUDREG_115200  (GetInstructionClock()/(BRG_DIV*115200) - 1)// 115200
-#define BAUDREG_250000  (GetInstructionClock()/(BRG_DIV*250000) - 1)// 250000
+#define BAUDREG_115200  (GetInstructionClock()/(BRG_DIV*115200u) - 1u)// 115200
+#define BAUDREG_250000  (GetInstructionClock()/(BRG_DIV*250000u) - 1u)// 250000
 //******************************************************************/
 
 //********************* COM UART ***********************************/

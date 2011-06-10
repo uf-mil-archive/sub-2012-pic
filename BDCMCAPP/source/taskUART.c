@@ -2,20 +2,23 @@
 
 xQueueHandle hUARTTxQueue;
 xTaskHandle hUARTTask;
+UARTConfigData gUARTConfig;
 
 volatile IncomingBuffers gUARTIncBuffers;
 
-void COMInit(void);
-void COMReadBaudFromEE(void);
+void COMInit(UINT16 bauddiv);
 void COMSetBaud(UINT16 baud);
+static void InitUARTConfig(void);
 
 void xUARTTaskInit(void)
 {
     // Allocate the send and receive queues for the task
     hUARTTxQueue = xQueueCreate(UART_QUEUE_SIZE, sizeof(RTOSMsg));
 
+    InitUARTConfig();
+
     // Initialize the UART
-    COMInit();
+    COMInit(gUARTConfig.BaudDiv);
 	
     xTaskCreate(taskUART, (CHAR*)"UART", STACK_SIZE_UART,
                 NULL, tskIDLE_PRIORITY + 1, &hUARTTask);
@@ -57,10 +60,76 @@ void taskUART(void* pvParameter)
     vTaskDelete( NULL );
 }
 
-void COMInit(void)
+static void InitUARTConfig(void)
+{
+    BYTE c;
+    BYTE *p;
+    UINT16 d;
+    UARTConfigData tmpConfig;    // Shadow copy to use when checking for valid EROM
+
+    // First try to read in a valid UDPConfig struct. If it doesn't exist,
+    // or the checksum is invalid(power failure while programming), we build
+    // and save the default template.
+
+    p = (BYTE*)&tmpConfig;
+    d = UART_EROM_BASE;
+
+    // attempt to read in the config data from FLASH
+    EROM_ReadBytes(d++, 1, &c);
+
+    // read in the data structure from FLASH if it exists if not
+    // just save our default configuration to FLASH
+    if (c == APP_VERSION)
+    {
+        EROM_ReadBytes(d, sizeof(UARTConfigData), p);
+
+        // The two bytes after the structure are the checksum
+        INT16 savedChk = EROM_ReadInt16(d + sizeof(UARTConfigData));
+
+        if(CRC16Checksum(p, sizeof(UARTConfigData)) != savedChk)
+            goto CONFIG_DEFAULT_UART;
+
+        // it's a valid UDPConfigData struct - copy the shadow to the real one
+        memcpy((void *)&gUARTConfig, (void *)&tmpConfig, sizeof(UARTConfigData));
+
+        return;
+    }
+
+CONFIG_DEFAULT_UART:
+    gUARTConfig.BaudDiv = COM_DEFAULT_BAUD;
+
+    SaveUARTConfig(&gUARTConfig);
+}
+
+void SaveUARTConfig(UARTConfigData* uartCfg)
+{
+    BYTE *p;
+    UINT16 d, chk;
+    BYTE appVers = APP_VERSION;
+
+    p = (BYTE*)uartCfg;
+    // The base address + the app_config + app_config checksum size
+    d = UART_EROM_BASE;
+
+    // Calculate the checksum
+    chk = CRC16Checksum(p, sizeof(UARTConfigData));
+
+    // Write the app version
+    EROM_WriteBytes(d++, 1, &appVers);
+
+    // Copy out the UARTConfig
+    EROM_WriteBytes(d, sizeof(UARTConfigData), p);
+
+    // Write the checksum
+    EROM_WriteInt16((d + sizeof(UARTConfigData)), chk);
+}
+
+void COMInit(UINT16 bauddiv)
 {
     COM_UxMODEbits.UARTEN = 0; 	// Make sure the UART is disabled
-    COMReadBaudFromEE();		// Set BAUD to the saved value
+
+    COMSetBaud(bauddiv);
+
     COM_UxMODE = 0x8808;
     // Bit15 - 1 Enable UART (must be set before UxTXEN)
     // Bit14 - 0 Continue op in debug mode
@@ -108,17 +177,6 @@ void COMSetBaud(UINT16 baud)
     COM_UxBRG = baud;			        // Write the new divisor
     COM_UxMODE |= temp;			        // Reset the UARTEN flag back to its
     // original value
-
-    return;
-}
-
-void COMReadBaudFromEE(void)
-{
-    UINT16 baud = 0xFFFF;           //DataEERead(COM_BAUD_EEADD);
-    if(baud == 0xFFFF)
-        baud = COM_DEFAULT_BAUD;	// No baud divisor saved,
-    // just write the default one.
-    COMSetBaud(baud);
 
     return;
 }

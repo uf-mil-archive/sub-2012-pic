@@ -25,4 +25,5 @@
 <a href="/index.htm">Home</a>
 <a href="/netconfig.htm">Network Configuration</a>
 <a href="/mtrconfig.htm">Motor Configuration</a>
+<a href="/serconfig.htm">Serial Configuration</a>
 </div>

@@ -116,6 +116,9 @@ void ioMap(void)
     // Outputs
     COM_UTX_PIN = COM_UxTX_IO;
 
+    /********** Comparator 2 ***************/
+    COMP2_OUT_PIN = COMP2_OUT;
+
     // Lock the IOLOCK bit so that the IO is not accidentally changed.
     __builtin_write_OSCCONL(OSCCON | 0x0040);
 }//end ioMap()

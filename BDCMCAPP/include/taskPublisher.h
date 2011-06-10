@@ -11,7 +11,7 @@
 #include "taskUART.h"
 #include "messages.h"
 
-#define STACK_SIZE_PUBLISHER    (configMINIMAL_STACK_SIZE * 2)
+#define STACK_SIZE_PUBLISHER    (configMINIMAL_STACK_SIZE * 4)
 #define PBL_DEFAULT_RATE    20
 #define PBL_MAX_RATE        200
 

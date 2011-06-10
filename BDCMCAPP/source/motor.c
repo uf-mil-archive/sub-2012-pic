@@ -1,8 +1,6 @@
 #include "motor.h"
 #include "p33FJ128MC804.h"
-#include "taskTCPIP.h"
-#include "mcp4821.h"
-
+#include "adc.h"
 
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
 
@@ -14,20 +12,21 @@ MotorData *hMotorData = NULL;
 Q6_26 MTR_FTable[101];
 Q6_26 MTR_RTable[101];
 
-void PWMInit(void);
-void motorSetupTimer(void);
-void BrushedDCOpenLoop(void);
-inline void EnableMotorInterrupts(void);
-inline void DisableMotorInterrupts(void);
-void BROLInit(void);
-void GetMotorDataFromEROM(MotorData** motor);
+static void PWMInit(void);
+static void BrushedDCOpenLoop(void);
+static inline void EnableMotorInterrupts(void);
+static inline void DisableMotorInterrupts(void);
+static void BROLInit(void);
+static void GetMotorDataFromEROM(MotorData** motor);
+static void CompInit(void);
 
 void MotorInit(void)
 {
     // Pull in settings from EROM
     GetMotorDataFromEROM(&hMotorData);
 
-    // Initialize the DAC and the comparator here
+    CompInit();     // Initialize the comparator. The dac has been setup
+                    // by the EROM pull already
 
     DisableMotorInterrupts();
 
@@ -65,10 +64,17 @@ void PWMInit(void)
     PWM1CON2 = 0x0000;      // 1:1 postscalar on the special event trigger for A/D
                             // Synchronized updates, override on clock boundaries
 
-
     P1TCONbits.PTEN = 1;    // Start PWM module (all pins are still off due to override)
 
     return;
+}
+
+static void CompInit(void)
+{
+    // The current monitor is connected to comparator 2
+    CMCON = 0x0A84;     // C2 enabled, drives output pin, connect inputs to pads
+                        // output not inverted.
+    CVRCON = 0x00;      // Comparator internal reference circuit off
 }
 
 void BrushedDCOpenLoop(void)
@@ -309,9 +315,7 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
     else if((hMotorData->Flags & MTR_FLAGMASK_UNDERVOLTAGE) != 0)
     {
         hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
-    }
-
-    
+    }   
 
     // Call the controller
     controller();
@@ -392,7 +396,8 @@ void GetMotorDataFromEROM(MotorData** motor)
         if(CRC16Checksum(p, sizeof(MotorData)) != savedChk)
             goto CONFIG_DEFAULT_MOTOR;
 
-        //DAC_SetOutput(((float)BROLMotorData.MaxCurrent) / pow(2,12));   // Set the DAC output voltage
+        // Convert the max current to a voltage for the comparator's DAC
+        DAC_SetOutput((((float)tmpData.MaxCurrent) / pow(2,12))*ADC_CURRENT_GAIN);   // Set the DAC output voltage
 
         // It's a valid struct if we get here. Switch on the motor type
         type = (tmpData.Flags & MTR_FLAGMASK_MOTORCODE);
@@ -437,7 +442,7 @@ CONFIG_DEFAULT_MOTOR:
     // Now save this as the default
     SaveMotorConfig(&BROLMotorData);
 
-    //DAC_SetOutput(((float)BROLMotorData.MaxCurrent) / pow(2,12));   // Set the DAC output voltage
+    DAC_SetOutput((((float)BROLMotorData.MaxCurrent) / pow(2,12))*ADC_CURRENT_GAIN);   // Set the DAC output voltage
     controller = &BrushedDCOpenLoop;// Set the controller callback
     *motor = &BROLMotorData;    // Set the handle to the correct instance
 }

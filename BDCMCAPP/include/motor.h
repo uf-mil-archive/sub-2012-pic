@@ -9,6 +9,8 @@
 #include "messages.h"   // For CRC-16
 #include "taskPublisher.h" // Since the motor handles the heartbeat,
                            // we need to be able to unsubscribe people
+#include "mcp4821.h"
+
 
 #include <math.h> // for pow()
 #include <string.h> // for memset
@@ -41,7 +43,7 @@
 
 #define MTR_DEFAULT_MANUFACTURER    "SEABOTIX"
 #define MTR_DEFAULT_HMAXV           ((Q6_10)20480)	// ~20.0V
-#define MTR_DEFAULT_MINV            ((Q6_10)(25 << 10))
+#define MTR_DEFAULT_MINV            ((Q6_10)(28 << 10))
 #define MTR_DEFAULT_MAXCURRENT      ((Q4_12)(4 << 12))
 #define MTR_DEFAULT_MAXSLEW         (15) // 1*1KHz =
 

@@ -45,6 +45,7 @@ void HTTPPrint_config_controlip(void);
 void HTTPPrint_config_endian(WORD);
 void HTTPPrint_reboot(void);
 void HTTPPrint_rebootaddr(void);
+void HTTPPrint_config_serbaud(WORD);
 
 void HTTPPrint(DWORD callbackID)
 {
@@ -184,6 +185,21 @@ void HTTPPrint(DWORD callbackID)
 			break;
         case 0x0000002d:
 			HTTPPrint_rebootaddr();
+			break;
+        case 0x0000002e:
+			HTTPPrint_config_serbaud(0);
+			break;
+        case 0x0000002f:
+			HTTPPrint_config_serbaud(1);
+			break;
+        case 0x00000030:
+			HTTPPrint_config_serbaud(2);
+			break;
+        case 0x00000031:
+			HTTPPrint_config_serbaud(3);
+			break;
+        case 0x00000032:
+			HTTPPrint_config_serbaud(4);
 			break;
 		default:
 			// Output notification for undefined values

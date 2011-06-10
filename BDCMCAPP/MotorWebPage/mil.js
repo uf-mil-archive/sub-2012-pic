@@ -99,7 +99,7 @@ function pollAJAX() {
 	}
 	
 	// Call ourselves again in 10ms
-	setTimeout("pollAJAX()",10);
+	//setTimeout("pollAJAX()",10);
 	
 }
 			
@@ -116,5 +116,5 @@ function getXMLValue(xmlData, field) {
 }
 
 //kick off the AJAX Updater
-setTimeout("pollAJAX()",500);
+//setTimeout("pollAJAX()",500);
 

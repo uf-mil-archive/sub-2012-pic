@@ -12,7 +12,7 @@
 #include "taskUART.h"
 #include "messages.h"
 
-#define STACK_SIZE_PARSER       (configMINIMAL_STACK_SIZE * 3)
+#define STACK_SIZE_PARSER       (configMINIMAL_STACK_SIZE * 6)
 
 #define PARSER_QUEUE_SIZE       20
 

@@ -77,7 +77,7 @@
 extern APP_CONFIG AppConfig;
 static HTTP_IO_RESULT HTTPNetConfig(void);
 static HTTP_IO_RESULT HTTPMotorConfig(void);
-
+static HTTP_IO_RESULT HTTPSerialConfig(void);
 // Sticky status message variable.
 // This is used to indicated whether or not the previous POST operation was 
 // successful.  The application uses these to store status messages when a 
@@ -127,6 +127,10 @@ HTTP_IO_RESULT HTTPExecutePost(void)
     else if(!memcmppgm2ram(filename, "mtrconfig.htm", 13))
     {
         return HTTPMotorConfig();
+    }
+    else if(!memcmppgm2ram(filename, "serconfig.htm", 13))
+    {
+        return HTTPSerialConfig();
     }
 
     return HTTP_IO_DONE;
@@ -358,6 +362,9 @@ static HTTP_IO_RESULT HTTPMotorConfig(void)
     MotorData newMotorData;
     INT16 i;
 
+    // Clear the structure first, just in case
+    memset(&newMotorData, 0x0, sizeof(MotorData));
+
     // Like before, we do this in one shot
     if(curHTTP.byteCount > TCPIsGetReady(sktHTTP) + TCPGetRxFIFOFree(sktHTTP))
             goto MtrConfigFailure;
@@ -367,47 +374,44 @@ static HTTP_IO_RESULT HTTPMotorConfig(void)
     if(TCPIsGetReady(sktHTTP) < curHTTP.byteCount)
             return HTTP_IO_NEED_DATA;
 
-    // Use current config in non-volatile memory as defaults
-    EROM_ReadBytes(MTR_EROM_BASE+1, sizeof(MotorData),(BYTE*)&newMotorData);
-
     // Read all browser POST data
     while(curHTTP.byteCount)
     {
         // Read a form field name
-        if(HTTPReadPostName(curHTTP.data, 6) != HTTP_READ_OK)
+        if(HTTPReadPostName(curHTTP.data, 7) != HTTP_READ_OK)
                 goto MtrConfigFailure;
 
         // Read a form field value
-        if(HTTPReadPostValue(curHTTP.data + 6, sizeof(curHTTP.data)-6-2) != HTTP_READ_OK)
+        if(HTTPReadPostValue(curHTTP.data + 7, sizeof(curHTTP.data)-7-2) != HTTP_READ_OK)
                 goto MtrConfigFailure;
 
         // Parse the value that was read
         if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"mtman"))
         {// Read new motor manufacturer
-                FormatNetBIOSName(&curHTTP.data[6]);
-                memcpy((void*)newMotorData.Manufacturer, (void*)curHTTP.data+6, 16);
+                strupr((char*)&curHTTP.data[7]);
+                memcpy((void*)newMotorData.Manufacturer, (void*)curHTTP.data+7, 16);
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"mtrtp"))
         {// Motor type setting
-            if(!strcmppgm2ram((char*)curHTTP.data+6, (ROM char*)"br"))
+            if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"br"))
                 newMotorData.Flags |= (MTR_FLAGMASK_MOTORTYPE & MTR_CODE_BROL);
-            else if(!strcmppgm2ram((char*)curHTTP.data+6, (ROM char*)"bl"))
+            else if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"bl"))
                 newMotorData.Flags |= (MTR_FLAGMASK_MOTORTYPE & MTR_CODE_BLOL);
             else
                 goto MtrConfigFailure;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"ctyp"))
         {// Controller type setting
-            if(!strcmppgm2ram((char*)curHTTP.data+6, (ROM char*)"op"))
+            if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"op"))
                 newMotorData.Flags |= (MTR_FLAGMASK_CONTROLTYPE & MTR_CODE_BROL);
-            else if(!strcmppgm2ram((char*)curHTTP.data+6, (ROM char*)"cl"))
+            else if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"cl"))
                 newMotorData.Flags |= (MTR_FLAGMASK_CONTROLTYPE & MTR_CODE_BRCL);
             else
                 goto MtrConfigFailure;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"mxvol"))
         {// Max Voltage
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             if(result > 0.0f)
             {
                 UINT16 resFixed = (UINT16)(result*pow(2,10));
@@ -421,7 +425,7 @@ static HTTP_IO_RESULT HTTPMotorConfig(void)
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"mnvol"))
         {// Min Voltage
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             if(result > 0.0f)
             {
                 UINT16 resFixed = (UINT16)(result*pow(2,10));
@@ -435,7 +439,7 @@ static HTTP_IO_RESULT HTTPMotorConfig(void)
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"mxcur"))
         {// Max Current
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             if(result > 0.0f)
             {
                 UINT16 resFixed = (UINT16)(result*pow(2,12));
@@ -449,7 +453,7 @@ static HTTP_IO_RESULT HTTPMotorConfig(void)
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"mxslw"))
         {// Max slew rate
-            unsigned long result = strtoul((char*)curHTTP.data+6, NULL, 10);
+            unsigned long result = strtoul((char*)curHTTP.data+7, NULL, 10);
             if(result < 250)
                 newMotorData.MaxSlew = (UINT16)result;
             else
@@ -457,65 +461,68 @@ static HTTP_IO_RESULT HTTPMotorConfig(void)
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"fcrv5"))
         {// Forward Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.FCoeff[5] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"fcrv4"))
         {// Forward Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.FCoeff[4] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"fcrv3"))
         {// Forward Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.FCoeff[3] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"fcrv2"))
         {// Forward Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.FCoeff[2] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"fcrv1"))
         {// Forward Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.FCoeff[1] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"fcrv0"))
         {// Forward Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.FCoeff[0] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"rcrv5"))
         {// Reverse Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.RCoeff[5] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"rcrv4"))
         {// Reverse Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.RCoeff[4] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"rcrv3"))
         {// Reverse Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.RCoeff[3] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"rcrv2"))
         {// Reverse Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.RCoeff[2] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"rcrv1"))
         {// Reverse Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.RCoeff[1] = result;
         }
         else if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"rcrv0"))
         {// Reverse Coefficient
-            float result = (float)atof((char*)curHTTP.data+6);
+            float result = (float)atof((char*)curHTTP.data+7);
             newMotorData.RCoeff[0] = result;
         }
     }
+
+    // Set the valid motor code flag
+    newMotorData.Flags |= 0x1;
 
     SaveMotorConfig(&newMotorData);
 
@@ -534,11 +541,74 @@ static HTTP_IO_RESULT HTTPMotorConfig(void)
 
 MtrConfigFailure:
     lastFailure = TRUE;
-    strcpypgm2ram((char*)curHTTP.data, "netconfig.htm");
+    strcpypgm2ram((char*)curHTTP.data, "mtrconfig.htm");
     curHTTP.httpStatus = HTTP_REDIRECT;
     return HTTP_IO_DONE;
 }
 
+static HTTP_IO_RESULT HTTPSerialConfig(void)
+{
+    INT16 i;
+
+    // Like before, we do this in one shot
+    if(curHTTP.byteCount > TCPIsGetReady(sktHTTP) + TCPGetRxFIFOFree(sktHTTP))
+            goto SerConfigFailure;
+
+    // Ensure that all data is waiting to be parsed.  If not, keep waiting for
+    // all of it to arrive.
+    if(TCPIsGetReady(sktHTTP) < curHTTP.byteCount)
+            return HTTP_IO_NEED_DATA;
+
+    // Read all browser POST data
+    while(curHTTP.byteCount)
+    {
+        // Read a form field name
+        if(HTTPReadPostName(curHTTP.data, 7) != HTTP_READ_OK)
+                goto SerConfigFailure;
+
+        // Read a form field value
+        if(HTTPReadPostValue(curHTTP.data + 7, sizeof(curHTTP.data)-7-2) != HTTP_READ_OK)
+                goto SerConfigFailure;
+
+        // Parse the value that was read
+        if(!strcmppgm2ram((char*)curHTTP.data, (ROM char*)"baud"))
+        {// New baud setting
+            if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"b9k"))
+                gUARTConfig.BaudDiv = BAUDREG_9600;
+            else if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"b38k"))
+                gUARTConfig.BaudDiv = BAUDREG_38400;
+            else if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"b56k"))
+                gUARTConfig.BaudDiv = BAUDREG_56000;
+            else if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"b115k"))
+                gUARTConfig.BaudDiv = BAUDREG_115200;
+            else if(!strcmppgm2ram((char*)curHTTP.data+7, (ROM char*)"b250k"))
+                gUARTConfig.BaudDiv = BAUDREG_250000;
+            else
+                goto SerConfigFailure;
+        }
+    }
+
+    SaveUARTConfig(&gUARTConfig);
+
+    // Set the board to reboot and display reconnecting information
+    strcpypgm2ram((char*)curHTTP.data, "reboot.htm?");
+    memcpy((void*)(curHTTP.data+20), (void*)AppConfig.NetBIOSName, 16);
+    curHTTP.data[20+16] = 0x00;	// Force null termination
+    for(i = 20; i < 20u+16u; i++)
+    {
+            if(curHTTP.data[i] == ' ')
+                    curHTTP.data[i] = 0x00;
+    }
+    curHTTP.httpStatus = HTTP_REDIRECT;
+
+    return HTTP_IO_DONE;
+
+SerConfigFailure:
+    lastFailure = TRUE;
+    strcpypgm2ram((char*)curHTTP.data, "serconfig.htm");
+    curHTTP.httpStatus = HTTP_REDIRECT;
+    return HTTP_IO_DONE;
+}
 
 #endif //(use_post)
 
@@ -827,7 +897,7 @@ void HTTPPrint_config_mtrType(WORD type)
 {
     if(hMotorData)
     {
-        if(((hMotorData->Flags & MTR_FLAGMASK_MOTORTYPE) > 0) == type)
+        if((hMotorData->Flags & MTR_FLAGMASK_MOTORTYPE) == type)
             TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
     }
 }
@@ -836,7 +906,7 @@ void HTTPPrint_config_cntType(WORD type)
 {
     if(hMotorData)
     {
-        if(((hMotorData->Flags & MTR_FLAGMASK_CONTROLTYPE) > 0) == type)
+        if((hMotorData->Flags & MTR_FLAGMASK_CONTROLTYPE) == type)
             TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
     }
 }
@@ -889,6 +959,35 @@ void HTTPPrint_config_endian(WORD val)
 {
     if(val == gCommonMsgData.Endianess)    // Little endian check
         TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
+}
+
+void HTTPPrint_config_serbaud(WORD val)
+{
+    switch(val)
+    {
+        case 0:
+            if(gUARTConfig.BaudDiv == BAUDREG_9600)
+                TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
+            break;
+        case 1:
+            if(gUARTConfig.BaudDiv == BAUDREG_38400)
+                TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
+            break;
+        case 2:
+            if(gUARTConfig.BaudDiv == BAUDREG_56000)
+                TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
+            break;
+        case 3:
+            if(gUARTConfig.BaudDiv == BAUDREG_115200)
+                TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
+            break;
+        case 4:
+            if(gUARTConfig.BaudDiv == BAUDREG_250000)
+                TCPPutROMString(sktHTTP, (ROM BYTE*)"checked");
+            break;
+        default:    // Unrecognized
+            break;
+    }
 }
 
 #endif

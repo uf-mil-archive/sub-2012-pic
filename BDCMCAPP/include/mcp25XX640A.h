@@ -23,9 +23,10 @@
 // First two pages blank - it seems when you screw up, those are the
 // pages you ruin, so keep them empty.
 #define ETH_EROM_BASE       (EROM_PAGE_SIZE*2) // 1k reserved for Ethernet settings
-#define UDP_EROM_BASE		(EROM_PAGE_SIZE*16 + ETH_EROM_BASE)
-#define MTR_EROM_BASE       (EROM_PAGE_SIZE*32 + ETH_EROM_BASE)  // 1k reserved for motor settings
-#define COMMON_EROM_BASE    (EROM_PAGE_SIZE*32 + MTR_EROM_BASE)  //
+#define UDP_EROM_BASE       (EROM_PAGE_SIZE*32 + ETH_EROM_BASE)	// 1k reserved for UDP settings
+#define MTR_EROM_BASE       (EROM_PAGE_SIZE*32 + UDP_EROM_BASE)  // 1k reserved for motor settings
+#define COMMON_EROM_BASE    (EROM_PAGE_SIZE*32 + MTR_EROM_BASE)  // 1k reserved for common settings
+#define UART_EROM_BASE      (EROM_PAGE_SIZE*32 + COMMON_EROM_BASE)
 //********************* ~ADDRESS MAPS *******************************/
 
 INT8 EROM_ReadBytes(UINT16 address, UINT16 length, BYTE* const buf);
