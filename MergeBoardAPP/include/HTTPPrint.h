@@ -18,10 +18,6 @@ extern HTTP_STUB httpStubs[MAX_HTTP_CONNECTIONS];
 extern BYTE curHTTPID;
 
 void HTTPPrint(DWORD callbackID);
-void HTTPPrint_motor_manufacturer(void);
-void HTTPPrint_motor_current(void);
-void HTTPPrint_motor_railvoltage(void);
-void HTTPPrint_motor_direction(void);
 void HTTPPrint_config_hostname(void);
 void HTTPPrint_config_ip(void);
 void HTTPPrint_config_mac(void);
@@ -47,90 +43,78 @@ void HTTPPrint(DWORD callbackID)
 			HTTPIncFile((ROM BYTE*)"header.inc");
 			break;
         case 0x00000001:
-			HTTPPrint_motor_manufacturer();
-			break;
-        case 0x00000002:
-			HTTPPrint_motor_current();
-			break;
-        case 0x00000003:
-			HTTPPrint_motor_railvoltage();
-			break;
-        case 0x00000004:
-			HTTPPrint_motor_direction();
-			break;
-        case 0x00000005:
 			HTTPPrint_config_hostname();
 			break;
-        case 0x00000006:
+        case 0x00000002:
 			HTTPPrint_config_ip();
 			break;
-        case 0x00000007:
+        case 0x00000003:
 			HTTPPrint_config_mac();
 			break;
-        case 0x00000008:
+        case 0x00000004:
 			HTTPPrint_version();
 			break;
-        case 0x00000009:
+        case 0x00000005:
 			HTTPPrint_builddate();
 			break;
-        case 0x0000000a:
+        case 0x00000006:
 			HTTPPrint_task_stack(0);
 			break;
-        case 0x0000000b:
+        case 0x00000007:
 			HTTPPrint_task_stack(1);
 			break;
-        case 0x0000000c:
+        case 0x00000008:
 			HTTPPrint_task_stack(2);
 			break;
-        case 0x0000000d:
+        case 0x00000009:
 			HTTPPrint_task_stack(3);
 			break;
-        case 0x0000000e:
+        case 0x0000000a:
 			HTTPIncFile((ROM BYTE*)"footer.inc");
 			break;
-        case 0x0000000f:
+        case 0x0000000b:
 			HTTPPrint_config_subnet();
 			break;
-        case 0x00000010:
+        case 0x0000000c:
 			HTTPPrint_config_gw();
 			break;
-        case 0x00000011:
+        case 0x0000000d:
 			HTTPPrint_config_dns1();
 			break;
-        case 0x00000012:
+        case 0x0000000e:
 			HTTPPrint_config_dns2();
 			break;
-        case 0x00000013:
+        case 0x0000000f:
 			HTTPPrint_config_udpport();
 			break;
-        case 0x00000014:
+        case 0x00000010:
 			HTTPPrint_config_controlip();
 			break;
-        case 0x00000015:
+        case 0x00000011:
 			HTTPPrint_config_endian(0);
 			break;
-        case 0x00000016:
+        case 0x00000012:
 			HTTPPrint_config_endian(1);
 			break;
-        case 0x00000017:
+        case 0x00000013:
 			HTTPPrint_reboot();
 			break;
-        case 0x00000018:
+        case 0x00000014:
 			HTTPPrint_rebootaddr();
 			break;
-        case 0x00000019:
+        case 0x00000015:
 			HTTPPrint_config_serbaud(0);
 			break;
-        case 0x0000001a:
+        case 0x00000016:
 			HTTPPrint_config_serbaud(1);
 			break;
-        case 0x0000001b:
+        case 0x00000017:
 			HTTPPrint_config_serbaud(2);
 			break;
-        case 0x0000001c:
+        case 0x00000018:
 			HTTPPrint_config_serbaud(3);
 			break;
-        case 0x0000001d:
+        case 0x00000019:
 			HTTPPrint_config_serbaud(4);
 			break;
 		default:
