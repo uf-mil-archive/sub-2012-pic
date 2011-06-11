@@ -71,8 +71,6 @@ void taskTCPIP(void* pvParameter)
     // to the ENC28J60 driver which uses FreeRTOS. The scheduler
     // must be running to handle this.
     StackInit();
-
-    ADCInit();
     
     for(;;)
     {

@@ -10,7 +10,6 @@
 #include "taskTCPIP.h"
 #include "taskPublisher.h"
 #include "messages.h"
-#include "motor.h"
 
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
@@ -65,8 +64,6 @@ int main(void)
     xTCPIPTaskInit();
     xParserTaskInit();
     xPublisherTaskInit();
-
-    MotorInit();
 
     vTaskStartScheduler();
 

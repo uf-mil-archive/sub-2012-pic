@@ -14,7 +14,7 @@
     .include "p30fxxxx.inc"
 .endif
 .ifdecl __dsPIC33F
-    .include "p33fxxxx.inc"
+    .include "p33Fxxxx.inc"
 .endif
 .ifdecl __PIC24H
     .include "p24hxxxx.inc"

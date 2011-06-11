@@ -175,8 +175,8 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
     // The next two bytes are packet count of the transmitter
 
     // From now on it's motor specific. Ensure we have a motor instance
-    if(!hMotorData)
-        return;
+    //if(!hMotorData)
+    //   return;
 
     // Okay, they're talking to us. Is the message a heartbeat or ESTOP?
     if(rBuf[4] == MSG_FEED_HEARTBEAT)
@@ -185,25 +185,14 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
         {
             // Is the sender the guy in charge of me?
             if(rBuf[0] == gCommonMsgData.ControllerAdd)
-                FeedHeartbeat();
-        }
-        return;
-    }
-    else if(rBuf[4] == MSG_ESTOP)
-    {
-        if(length == MSG_ESTOP_LENGTH)
-        {
-            // Handle estop
+                Nop();//FeedHeartbeat();
         }
         return;
     }
 
-    // Do the motor types line up?
-    if(((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1) != rBuf[4])
-        return;
+    // Check if type code is merge board specific
 
-    // They're either subscribing/unsubscribing or commanding a new
-    // motor reference.
+    // They're either subscribing/unsubscribing
     switch(rBuf[5])
     {
         case MSG_START_PUBLISH:
@@ -218,20 +207,6 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
         case MSG_STOP_PUBLISH:
             if(length == MSG_STOP_PUBLISH_LENGTH)
                 SetSubscriber(transport, FALSE);
-            break;
-        case MSG_SET_REFERENCE:
-            if(length == MSG_SET_REFERENCE_LENGTH)
-            {
-                // Is the sender the guy in charge of me?
-                if(rBuf[0] == gCommonMsgData.ControllerAdd)
-                {
-                        hMotorData->ReferenceInput = 
-                        (gCommonMsgData.Endianess == MSG_ENDIANESS_BIG) ?
-                            ReadBEIntFromPacket(&rBuf[6]):
-                            ReadLEIntFromPacket(&rBuf[6]);
-                        ReferenceChanged();
-                }
-            }
             break;
         default:
             break; // Unrecognized
@@ -290,25 +265,13 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
                 &tmplength);
 
         // Insert TypeCode
-        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+//        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
 
         // Insert the tick count
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
-        // Insert flags - clear out anything private
-        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Flags, &tmplength);
+        // Paul - Packet contents go here, big endian calls
 
-        // Insert reference input
-        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
-
-        // Insert present output
-        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
-
-        // Insert voltage rail
-        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
-
-        // Insert motor current
-        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Current, &tmplength);
     }
     else    // Little Endian
     {
@@ -318,25 +281,12 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
                 &tmplength);
 
         // Insert TypeCode
-        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+        //gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
 
         // Insert the tick count
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
-        // Insert flags - clear out anything private
-        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Flags, &tmplength);
-
-        // Insert reference input
-        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->ReferenceInput, &tmplength);
-
-        // Insert present output
-        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->PresentOutput, &tmplength);
-
-        // Insert voltage rail
-        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->VRail, &tmplength);
-
-        // Insert motor current
-        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], hMotorData->Current, &tmplength);
+        // Paul - Packet contents go here, little endian calls
     }
 
     // Calculate the checksum

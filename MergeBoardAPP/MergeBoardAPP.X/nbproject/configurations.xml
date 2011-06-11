@@ -33,7 +33,6 @@
       <itemPath>../include/HardwareProfile.h</itemPath>
       <itemPath>../include/TCPIPConfig.h</itemPath>
       <itemPath>../include/Tick.h</itemPath>
-      <itemPath>../include/adc.h</itemPath>
       <itemPath>../include/blockingDelay.h</itemPath>
       <itemPath>../include/fixMath.h</itemPath>
       <itemPath>../include/mavg.h</itemPath>
@@ -41,6 +40,7 @@
       <itemPath>../include/mcp4821.h</itemPath>
       <itemPath>../include/messages.h</itemPath>
       <itemPath>../include/simplequeue.h</itemPath>
+      <itemPath>../include/taskADC.h</itemPath>
       <itemPath>../include/taskParser.h</itemPath>
       <itemPath>../include/taskPublisher.h</itemPath>
       <itemPath>../include/taskTCPIP.h</itemPath>
@@ -81,13 +81,11 @@
         <itemPath>../../Microchip/TCPIP Stack/NBNS.c</itemPath>
         <itemPath>../../Microchip/TCPIP Stack/StackTsk.c</itemPath>
         <itemPath>../../Microchip/TCPIP Stack/TCP.c</itemPath>
-        <itemPath>../../Microchip/TCPIP Stack/Tick.c</itemPath>
         <itemPath>../../Microchip/TCPIP Stack/UDP.c</itemPath>
       </logicalFolder>
       <itemPath>../source/CustomHTTPApp.c</itemPath>
       <itemPath>../source/MergeBoardWebPage.s</itemPath>
-      <itemPath>../source/Tick.c</itemPath>
-      <itemPath>../source/adc.c</itemPath>
+      <itemPath>/home/devin/Versioned/git_folder/subjugator_pic/MergeBoardAPP/source/Tick.c</itemPath>
       <itemPath>../source/blockingDelay.c</itemPath>
       <itemPath>../source/main.c</itemPath>
       <itemPath>../source/mavg.c</itemPath>
@@ -95,6 +93,7 @@
       <itemPath>../source/mcp4821.c</itemPath>
       <itemPath>../source/messages.c</itemPath>
       <itemPath>../source/simplequeue.c</itemPath>
+      <itemPath>../source/taskADC.h.c</itemPath>
       <itemPath>../source/taskParser.c</itemPath>
       <itemPath>../source/taskPublisher.c</itemPath>
       <itemPath>../source/taskTCPIP.c</itemPath>
@@ -115,8 +114,8 @@
         <targetHeader></targetHeader>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>C30</languageToolchain>
-        <compilerSet>MPASMWIN</compilerSet>
-        <platform>3</platform>
+        <languageToolchainVersion></languageToolchainVersion>
+        <platform>2</platform>
       </toolsSet>
       <compileType>
         <linkerTool>
@@ -127,15 +126,15 @@
       <C30>
         <property key="scalar-model" value="default"/>
         <property key="extra-include-directories"
-                  value="../include;../../Microchip/Include;../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../../FreeRTOS/Source/include;../../Microchip/Include/TCPIP Stack;"/>
+                  value="../include;../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../../FreeRTOS/Source/include;../../Microchip/Include;../../Microchip/Include/TCPIP Stack"/>
         <property key="preprocessor-macros" value="MPLAB_DSPIC_PORT"/>
         <property key="data-model" value="large-data"/>
         <property key="enable-all-warnings" value="true"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="enable-short-double" value="false"/>
-        <property key="enable-ansi-warnings" value="false"/>
-        <property key="optimization-level" value="1"/>
         <property key="enable-procedural-abstraction" value="false"/>
+        <property key="optimization-level" value="1"/>
+        <property key="enable-ansi-warnings" value="false"/>
         <property key="enable-fatal-warnings" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="enable-omit-frame-pointer" value="false"/>
@@ -146,7 +145,7 @@
       </C30>
       <C30-AS>
         <property key="omit-debug-dirs" value="false"/>
-        <property key="extra-include-directories-for-assembler" value="..;"/>
+        <property key="extra-include-directories-for-assembler" value=".."/>
         <property key="preprocessor-macros" value=""/>
         <property key="list-file" value=""/>
         <property key="list-source" value="false"/>
@@ -154,7 +153,7 @@
         <property key="relax" value="false"/>
         <property key="warning-level" value="emit-warnings"/>
         <property key="extra-include-directories-for-preprocessor"
-                  value="../include;../../Microchip/Include;../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../../FreeRTOS/Source/include;../../Microchip/Include/TCPIP Stack;"/>
+                  value="../include;../../Microchip/Include;../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../../FreeRTOS/Source/include;../../Microchip/Include/TCPIP Stack"/>
         <property key="list-section-info" value="false"/>
         <property key="omit-forms" value="false"/>
         <property key="list-symbols" value="false"/>
@@ -179,20 +178,66 @@
         <property key="enable-handles" value="true"/>
         <property key="enable-data-init" value="true"/>
         <property key="secure-flash" value="no_flash"/>
-        <property key="generate-cross-reference-file" value="false"/>
-        <property key="report-memory-usage" value="true"/>
         <property key="boot-write-protect" value="no_write_protect"/>
         <property key="boot-flash" value="no_flash"/>
+        <property key="report-memory-usage" value="true"/>
+        <property key="generate-cross-reference-file" value="false"/>
         <property key="input-libraries" value=""/>
         <property key="secure-ram" value="no_ram"/>
-        <property key="enable-check-sections" value="true"/>
+        <property key="enable-check-sections" value="false"/>
         <property key="enable-default-isr" value="true"/>
         <property key="symbol-stripping" value="keep-all"/>
         <property key="boot-ram" value="no_ram"/>
-        <property key="extra-lib-directories" value="..;"/>
         <property key="secure-eeprom" value="no_eeprom"/>
+        <property key="extra-lib-directories" value=".."/>
       </C30-LD>
+      <C30Global>
+      </C30Global>
       <PICkit3PlatformTool>
+        <property key="UART 2" value="true"/>
+        <property key="UART 1" value="true"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="memories.id" value="false"/>
+        <property key="ToolFirmwareFilePath" value=""/>
+        <property key="memories.eeprom" value="false"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="DUAL COMPARATOR" value="true"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="INPUT CAPTURE 8" value="true"/>
+        <property key="INPUT CAPTURE 7" value="true"/>
+        <property key="INPUT CAPTURE 2" value="true"/>
+        <property key="INPUT CAPTURE 1" value="true"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="ADC 1" value="true"/>
+        <property key="OUTPUT COMPARE 8" value="true"/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="REAL TIME CLOCK AND CALENDAR" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="OUTPUT COMPARE 3" value="true"/>
+        <property key="PARALLEL MASTER/SLAVE PORT" value="true"/>
+        <property key="OUTPUT COMPARE 2" value="true"/>
+        <property key="OUTPUT COMPARE 1" value="true"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="memories.programmemory.start" value="0x0"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="voltagevalue" value="3.25"/>
+        <property key="memories.programmemory.end" value="0x157ff"/>
+        <property key="TIMER5" value="true"/>
+        <property key="TIMER4" value="true"/>
+        <property key="TIMER3" value="true"/>
+        <property key="SPI 2" value="true"/>
+        <property key="TIMER2" value="true"/>
+        <property key="SPI 1" value="true"/>
+        <property key="TIMER1" value="true"/>
+        <property key="programmertogo.imagename" value=""/>
+        <property key="hwtoolclock.instructionspeed" value=""/>
+        <property key="CRC" value="true"/>
+        <property key="I2C1" value="true"/>
+        <property key="hwtoolclock.units" value="mips"/>
+        <property key="Freeze All Other Peripherals" value="true"/>
+        <property key="programoptions.preserveprogramrange.end" value="0xff"/>
       </PICkit3PlatformTool>
     </conf>
   </confs>

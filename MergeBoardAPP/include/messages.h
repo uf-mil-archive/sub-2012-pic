@@ -21,7 +21,6 @@
 
 #include "p33Fxxxx.h"
 #include "GenericTypeDefs.h"
-#include "motor.h"
 #include "taskPublisher.h"
 
 #define MSG_FLAG        0x7E

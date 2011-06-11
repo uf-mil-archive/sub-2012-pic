@@ -4,7 +4,6 @@
 #include "p33FJ128MC804.h"
 #include "taskUART.h"
 #include "fixMath.h"
-#include "motor.h"
 #include "mavg.h"
 
 /* Configure these for the A/D settings and hardware */

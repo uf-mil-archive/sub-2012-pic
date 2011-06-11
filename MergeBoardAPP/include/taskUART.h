@@ -12,9 +12,9 @@
 
 #include "messages.h"
 #include "taskParser.h"
+#include "mcp25XX640A.h"
 
-#include <stdio.h>
-#include <stdarg.h>
+#include <string.h>
 #include <stdlib.h>
 
 #define UART_QUEUE_SIZE     10

@@ -54,12 +54,9 @@ void taskPublisher(void* pvParameter)
         // Block here until the timeout has passed
         vTaskDelayUntil(&previousWakeTime, gPublishPeriod);
 
-        if(!hMotorData) // Nothing to publish - this is also necessary since
+        //if(!hMotorData) // Nothing to publish - this is also necessary since
                         // the packet builders don't check if motor data is valid.
-            continue;
-        
-        if((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) == MTR_CODE_NONE)
-            continue;
+        //    continue;
 
         BYTE* packet;
         length = BuildOutgoingPacket(&packet, previousWakeTime);
