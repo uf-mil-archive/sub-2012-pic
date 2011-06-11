@@ -16,7 +16,6 @@
 #define PBL_MAX_RATE        200
 
 extern xTaskHandle hPublisherTask;
-extern portBASE_TYPE gPublishPeriod;   // Publishing period in ms
 
 void xPublisherTaskInit(void);
 
@@ -24,6 +23,6 @@ void taskPublisher(void* pvParameter);
 
 void SetNewPublishRate(INT16 rate);
 void SetSubscriber(INT16 transport, BOOL state);
-inline void LostSubscribers(void); // Called when the heartbeat is gone - basically stops publishing
+inline void LostSubscribers(void); // Called when connection is lost and we should shutup
 
 #endif

@@ -14,7 +14,7 @@
 
 #define STACK_SIZE_PARSER       (configMINIMAL_STACK_SIZE * 6)
 
-#define PARSER_QUEUE_SIZE       20
+#define PARSER_QUEUE_SIZE       20  // Increase this if packets get dropped
 
 extern xTaskHandle hParserTask;
 extern xQueueHandle hParserQueue;

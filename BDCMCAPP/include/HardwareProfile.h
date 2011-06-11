@@ -5,6 +5,9 @@
 #error "Hardware Profile for selected processor does not exist"
 #endif // Allowable processors
 
+
+// Paul - change this number to force the EPROM to update to defaults
+// useful if you change them without access to webpage.
 // The version number of this application number
 #define APP_VERSION		0x01
 
