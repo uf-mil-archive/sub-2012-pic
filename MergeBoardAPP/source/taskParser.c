@@ -3,6 +3,11 @@
 xTaskHandle hParserTask;
 xQueueHandle hParserQueue;
 
+
+// Paul - you shouldn't need to add any changes here. This will get
+// messages from the UDP or serial already, and invoke the ParseNewPacket
+// in messages.c. You will need to edit that function
+
 void xParserTaskInit(void)
 {
     // Allocate the receive queue for the task

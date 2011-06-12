@@ -66,6 +66,7 @@
 #include "taskUART.h"
 #include "taskParser.h"
 #include "taskPublisher.h"
+#include "taskADC.h"
 
 #include <math.h>
 
@@ -318,17 +319,19 @@ static HTTP_IO_RESULT HTTPNetConfig(void)
         }
     }
 
-
-    // All parsing complete!  Save new settings and force a reboot
-    SaveAppConfig(&newAppConfig);
-    SaveUDPConfig(&newUDPConfig);
-
     // Strip out the relevant parts for controller/local address
     newCommonData.Address = newAppConfig.MyIPAddr.byte.MB;
     newCommonData.ControllerAdd = newUDPConfig.ControllerIP.byte.MB;
     newCommonData.MultiCastAddress = 255;
-    
-    SaveCommonMessageData(&newCommonData);
+
+    // All parsing complete!  Save new settings and force a reboot
+    xSemaphoreTake(hCommonSPIMutex, portMAX_DELAY); // This blocks until the semaphore is free
+    {
+        SaveAppConfig(&newAppConfig);
+        SaveUDPConfig(&newUDPConfig);
+        SaveCommonMessageData(&newCommonData);
+    }
+    xSemaphoreGive(hCommonSPIMutex);
 
     // Set the board to reboot and display reconnecting information
     strcpypgm2ram((char*)curHTTP.data, "reboot.htm?");
@@ -393,7 +396,11 @@ static HTTP_IO_RESULT HTTPSerialConfig(void)
         }
     }
 
-    SaveUARTConfig(&gUARTConfig);
+    xSemaphoreTake(hCommonSPIMutex, portMAX_DELAY); // This blocks until the semaphore is free
+    {
+        SaveUARTConfig(&gUARTConfig);
+    }
+    xSemaphoreGive(hCommonSPIMutex);
 
     // Set the board to reboot and display reconnecting information
     strcpypgm2ram((char*)curHTTP.data, "reboot.htm?");
@@ -603,6 +610,13 @@ void HTTPPrint_task_stack(WORD num)
             TCPPutString(sktHTTP, used);
             TCPPut(sktHTTP, '/');
             uitoa(STACK_SIZE_PARSER*sizeof(portSTACK_TYPE), max);
+            TCPPutString(sktHTTP, max);
+            break;
+        case 4:
+            uitoa(uxTaskGetStackHighWaterMark(hADCTask)*sizeof(portSTACK_TYPE), used);
+            TCPPutString(sktHTTP, used);
+            TCPPut(sktHTTP, '/');
+            uitoa(STACK_SIZE_ADC*sizeof(portSTACK_TYPE), max);
             TCPPutString(sktHTTP, max);
             break;
         default:

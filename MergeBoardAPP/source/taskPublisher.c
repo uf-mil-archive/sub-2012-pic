@@ -2,7 +2,7 @@
 #include "taskTCPIP.h"
 
 xTaskHandle hPublisherTask;
-portBASE_TYPE gPublishPeriod;
+static portBASE_TYPE gPublishPeriod;
 
 void SetNewPublishRate(INT16 rate)
 {
@@ -42,7 +42,7 @@ void xPublisherTaskInit(void)
 
 void taskPublisher(void* pvParameter)
 {
-    INT16 length;
+    INT16 length, estopLength;
     portTickType previousWakeTime;
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
@@ -54,18 +54,34 @@ void taskPublisher(void* pvParameter)
         // Block here until the timeout has passed
         vTaskDelayUntil(&previousWakeTime, gPublishPeriod);
 
+        // Paul - here is where you hook the functions you want to call to build
+        // your packets. Presently, I can think of two - the estop which is sent to
+        // broadcast UDP, and then your standard packet which you will send to
+        // the controlling device.
+
+
+        // Paul - Check here to see if you have valid structs to publish from, no
+        // reading null pointers!
         //if(!hMotorData) // Nothing to publish - this is also necessary since
                         // the packet builders don't check if motor data is valid.
         //    continue;
 
-        BYTE* packet;
+        BYTE* packet, estopPacket;
         length = BuildOutgoingPacket(&packet, previousWakeTime);
 
+        // Paul - Build estop packet here - always publish this, even if you don't have
+        // current subscribers (hence, no if statement). You might want to include
+        // a timer to force this to publish at a reduced rate from normal, for instance,
+        // 20Hz, or even 10Hz. You will most likely run this loop at about 100Hz.
+
+        //estopLength = BuildOutgoingESTOPPacket(&estopPacket, previousWakeTime);
+        //UDPSend(estopPacket, estopLength, MSG_SENDER_BROADCAST, MSG_DONT_FREE_BUFFER); // Send over UDP broadcast
+        
         // Publish to who?
         if(gOutgoingMsgData.Subscribers & MSG_SENDER_UART)
             COMSend(packet, length, MSG_DONT_FREE_BUFFER); // Send over UART
 
-	//UDPSend(packet, length, MSG_SENDER_BROADCAST, MSG_DONT_FREE_BUFFER); // Send over UDP
+	
 
         if(gOutgoingMsgData.Subscribers & MSG_SENDER_ETH)
             UDPSend(packet, length, MSG_SENDER_ETH, MSG_DONT_FREE_BUFFER); // Send over UDP
