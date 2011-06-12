@@ -256,7 +256,7 @@
 //		Define the address of the CONFIG fuses
 /////////////////////////////////////////////////////////////////////////// 
 #if defined __dsPIC33FJ128MC804__
-	#define CONFIG_BASE		(DWORD) 0x157FE	
+    #define CONFIG_BASE		(DWORD) 0x157FE     // End of user memory
 #else
 	#error platform.h - missing CONFIG_BASE parameter
 #endif
