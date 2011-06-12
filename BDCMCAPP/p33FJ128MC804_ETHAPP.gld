@@ -75,33 +75,6 @@ SECTIONS
         SHORT(0);
   } >reset
 
-/*
-  ** Bootloader UserJump and CodeState
-  **    the first four instruction locations are reserved 
-  **       for the user application reset vector
-  **    the next four instruction locations contain a goto 0
-  **       instruction in the event the user vector does not
-  **       perform a goto to the user code
-  **    the next instruction location is used for the CodeState flag
-  **    the next instruction location is used for the image load ID
-  */
-
-  .userjump :
-  {
-        SHORT(0xffff);
-        SHORT(0xffff);
-        SHORT(0xffff);
-        SHORT(0xffff);
-        SHORT(0x0000);
-        SHORT(0x0004);
-        SHORT(0x0000);
-        SHORT(0x0000);
-        SHORT(0xffff);
-        SHORT(0xffff);
-        SHORT(0xffff);
-        SHORT(0xffff);
-  } >userjump
-
 
   /*
   ** Interrupt Vector Tables

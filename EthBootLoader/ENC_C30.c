@@ -187,7 +187,7 @@
 // 		Setup the User's Application Jump Vector Table
 ///////////////////////////////////////////////////////////////////////////
 BYTE MAC[] __attribute__((space(prog))) __attribute__ ((address(P_MAC))) = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
-IP_ADDR Def_IP __attribute__ ((space(prog))) __attribute__ ((address(P_Def_IP))) = {192,168,2,200};
+IP_ADDR Def_IP __attribute__ ((space(prog))) __attribute__ ((address(P_Def_IP))) = {192,168,1,200};
 
 
 ///////////////////////////////////////////////////////////////////////////

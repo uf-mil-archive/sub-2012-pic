@@ -97,6 +97,7 @@ file_069=TCPIP
 file_070=TCPIP
 file_071=.
 file_072=.
+file_073=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -171,6 +172,7 @@ file_069=no
 file_070=no
 file_071=no
 file_072=no
+file_073=no
 [OTHER_FILES]
 file_000=no
 file_001=no
@@ -245,6 +247,7 @@ file_069=no
 file_070=no
 file_071=no
 file_072=no
+file_073=no
 [FILE_INFO]
 file_000=source\main.c
 file_001=source\taskUART.c
@@ -319,6 +322,7 @@ file_069=..\Microchip\Include\TCPIP Stack\TCPIP.h
 file_070=..\Microchip\Include\TCPIP Stack\UDP.h
 file_071=include\HTTPPrint.h
 file_072=include\Tick.h
+file_073=p33FJ128MC804_ETHAPP.gld
 [SUITE_INFO]
 suite_guid={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 suite_state=

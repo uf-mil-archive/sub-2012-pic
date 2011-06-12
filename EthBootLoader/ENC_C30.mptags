@@ -1,0 +1,897 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+AD1PCFGL_Def::0xFFF0	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	52;"	d	line:52
+ARP::0x0806	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	15;"	d	line:15
+ARP_Pkt_Len::28	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	27;"	d	line:27
+ARP_REPLY::0x0002	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	17;"	d	line:17
+ARP_REQUEST::0x0001	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	16;"	d	line:16
+AbsAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	381;"	v	line:381
+Addr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	929;"	l	line:929
+AddrH	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	397;"	m	line:397	file:
+AddrL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	398;"	m	line:398	file:
+Address	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1532;"	l	line:1532
+All	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	265;"	m	line:265	file:
+All	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	289;"	m	line:289	file:
+BCD2Bin::(x)((x>>4*10)+(x&0x0f))	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	442;"	d	line:442	file:
+BDCMC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	23;"	d	line:23
+BFC::(0b10100000)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	69;"	d	line:69
+BFCReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1349;"	f	line:1349	signature:(BYTE Address, BYTE Data)
+BFS::(0b10000000)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	68;"	d	line:68
+BFSReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1372;"	f	line:1372	signature:(BYTE Address, BYTE Data)
+BOOLEAN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	20;"	t	line:20
+BOOTLOADER_BASE::(DWORD)0x00400	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	231;"	d	line:231
+BOOTLOADER_END::(DWORD)0x02fff	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	235;"	d	line:235
+BOOTLOADER_END::(DWORD)0x03fff	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	233;"	d	line:233
+BYTE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	13;"	t	line:13
+BYTE_VAL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	37;"	t	line:37
+BackpressureApplied	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	97;"	m	line:97
+BankSel	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1415;"	f	line:1415	signature:(WORD Target)
+Base	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	395;"	m	line:395	file:
+BaseAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	787;"	l	line:787
+BaseAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	868;"	l	line:868
+Blk_temp	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	347;"	v	line:347
+Broadcast	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	116;"	m	line:116
+Broadcast	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	87;"	m	line:87
+Broadcast_MAC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	235;"	v	line:235
+BusyHold	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	349;"	v	line:349
+BusyHoldCnt::5	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	312;"	d	line:312	file:
+BusyLEDCount	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	226;"	v	line:226
+ByteCount	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	106;"	m	line:106
+ByteCount	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	80;"	m	line:80
+BytesTransmittedOnWire	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	94;"	m	line:94
+CBusyLEDCount::100	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	225;"	d	line:225	file:
+CHealthLEDCount::100	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	223;"	d	line:223	file:
+CONFIG_BASE::(DWORD)0x157FE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	259;"	d	line:259
+CONSOLE_BAUDRATE::115200	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	54;"	d	line:54
+CONSOLE_BRG::U1BRG	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	133;"	d	line:133
+CONSOLE_BRG::U2BRG	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	146;"	d	line:146
+CONSOLE_MODE::U1MODE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	134;"	d	line:134
+CONSOLE_MODE::U2MODE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	147;"	d	line:147
+CONSOLE_OERR::U1STAbits.OERR	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	141;"	d	line:141
+CONSOLE_OERR::U2STAbits.OERR	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	154;"	d	line:154
+CONSOLE_REG::SYSCLK/8/CONSOLE_BAUDRATE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	127;"	d	line:127
+CONSOLE_RXIE::IEC0bits.U1RXIE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	144;"	d	line:144
+CONSOLE_RXIE::IEC1bits.U2RXIE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	157;"	d	line:157
+CONSOLE_RXIF::IFS0bits.U1RXIF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	140;"	d	line:140
+CONSOLE_RXIF::IFS1bits.U2RXIF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	153;"	d	line:153
+CONSOLE_RXIP::IPC2bits.U1RXIP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	143;"	d	line:143
+CONSOLE_RXIP::IPC7bits.U2RXIP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	156;"	d	line:156
+CONSOLE_RXREG::U1RXREG	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	142;"	d	line:142
+CONSOLE_RXREG::U2RXREG	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	155;"	d	line:155
+CONSOLE_STA::U1STA	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	135;"	d	line:135
+CONSOLE_STA::U2STA	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	148;"	d	line:148
+CONSOLE_TXEN::U1STAbits.UTXEN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	137;"	d	line:137
+CONSOLE_TXEN::U2STAbits.UTXEN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	150;"	d	line:150
+CONSOLE_TXREG::U1TXREG	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	138;"	d	line:138
+CONSOLE_TXREG::U2TXREG	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	151;"	d	line:151
+CONSOLE_UART::2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	57;"	d	line:57
+CONSOLE_UARTEN::U1MODEbits.UARTEN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	136;"	d	line:136
+CONSOLE_UARTEN::U2MODEbits.UARTEN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	149;"	d	line:149
+CONSOLE_UTXBF::U1STAbits.UTXBF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	139;"	d	line:139
+CONSOLE_UTXBF::U2STAbits.UTXBF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	152;"	d	line:152
+CONTROL_PORT::0x4004	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	204;"	d	line:204	file:
+CP_Cmd	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	369;"	v	line:369
+CP_Dump::5	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	329;"	d	line:329	file:
+CP_Erase::6	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	330;"	d	line:330	file:
+CP_Erase_EE::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	332;"	d	line:332	file:
+CP_Erase_PGM::7	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	331;"	d	line:331	file:
+CP_Invalidate::2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	326;"	d	line:326	file:
+CP_LDR_Mode::3	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	327;"	d	line:327	file:
+CP_New_Code::4	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	328;"	d	line:328	file:
+CP_Reset::9	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	333;"	d	line:333	file:
+CP_Seq	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	368;"	v	line:368
+CP_SetIP::1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	325;"	d	line:325	file:
+CP_Status::0	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	324;"	d	line:324	file:
+CP_VarLen	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	379;"	v	line:379
+CP_payload_len::19	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	316;"	d	line:316	file:
+CRCError	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	111;"	m	line:111
+CRCError	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	82;"	m	line:82
+CStatusLEDCount::255	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	221;"	d	line:221	file:
+CTMR_Activity::1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	208;"	d	line:208	file:
+C_TMR0_1ms::256-(SYSCLK/(64*2*1000))	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	207;"	d	line:207	file:
+CarrierPreviouslySeen	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	109;"	m	line:109
+Cfg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	294;"	m	line:294	file:
+Checksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	83;"	m	line:83	struct:_IP_HEADER
+ChkMax	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	401;"	m	line:401	file:
+ChkSumErr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	282;"	m	line:282	file:
+CodeState::(DWORD)(PARAM_BASE+8)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	248;"	d	line:248
+CodeStateValid	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	703;"	f	line:703	signature:(void)
+CodeViolation	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	110;"	m	line:110
+CollisionCount	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	81;"	m	line:81
+ControlFrame	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	118;"	m	line:118
+ControlFrame	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	95;"	m	line:95
+Count	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	346;"	v	line:346
+Counter	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	377;"	v	line:377
+Current_ERDPTH	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2257;"	l	line:2257
+Current_ERDPTL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2257;"	l	line:2257
+Current_Offset_LSB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2256;"	l	line:2256
+Current_Offset_MSB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2256;"	l	line:2256
+DA_IP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	342;"	v	line:342
+DRESULT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	11;"	t	line:11
+DSTATUS	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	10;"	t	line:10
+DUPLEX	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	54;"	t	line:54
+DWORD	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	17;"	t	line:17
+DWORD_VAL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	104;"	t	line:104
+DataLo	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	387;"	v	line:387
+Data_Seq	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	338;"	v	line:338
+Def_IP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	190;"	v	line:190
+DeselectENC::(ENC_CS=1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1101;"	d	line:1101	file:
+DestIPAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	85;"	m	line:85	struct:_IP_HEADER
+DestMACAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	58;"	m	line:58	struct:_ETHER_HEADER
+DestMACAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	65;"	m	line:65	struct:_IEEE_HEADER
+Dest_Port	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	98;"	m	line:98	struct:_UDP_HEADER
+DoControl	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	453;"	p	line:453	file:	signature:(UDP_HEADER* UDP_Hdr, IP_ADDR* RemoteIP, MAC_ADDR* RemoteMAC)
+Done	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	85;"	m	line:85
+DribbleNibble	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	117;"	m	line:117
+Dummy	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	292;"	m	line:292	file:
+EBSTCON::0x307	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	239;"	d	line:239
+EBSTCON_BISTST::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	758;"	d	line:758
+EBSTCON_PSEL::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	754;"	d	line:754
+EBSTCON_PSV0::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	753;"	d	line:753
+EBSTCON_PSV1::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	752;"	d	line:752
+EBSTCON_PSV2::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	751;"	d	line:751
+EBSTCON_TME::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	757;"	d	line:757
+EBSTCON_TMSEL0::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	756;"	d	line:756
+EBSTCON_TMSEL1::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	755;"	d	line:755
+EBSTCSH::0x309	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	241;"	d	line:241
+EBSTCSL::0x308	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	240;"	d	line:240
+EBSTSD::0x306	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	238;"	d	line:238
+ECHO::0x08	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	33;"	d	line:33
+ECOCON::0x315	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	253;"	d	line:253
+ECOCON_COCON0::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	768;"	d	line:768
+ECOCON_COCON1::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	767;"	d	line:767
+ECOCON_COCON2::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	766;"	d	line:766
+ECON1::0x1F	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	161;"	d	line:161
+ECON1_BSEL0::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	678;"	d	line:678
+ECON1_BSEL1::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	677;"	d	line:677
+ECON1_CSUMEN::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	674;"	d	line:674
+ECON1_DMAST::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	673;"	d	line:673
+ECON1_RXEN::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	676;"	d	line:676
+ECON1_RXRST::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	672;"	d	line:672
+ECON1_TXRST::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	671;"	d	line:671
+ECON1_TXRTS::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	675;"	d	line:675
+ECON2::0x1E	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	160;"	d	line:160
+ECON2_AUTOINC::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	665;"	d	line:665
+ECON2_PKTDEC::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	666;"	d	line:666
+ECON2_PWRSV::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	667;"	d	line:667
+ECON2_VRPS::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	668;"	d	line:668
+EDMACSH::0x17	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	153;"	d	line:153
+EDMACSL::0x16	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	152;"	d	line:152
+EDMADSTH::0x15	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	151;"	d	line:151
+EDMADSTL::0x14	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	150;"	d	line:150
+EDMANDH::0x13	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	149;"	d	line:149
+EDMANDL::0x12	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	148;"	d	line:148
+EDMASTH::0x11	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	147;"	d	line:147
+EDMASTL::0x10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	146;"	d	line:146
+EE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	295;"	m	line:295	file:
+EECntr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	386;"	v	line:386
+EFLOCON::0x317	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	255;"	d	line:255
+EFLOCON_FCEN0::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	773;"	d	line:773
+EFLOCON_FCEN1::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	772;"	d	line:772
+EFLOCON_FULDPXS::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	771;"	d	line:771
+EHT0::0x100	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	164;"	d	line:164
+EHT1::0x101	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	165;"	d	line:165
+EHT2::0x102	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	166;"	d	line:166
+EHT3::0x103	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	167;"	d	line:167
+EHT4::0x104	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	168;"	d	line:168
+EHT5::0x105	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	169;"	d	line:169
+EHT6::0x106	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	170;"	d	line:170
+EHT7::0x107	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	171;"	d	line:171
+EIE::0x1B	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	157;"	d	line:157
+EIE_DMAIE::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	641;"	d	line:641
+EIE_INTIE::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	639;"	d	line:639
+EIE_LINKIE::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	642;"	d	line:642
+EIE_PKTIE::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	640;"	d	line:640
+EIE_RXERIE::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	646;"	d	line:646
+EIE_TXERIE::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	645;"	d	line:645
+EIE_TXIE::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	643;"	d	line:643
+EIE_WOLIE::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	644;"	d	line:644
+EIR::0x1C	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	158;"	d	line:158
+EIR_DMAIF::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	650;"	d	line:650
+EIR_LINKIF::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	651;"	d	line:651
+EIR_PKTIF::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	649;"	d	line:649
+EIR_RXERIF::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	655;"	d	line:655
+EIR_TXERIF::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	654;"	d	line:654
+EIR_TXIF::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	652;"	d	line:652
+EIR_WOLIF::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	653;"	d	line:653
+ENC28J60_H	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	40;"	d	line:40
+ENC_CS::LATBbits.LATB9	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	109;"	d	line:109
+ENC_SPIBUF::SPI1BUF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	169;"	d	line:169
+ENC_SPIBUF::SPI2BUF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	176;"	d	line:176
+ENC_SPICON1::SPI1CON1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	167;"	d	line:167
+ENC_SPICON1::SPI2CON1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	174;"	d	line:174
+ENC_SPICON1bits::SPI1CON1bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	168;"	d	line:168
+ENC_SPICON1bits::SPI2CON1bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	175;"	d	line:175
+ENC_SPISTAT::SPI1STAT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	165;"	d	line:165
+ENC_SPISTAT::SPI2STAT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	172;"	d	line:172
+ENC_SPISTAT_RBF::SPI1STATbits.SPIRBF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	170;"	d	line:170
+ENC_SPISTAT_RBF::SPI2STATbits.SPIRBF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	177;"	d	line:177
+ENC_SPISTATbits::SPI1STATbits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	166;"	d	line:166
+ENC_SPISTATbits::SPI2STATbits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	173;"	d	line:173
+ENC_SPI_PORT::2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	108;"	d	line:108
+ENC_SPI_PRESCALE_PRI::2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	106;"	d	line:106
+ENC_SPI_PRESCALE_SEC::7	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	107;"	d	line:107
+ENC_SPI_read	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1055;"	f	line:1055	signature:(char command)
+ENC_SPI_write	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1075;"	f	line:1075	signature:(char data)
+ENC_SPI_write	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	452;"	p	line:452	file:	signature:(char data)
+ENC_SW_Reset	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1464;"	f	line:1464	signature:(void)
+EPAUSH::0x319	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	257;"	d	line:257
+EPAUSL::0x318	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	256;"	d	line:256
+EPKTCNT::0x119	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	189;"	d	line:189
+EPMCSH::0x111	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	181;"	d	line:181
+EPMCSL::0x110	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	180;"	d	line:180
+EPMM0::0x108	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	172;"	d	line:172
+EPMM1::0x109	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	173;"	d	line:173
+EPMM2::0x10A	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	174;"	d	line:174
+EPMM3::0x10B	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	175;"	d	line:175
+EPMM4::0x10C	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	176;"	d	line:176
+EPMM5::0x10D	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	177;"	d	line:177
+EPMM6::0x10E	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	178;"	d	line:178
+EPMM7::0x10F	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	179;"	d	line:179
+EPMOH::0x115	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	185;"	d	line:185
+EPMOL::0x114	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	184;"	d	line:184
+ERDPTH::0x01	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	131;"	d	line:131
+ERDPTL::0x00	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	130;"	d	line:130
+EREVID::0x312	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	250;"	d	line:250
+ERXFCON::0x118	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	188;"	d	line:188
+ERXFCON_ANDOR::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	700;"	d	line:700
+ERXFCON_BCEN::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	706;"	d	line:706
+ERXFCON_CRCEN::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	701;"	d	line:701
+ERXFCON_HTEN::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	704;"	d	line:704
+ERXFCON_MCEN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1738;"	l	line:1738
+ERXFCON_MCEN::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	705;"	d	line:705
+ERXFCON_MPEN::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	703;"	d	line:703
+ERXFCON_PMEN::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	702;"	d	line:702
+ERXFCON_UCEN::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	699;"	d	line:699
+ERXNDH::0x0B	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	141;"	d	line:141
+ERXNDL::0x0A	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	140;"	d	line:140
+ERXRDPTH::0x0D	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	143;"	d	line:143
+ERXRDPTL::0x0C	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	142;"	d	line:142
+ERXSTH::0x09	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	139;"	d	line:139
+ERXSTL::0x08	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	138;"	d	line:138
+ERXWRPTH::0x0F	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	145;"	d	line:145
+ERXWRPTL::0x0E	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	144;"	d	line:144
+ESTAT::0x1D	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	159;"	d	line:159
+ESTAT_CLKRDY::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	662;"	d	line:662
+ESTAT_INT::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	658;"	d	line:658
+ESTAT_LATECOL::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	659;"	d	line:659
+ESTAT_RXBUSY::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	660;"	d	line:660
+ESTAT_TXABRT::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	661;"	d	line:661
+ETHER_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	61;"	t	line:61
+ETXNDH::0x07	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	137;"	d	line:137
+ETXNDL::0x06	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	136;"	d	line:136
+ETXSTH::0x05	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	135;"	d	line:135
+ETXSTL::0x04	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	134;"	d	line:134
+EWOLIE::0x116	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	186;"	d	line:186
+EWOLIE_AWOLIE::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	682;"	d	line:682
+EWOLIE_BCWOLIE::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	687;"	d	line:687
+EWOLIE_HTWOLIE::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	685;"	d	line:685
+EWOLIE_MCWOLIE::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	686;"	d	line:686
+EWOLIE_MPWOLIE::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	684;"	d	line:684
+EWOLIE_PMWOLIE::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	683;"	d	line:683
+EWOLIE_UCWOLIE::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	681;"	d	line:681
+EWOLIR::0x117	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	187;"	d	line:187
+EWOLIR_AWOLIF::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	691;"	d	line:691
+EWOLIR_BCWOLIF::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	696;"	d	line:696
+EWOLIR_HTWOLIF::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	694;"	d	line:694
+EWOLIR_MCWOLIF::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	695;"	d	line:695
+EWOLIR_MPWOLIF::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	693;"	d	line:693
+EWOLIR_PMWOLIF::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	692;"	d	line:692
+EWOLIR_UCWOLIF::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	690;"	d	line:690
+EWRPTH::0x03	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	133;"	d	line:133
+EWRPTL::0x02	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	132;"	d	line:132
+EraseBlock	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	439;"	p	line:439	file:	signature:(BYTE Page, WORD Addr)
+EraseBlock	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	819;"	f	line:819	signature:(BYTE Page, WORD Addr)
+ExcessiveDefer	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	89;"	m	line:89
+FALSE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	20;"	e	line:20	enum:_BOOLEAN
+FALSE::0	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	110;"	d	line:110
+FCY::XTAL_FREQ*PLLMODE/2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	125;"	d	line:125
+FIP_Checksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	424;"	m	line:424	file:
+FIP_DestIPAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	426;"	m	line:426	file:
+FIP_Frag	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	421;"	m	line:421	file:
+FIP_ID	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	420;"	m	line:420	file:
+FIP_Length	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	419;"	m	line:419	file:
+FIP_PDU	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	429;"	m	line:429	file:
+FIP_Protocol	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	423;"	m	line:423	file:
+FIP_SourceIPAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	425;"	m	line:425	file:
+FIP_TOS	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	418;"	m	line:418	file:
+FIP_TTL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	422;"	m	line:422	file:
+FIP_VerF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	417;"	m	line:417	file:
+FMAC_DA	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	412;"	m	line:412	file:
+FMAC_SA	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	413;"	m	line:413	file:
+FMAC_Type	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	414;"	m	line:414	file:
+FRESULT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	12;"	t	line:12
+FULL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	52;"	e	line:52	enum:_DUPLEX
+FaddrH	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	373;"	v	line:373
+FaddrL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	374;"	v	line:374
+FaddrU	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	372;"	v	line:372
+Flags_Frag	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	80;"	m	line:80	struct:_IP_HEADER
+Giant	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	92;"	m	line:92
+HALF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	51;"	e	line:51	enum:_DUPLEX
+HB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	65;"	m	line:65	struct:_DWORD_VAL::<anonymous>
+HEX_RCD	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	260;"	t	line:260	file:
+HIGH::(a)((a>>8)&0x00FF)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	211;"	d	line:211	file:
+HW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	60;"	m	line:60	struct:_DWORD_VAL::<anonymous>
+HWver	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	464;"	v	line:464
+HealthHold	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	350;"	v	line:350
+HealthHoldCnt::5	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	313;"	d	line:313	file:
+HealthLEDCount	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	224;"	v	line:224
+HexByte	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	378;"	v	line:378
+HiAddrErr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	281;"	m	line:281	file:
+Host_CP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	385;"	v	line:385
+Host_IP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	384;"	v	line:384
+Host_MAC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	383;"	v	line:383
+ICMP::1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	21;"	d	line:21
+ICMPEchoReply	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2310;"	f	line:2310	signature:(MAC_ADDR *Target_MAC, IP_ADDR *Target_IP, BYTE *ICMP_ID, BYTE *ICMP_Seq)
+ICMP_Hdr_Base	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2315;"	l	line:2315
+ICMP_Hdr_Chksum_Offset::2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2313;"	d	line:2313	file:
+ICMP_Hdr_Len::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2312;"	d	line:2312	file:
+ICMP_Hdr_Len::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	26;"	d	line:26
+ICMP_ID	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	365;"	v	line:365
+ICMP_PAD::0	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2314;"	d	line:2314	file:
+ICMP_seq	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	364;"	v	line:364
+ID	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	79;"	m	line:79	struct:_IP_HEADER
+ID_Rcd	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	283;"	m	line:283	file:
+IEEE_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	71;"	t	line:71
+IP::0x0800	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	14;"	d	line:14
+IP_ADDR	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	46;"	t	line:46
+IP_Chksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	363;"	v	line:363
+IP_DP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	367;"	v	line:367
+IP_HDR_LEN::20	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2167;"	d	line:2167	file:
+IP_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	86;"	t	line:86
+IP_HdrLen	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	359;"	v	line:359
+IP_Hdr_Base	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2170;"	l	line:2170
+IP_Hdr_Chksum_Offset::10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2168;"	d	line:2168	file:
+IP_Hdr_Len::20	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	317;"	d	line:317	file:
+IP_Hdr_Len::20	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	30;"	d	line:30
+IP_Len	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	78;"	m	line:78	struct:_IP_HEADER
+IP_OptLen	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	360;"	v	line:360
+IP_PDU_Ptr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	358;"	v	line:358
+IP_PORT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	47;"	t	line:47
+IP_Protocol	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	362;"	v	line:362
+IP_SP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	366;"	v	line:366
+IP_ver4::4;supportedIPversion	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	11;"	d	line:11
+ImageID::(DWORD)(PARAM_BASE+12)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	249;"	d	line:249
+LB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	64;"	m	line:64	struct:_DWORD_VAL::<anonymous>
+LDR_Mode	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	274;"	m	line:274	file:
+LD_DWORD::(ptr)(*(DWORD*)(BYTE*)(ptr))	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	114;"	d	line:114
+LD_WORD::(ptr)(*(WORD*)(BYTE*)(ptr))	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	113;"	d	line:113
+LED0::LED_Status	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	116;"	d	line:116
+LED0_TRIS::LED_Status_TRIS	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	117;"	d	line:117
+LED_Status::LATAbits.LATA10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	114;"	d	line:114
+LED_Status_TRIS::TRISAbits.TRISA10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	115;"	d	line:115
+LIA_CP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	337;"	v	line:337
+LIA_ID	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	339;"	v	line:339
+LIA_ID_Len::2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	320;"	d	line:320	file:
+LIA_IP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	232;"	v	line:232
+LIA_MAC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	228;"	v	line:228
+LIA_MIP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	234;"	v	line:234
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1532;"	p	line:1532	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1536;"	p	line:1536	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1537;"	p	line:1537	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1570;"	p	line:1570	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1571;"	p	line:1571	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1582;"	p	line:1582	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1646;"	p	line:1646	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1648;"	p	line:1648	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1655;"	p	line:1655	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1719;"	p	line:1719	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1738;"	p	line:1738	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1743;"	p	line:1743	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1746;"	p	line:1746	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1749;"	p	line:1749	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1752;"	p	line:1752	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1753;"	p	line:1753	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1758;"	p	line:1758	file:
+LOW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1759;"	p	line:1759	file:
+LOW::(a)(a&0x00FF)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	210;"	d	line:210	file:
+LSAPControl	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	68;"	m	line:68	struct:_IEEE_HEADER
+LSB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	44;"	m	line:44	struct:_WORD_VAL::<anonymous>
+LSB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2254;"	l	line:2254
+LSB::(a)((a).v[0])	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	107;"	d	line:107
+LSW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2249;"	m	line:2249	file:
+LW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	59;"	m	line:59	struct:_DWORD_VAL::<anonymous>
+LastTPU	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	371;"	v	line:371
+LateCollision	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	91;"	m	line:91
+LdrLenErr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	271;"	m	line:271	file:
+Ldr_Cmd_Delay::3000	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	308;"	d	line:308	file:
+Ldr_Dly	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	370;"	v	line:370
+Ldr_Err	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	272;"	m	line:272	file:
+Ldr_FErr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	269;"	m	line:269	file:
+Len	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	396;"	m	line:396	file:
+Len	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	67;"	m	line:67	struct:_IEEE_HEADER
+LengthCheckError	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	112;"	m	line:112
+LengthCheckError	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	83;"	m	line:83
+LengthOutOfRange	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	113;"	m	line:113
+LengthOutOfRange	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	84;"	m	line:84
+LinkStatus::((ReadPHYReg(PHSTAT2)&PHSTAT2_	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	280;"	d	line:280
+MAADR0::0x301	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	233;"	d	line:233
+MAADR1::0x300	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	232;"	d	line:232
+MAADR2::0x303	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	235;"	d	line:235
+MAADR3::0x302	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	234;"	d	line:234
+MAADR4::0x305	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	237;"	d	line:237
+MAADR5::0x304	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	236;"	d	line:236
+MABBIPG::0x204	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	202;"	d	line:202
+MAC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	189;"	v	line:189
+MACCalcTxChecksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	447;"	p	line:447	file:	signature:(WORD base, WORD len)
+MACDiscardRx	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2018;"	f	line:2018	signature:(void)
+MACFlush	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1957;"	f	line:1957	signature:(void)
+MACGet	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1858;"	f	line:1858	signature:(void)
+MACGetArray	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1890;"	f	line:1890	signature:(BYTE *destination, WORD len)
+MACGetHeader	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2063;"	f	line:2063	signature:(MAC_ADDR *remote, WORD* type)
+MACIsTxReady	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2001;"	f	line:2001	signature:(void)
+MACLCON1::0x208	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	206;"	d	line:206
+MACLCON2::0x209	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	207;"	d	line:207
+MACON1::0x200	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	198;"	d	line:198
+MACON1_LOOPBK::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	709;"	d	line:709
+MACON1_MARXEN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1743;"	l	line:1743
+MACON1_MARXEN::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	713;"	d	line:713
+MACON1_PASSALL::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	712;"	d	line:712
+MACON1_RXPAUS::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	711;"	d	line:711
+MACON1_TXPAUS::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	710;"	d	line:710
+MACON2::0x201	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	199;"	d	line:199
+MACON2_MARST::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	716;"	d	line:716
+MACON2_MARXRST::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	718;"	d	line:718
+MACON2_MATXRST::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	720;"	d	line:720
+MACON2_RFUNRST::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	719;"	d	line:719
+MACON2_RNDRST::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	717;"	d	line:717
+MACON2_TFUNRST::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	721;"	d	line:721
+MACON3::0x202	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	200;"	d	line:200
+MACON3_FRMLNEN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1749;"	l	line:1749
+MACON3_FRMLNEN::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	730;"	d	line:730
+MACON3_FULDPX::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	731;"	d	line:731
+MACON3_HFRMEN::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	729;"	d	line:729
+MACON3_PADCFG0::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	726;"	d	line:726
+MACON3_PADCFG1::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	725;"	d	line:725
+MACON3_PADCFG2::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	724;"	d	line:724
+MACON3_PHDRLEN::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	728;"	d	line:728
+MACON3_TXCRCEN::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	727;"	d	line:727
+MACON4::0x203	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	201;"	d	line:201
+MACON4_BPEN::(1<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	735;"	d	line:735
+MACON4_DEFER::(1<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	734;"	d	line:734
+MACON4_LONGPRE::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	737;"	d	line:737
+MACON4_NOBKOFF::(1<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	736;"	d	line:736
+MACON4_PUREPRE::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	738;"	d	line:738
+MACPut	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1802;"	f	line:1802	signature:(BYTE data)
+MACPutArray	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1828;"	f	line:1828	signature:(BYTE *source, WORD len)
+MACPutHeader	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2128;"	f	line:2128	signature:(MAC_ADDR *remote, WORD type, WORD dataLen)
+MACSetDuplex	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1593;"	f	line:1593	signature:(DUPLEX DuplexState)
+MACSkip	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1926;"	f	line:1926	signature:(BYTE len)
+MAC_ADDR	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	45;"	t	line:45
+MAC_Hdr_Len::14	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	319;"	d	line:319	file:
+MAC_TX_BUFFER_COUNT::1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	46;"	d	line:46
+MAC_TX_BUFFER_SIZE::1024	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	45;"	d	line:45
+MAC_UNKNOWN::(0x0ffu)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	75;"	d	line:75
+MAC_header	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	104;"	v	line:104
+MAC_preamble	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	103;"	v	line:103
+MAC_type	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2081;"	l	line:2081
+MAIPGH::0x207	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	205;"	d	line:205
+MAIPGL::0x206	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	204;"	d	line:204
+MAMXFLH::0x20B	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	209;"	d	line:209
+MAMXFLL::0x20A	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	208;"	d	line:208
+MAPHSUP::0x20D	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	211;"	d	line:211
+MAPHSUP_RSTRMII::(1<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	741;"	d	line:741
+MAXFRAMEC::(1500u+sizeof(ETHER_HEADER)+4u	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	64;"	d	line:64
+MB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	67;"	m	line:67	struct:_DWORD_VAL::<anonymous>
+MCP_MAC_PREAMBLE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	93;"	t	line:93
+MCP_NPP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	408;"	m	line:408	file:
+MCP_Status	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	409;"	m	line:409	file:
+MCastPkt	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	270;"	m	line:270	file:
+MDef_CP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	461;"	v	line:461
+MICMD::0x212	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	216;"	d	line:216
+MICMD_MIIRD	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1571;"	l	line:1571
+MICMD_MIIRD::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	748;"	d	line:748
+MICMD_MIISCAN::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	747;"	d	line:747
+MICON::0x211	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	215;"	d	line:215
+MICON_RSTMII::(1<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	744;"	d	line:744
+MIP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	460;"	v	line:460
+MIRDH::0x219	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	223;"	d	line:223
+MIRDL::0x218	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	222;"	d	line:222
+MIREGADR::0x214	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	218;"	d	line:218
+MISTAT::0x30A	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	242;"	d	line:242
+MISTAT_BUSY::(1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	763;"	d	line:763
+MISTAT_NVALID::(1<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	761;"	d	line:761
+MISTAT_SCAN::(1<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	762;"	d	line:762
+MIWRH::0x217	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	221;"	d	line:221
+MIWRL::0x216	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	220;"	d	line:220
+MSB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	45;"	m	line:45	struct:_WORD_VAL::<anonymous>
+MSB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2254;"	l	line:2254
+MSB::(a)((a).v[1])	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	108;"	d	line:108
+MSW	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2250;"	m	line:2250	file:
+MaxOffset	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	588;"	l	line:588
+MaximumCollisions	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	90;"	m	line:90
+MirrorBlock	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	438;"	p	line:438	file:	signature:(BYTE Page, WORD Addr)
+MirrorBlock	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	767;"	f	line:767	signature:(BYTE Page, WORD Addr)
+Multicast	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	115;"	m	line:115
+Multicast	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	86;"	m	line:86
+Next	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2025;"	l	line:2025
+Next	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	355;"	v	line:355
+NextPacketLocation	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	238;"	v	line:238
+NextPacketPointer	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	91;"	m	line:91	struct:_MCP_MAC_PREAMBLE
+No_Code	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	273;"	m	line:273	file:
+NumBytes	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	375;"	v	line:375
+NxtPktOffset	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	354;"	v	line:354
+OUI	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	69;"	m	line:69	struct:_IEEE_HEADER
+OUI_1::0x10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	134;"	d	line:134	file:
+OUI_2::0x00	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	135;"	d	line:135	file:
+OUI_3::0x00	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	136;"	d	line:136	file:
+PARAM_BASE::(DWORD)0x03000	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	244;"	d	line:244
+PARAM_BASE::(DWORD)0x04000	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	242;"	d	line:242
+PARAM_END::(DWORD)(PARAM_BASE+28)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	252;"	d	line:252
+PAUSEControlFrame	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	96;"	m	line:96
+PA_DefData::0b0000011100011000	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	72;"	d	line:72
+PA_DefTRIS::0b1111100011100111	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	73;"	d	line:73
+PB_DefData::0b0000001100000000	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	81;"	d	line:81
+PB_DefTRIS::0b0000000001111111	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	82;"	d	line:82
+PC_DefData::0b0000000000000000	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	94;"	d	line:94
+PC_DefTRIS::0b1111111100100111	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	95;"	d	line:95
+PDU	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	430;"	v	line:430
+PGM	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	296;"	m	line:296	file:
+PGM_Erase	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	910;"	f	line:910	signature:(void)
+PGM_write	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	560;"	f	line:560	signature:(DWORD_VAL Addr, char* data, BYTE len)
+PHCON1::0x00	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	496;"	d	line:496
+PHCON1_PDPXMD::(1ul<<8)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	783;"	d	line:783
+PHCON1_PLOOPBK::(1ul<<14)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	781;"	d	line:781
+PHCON1_PPWRSV::(1ul<<11)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	782;"	d	line:782
+PHCON1_PRST::(1ul<<15)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	780;"	d	line:780
+PHCON2::0x10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	500;"	d	line:500
+PHCON2_FRCLNK::(1ul<<14)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	810;"	d	line:810
+PHCON2_HDLDIS::(1ul<<8)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	813;"	d	line:813
+PHCON2_JABBER::(1ul<<10)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	812;"	d	line:812
+PHCON2_TXDIS::(1ul<<13)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	811;"	d	line:811
+PHID1::0x02	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	498;"	d	line:498
+PHID2::0x03	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	499;"	d	line:499
+PHID2_PID19::(1ul<<10)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	797;"	d	line:797
+PHID2_PID20::(1ul<<11)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	796;"	d	line:796
+PHID2_PID21::(1ul<<12)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	795;"	d	line:795
+PHID2_PID22::(1ul<<13)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	794;"	d	line:794
+PHID2_PID23::(1ul<<14)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	793;"	d	line:793
+PHID2_PID24::(1ul<<15)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	792;"	d	line:792
+PHID2_PPN0::(1ul<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	803;"	d	line:803
+PHID2_PPN1::(1ul<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	802;"	d	line:802
+PHID2_PPN2::(1ul<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	801;"	d	line:801
+PHID2_PPN3::(1ul<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	800;"	d	line:800
+PHID2_PPN4::(1ul<<8)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	799;"	d	line:799
+PHID2_PPN5::(1ul<<9)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	798;"	d	line:798
+PHID2_PREV0::(1ul)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	807;"	d	line:807
+PHID2_PREV1::(1ul<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	806;"	d	line:806
+PHID2_PREV2::(1ul<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	805;"	d	line:805
+PHID2_PREV3::(1ul<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	804;"	d	line:804
+PHIE::0x12	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	502;"	d	line:502
+PHIE_PGEIE::(1ul<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	825;"	d	line:825
+PHIE_PLNKIE::(1ul<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	824;"	d	line:824
+PHIR::0x13	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	503;"	d	line:503
+PHIR_PGIF::(1ul<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	829;"	d	line:829
+PHIR_PLNKIF::(1ul<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	828;"	d	line:828
+PHLCON::0x14	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	504;"	d	line:504
+PHLCON_LACFG0::(1ul<<8)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	835;"	d	line:835
+PHLCON_LACFG1::(1ul<<9)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	834;"	d	line:834
+PHLCON_LACFG2::(1ul<<10)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	833;"	d	line:833
+PHLCON_LACFG3::(1ul<<11)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	832;"	d	line:832
+PHLCON_LBCFG0::(1ul<<4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	839;"	d	line:839
+PHLCON_LBCFG1::(1ul<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	838;"	d	line:838
+PHLCON_LBCFG2::(1ul<<6)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	837;"	d	line:837
+PHLCON_LBCFG3::(1ul<<7)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	836;"	d	line:836
+PHLCON_LFRQ0::(1ul<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	841;"	d	line:841
+PHLCON_LFRQ1::(1ul<<3)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	840;"	d	line:840
+PHLCON_STRCH::(1ul<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	842;"	d	line:842
+PHSTAT1::0x01	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	497;"	d	line:497
+PHSTAT1_JBSTAT::(1ul<<1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	789;"	d	line:789
+PHSTAT1_LLSTAT::(1ul<<2)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	788;"	d	line:788
+PHSTAT1_PFDPX::(1ul<<12)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	786;"	d	line:786
+PHSTAT1_PHDPX::(1ul<<11)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	787;"	d	line:787
+PHSTAT2::0x11	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	501;"	d	line:501
+PHSTAT2_COLSTAT::(1ul<<11)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	818;"	d	line:818
+PHSTAT2_DPXSTAT::(1ul<<9)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	820;"	d	line:820
+PHSTAT2_LSTAT::(1ul<<10)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	819;"	d	line:819
+PHSTAT2_PLRITY::(1ul<<5)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	821;"	d	line:821
+PHSTAT2_RXSTAT::(1ul<<12)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	817;"	d	line:817
+PHSTAT2_TXSTAT::(1ul<<13)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	816;"	d	line:816
+PIC_ERASE_SIZE::512	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	210;"	d	line:210
+PIC_INSTR_SIZE::4	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	213;"	d	line:213
+PIC_PAGE_ERASE::0x4042	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	219;"	d	line:219
+PIC_ROW_WRITE::0x4001	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	220;"	d	line:220
+PIC_WRITE_ROWS::(PIC_ERASE_SIZE/PIC_WRITE_SIZE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	212;"	d	line:212
+PIC_WRITE_SIZE::64	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	211;"	d	line:211
+PLLMODE::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	50;"	d	line:50
+P_Def_IP::(DWORD)(PARAM_BASE+24)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	251;"	d	line:251
+P_MAC::(DWORD)(PARAM_BASE+16)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	250;"	d	line:250
+PacketDefer	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	88;"	m	line:88
+PauseControlFrame	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	119;"	m	line:119
+PhyReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1618;"	l	line:1618
+PktLen	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	353;"	v	line:353
+PreviouslyIgnored	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	107;"	m	line:107
+PrgDone	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	279;"	m	line:279	file:
+PrgRcdDn	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	280;"	m	line:280	file:
+ProductID	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	463;"	v	line:463
+Protocol	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	70;"	m	line:70	struct:_IEEE_HEADER
+Protocol	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	82;"	m	line:82	struct:_IP_HEADER
+PutIPHeader	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2154;"	f	line:2154	signature:(IP_ADDR *Target_IP, BYTE IP_Protocol, WORD IP_Length)
+PutMACHeader::MACPutHeader	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2127;"	d	line:2127	file:
+PutTxChecksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2225;"	f	line:2225	signature:(WORD Base, WORD Len, WORD Checksum_Offset)
+PutTxChecksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	448;"	p	line:448	file:	signature:(WORD Base, WORD Len, WORD Checksum_Offset)
+PutUDP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2368;"	f	line:2368	signature:(MAC_ADDR *Target_MAC, IP_ADDR *Target_IP, WORD *Source_Port, WORD *Target_Port, WORD Mesg_Len, BYTE *Mesg)
+PutUDP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	449;"	p	line:449	file:	signature:(MAC_ADDR *Target_MAC, IP_ADDR *Target_IP, WORD *Source_Port, WORD *Target_Port, WORD Mesg_Len, BYTE *Mesg)
+RAMSIZE::8192	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	47;"	d	line:47
+RBM::(0b00111010)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	71;"	d	line:71
+RCR::(0b00000000)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	70;"	d	line:70
+REPLY::0x00	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	34;"	d	line:34
+RType	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	399;"	m	line:399	file:
+RVecLen::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	310;"	d	line:310	file:
+RXDCPreviouslySeen	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	108;"	m	line:108
+RXSIZE::(RXSTOP-RXSTART+1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	58;"	d	line:58
+RXSTART::(0x0000)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	56;"	d	line:56
+RXSTATUS	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	124;"	t	line:124
+RXSTOP::(0x17ff)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	57;"	d	line:57
+Rd_Done	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	276;"	m	line:276	file:
+ReadETHReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1437;"	f	line:1437	signature:(BYTE Address)
+ReadMACReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1484;"	f	line:1484	signature:(BYTE Address)
+ReadPHYReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1549;"	f	line:1549	signature:(BYTE Target)
+ReceiveOk	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	114;"	m	line:114
+Res	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	293;"	m	line:293	file:
+ResetVectorEnd::(DWORD)0x00004	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	230;"	d	line:230
+RstVector	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	275;"	m	line:275	file:
+SA_IP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	230;"	v	line:230
+SA_IP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	340;"	v	line:340
+SA_MAC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	229;"	v	line:229
+SA_MAC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	341;"	v	line:341
+SA_UDP	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	231;"	v	line:231
+SPI2_CLK_RPR::RPOR11bits.RP22R	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	66;"	d	line:66
+SPI2_SDI_RP::24	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	65;"	d	line:65
+SPI2_SDO_RPR::RPOR11bits.RP23R	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	67;"	d	line:67
+ST_DWORD::(ptr,val)*(DWORD*)(BYTE*)(ptr)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	116;"	d	line:116
+ST_WORD::(ptr,val)*(WORD*)(BYTE*)(ptr)=	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	115;"	d	line:115
+SWver	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	465;"	v	line:465
+SYSCLK::XTAL_FREQ*PLLMODE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	126;"	d	line:126
+SYSCMD::(0b11111111)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	73;"	d	line:73
+SelectENC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	451;"	p	line:451	file:	signature:(void)
+SelectENC::(ENC_CS=0)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1092;"	d	line:1092	file:
+ServiceSystemTimer	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1224;"	f	line:1224	signature:(void)
+ServiceSystemTimer	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	441;"	p	line:441	file:	signature:(void)
+Shadow	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	197;"	v	line:197
+ShadowBaseAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	199;"	v	line:199
+ShadowDirty	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	200;"	v	line:200
+ShadowDirty	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	391;"	v	line:391
+ShadowPage	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	198;"	v	line:198
+ShowPgmMemory	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	729;"	f	line:729	signature:(BYTE Page, WORD Addr, WORD len)
+Source	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	344;"	v	line:344
+SourceIPAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	84;"	m	line:84	struct:_IP_HEADER
+SourceMACAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	59;"	m	line:59	struct:_ETHER_HEADER
+SourceMACAddr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	66;"	m	line:66	struct:_IEEE_HEADER
+Source_Port	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	97;"	m	line:97	struct:_UDP_HEADER
+State	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	285;"	v	line:285
+StatusLEDCount	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	222;"	v	line:222
+StatusTmr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	348;"	v	line:348
+StatusTmrCnt::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	311;"	d	line:311	file:
+StatusVector	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	92;"	m	line:92	struct:_MCP_MAC_PREAMBLE
+T4_Cfg::T4_Status.Cfg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	302;"	d	line:302	file:
+T4_EE::T4_Status.EE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	301;"	d	line:301	file:
+T4_Error	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	277;"	m	line:277	file:
+T4_Mode::T4_Status.All	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	304;"	d	line:304	file:
+T4_PGM::T4_Status.PGM	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	300;"	d	line:300	file:
+T4_Res::T4_Status.Res	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	303;"	d	line:303	file:
+T4_Status	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	298;"	v	line:298
+TCP::6	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	22;"	d	line:22
+TCP_ACK::0x10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	41;"	d	line:41
+TCP_FIN::0x01	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	37;"	d	line:37
+TCP_PSH::0x08	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	40;"	d	line:40
+TCP_RST::0x04	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	39;"	d	line:39
+TCP_SYN::0x02	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	38;"	d	line:38
+TCP_URG::0x20	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	42;"	d	line:42
+TF_100ms	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	249;"	v	line:249
+TF_Long	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	248;"	v	line:248
+TF_Short	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	247;"	v	line:247
+TMR_100ms	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	245;"	v	line:245
+TMR_Activity	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	246;"	v	line:246
+TMR_Long	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	244;"	v	line:244
+TMR_Short	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	243;"	v	line:243
+TOS	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	77;"	m	line:77	struct:_IP_HEADER
+TRUE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	20;"	e	line:20	enum:_BOOLEAN
+TRUE::1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	111;"	d	line:111
+TTL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	81;"	m	line:81	struct:_IP_HEADER
+TXEND::(RAMSIZE-1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	60;"	d	line:60
+TXSTART::(RXSTOP+1)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	59;"	d	line:59
+TXSTATUS	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	101;"	t	line:101
+Target	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1570;"	l	line:1570
+Target	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	345;"	v	line:345
+Type	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	60;"	m	line:60	struct:_ETHER_HEADER
+Type_Err	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	268;"	m	line:268	file:
+UART2_RX_RP::21	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	62;"	d	line:62
+UART2_TX_RPR::RPOR3bits.RP7R	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	63;"	d	line:63
+UB	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	66;"	m	line:66	struct:_DWORD_VAL::<anonymous>
+UDP::17	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	23;"	d	line:23
+UDP_Checksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	100;"	m	line:100	struct:_UDP_HEADER
+UDP_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	101;"	t	line:101
+UDP_Hdr_Len::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	318;"	d	line:318	file:
+UDP_Hdr_Len::8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	29;"	d	line:29
+UDP_Len	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	99;"	m	line:99	struct:_UDP_HEADER
+UR	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	402;"	v	line:402
+UR_Data	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	400;"	m	line:400	file:
+USE_CLOCK_INIT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	47;"	d	line:47
+USE_IO_MAPPING	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	60;"	d	line:60
+USE_PHY	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	53;"	e	line:53	enum:_DUPLEX
+Underrun	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	93;"	m	line:93
+UnsupportedOpcode	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	120;"	m	line:120
+UserCatchAll::(DWORD)(PARAM_BASE+4)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	247;"	d	line:247
+UserExec	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1041;"	f	line:1041	signature:(DWORD addr)
+UserJump::(DWORD)PARAM_BASE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	246;"	d	line:246
+UserVectorPresent	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	688;"	f	line:688	signature:(void)
+VLANTaggedFrame	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	98;"	m	line:98
+VLANType	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	121;"	m	line:121
+Val	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	36;"	m	line:36	union:_BYTE_VAL
+Val	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	41;"	m	line:41	union:_WORD_VAL
+Val	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	54;"	m	line:54	union:_DWORD_VAL
+Ver_Flags	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	76;"	m	line:76	struct:_IP_HEADER
+WBM::(0b01111010)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	72;"	d	line:72
+WCR::(0b01000000)	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	67;"	d	line:67
+WORD	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	15;"	t	line:15
+WORD_VAL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	48;"	t	line:48
+WR_EEPROM	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	278;"	m	line:278	file:
+WasDiscarded	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	239;"	v	line:239
+WasDiscarded	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	390;"	v	line:390
+WriteBlock	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	440;"	p	line:440	file:	signature:(BYTE Page, WORD Addr)
+WriteBlock	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	849;"	f	line:849	signature:(BYTE Page, WORD Addr)
+WritePHYReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1513;"	f	line:1513	signature:(BYTE Address, WORD Data)
+WriteReg	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1395;"	f	line:1395	signature:(BYTE Address, BYTE Data)
+XEE_SPIBUF::SPI1BUF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	192;"	d	line:192
+XEE_SPIBUF::SPI2BUF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	200;"	d	line:200
+XEE_SPICON1::SPI1CON1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	189;"	d	line:189
+XEE_SPICON1::SPI2CON1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	197;"	d	line:197
+XEE_SPICON1bits::SPI1CON1bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	194;"	d	line:194
+XEE_SPICON1bits::SPI2CON1bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	202;"	d	line:202
+XEE_SPICON2::SPI1CON2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	190;"	d	line:190
+XEE_SPICON2::SPI2CON2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	198;"	d	line:198
+XEE_SPISTAT::SPI1STAT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	191;"	d	line:191
+XEE_SPISTAT::SPI2STAT	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	199;"	d	line:199
+XEE_SPISTAT_RBF::SPI1STATbits.SPIRBF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	193;"	d	line:193
+XEE_SPISTAT_RBF::SPI2STATbits.SPIRBF	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	201;"	d	line:201
+XEE_SPISTATbits::SPI1STATbits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	195;"	d	line:195
+XEE_SPISTATbits::SPI2STATbits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	203;"	d	line:203
+XTAL_FREQ::10000000	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	49;"	d	line:49
+XTEA_DATA_LEN::XTEA_DATA_LEN_ASCII/2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	88;"	d	line:88	file:
+XTEA_DATA_LEN_ASCII::48	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	87;"	d	line:87	file:
+XTEA_DELTA::0x9E3779B9	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	89;"	d	line:89	file:
+XTEA_ITERATIONS::(WORD)16	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	86;"	d	line:86	file:
+XTEA_KEY::"MILMILMILMILMILM"	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	85;"	d	line:85	file:
+Zero	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	122;"	m	line:122
+Zeros	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	99;"	m	line:99
+_BOOLEAN	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	20;"	g	line:20
+_BYTE_VAL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	23;"	u	line:23
+_DUPLEX	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	50;"	g	line:50
+_DWORD_VAL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	52;"	u	line:52
+_ETHER_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	56;"	s	line:56
+_HEX_RCD	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	252;"	s	line:252	file:
+_IEEE_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	63;"	s	line:63
+_IP_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	74;"	s	line:74
+_MCP_MAC_PREAMBLE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	89;"	s	line:89
+_UDP_HEADER	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ip.h	95;"	s	line:95
+_WORD_VAL	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	39;"	u	line:39
+__ICD2RAM	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	152;"	d	line:152	file:
+addrHi	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	255;"	m	line:255	struct:_HEX_RCD	file:
+addrLo	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	256;"	m	line:256	struct:_HEX_RCD	file:
+b0	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	27;"	m	line:27	struct:_BYTE_VAL::<anonymous>
+b0	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	71;"	m	line:71	struct:_DWORD_VAL::<anonymous>
+b1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	28;"	m	line:28	struct:_BYTE_VAL::<anonymous>
+b1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	72;"	m	line:72	struct:_DWORD_VAL::<anonymous>
+b10	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	81;"	m	line:81	struct:_DWORD_VAL::<anonymous>
+b11	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	82;"	m	line:82	struct:_DWORD_VAL::<anonymous>
+b12	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	83;"	m	line:83	struct:_DWORD_VAL::<anonymous>
+b13	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	84;"	m	line:84	struct:_DWORD_VAL::<anonymous>
+b14	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	85;"	m	line:85	struct:_DWORD_VAL::<anonymous>
+b15	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	86;"	m	line:86	struct:_DWORD_VAL::<anonymous>
+b16	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	87;"	m	line:87	struct:_DWORD_VAL::<anonymous>
+b17	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	88;"	m	line:88	struct:_DWORD_VAL::<anonymous>
+b18	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	89;"	m	line:89	struct:_DWORD_VAL::<anonymous>
+b19	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	90;"	m	line:90	struct:_DWORD_VAL::<anonymous>
+b2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	29;"	m	line:29	struct:_BYTE_VAL::<anonymous>
+b2	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	73;"	m	line:73	struct:_DWORD_VAL::<anonymous>
+b20	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	91;"	m	line:91	struct:_DWORD_VAL::<anonymous>
+b21	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	92;"	m	line:92	struct:_DWORD_VAL::<anonymous>
+b22	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	93;"	m	line:93	struct:_DWORD_VAL::<anonymous>
+b23	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	94;"	m	line:94	struct:_DWORD_VAL::<anonymous>
+b24	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	95;"	m	line:95	struct:_DWORD_VAL::<anonymous>
+b25	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	96;"	m	line:96	struct:_DWORD_VAL::<anonymous>
+b26	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	97;"	m	line:97	struct:_DWORD_VAL::<anonymous>
+b27	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	98;"	m	line:98	struct:_DWORD_VAL::<anonymous>
+b28	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	99;"	m	line:99	struct:_DWORD_VAL::<anonymous>
+b29	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	100;"	m	line:100	struct:_DWORD_VAL::<anonymous>
+b3	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	30;"	m	line:30	struct:_BYTE_VAL::<anonymous>
+b3	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	74;"	m	line:74	struct:_DWORD_VAL::<anonymous>
+b30	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	101;"	m	line:101	struct:_DWORD_VAL::<anonymous>
+b31	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	102;"	m	line:102	struct:_DWORD_VAL::<anonymous>
+b4	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	31;"	m	line:31	struct:_BYTE_VAL::<anonymous>
+b4	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	75;"	m	line:75	struct:_DWORD_VAL::<anonymous>
+b5	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	32;"	m	line:32	struct:_BYTE_VAL::<anonymous>
+b5	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	76;"	m	line:76	struct:_DWORD_VAL::<anonymous>
+b6	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	33;"	m	line:33	struct:_BYTE_VAL::<anonymous>
+b6	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	77;"	m	line:77	struct:_DWORD_VAL::<anonymous>
+b7	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	34;"	m	line:34	struct:_BYTE_VAL::<anonymous>
+b7	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	78;"	m	line:78	struct:_DWORD_VAL::<anonymous>
+b8	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	79;"	m	line:79	struct:_DWORD_VAL::<anonymous>
+b9	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	80;"	m	line:80	struct:_DWORD_VAL::<anonymous>
+bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	103;"	m	line:103	union:_DWORD_VAL
+bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	35;"	m	line:35	union:_BYTE_VAL
+bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	100;"	m	line:100
+bits	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	123;"	m	line:123
+blank	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	456;"	v	line:456
+byte	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	68;"	m	line:68	union:_DWORD_VAL
+checksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2252;"	l	line:2252
+checksum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	376;"	v	line:376
+clockInit	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	172;"	p	line:172	file:	signature:(void)
+crc	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	259;"	m	line:259	struct:_HEX_RCD	file:
+dVal	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2246;"	m	line:2246	file:
+data	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	258;"	m	line:258	struct:_HEX_RCD	file:
+decipher	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	500;"	f	line:500	signature:(WORD iterations, DWORD* v, DWORD* k)
+delay_ms	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	486;"	f	line:486	signature:(WORD milliseconds)
+delay_us	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	492;"	f	line:492	signature:(WORD microseconds)
+delta	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	512;"	l	line:512
+display_buffer	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	437;"	p	line:437	file:	signature:(DWORD offset, DWORD size, BYTE* ptr)
+dummy	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1063;"	l	line:1063
+dummy	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1083;"	l	line:1083
+dump_pkt_dly::3	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	309;"	d	line:309	file:
+dwv	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	586;"	l	line:586
+getc_QConsole	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	450;"	p	line:450	file:	signature:(void)
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1673;"	l	line:1673
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1872;"	l	line:1872
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1908;"	l	line:1908
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1941;"	l	line:1941
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2254;"	l	line:2254
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2353;"	l	line:2353
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2370;"	l	line:2370
+i	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	511;"	l	line:511
+init_CONSOLE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	469;"	f	line:469	signature:(void)
+init_ENC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1663;"	f	line:1663	signature:(BYTE *Address)
+init_ENC	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	446;"	p	line:446	file:	signature:(BYTE *Address)
+init_pic	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1109;"	f	line:1109	signature:(void)
+key	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	457;"	v	line:457
+len	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	254;"	m	line:254	struct:_HEX_RCD	file:
+offset	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	787;"	l	line:787
+offset	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	868;"	l	line:868
+offset	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	928;"	l	line:928
+pBYTE	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	14;"	t	line:14
+pchar	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	19;"	t	line:19
+reset_cpu::__asm__volatile("RESET")	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\platform.h	269;"	d	line:269
+restart_wdt::__asm__volatile("CLRWDT")	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	213;"	d	line:213	file:
+result	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1566;"	l	line:1566
+sWORD	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	16;"	t	line:16
+serial_isr	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	445;"	p	line:445	file:	signature:(void)
+sum	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	512;"	l	line:512
+type	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	257;"	m	line:257	struct:_HEX_RCD	file:
+v	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	47;"	m	line:47	union:_WORD_VAL
+v	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	56;"	m	line:56	union:_DWORD_VAL
+v	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	104;"	m	line:104
+v	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC28J60.h	78;"	m	line:78
+v0	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+v1	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+vx	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+vxx	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+vy	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+vyy	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+vz	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+vzz	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	510;"	l	line:510
+w	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	55;"	m	line:55	union:_DWORD_VAL
+w	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2255;"	l	line:2255
+w	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	587;"	l	line:587
+w	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	787;"	l	line:787
+w	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	868;"	l	line:868
+word	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\DataTypes.h	61;"	m	line:61	union:_DWORD_VAL
+x	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1450;"	l	line:1450
+x	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1498;"	l	line:1498
+x	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1528;"	l	line:1528
+x	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1565;"	l	line:1565
+x	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1617;"	l	line:1617
+x	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	2008;"	l	line:2008
+x	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	868;"	l	line:868
+x00	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1582;"	l	line:1582
+x00	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1746;"	l	line:1746
+x00ff	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1536;"	l	line:1536
+x00ff	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1752;"	l	line:1752
+x0C	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1759;"	l	line:1759
+x12	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	1758;"	l	line:1758
+y	C:\Versioned\git_folder\subjugator_pic\EthBootLoader\ENC_C30.c	868;"	l	line:868
