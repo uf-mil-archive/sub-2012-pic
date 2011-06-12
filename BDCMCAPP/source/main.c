@@ -154,3 +154,10 @@ static void clockInit(void)
     __builtin_write_OSCCONL(0x01); // Request clock switch
     while (OSCCONbits.COSC != 0b011); // Wait for oscillator to switch
 }
+
+
+// Put an OSCOPE on the LED pin to get an idea of idle processing time
+void vApplicationIdleHook( void )
+{
+    LED = LED_OFF;
+}

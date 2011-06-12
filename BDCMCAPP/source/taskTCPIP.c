@@ -64,8 +64,8 @@ void xTCPIPTaskInit(void)
  ********************************************************************/
 void taskTCPIP(void* pvParameter)
 {
-	portTickType previousWakeTime;
-	previousWakeTime = xTaskGetTickCount();
+    portTickType previousWakeTime;
+    previousWakeTime = xTaskGetTickCount();
 
     // Initialize the core stack layers. This makes calls
     // to the ENC28J60 driver which uses FreeRTOS. The scheduler
@@ -78,6 +78,8 @@ void taskTCPIP(void* pvParameter)
     {
         // Block here until the timeout has passed
         vTaskDelayUntil(&previousWakeTime, 5 / portTICK_RATE_MS);
+
+        LED = LED_ON;
 
         // perform normal stack tasks including checking for incoming
         // packets and calling appropriate handlers

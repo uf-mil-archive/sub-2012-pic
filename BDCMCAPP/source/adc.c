@@ -162,5 +162,5 @@ ADC_DONE:
     ADCCurrentDMABuffer ^= 1; // Toggle to other buffer
     IFS3bits.DMA5IF = 0;    // Clear the DMA0 interrupt flag
 
-    LED = LED_OFF;
+    //LED = LED_OFF;
 }

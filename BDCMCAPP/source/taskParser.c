@@ -21,9 +21,10 @@ void taskParser(void* pvParameter)
 
     for(;;)
     {
-        // Block here until a new message is ready to be sent
+        // Block here until a new message arrives
         xQueueReceive(hParserQueue, &msg, portMAX_DELAY);
-
+        LED = LED_ON;
+        
         // To get here, a new message has shown up in the queue
         ParseNewPacket(msg.Buffer, msg.Length, msg.Sender);
 

@@ -36,6 +36,8 @@ void taskUART(void* pvParameter)
         // Block here until a new message is ready to be sent
         xQueueReceive(hUARTTxQueue, &msg, portMAX_DELAY);
 
+        LED = LED_ON;
+
         pByte = msg.Buffer;
         while(msg.Length > 0)
         {

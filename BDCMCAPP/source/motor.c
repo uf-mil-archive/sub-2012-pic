@@ -282,7 +282,7 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
     if(mtrPWMIntCount!= 0)
         return;
 
-    //LED = LED_ON;   // Used for timing analysis with o-scope
+    LED = LED_ON;   // Used for timing analysis with o-scope
 
     // Once per second force a reference calculation. This is in case
     // the motor command is long lived, and the battery voltage shifts, the
@@ -306,9 +306,9 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
     // This is an undervolt condition, override the desired speed
     if(hMotorData->MinVoltage > hMotorData->VRail)
     {
-        hMotorData->Flags  |= MTR_FLAGMASK_UNDERVOLTAGE;
+        hMotorData->Flags |= MTR_FLAGMASK_UNDERVOLTAGE;
         hMotorData->ReferenceInput = 0;
-		hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
+	hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
     }
     // Undervolt occurred, but the rail is back above minimum now.
     // Clear undervolt flag
