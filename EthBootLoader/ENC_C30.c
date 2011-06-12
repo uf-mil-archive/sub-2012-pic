@@ -82,7 +82,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //	Define Cypher/Decypher Constants
 ////////////////////////////////////////////////////////////////////////////
-#define XTEA_KEY "BrushElectronics"  		// must be exactly 16 bytes long
+#define XTEA_KEY "MILMILMILMILMILM"  		// must be exactly 16 bytes long
 #define XTEA_ITERATIONS (WORD)16			// number of decipher iterations
 #define XTEA_DATA_LEN_ASCII 48				// fixed length record size (ASCII)
 #define XTEA_DATA_LEN XTEA_DATA_LEN_ASCII/2	// hex record length
@@ -305,7 +305,7 @@ union
 ///////////////////////////////////////////////////////////////////////////
 //	 	BOOTLOADER APPLICATION EQUATES
 ///////////////////////////////////////////////////////////////////////////
-#define Ldr_Cmd_Delay	5000	// number of ms delay to wait for Loader Command
+#define Ldr_Cmd_Delay	3000	// number of ms delay to wait for Loader Command
 #define dump_pkt_dly	3		// number of mS delay between dump packets
 #define RVecLen			8		// byte length of RESET vector block
 #define StatusTmrCnt	8		// Status LED flash rate counter (number of TMR3 rollovers)

@@ -5,11 +5,13 @@
 #error "Hardware Profile for selected processor does not exist"
 #endif // Allowable processors
 
-
-// Paul - change this number to force the EPROM to update to defaults
-// useful if you change them without access to webpage.
 // The version number of this application number
 #define APP_VERSION		0x01
+
+
+// This will force update the bootloader's IP/MAC to keep them in
+// sync with the application
+//#define IS_BOOTLOADED
 
 /*
  *  Timers 1,2,3, and 5 are used by FreeRTOS and the tcp/ip stack. Timer 1 is
