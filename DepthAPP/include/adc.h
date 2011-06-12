@@ -3,7 +3,7 @@
 
 #include "p33Fxxxx.h"
 #include "HardwareProfile.h"
-#include "taskUART.h"
+#include "taskPublisher.h"
 #include "fixMath.h"
 #include "mavg.h"
 #include "math.h"
@@ -43,8 +43,13 @@
 // The amount of degC per bit for thermistor temp measurements
 #define ADC_VTHERM_BPC         ((Q1_15)((ADC_VTHERM_MMT / ADC_MAX_VAL) * 32767))
 
+#define HEARTBEAT_TIMEOUT_TICKS     3000    // ~2s at 1.5kHz tick rate of A/D
+#define ADC_FLAGMASK_HEARTBEAT      (1<<0)
+
 typedef struct
 {
+    UINT8 Flags;
+    UINT16 InterruptCount;
     Q6_10 Depth;
     Q8_8 ThermTemp;
     UINT16 Humidity;
@@ -54,5 +59,6 @@ typedef struct
 extern SensorData gSensorData;
 
 void ADCInit(void);
+inline void FeedHeartbeat(void);
 
 #endif // ADC_H

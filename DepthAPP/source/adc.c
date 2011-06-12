@@ -21,6 +21,12 @@ static MAVGFilter vtempMAVG;
 
 void ADCDMAInit(void);
 
+inline void FeedHeartbeat(void)
+{
+    gSensorData.InterruptCount = 0;
+    gSensorData.Flags |= ADC_FLAGMASK_HEARTBEAT;
+}
+
 // Channel 0 is the pressure sensor
 // Channel 1 is the temperature resistor
 void ADCInit(void)
@@ -157,6 +163,16 @@ void __attribute__((interrupt, no_auto_psv)) _DMA5Interrupt(void)
     // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q8_8 in the motor
     // struct, so shift to generate final result
     gSensorData.ThermTemp = (Q8_8)((vtempMAVG.CurrentAvg*ADC_VTHERM_BPC) >> 7);
+
+    // No valid heartbeat, stop publishing
+    if((gSensorData.Flags & ADC_FLAGMASK_HEARTBEAT) != 0)
+    {
+        if((++gSensorData.InterruptCount) > HEARTBEAT_TIMEOUT_TICKS)
+        {
+            gSensorData.Flags  &= ~ADC_FLAGMASK_HEARTBEAT;  // Clear the heartbeat flag
+            LostSubscribers();  // Turn off the publishing
+        }
+    }
 
 ADC_DONE:
     ADCCurrentDMABuffer ^= 1; // Toggle to other buffer
