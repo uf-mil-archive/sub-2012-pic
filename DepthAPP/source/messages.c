@@ -187,12 +187,11 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
     }
 	// The depth board doesn't care about e-stops
 
-    // Do the motor types line up?
-//    if(((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1) != rBuf[4])
-//        return;
+    // Does the packet type agree?
+    if(DEPTH_TYPE_CODE != rBuf[4])
+          return;
 
-    // They're either subscribing/unsubscribing or commanding a new
-    // motor reference.
+    // They're subscribing/unsubscribing
     switch(rBuf[5])
     {
         case MSG_START_PUBLISH:
@@ -265,12 +264,22 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
                 &tmplength);
 
         // Insert TypeCode
-        //gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)DEPTH_TYPE_CODE;
 
         // Insert the tick count
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
-        
+        // Insert the depth
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.Depth, &tmplength);
+
+        // Insert the thermistor temperature
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.ThermTemp, &tmplength);
+
+        // Insert the humidity
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.Humidity, &tmplength);
+
+        // Insert the humidity sensor temp reading
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.HumTemp, &tmplength);
     }
     else    // Little Endian
     {
@@ -280,10 +289,22 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
                 &tmplength);
 
         // Insert TypeCode
-        //gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)DEPTH_TYPE_CODE;
 
         // Insert the tick count
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
+
+        // Insert the depth
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.Depth, &tmplength);
+
+        // Insert the thermistor temperature
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.ThermTemp, &tmplength);
+
+        // Insert the humidity
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.Humidity, &tmplength);
+
+        // Insert the humidity sensor temp reading
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.HumTemp, &tmplength);
     }
 
     // Calculate the checksum

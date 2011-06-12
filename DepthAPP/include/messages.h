@@ -23,10 +23,13 @@
 #include "GenericTypeDefs.h"
 #include "taskPublisher.h"
 #include "mcp25XX640A.h"
+#include "adc.h"
 
 #define MSG_FLAG        0x7E
 #define MSG_ESCAPE      0x7D
 #define MSG_ESCAPE_XOR  0x20
+
+#define DEPTH_TYPE_CODE 4
 
 #define MSG_MAX_LENGTH  30              // The longest message is 30 bytes not including
                                         // flags or escape characters.
@@ -34,8 +37,6 @@
 #define MSG_NUM_INCOMING_BUFFERS   5    // Number of incoming buffers per device
 
 #define MSG_SENDER_UART         1
-#define MSG_SENDER_ETH          2
-#define MSG_SENDER_BROADCAST    3
 
 #define MSG_FEED_HEARTBEAT  100         // Heartbeat Packet
 #define MSG_FEED_HEARTBEAT_LENGTH   7   // Length of the packet including 2 byte checksum
@@ -63,8 +64,8 @@
 #define MSG_ENDIANESS_LITTLE        0
 #define MSG_ENDIANESS_BIG           1
 
-#define DEFAULT_LOCAL_ADDRESS           108
-#define DEFAULT_CONTROLLER_ADDRESS      112
+#define DEFAULT_LOCAL_ADDRESS           2
+#define DEFAULT_CONTROLLER_ADDRESS      1
 #define DEFAULT_ENDIANESS               MSG_ENDIANESS_LITTLE
 
 // This is the message structure for communicating between RTOS tasks

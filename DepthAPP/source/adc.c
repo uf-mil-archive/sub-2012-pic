@@ -1,5 +1,7 @@
 #include "adc.h"
 
+SensorData gSensorData;
+
 struct
 {
     UINT16 ADC1CH0[ADC_DMA_BUFFER_SIZE];
@@ -148,15 +150,13 @@ void __attribute__((interrupt, no_auto_psv)) _DMA5Interrupt(void)
         MAVG_Update(&vtempMAVG, &ADCBufferB.ADC1CH1[0], ADC_DMA_BUFFER_SIZE);
     }    
 
-//    if(hMotorData)
-//    {
-//        // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q6_10 in the motor
-//        // struct, so shift to generate final result
-//        hMotorData->VRail = (Q6_10)((vrailMAVG.CurrentAvg*ADC_VRAIL_BPV) >> 5);
-//        // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q4_12 in the motor
-//        // struct, so shift to generate final result
-//        hMotorData->Current = (Q4_12)((currentMAVG.CurrentAvg*ADC_CURRENT_BPA) >> 3);
-//    }
+
+    // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. QX_15*Q6_10=QX_25 We store Q6_10 in the sensor
+    // struct, so shift to generate final result
+    gSensorData.Depth = (Q6_10)(((vpresMAVG.CurrentAvg*ADC_VPRES_BPP)*PRESSURE_TO_DEPTH) >> 15);
+    // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q8_8 in the motor
+    // struct, so shift to generate final result
+    gSensorData.ThermTemp = (Q8_8)((vtempMAVG.CurrentAvg*ADC_VTHERM_BPC) >> 7);
 
 ADC_DONE:
     ADCCurrentDMABuffer ^= 1; // Toggle to other buffer

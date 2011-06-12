@@ -7,10 +7,10 @@
 
 // The version number of this application number
 #define APP_VERSION		0x01
-
+#define FRESHWATER
 /*
- *  Timers 1,2,3, and 5 are used by FreeRTOS and the tcp/ip stack. Timer 1 is
- *  also used in the blocking delay routines
+ *  Timers 5 is used by FreeRTOS. Timer 1 is
+ *  used in the blocking delay routines
  */
 
 #define GetSystemClock()        (80000000ul) //Hz
@@ -70,9 +70,9 @@
                             // SDI PPS register below
 
 // Define PPS SPI Pins
-#define EROM_SDO_PIN    RPOR5bits.RP11R    // EEPROM SPI Data Out pin RP11
+#define EROM_SDO_PIN    RPOR5bits.RP11R     // EEPROM SPI Data Out pin RP11
 #define EROM_SCK_PIN    RPOR6bits.RP12R     // EEPROM SPI Clock pin RP12
-#define EROM_SDI_PIN	14                   // EEPROM SPI Data In pin RP14
+#define EROM_SDI_PIN	14                  // EEPROM SPI Data In pin RP14
 #define EROM_SDI_PINREG RPINR20bits.SDI1R   // The register where SDI
                                             // pin is assigned
 
@@ -119,14 +119,14 @@
 #define COM_DEFAULT_BAUD	BAUDREG_115200
 
 // Receiver Interrupt Info - These need to be changed if you change UART# !!!
-#define COM_UxRXIE				IEC1bits.U2RXIE
+#define COM_UxRXIE		IEC1bits.U2RXIE
 #define COM_UxRXIFLAG           IFS1bits.U2RXIF
-#define COM_UxRXIPRIORITY		IPC7bits.U2RXIP
+#define COM_UxRXIPRIORITY	IPC7bits.U2RXIP
 
 // Transmitter Interrupt Info - These need to be changed if you change UART# !!!
-#define COM_UxTXIE				IEC1bits.U2TXIE
+#define COM_UxTXIE		IEC1bits.U2TXIE
 #define COM_UxTXIFLAG           IFS1bits.U2TXIF
-#define COM_UxTXIPRIORITY		IPC7bits.U2TXIP
+#define COM_UxTXIPRIORITY       IPC7bits.U2TXIP
 
 // Define PPS UART pins
 #define COM_UTX_PIN         RPOR3bits.RP7R	    // COM UART TX pin RP7

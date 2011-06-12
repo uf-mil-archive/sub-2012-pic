@@ -15,7 +15,7 @@
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_OFF & POSCMD_EC)
 _FWDT(FWDTEN_OFF)
-_FICD(ICS_PGD3 & JTAGEN_OFF)
+_FICD(JTAGEN_OFF)
 _FPOR(PWMPIN_ON & HPOL_ON & LPOL_ON & ALTI2C_OFF)
 
 // Function declarations
@@ -46,11 +46,11 @@ int main(void)
     LED_TRIS = OUTPUT_PIN;
     LED = LED_OFF;
 
-//	EROM_Clear();  // Erases the entire EEPROM
-
+   // EROM_Clear();  // Erases the entire EEPROM
+    
     CRC16Init();    // Just get this ready for later. Doesn't hurt to be called here
     InitCommonMessageData();
-	ADCInit();
+    ADCInit();
 
     //// This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.
