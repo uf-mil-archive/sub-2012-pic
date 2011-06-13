@@ -69,6 +69,7 @@
 
 #define DEFAULT_LOCAL_ADDRESS           2
 #define DEFAULT_CONTROLLER_ADDRESS      1
+#define DEFAULT_MULTICAST_ADDRESS		255
 #define DEFAULT_ENDIANESS               MSG_ENDIANESS_LITTLE
 
 // This is the message structure for communicating between RTOS tasks

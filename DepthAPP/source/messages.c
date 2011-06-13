@@ -44,6 +44,7 @@ void InitCommonMessageData(void)
 CONFIG_DEFAULT_COMMON:
     gCommonMsgData.Address = DEFAULT_LOCAL_ADDRESS;
     gCommonMsgData.ControllerAdd = DEFAULT_CONTROLLER_ADDRESS;
+	gCommonMsgData.MultiCastAddress = DEFAULT_MULTICAST_ADDRESS;
     gCommonMsgData.Endianess = DEFAULT_ENDIANESS;
 
     SaveCommonMessageData(&gCommonMsgData);

@@ -18,7 +18,7 @@
 // The VRail Voltage divider gain
 #define ADC_VRAIL_GAIN          (8.25/108.25)
 // The Current Divider Gain
-#define ADC_CURRENT_GAIN        (1.0/5.0)
+#define ADC_CURRENT_GAIN        (3.0/10.0)
 
 
 /* Shouldn't need to edit these */

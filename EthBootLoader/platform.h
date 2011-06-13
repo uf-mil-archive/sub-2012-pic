@@ -6,10 +6,6 @@
 //	The original hardware was the Explorer 16 with the 
 //	PIC24FJ128GA010, PIC24HJ256GA610 and dsPIC33FJ256GP710
 //
-//	The Ethernet interface is via a ENC PICTail installed in
-//	the top slot of J5
-//
-//	SPI1 is used to communicate with the ENC card
 //
 //		Copyright (c) 2008-2009, Andrew Smallridge
 //
