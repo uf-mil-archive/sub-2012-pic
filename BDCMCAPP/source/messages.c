@@ -197,6 +197,15 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
         }
         return;
     }
+    else if(rBuf[4] == MSG_RESET)
+    {
+        if(length == MSG_RESET_LENGTH)
+        {
+            // Reset the device, this is most likely to get into bootloader mode
+            asm("reset");
+        }
+        return;
+    }
 
     // Do the motor types line up?
     if(((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1) != rBuf[4])

@@ -185,7 +185,17 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
         }
         return;
     }
-	// The depth board doesn't care about e-stops
+    // The depth board doesn't care about e-stops
+
+    else if(rBuf[4] == MSG_RESET)
+    {
+        if(length == MSG_RESET_LENGTH)
+        {
+            // Reset the device, this is most likely to get into bootloader mode
+            asm("reset");
+        }
+        return;
+    }
 
     // Does the packet type agree?
     if(DEPTH_TYPE_CODE != rBuf[4])

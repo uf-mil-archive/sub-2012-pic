@@ -44,6 +44,9 @@
 #define MSG_ESTOP           101     // ESTOP Packet
 #define MSG_ESTOP_LENGTH    7       // Length of the packet including 2 byte checksum
 
+#define MSG_RESET           127     // Reset Packet
+#define MSG_RESET_LENGTH    7       // Length of the packet including 2 byte checksum
+
 // Message Defines
 #define MSG_START_PUBLISH           1   // Start publishing data
 #define MSG_START_PUBLISH_LENGTH    9   // Length of the packet including 2 byte checksum

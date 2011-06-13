@@ -43,6 +43,9 @@
 #define MSG_ESTOP           101     // ESTOP Packet
 #define MSG_ESTOP_LENGTH    7       // Length of the packet including 2 byte checksum
 
+#define MSG_RESET           127     // Reset Packet
+#define MSG_RESET_LENGTH    7       // Length of the packet including 2 byte checksum
+
 // Message Defines
 #define MSG_START_PUBLISH           1   // Start publishing data
 #define MSG_START_PUBLISH_LENGTH    9   // Length of the packet including 2 byte checksum
@@ -50,6 +53,7 @@
 #define MSG_STOP_PUBLISH_LENGTH     8   // Length of the packet including 2 byte checksum
 #define MSG_SET_REFERENCE           3   // Set a new duty cycle
 #define MSG_SET_REFERENCE_LENGTH    10  // Length of the packet including 2 byte checksum
+
 
 #define MSG_CRC_POLY    0x1021      // The CRC-16 Polynomial CRC16-XMODEM
 
