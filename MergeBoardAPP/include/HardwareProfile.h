@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////////
+// Merge Board Hardware Profile
+////////////////////////////////////////////////////////////////////////////////
+
 #ifndef HARDWARE_PROFILE_H
 #define HARDWARE_PROFILE_H
 
@@ -18,83 +22,121 @@
 #define GetPeripheralClock()    (GetSystemClock())
 
 //********************* Analog Pins ********************************/
-#define ANCONFIG    0xFFF0  // Default Analog pin configuration
-// set all to digital except:
-//  - AN0 - Vrail
-//  - AN1 - ISense for measurement
-//  - AN2 - ISense for comparator input
-//  - AN3 - IRef for comparator input
+#define ANCONFIG    0xFFFF  // Default Analog pin configuration
+// set all to digital
+//******************************************************************/
 
-// Comparator PPS pins 
-#define COMP2_OUT       2
-#define COMP2_OUT_PIN   RPOR1bits.RP2R
+//******************* Open Drain Pins ******************************/
+#define ODCACONFIG    0x0000  // Default Open Drain pin configuration
+#define ODCBCONFIG    0x0300  // Default Open Drain pin configuration
+#define ODCCCONFIG    0x0000  // Default Open Drain pin configuration
 
+//  All Port A pins are configured normal
+//  All port B pins are configured normal except:
+//  RB8 : I2C_CLK
+//  RB9 : I2C_DAT
+//  All port C pins are configured normal
 //******************************************************************/
 
 //****************************** LED *******************************/
-
-#define LED_TRIS    TRISAbits.TRISA10   // LED TRIS
-#define LED         LATAbits.LATA10     // LED IO
-#define LED_ON      1                   // The LED is configured
-#define LED_OFF     0                   // to turn on with a high output
-
+#define LED_TRIS    TRISAbits.TRISA1   // LED TRIS
+#define LED         LATAbits.LATA1     // LED IO
+#define LED_ON      1                  // The LED is configured
+#define LED_OFF     0                  // to turn on with a high output
 //******************************************************************/
 
-//***************************** PWM ********************************/
-
-#define FPWM    20000       // PWM Frequency (Hz)
-
+//*************************** BUZZER *******************************/
+#define BUZZER_TRIS    TRISBbits.TRISB13   // Buzzer TRIS
+#define BUZZER         LATBbits.LATB13     // Buzzer IO
+#define BUZZER_ON      1                   // The Buzzer is configured
+#define BUZZER_OFF     0                   // to turn on with a high output
 //******************************************************************/
 
-//************************* COMPARATOR *****************************/
-// Define PPS SPI Pins
-//#define EROM_SDO_PIN    RPOR10bits.RP20R    // EEPROM SPI Data Out pin RP20
-//#define EROM_SCK_PIN    RPOR9bits.RP19R     // EEPROM SPI Clock pin RP19
-//#define EROM_SDI_PIN	4                   // EEPROM SPI Data In pin RP4
-//#define EROM_SDI_PINREG RPINR20bits.SDI1R   // The register where SDI
-                                            // pin is assigned
+//******************** HighSide Drivers ****************************/
+#define RAIL16_TRIS    TRISCbits.TRISC8   // 16V Rail Control TRIS
+#define RAIL16         LATCbits.LATC8     // 16V Rail IO
+
+#define RAIL32_TRIS    TRISAbits.TRISA9   // 32V Rail TRIS
+#define RAIL32         LATAbits.LATA9    // 32V Rail IO
+
+#define ENET_SW_TRIS    TRISAbits.TRISA3   // Ethernet Switch TRIS
+#define ENET_SW         LATAbits.LATA3     // Ethernet Switch IO
+
+#define TURN_ON      1                   // Turn on the highside drivers with
+#define TURN_OFF     0                   // a high output
 //******************************************************************/
 
+//**************************HALL SWITCHES***************************/
+//
+//  Note:   Hall effect switches are pulled up on the Merge Board.
+//          For this reason the SW will register as a '1' when the
+//          hall effect is not plugged in. To prevent a startup without
+//          a kill SW connected, a '1' on the SW pin should be considered
+//          the 'KILL' state and a '0' is Run. Likewise, a '1' on the ON/OFF
+//          SW pin should be considered the 'OFF' state and a '0' the Run state.
+//
+#define KILLSW_TRIS     TRISBbits.TRISB15     // Kill Switch TRIS
+#define KILLSW          PORTBbits.RB15        // Kill Switch IO
+#define KILLSW_CN       CNEN1bits.CN11IE      // KillSW Change notification
+#define CN_ENABLE   1                         // value to enable CN interupt
+
+#define ONOFFSW_TRIS    TRISBbits.TRISB14   // On/Off Switch TRIS
+#define ONOFFSW         PORTBbits.RB14      // ON/Off Switch IO
+#define ONOFFSW_CN      CNEN1bits.CN12IE    // On/Off Change noticacation
+//******************************************************************/
+
+//*************** Overcurrent Protection Interupts *****************/
+//  Fault16 is on INT0
+//  Fault32 is on INT1
+//
+#define FAULT16_TRIS    TRISBbits.TRISB7    // Fault16 TRIS
+#define FAULT16         PORTBbits.RB7       // Fault16 IO
+
+#define FAULT32_TRIS    TRISBbits.TRISB11   // Fault16 TRIS
+#define FAULT32         PORTBbits.RB11      // Fault16 IO
+
+// Define PPS INT1 Pin for Fault32
+#define FAULT32_PIN	11			//
+#define FAULT32_PINREG	RPINR0bits.INT1R	// The register where INT1
+//******************************************************************/
 
 //********************* I/O pin definitions ************************/
-
 // Simple names for pins. I also like using these little ActiveHigh/Low
 // to control chip selects and LEDs.
+//
 #define INPUT_PIN   1
 #define OUTPUT_PIN  0
 #define AL_FALSE    1
 #define AL_TRUE     0
-
 //******************************************************************/
 
+//******************** Generic Defines *****************************/
 // Generic SPI Helper Defines
 #define SPIREG2(a,b)    SPI##a##b
 #define SPIREG(a,b)     SPIREG2(a,b)
 
-// SPI PPS Outputs
+// SPI PPS Outputs (Do not change)
 #define SPI1SCK_IO	8
 #define SPI1SDO_IO	7
 #define SPI2SCK_IO	11
 #define SPI2SDO_IO	10
+//******************************************************************/
 
 //********************* EEPROM SPI *****************************/
 // The EEPROM and the DAC used to set a reference current
 // share the same SPI bus.
 
 // The EEPROM digital pins
-#define EROM_CS_TRIS    TRISAbits.TRISA4    // The EEPROM Chip Select TRIS
-#define EROM_CS_IO	LATAbits.LATA4      // The EEPROM Chip Select IO
-
-#define EROM_WP_TRIS	TRISAbits.TRISA9    // The EEPROM Write Protect TRIS
-#define EROM_WP_IO	LATAbits.LATA9      // The EEPROM Write Protect IO
+#define EROM_CS_TRIS    TRISBbits.TRISB10    // The EEPROM Chip Select TRIS
+#define EROM_CS_IO	LATBbits.LATB10      // The EEPROM Chip Select IO
 
 #define EROM_SPINUM	1   // You must define this number and the proper
                             // SDI PPS register below
 
 // Define PPS SPI Pins
-#define EROM_SDO_PIN    RPOR10bits.RP20R    // EEPROM SPI Data Out pin RP20
-#define EROM_SCK_PIN    RPOR9bits.RP19R     // EEPROM SPI Clock pin RP19
-#define EROM_SDI_PIN	4                   // EEPROM SPI Data In pin RP4
+#define EROM_SDO_PIN    RPOR10bits.RP21R    // EEPROM SPI MOSI Data pin RP21
+#define EROM_SCK_PIN    RPOR10bits.RP20R     // EEPROM SPI Clock pin RP20
+#define EROM_SDI_PIN	19                  // EEPROM SPI MISO Data pin RP19
 #define EROM_SDI_PINREG RPINR20bits.SDI1R   // The register where SDI
                                             // pin is assigned
 
@@ -109,31 +151,28 @@
 #define EROM_SPIxSCK_IO  	SPIREG(EROM_SPINUM,SCK_IO)
 #define EROM_SPIxSDO_IO  	SPIREG(EROM_SPINUM,SDO_IO)
 
-//********************* ~EEPROM SPI ***********************************/
+//******************************************************************/
 
 //********************* DAC SPI *****************************/
 // The EEPROM and the DAC used to set a reference current
 // share the same SPI bus.
 
-// This is a dirty variable that helps determine if the bus is already
-// setup.
-
 // The DAC digital pins
-#define DAC_CS_TRIS     TRISAbits.TRISA8    // The DAC Chip Select TRIS
-#define DAC_CS_IO       LATAbits.LATA8      // The DAC Chip Select IO
+#define DAC16_CS_TRIS   TRISBbits.TRISB6    // The DAC16 Chip Select TRIS
+#define DAC16_CS_IO     LATBbits.LATB6      //The DAC16 Chip Select IO
 
-#define DAC_LD_TRIS     TRISAbits.TRISA3    // The DAC LOAD TRIS
-#define DAC_LD_IO       LATAbits.LATA3      // The DAC Load IO
+#define DAC32_CS_TRIS   TRISAbits.TRISA4    // The DAC32 Chip Select TRIS
+#define DAC32_CS_IO     LATAbits.LATA4      //The DAC32 Chip Select IO
 
 #define DAC_SPINUM	1   // You must define this number and the proper
                             // SDI PPS register below
 
 // Define PPS SPI Pins
-#define DAC_SDO_PIN     RPOR10bits.RP20R    // DAC SPI Data Out pin RP20
-#define DAC_SCK_PIN     RPOR9bits.RP19R     // DAC SPI Clock pin RP19
-#define DAC_SDI_PIN     4                   // DAC SPI Data In pin RP4
+#define DAC_SDO_PIN     RPOR10bits.RP21R    // DAC SPI MOSI Data pin RP21
+#define DAC_SCK_PIN     RPOR10bits.RP20R    // DAC SPI Clock pin RP20
+#define DAC_SDI_PIN     19                  // DAC SPI MISO Data pin RP19
 #define DAC_SDI_PINREG  RPINR20bits.SDI1R   // The register where SDI
-                                            // pin is assigned
+                                           // pin is assigned
 
 // Map SPI Registers
 #define DAC_SPIxSTAT            SPIREG(DAC_SPINUM,STAT)
@@ -146,8 +185,38 @@
 #define DAC_SPIxSCK_IO  	SPIREG(DAC_SPINUM,SCK_IO)
 #define DAC_SPIxSDO_IO  	SPIREG(DAC_SPINUM,SDO_IO)
 
-//********************* ~DAC SPI ***********************************/
+//******************************************************************/
 
+//********************* ADC SPI *****************************/
+
+// The ADC digital pins
+#define ADC16_CS_TRIS   TRISCbits.TRISC9    // The ADC16 Chip Select TRIS
+#define ADC16_CS_IO     LATCbits.LATC9      //The ADC16 Chip Select IO
+
+#define ADC32_CS_TRIS   TRISBbits.TRISB5  // The ADC32 Chip Select TRIS
+#define ADC32_CS_IO     LATBbits.LATB5      //The ADC32 Chip Select IO
+
+#define ADC_SPINUM	1   // You must define this number and the proper
+                            // SDI PPS register below
+
+// Define PPS SPI Pins
+#define ADC_SDO_PIN     RPOR10bits.RP21R    // ADC SPI SDO (MOSI) Data pin RP21
+#define ADC_SCK_PIN     RPOR10bits.RP20R    // ADC SPI Clock pin RP20
+#define ADC_SDI_PIN     19                  // ADC SPI SDI (MISO) Data pin RP19
+#define ADC_SDI_PINREG  RPINR20bits.SDI1R   // The register where SDI
+                                            // pin is assigned
+
+// Map SPI Registers
+#define ADC_SPIxSTAT            SPIREG(ADC_SPINUM,STAT)
+#define ADC_SPIxCON1		SPIREG(ADC_SPINUM,CON1)
+#define ADC_SPIxCON2		SPIREG(ADC_SPINUM,CON2)
+#define ADC_SPIxSTATbits	SPIREG(ADC_SPINUM,STATbits)
+#define ADC_SPIxCON1bits  	SPIREG(ADC_SPINUM,CON1bits)
+#define ADC_SPIxCON2bits  	SPIREG(ADC_SPINUM,CON2bits)
+#define ADC_SPIxBUF     	SPIREG(ADC_SPINUM,BUF)
+#define ADC_SPIxSCK_IO  	SPIREG(ADC_SPINUM,SCK_IO)
+#define ADC_SPIxSDO_IO  	SPIREG(ADC_SPINUM,SDO_IO)
+//******************************************************************/
 
 //********************* ENC28J60 SPI ***********************************/
 
@@ -179,8 +248,7 @@
 #define ENC_SPIBRG          SPIREG(ENC_SPINUM,BRG)
 #define ENC_SPIxSCK_IO      SPIREG(ENC_SPINUM,SCK_IO)
 #define ENC_SPIxSDO_IO      SPIREG(ENC_SPINUM,SDO_IO)
-
-//********************* ~ENC28J60 SPI ********************************/
+//******************************************************************/
 
 // Generic UART Helper Defines
 #define UARTREG2(a,b)     U##a##b
@@ -222,8 +290,8 @@
 #define COM_UxTXIPRIORITY	IPC7bits.U2TXIP
 
 // Define PPS UART pins
-#define COM_UTX_PIN         RPOR3bits.RP7R	    // COM UART TX pin RP7
-#define COM_URX_PIN         21              	    // COM UART RX pin RP21
+#define COM_UTX_PIN         RPOR11bits.RP23R 	    // COM UART TX pin RP22
+#define COM_URX_PIN         22              	    // COM UART RX pin RP23
 #define COM_URX_PINREG      RPINR19bits.U2RXR       // The register where the
                                                     // RX pin is assigned
 
@@ -236,7 +304,7 @@
 #define COM_UxMODEbits  UARTREG(COM_UARTNUM,MODEbits)
 #define COM_UxSTAbits   UARTREG(COM_UARTNUM,STAbits)
 #define COM_UxTX_IO 	UARTREG(COM_UARTNUM,TX_IO)
-//********************* ~COM UART ***********************************/
+//******************************************************************/
 
 extern void ioMap();    // This function maps all of the PPS pins appropriately
                         // and it configures the open drain pins.
