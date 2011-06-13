@@ -232,6 +232,11 @@ CONFIG_DEFAULT_APP_CONFIG:
     memcpypgm2ram(AppConfig.NetBIOSName, (ROM void*) MY_DEFAULT_HOST_NAME, 16);
     FormatNetBIOSName(AppConfig.NetBIOSName);
 
+    // Force the bootloader to use the same IP and MAC address
+#if defined(IS_BOOTLOADED)
+    SyncBL(AppConfig.MyMACAddr.v, AppConfig.MyIPAddr.v);
+#endif
+    
     SaveAppConfig(&AppConfig);
 }
 

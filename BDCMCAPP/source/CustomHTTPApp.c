@@ -54,10 +54,6 @@
 #define __CUSTOMHTTPAPP_C
 
 #include "TCPIPConfig.h"
-
-
-#if defined(STACK_USE_HTTP2_SERVER)
-
 #include "FreeRTOS.h"
 #include "TCPIP Stack/TCPIP.h"
 #include "taskTCPIP.h"
@@ -69,6 +65,13 @@
 #include "taskPublisher.h"
 
 #include <math.h>
+
+#if defined(IS_BOOTLOADED)
+    #include "boothook.h"
+#endif
+
+
+#if defined(STACK_USE_HTTP2_SERVER)
 
 /****************************************************************************
   Section:
@@ -328,6 +331,10 @@ static HTTP_IO_RESULT HTTPNetConfig(void)
     // All parsing complete!  Save new settings and force a reboot
     SaveAppConfig(&newAppConfig);
     SaveUDPConfig(&newUDPConfig);
+
+#if defined(IS_BOOTLOADED)
+    SyncBL(newAppConfig.MyMACAddr.v, newAppConfig.MyIPAddr.v);
+#endif
 
     // Strip out the relevant parts for controller/local address
     newCommonData.Address = newAppConfig.MyIPAddr.byte.MB;

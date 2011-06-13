@@ -154,7 +154,7 @@
  *   To clear EEPROM, hold BUTTON0, reset the board, and continue
  *   holding until the LEDs flash.  Release, and reset again.
  */
-#define MY_DEFAULT_HOST_NAME			"SUBMOTOR"
+#define MY_DEFAULT_HOST_NAME		"SUBMOTOR"
 
 #define MY_DEFAULT_MAC_BYTE1            (0x00)
 #define MY_DEFAULT_MAC_BYTE2            (0x04)
@@ -166,7 +166,7 @@
 #define MY_DEFAULT_IP_ADDR_BYTE1        (192ul)
 #define MY_DEFAULT_IP_ADDR_BYTE2        (168ul)
 #define MY_DEFAULT_IP_ADDR_BYTE3        (1ul)
-#define MY_DEFAULT_IP_ADDR_BYTE4        (109ul)
+#define MY_DEFAULT_IP_ADDR_BYTE4        (200ul)
 
 #define MY_DEFAULT_MASK_BYTE1           (255ul)
 #define MY_DEFAULT_MASK_BYTE2           (255ul)

@@ -35,6 +35,7 @@
       <itemPath>../include/TCPIPConfig.h</itemPath>
       <itemPath>../include/adc.h</itemPath>
       <itemPath>../include/blockingDelay.h</itemPath>
+      <itemPath>../include/boothook.h</itemPath>
       <itemPath>../include/fixMath.h</itemPath>
       <itemPath>../include/mavg.h</itemPath>
       <itemPath>../include/mcp25XX640A.h</itemPath>
@@ -90,6 +91,7 @@
       <itemPath>../source/MotorWebPage.s</itemPath>
       <itemPath>../source/adc.c</itemPath>
       <itemPath>../source/blockingDelay.c</itemPath>
+      <itemPath>../source/boothook.c</itemPath>
       <itemPath>../source/main.c</itemPath>
       <itemPath>../source/mavg.c</itemPath>
       <itemPath>../source/mcp25XX640A.c</itemPath>
@@ -135,9 +137,9 @@
         <property key="enable-all-warnings" value="true"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="enable-short-double" value="false"/>
-        <property key="enable-ansi-warnings" value="false"/>
-        <property key="optimization-level" value="1"/>
         <property key="enable-procedural-abstraction" value="false"/>
+        <property key="optimization-level" value="1"/>
+        <property key="enable-ansi-warnings" value="false"/>
         <property key="enable-fatal-warnings" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="enable-omit-frame-pointer" value="false"/>
@@ -154,9 +156,9 @@
         <property key="list-source" value="false"/>
         <property key="list-assembly" value="false"/>
         <property key="relax" value="false"/>
-        <property key="warning-level" value="emit-warnings"/>
         <property key="extra-include-directories-for-preprocessor"
                   value="../include;../../Microchip/Include;../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../../FreeRTOS/Source/include;../../Microchip/Include/TCPIP Stack;"/>
+        <property key="warning-level" value="emit-warnings"/>
         <property key="list-section-info" value="false"/>
         <property key="omit-forms" value="false"/>
         <property key="list-symbols" value="false"/>
@@ -181,18 +183,18 @@
         <property key="enable-handles" value="true"/>
         <property key="enable-data-init" value="true"/>
         <property key="secure-flash" value="no_flash"/>
-        <property key="generate-cross-reference-file" value="false"/>
-        <property key="report-memory-usage" value="true"/>
-        <property key="boot-write-protect" value="no_write_protect"/>
         <property key="boot-flash" value="no_flash"/>
+        <property key="boot-write-protect" value="no_write_protect"/>
+        <property key="report-memory-usage" value="true"/>
+        <property key="generate-cross-reference-file" value="false"/>
         <property key="input-libraries" value=""/>
         <property key="secure-ram" value="no_ram"/>
         <property key="enable-check-sections" value="false"/>
         <property key="enable-default-isr" value="true"/>
         <property key="symbol-stripping" value="keep-all"/>
         <property key="boot-ram" value="no_ram"/>
-        <property key="extra-lib-directories" value=".."/>
         <property key="secure-eeprom" value="no_eeprom"/>
+        <property key="extra-lib-directories" value=".."/>
       </C30-LD>
       <C30Global>
       </C30Global>

@@ -8,10 +8,26 @@
 // The version number of this application number
 #define APP_VERSION		0x01
 
-
 // This will force update the bootloader's IP/MAC to keep them in
 // sync with the application
-//#define IS_BOOTLOADED
+#define IS_BOOTLOADED
+#if defined(IS_BOOTLOADED)
+    // These defines must match the identical section in the bootloader's
+    // platform.h
+
+    ///////////////////////////////////////////////////////////////////////////
+    //	Locate the parameter block in write accessable program memory
+    /////////////////////////////////////////////////////////////////////////// 
+    #define PARAM_BASE		(DWORD) 0x03000		// Start of the parameter block	
+    #define UserJump		(DWORD) PARAM_BASE		
+    #define UserCatchAll	(DWORD) (PARAM_BASE + 4)
+    #define CodeState		(DWORD) (PARAM_BASE + 8)
+    #define ImageID		(DWORD) (PARAM_BASE + 12)
+    #define P_MAC		(DWORD) (PARAM_BASE + 16)
+    #define P_Def_IP		(DWORD) (PARAM_BASE + 24)		
+    #define PARAM_END		(DWORD) (PARAM_BASE + 28)
+#endif
+
 
 /*
  *  Timers 1,2,3, and 5 are used by FreeRTOS and the tcp/ip stack. Timer 1 is

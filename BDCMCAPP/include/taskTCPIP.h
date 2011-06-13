@@ -14,6 +14,10 @@
 #include "messages.h"
 #include "adc.h"
 
+#ifdef IS_BOOTLOADED
+    #include "boothook.h"
+#endif
+
 // size of the stack for this task
 #define STACK_SIZE_TCPIP            (configMINIMAL_STACK_SIZE * 6)
 #define UDP_QUEUE_SIZE              10
