@@ -30,7 +30,7 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1472/ENC_C30.o
+OBJECTFILES=${OBJECTDIR}/_ext/1472/mcp25XX640A.o ${OBJECTDIR}/_ext/1472/ENC_C30.o
 
 
 CFLAGS=
@@ -38,8 +38,8 @@ ASFLAGS=
 LDLIBSOPTIONS=
 
 # Path to java used to run MPLAB X when this makefile was created
-MP_JAVA_PATH=/usr/lib/jvm/ia32-java-6-sun-1.6.0.24/jre/bin/
-OS_ORIGINAL="Linux"
+MP_JAVA_PATH=C:\\Program\ Files\ \(x86\)\\Java\\jre6/bin/
+OS_ORIGINAL="MINGW32_NT-6.1"
 OS_CURRENT="$(shell uname -s)"
 ############# Tool locations ##########################################
 # If you copy a project from one host to another, the path where the  #
@@ -47,17 +47,17 @@ OS_CURRENT="$(shell uname -s)"
 # If you open this project with MPLAB X in the new host, this         #
 # makefile will be regenerated and the paths will be corrected.       #
 #######################################################################
-MP_CC=/opt/microchip/mplabc30/v3.24/bin/pic30-gcc
+MP_CC=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-gcc.exe
 # MP_BC is not defined
-MP_AS=/opt/microchip/mplabc30/v3.24/bin/pic30-as
-MP_LD=/opt/microchip/mplabc30/v3.24/bin/pic30-ld
-MP_AR=/opt/microchip/mplabc30/v3.24/bin/pic30-ar
+MP_AS=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-as.exe
+MP_LD=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-ld.exe
+MP_AR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin\\pic30-ar.exe
 # MP_BC is not defined
-MP_CC_DIR=/opt/microchip/mplabc30/v3.24/bin
+MP_CC_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
 # MP_BC_DIR is not defined
-MP_AS_DIR=/opt/microchip/mplabc30/v3.24/bin
-MP_LD_DIR=/opt/microchip/mplabc30/v3.24/bin
-MP_AR_DIR=/opt/microchip/mplabc30/v3.24/bin
+MP_AS_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
+MP_LD_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
+MP_AR_DIR=C:\\Program\ Files\ \(x86\)\\Microchip\\MPLAB\ C30\\bin
 # MP_BC_DIR is not defined
 .build-conf: ${BUILD_SUBPROJECTS}
 ifneq ($(OS_CURRENT),$(OS_ORIGINAL))
@@ -66,7 +66,7 @@ endif
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/ENC_C30.X.${IMAGE_TYPE}.elf
 
 MP_PROCESSOR_OPTION=33FJ128MC804
-MP_LINKER_FILE_OPTION=,--script=/home/devin/Versioned/git_folder/subjugator_pic/EthBootLoader/LinkerScripts/p33FJ128MC804_ETHBL.gld
+MP_LINKER_FILE_OPTION=,--script=../LinkerScripts/p33FJ128MC804_ETHBL.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
@@ -76,6 +76,21 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/_ext/1472/mcp25XX640A.o: ../mcp25XX640A.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/1472 
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I".." -MMD -MF ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/1472/mcp25XX640A.o ../mcp25XX640A.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d > ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${CP} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d > ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${CP} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp
+endif
 ${OBJECTDIR}/_ext/1472/ENC_C30.o: ../ENC_C30.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1472 
 	${RM} ${OBJECTDIR}/_ext/1472/ENC_C30.o.d 
@@ -92,6 +107,21 @@ else
 	${RM} ${OBJECTDIR}/_ext/1472/ENC_C30.o.tmp
 endif
 else
+${OBJECTDIR}/_ext/1472/mcp25XX640A.o: ../mcp25XX640A.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/1472 
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -I".." -MMD -MF ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/1472/mcp25XX640A.o ../mcp25XX640A.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d > ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${CP} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d > ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${CP} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.d 
+	${RM} ${OBJECTDIR}/_ext/1472/mcp25XX640A.o.tmp
+endif
 ${OBJECTDIR}/_ext/1472/ENC_C30.o: ../ENC_C30.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1472 
 	${RM} ${OBJECTDIR}/_ext/1472/ENC_C30.o.d 
@@ -119,7 +149,7 @@ else
 dist/${CND_CONF}/${IMAGE_TYPE}/ENC_C30.X.${IMAGE_TYPE}.elf: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
 	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf  -mcpu=$(MP_PROCESSOR_OPTION)  -o dist/${CND_CONF}/${IMAGE_TYPE}/ENC_C30.X.${IMAGE_TYPE}.elf ${OBJECTFILES}        -Wl,--defsym=__MPLAB_BUILD=1,--heap=1024,--stack=1024,-L"../../../../../MCC18/lib",-Map="$(BINDIR_)$(TARGETBASE).map",--report-mem,--report-mem$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION)
-	${MP_CC_DIR}/pic30-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/ENC_C30.X.${IMAGE_TYPE}.elf -omf=elf
+	${MP_CC_DIR}\\pic30-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/ENC_C30.X.${IMAGE_TYPE}.elf -omf=elf
 endif
 
 

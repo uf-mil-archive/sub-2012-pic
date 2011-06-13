@@ -5,8 +5,26 @@
 //		Copyright (c) 2008, Andrew Smallridge
 //
 //		Last Modified 28/03/08
+//
+//      Added the types used by the EEPROM driver - Devin
 ///////////////////////////////////////////////////////////////////////////
+#ifndef PLATFORM_H
+#define PLATFORM_H
 
+#if defined(__GNUC__)
+#define __EXTENSION __extension__
+#else
+#define __EXTENSION
+#endif
+
+#if !defined(__PACKED)
+    #define __PACKED
+#endif
+
+typedef unsigned char       UINT8;
+typedef signed char         INT8;
+typedef signed short int    INT16;
+typedef unsigned short int  UINT16;
 typedef unsigned char	DSTATUS;
 typedef unsigned char	DRESULT;
 typedef unsigned char	FRESULT;
@@ -103,6 +121,36 @@ typedef union _DWORD_VAL
 		} bits;
 	} DWORD_VAL;
 
+typedef union
+{
+    UINT16 Val;
+    UINT8 v[2] __PACKED;
+    struct __PACKED
+    {
+        UINT8 LB;
+        UINT8 HB;
+    } byte;
+    struct __PACKED
+    {
+        __EXTENSION UINT8 b0:1;
+        __EXTENSION UINT8 b1:1;
+        __EXTENSION UINT8 b2:1;
+        __EXTENSION UINT8 b3:1;
+        __EXTENSION UINT8 b4:1;
+        __EXTENSION UINT8 b5:1;
+        __EXTENSION UINT8 b6:1;
+        __EXTENSION UINT8 b7:1;
+        __EXTENSION UINT8 b8:1;
+        __EXTENSION UINT8 b9:1;
+        __EXTENSION UINT8 b10:1;
+        __EXTENSION UINT8 b11:1;
+        __EXTENSION UINT8 b12:1;
+        __EXTENSION UINT8 b13:1;
+        __EXTENSION UINT8 b14:1;
+        __EXTENSION UINT8 b15:1;
+    } bits;
+} UINT16_VAL, UINT16_BITS;
+
 
 #define LSB(a)          ((a).v[0])
 #define MSB(a)          ((a).v[1])
@@ -114,3 +162,5 @@ typedef union _DWORD_VAL
 #define	LD_DWORD(ptr)		(*(DWORD*)(BYTE*)(ptr))
 #define	ST_WORD(ptr,val)	*(WORD*)(BYTE*)(ptr)=(val)
 #define	ST_DWORD(ptr,val)	*(DWORD*)(BYTE*)(ptr)=(val)
+
+#endif

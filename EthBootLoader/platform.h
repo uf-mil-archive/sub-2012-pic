@@ -116,6 +116,50 @@
 	#define LED0 				LED_Status
 	#define LED0_TRIS 			LED_Status_TRIS
 
+        // Generic SPI Helper Defines
+        #define SPIREG2(a,b)    SPI##a##b
+        #define SPIREG(a,b)     SPIREG2(a,b)
+
+        // SPI PPS Outputs
+        #define SPI1SCK_IO	8
+        #define SPI1SDO_IO	7
+        #define SPI2SCK_IO	11
+        #define SPI2SDO_IO	10
+
+        //********************* EEPROM SPI *****************************/
+        // The EEPROM and the DAC used to set a reference current
+        // share the same SPI bus.
+
+        // The EEPROM digital pins
+        #define EROM_CS_TRIS    TRISAbits.TRISA4    // The EEPROM Chip Select TRIS
+        #define EROM_CS_IO	LATAbits.LATA4      // The EEPROM Chip Select IO
+
+        #define EROM_WP_TRIS	TRISAbits.TRISA9    // The EEPROM Write Protect TRIS
+        #define EROM_WP_IO	LATAbits.LATA9      // The EEPROM Write Protect IO
+
+        #define EROM_SPINUM	1   // You must define this number and the proper
+                                    // SDI PPS register below
+
+        // Define PPS SPI Pins
+        #define EROM_SDO_PIN    RPOR10bits.RP20R    // EEPROM SPI Data Out pin RP20
+        #define EROM_SCK_PIN    RPOR9bits.RP19R     // EEPROM SPI Clock pin RP19
+        #define EROM_SDI_PIN	4                   // EEPROM SPI Data In pin RP4
+        #define EROM_SDI_PINREG RPINR20bits.SDI1R   // The register where SDI
+                                                    // pin is assigned
+
+        // Map SPI Registers
+        #define EROM_SPIxSTAT           SPIREG(EROM_SPINUM,STAT)
+        #define EROM_SPIxCON1		SPIREG(EROM_SPINUM,CON1)
+        #define EROM_SPIxCON2		SPIREG(EROM_SPINUM,CON2)
+        #define EROM_SPIxSTATbits	SPIREG(EROM_SPINUM,STATbits)
+        #define EROM_SPIxCON1bits  	SPIREG(EROM_SPINUM,CON1bits)
+        #define EROM_SPIxCON2bits  	SPIREG(EROM_SPINUM,CON2bits)
+        #define EROM_SPIxBUF     	SPIREG(EROM_SPINUM,BUF)
+        #define EROM_SPIxSCK_IO  	SPIREG(EROM_SPINUM,SCK_IO)
+        #define EROM_SPIxSDO_IO  	SPIREG(EROM_SPINUM,SDO_IO)
+
+        //********************* ~EEPROM SPI ***********************************/
+
 #endif // BDCMC platform
 
 ///////////////////////////////////////////////////////////////////////////

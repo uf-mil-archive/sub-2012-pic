@@ -153,6 +153,7 @@
 
 #include "DataTypes.h"
 #include "platform.h"
+#include "mcp25XX640A.h"
 
 ///////////////////////////////////////////////////////////////////////////
 // 	Setup configuration bits
@@ -1216,6 +1217,13 @@ void init_pic(void)
 			// map the output pins to their respective functions
 			UART2_TX_RPR = 3;	// UART1 TX
 		#endif
+
+                #if defined(EROM_SDO_PIN)
+                    EROM_SDI_PINREG = EROM_SDI_PIN;
+                    // Outputs
+                    EROM_SCK_PIN = EROM_SPIxSCK_IO;
+                    EROM_SDO_PIN = EROM_SPIxSDO_IO;
+                #endif
 	#endif
 	}
 
@@ -2763,10 +2771,11 @@ void EE_Erase(void)
 ///////////////////////////////////////////////////////////////////////////
 // void EE_Erase(void)
 //
-// dummy handler
+// Hooked into our EEPROM driver now.
 ///////////////////////////////////////////////////////////////////////////
-	{
-	}
+{
+    EROM_Clear();
+}
 
 
 
