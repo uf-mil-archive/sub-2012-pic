@@ -30,6 +30,7 @@
       <itemPath>../include/FreeRTOSConfig.h</itemPath>
       <itemPath>../../Microchip/Include/GenericTypeDefs.h</itemPath>
       <itemPath>../include/HTTPPrint.h</itemPath>
+      <itemPath>../include/HallSwitches.h</itemPath>
       <itemPath>../include/HardwareProfile.h</itemPath>
       <itemPath>../include/TCPIPConfig.h</itemPath>
       <itemPath>../include/Tick.h</itemPath>
@@ -84,6 +85,7 @@
         <itemPath>../../Microchip/TCPIP Stack/UDP.c</itemPath>
       </logicalFolder>
       <itemPath>../source/CustomHTTPApp.c</itemPath>
+      <itemPath>../source/HallSwitches.c</itemPath>
       <itemPath>../source/MergeBoardWebPage.s</itemPath>
       <itemPath>../source/Tick.c</itemPath>
       <itemPath>../source/blockingDelay.c</itemPath>

@@ -59,8 +59,8 @@ void EROM_configSPI(void)
 {
     if(!EROM_IsInited)
     {
-        EROM_WP_TRIS = OUTPUT_PIN;
-        EROM_WP_IO = AL_FALSE;
+        //EROM_WP_TRIS = OUTPUT_PIN;
+        //EROM_WP_IO = AL_FALSE;
         EROM_CS_TRIS = OUTPUT_PIN;
         EROM_CS_IO = AL_FALSE;
 

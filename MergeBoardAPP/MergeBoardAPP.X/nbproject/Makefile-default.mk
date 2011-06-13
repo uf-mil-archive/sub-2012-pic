@@ -30,7 +30,7 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ${OBJECTDIR}/_ext/1386115845/heap_3.o ${OBJECTDIR}/_ext/812168374/mavg.o ${OBJECTDIR}/_ext/1295770447/ICMP.o ${OBJECTDIR}/_ext/812168374/main.o ${OBJECTDIR}/_ext/1295770447/NBNS.o ${OBJECTDIR}/_ext/812168374/taskPublisher.o ${OBJECTDIR}/_ext/812168374/mcp4821.o ${OBJECTDIR}/_ext/1295770447/StackTsk.o ${OBJECTDIR}/_ext/1295770447/Helpers.o ${OBJECTDIR}/_ext/812168374/simplequeue.o ${OBJECTDIR}/_ext/812168374/blockingDelay.o ${OBJECTDIR}/_ext/495416742/port.o ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o ${OBJECTDIR}/_ext/812168374/Tick.o ${OBJECTDIR}/_ext/812168374/taskTCPIP.o ${OBJECTDIR}/_ext/1295770447/HTTP2.o ${OBJECTDIR}/_ext/812168374/taskUART.o ${OBJECTDIR}/_ext/812168374/messages.o ${OBJECTDIR}/_ext/812168374/MergeBoardWebPage.o ${OBJECTDIR}/_ext/1295770447/IP.o ${OBJECTDIR}/_ext/1295770447/ARP.o ${OBJECTDIR}/_ext/1147412712/queue.o ${OBJECTDIR}/_ext/1295770447/UDP.o ${OBJECTDIR}/_ext/1147412712/tasks.o ${OBJECTDIR}/_ext/495416742/portasm_dsPIC.o ${OBJECTDIR}/_ext/812168374/taskParser.o ${OBJECTDIR}/_ext/812168374/taskADC.o ${OBJECTDIR}/_ext/1295770447/ENC28J60.o ${OBJECTDIR}/_ext/1147412712/list.o ${OBJECTDIR}/_ext/1295770447/TCP.o ${OBJECTDIR}/_ext/1295770447/DNS.o ${OBJECTDIR}/_ext/1295770447/MPFS2.o
+OBJECTFILES=${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ${OBJECTDIR}/_ext/1386115845/heap_3.o ${OBJECTDIR}/_ext/812168374/mavg.o ${OBJECTDIR}/_ext/1295770447/ICMP.o ${OBJECTDIR}/_ext/812168374/main.o ${OBJECTDIR}/_ext/1295770447/NBNS.o ${OBJECTDIR}/_ext/812168374/taskPublisher.o ${OBJECTDIR}/_ext/812168374/mcp4821.o ${OBJECTDIR}/_ext/1295770447/StackTsk.o ${OBJECTDIR}/_ext/1295770447/Helpers.o ${OBJECTDIR}/_ext/812168374/simplequeue.o ${OBJECTDIR}/_ext/812168374/blockingDelay.o ${OBJECTDIR}/_ext/495416742/port.o ${OBJECTDIR}/_ext/812168374/CustomHTTPApp.o ${OBJECTDIR}/_ext/812168374/Tick.o ${OBJECTDIR}/_ext/812168374/taskTCPIP.o ${OBJECTDIR}/_ext/1295770447/HTTP2.o ${OBJECTDIR}/_ext/812168374/taskUART.o ${OBJECTDIR}/_ext/812168374/messages.o ${OBJECTDIR}/_ext/812168374/MergeBoardWebPage.o ${OBJECTDIR}/_ext/1295770447/IP.o ${OBJECTDIR}/_ext/1295770447/ARP.o ${OBJECTDIR}/_ext/1147412712/queue.o ${OBJECTDIR}/_ext/1295770447/UDP.o ${OBJECTDIR}/_ext/812168374/HallSwitches.o ${OBJECTDIR}/_ext/1147412712/tasks.o ${OBJECTDIR}/_ext/495416742/portasm_dsPIC.o ${OBJECTDIR}/_ext/812168374/taskParser.o ${OBJECTDIR}/_ext/812168374/taskADC.o ${OBJECTDIR}/_ext/1295770447/ENC28J60.o ${OBJECTDIR}/_ext/1147412712/list.o ${OBJECTDIR}/_ext/1295770447/TCP.o ${OBJECTDIR}/_ext/1295770447/DNS.o ${OBJECTDIR}/_ext/1295770447/MPFS2.o
 
 
 CFLAGS=
@@ -432,6 +432,21 @@ else
 	${RM} ${OBJECTDIR}/_ext/1295770447/UDP.o.d 
 	${CP} ${OBJECTDIR}/_ext/1295770447/UDP.o.tmp ${OBJECTDIR}/_ext/1295770447/UDP.o.d 
 	${RM} ${OBJECTDIR}/_ext/1295770447/UDP.o.tmp}
+endif
+${OBJECTDIR}/_ext/812168374/HallSwitches.o: ../source/HallSwitches.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/812168374 
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -DMPLAB_DSPIC_PORT -I"../include" -I"../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../FreeRTOS/Source/include" -I"../../Microchip/Include" -I"../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -MMD -MF ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d -o ${OBJECTDIR}/_ext/812168374/HallSwitches.o ../source/HallSwitches.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d > ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d > ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp}
 endif
 ${OBJECTDIR}/_ext/1147412712/tasks.o: ../../FreeRTOS/Source/tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1147412712 
@@ -898,6 +913,21 @@ else
 	${RM} ${OBJECTDIR}/_ext/1295770447/UDP.o.d 
 	${CP} ${OBJECTDIR}/_ext/1295770447/UDP.o.tmp ${OBJECTDIR}/_ext/1295770447/UDP.o.d 
 	${RM} ${OBJECTDIR}/_ext/1295770447/UDP.o.tmp}
+endif
+${OBJECTDIR}/_ext/812168374/HallSwitches.o: ../source/HallSwitches.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/812168374 
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${MP_CC}  -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -DMPLAB_DSPIC_PORT -I"../include" -I"../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../FreeRTOS/Source/include" -I"../../Microchip/Include" -I"../../Microchip/Include/TCPIP Stack" -mlarge-code -mlarge-data -O1 -MMD -MF ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d -o ${OBJECTDIR}/_ext/812168374/HallSwitches.o ../source/HallSwitches.c  
+ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
+	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d > ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp}
+else 
+	@sed -e 's/\"//g' ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d > ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${CP} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp ${OBJECTDIR}/_ext/812168374/HallSwitches.o.d 
+	${RM} ${OBJECTDIR}/_ext/812168374/HallSwitches.o.tmp}
 endif
 ${OBJECTDIR}/_ext/1147412712/tasks.o: ../../FreeRTOS/Source/tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/1147412712 
