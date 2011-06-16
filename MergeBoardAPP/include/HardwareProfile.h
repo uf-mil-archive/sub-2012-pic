@@ -221,19 +221,19 @@
 //********************* ENC28J60 SPI ***********************************/
 
 // Digital Pins
-#define ENC_CS_IO		LATBbits.LATB9
-#define ENC_CS_TRIS		TRISBbits.TRISB9
-#define ENC_RST_IO		LATBbits.LATB8
-#define ENC_RST_TRIS            TRISBbits.TRISB8
+#define ENC_CS_IO		LATBbits.LATB3
+#define ENC_CS_TRIS		TRISBbits.TRISB3
+#define ENC_RST_IO		LATBbits.LATB2
+#define ENC_RST_TRIS            TRISBbits.TRISB2
 #define ENC_SPI_IF		IFS2bits.SPI2IF 
 
 #define ENC_SPINUM	2	// You must define this number and the proper
 				// SDI PPS register below
 
 // Define PPS SPI Pins
-#define ENC_SDO_PIN	RPOR11bits.RP23R	// ENC SPI Data Out pin RP23
-#define ENC_SCK_PIN	RPOR11bits.RP22R	// ENC SPI Clock pin RP22
-#define ENC_SDI_PIN	24			// ENC SPI Data In pin RP24
+#define ENC_SDO_PIN	RPOR8bits.RP17R	// ENC SPI Data Out pin RP17
+#define ENC_SCK_PIN	RPOR8bits.RP16R         // ENC SPI Clock pin RP16
+#define ENC_SDI_PIN	18			// ENC SPI Data In pin RP18
 #define ENC_SDI_PINREG	RPINR22bits.SDI2R	// The register where SDI
 						// pin is assigned
 

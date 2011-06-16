@@ -13,12 +13,13 @@
 #include "taskTCPIP.h"
 #include "taskPublisher.h"
 #include "messages.h"
+#include "HallSwitches.h"
 
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_OFF & POSCMD_EC)
 _FWDT(FWDTEN_OFF)
-_FICD(ICS_PGD3 & JTAGEN_OFF)
+_FICD(JTAGEN_OFF)
 _FPOR(PWMPIN_ON & HPOL_ON & LPOL_ON & ALTI2C_OFF)
 
 /*************************/

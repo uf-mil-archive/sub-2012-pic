@@ -75,7 +75,7 @@ ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o: ../source/mcp25XX640A.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d 
-	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -I"../include" -I"../../../Microchip/include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ../source/mcp25XX640A.c  
+	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -I"../include" -I"../../../Microchip/include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d -o ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o ../source/mcp25XX640A.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d > ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp25XX640A.o.d 
@@ -90,7 +90,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/main.o: ../source/main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.d 
-	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -I"../include" -I"../../../Microchip/include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/main.o.d -o ${OBJECTDIR}/_ext/812168374/main.o ../source/main.c  
+	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -I"../include" -I"../../../Microchip/include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/main.o.d -o ${OBJECTDIR}/_ext/812168374/main.o ../source/main.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/main.o.d > ${OBJECTDIR}/_ext/812168374/main.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/main.o.d 
@@ -105,7 +105,7 @@ endif
 ${OBJECTDIR}/_ext/812168374/mcp4821.o: ../source/mcp4821.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/812168374 
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
-	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -I"../include" -I"../../../Microchip/include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
+	${MP_CC} -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=33FJ128MC804 -Wall -I"../include" -I"../../../Microchip/include" -I"../../../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC" -I"../../../FreeRTOS/Source/include" -mlarge-code -mlarge-data -MMD -MF ${OBJECTDIR}/_ext/812168374/mcp4821.o.d -o ${OBJECTDIR}/_ext/812168374/mcp4821.o ../source/mcp4821.c  
 ifneq (,$(findstring MINGW32,$(OS_CURRENT))) 
 	@sed -e 's/\"//g' -e 's/\\$$/__EOL__/g' -e 's/\\ /__ESCAPED_SPACES__/g' -e 's/\\/\//g' -e 's/__ESCAPED_SPACES__/\\ /g' -e 's/__EOL__$$/\\/g' ${OBJECTDIR}/_ext/812168374/mcp4821.o.d > ${OBJECTDIR}/_ext/812168374/mcp4821.o.tmp
 	${RM} ${OBJECTDIR}/_ext/812168374/mcp4821.o.d 
@@ -170,7 +170,7 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 dist/${CND_CONF}/${IMAGE_TYPE}/MergeBoardAPP.X.${IMAGE_TYPE}.elf: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC}  -omf=elf  -mcpu=33FJ128MC804  -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1 -o dist/${CND_CONF}/${IMAGE_TYPE}/MergeBoardAPP.X.${IMAGE_TYPE}.elf ${OBJECTFILES}       -Wl,--defsym=__MPLAB_BUILD=1,-L"..",-Map="$(BINDIR_)$(TARGETBASE).map",--report-mem,--report-mem,-Tp33FJ128MC804.gld,--defsym=__MPLAB_DEBUG=1,--defsym=__ICD2RAM=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_REAL_ICE=1
+	${MP_CC}  -omf=elf  -mcpu=33FJ128MC804  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -o dist/${CND_CONF}/${IMAGE_TYPE}/MergeBoardAPP.X.${IMAGE_TYPE}.elf ${OBJECTFILES}       -Wl,--defsym=__MPLAB_BUILD=1,-L"..",-Map="$(BINDIR_)$(TARGETBASE).map",--report-mem,--report-mem,-Tp33FJ128MC804.gld,--defsym=__MPLAB_DEBUG=1,--defsym=__ICD2RAM=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1
 else
 dist/${CND_CONF}/${IMAGE_TYPE}/MergeBoardAPP.X.${IMAGE_TYPE}.elf: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 

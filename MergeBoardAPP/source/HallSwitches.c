@@ -7,7 +7,10 @@
 //  in the ISR
 ////////////////////////////////////////////////////////////////////////////////
 #include "HallSwitches.h"
-#include "p33FJ128MC804.h"
+#include "p33Fxxxx.h"
+#include "taskADC.h"
+
+
 
 /************************Change Notification ISR*******************************/
 // behaviors for the hall effect switches live here.
@@ -15,10 +18,10 @@
 
 void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
 {
-    if (KILLSW == 0 || ONOFFSW == 0)
-        LED = LED_OFF;
+    if (KILLSW == 0)
+       gRailData.flags &= ~MERGE_FLAGMASK_KILLSW;
     else
-        LED = LED_ON;
+       gRailData.flags |= MERGE_FLAGMASK_KILLSW;
 
     IFS1bits.CNIF = 0;      // Clear CN interrupt
 }

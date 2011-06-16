@@ -11,6 +11,8 @@
 #include "HardwareProfile.h"
 #include "GenericTypeDefs.h"
 
+
+
 void hallSwInit();      // Initialize the change notification interupt
 void __attribute__ ((__interrupt__)) _CNInterrupt(void);
 

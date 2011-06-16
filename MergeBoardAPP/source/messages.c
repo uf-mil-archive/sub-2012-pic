@@ -265,28 +265,43 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
                 &tmplength);
 
         // Insert TypeCode
-//        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)MERGE_TYPECODE;
 
         // Insert the tick count
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
         // Paul - Packet contents go here, big endian calls
+        //Added flags
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)gRailData.flags;
 
+        //adding Current16 -> Voltage16 -> Current32 -> Voltage32
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current16, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail16[4], &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current32, &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail32[4], &tmplength);
     }
     else    // Little Endian
     {
-        // Insert the packet number
+                // Insert the packet number
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength],
                 gOutgoingMsgData.OutgoingCount,
                 &tmplength);
 
         // Insert TypeCode
-        //gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)((hMotorData->Flags & MTR_FLAGMASK_MOTORCODE) >> 1);
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)MERGE_TYPECODE;
 
         // Insert the tick count
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
-        // Paul - Packet contents go here, little endian calls
+        // Paul - Packet contents go here, big endian calls
+        //Added flags
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)gRailData.flags;
+
+        //adding Current16 -> Voltage16 -> Current32 -> Voltage32
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current16, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail16[4], &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current32, &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail32[4], &tmplength);
     }
 
     // Calculate the checksum

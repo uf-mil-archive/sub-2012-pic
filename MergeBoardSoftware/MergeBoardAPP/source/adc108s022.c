@@ -19,10 +19,12 @@
 #include "adc108s022.h"
 #include "p33FJ128MC804.h"
 
+#define MAX_NUMBER_OF_ADC_READS	5
+
 #if defined(ADC16_CS_IO) || defined(ADC32_CS_IO)
 
-UINT16 ADC16Val[5] = {0};     //array for ADC16 values
-UINT16 ADC32Val[5] = {0};     //array for ADC16 values
+UINT16 ADC16Val[MAX_NUMBER_OF_ADC_READS] = {0};     //array for ADC16 values
+UINT16 ADC32Val[MAX_NUMBER_OF_ADC_READS] = {0};     //array for ADC16 values
 
 INT16 ADC_IsInited = 0;
 

@@ -8,6 +8,7 @@
 #define Q6_10   UINT16
 #define Q12_0   UINT16
 #define Q4_12   UINT16
+#define Q7_9   UINT16
 
 
 #define Q8_24   UINT32

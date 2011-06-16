@@ -20,11 +20,144 @@ static MAVGFilter current32MAVG;
 
 static void InitRailConfig(void);
 
+
+////////////////////////////////////////////////////////////////////////////////
+//START ADC DRIVER CODE
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+#if defined(ADC16_CS_IO) || defined(ADC32_CS_IO)
+
+UINT16 ADC16Val [NUM_ADCS][NUM_ADC_SAMPLES];     //array for ADC16 values
+UINT16 ADC32Val [NUM_ADCS][NUM_ADC_SAMPLES];     //array for ADC32 values
+
+INT16 ADC_IsInited = 0;
+
+struct SavedSPI
+{
+    UINT16 CON1;
+    UINT16 CON2;
+    UINT16 STAT;
+}ADC_savedSPI;
+
+/******************************************************************************/
+
+void ADC_saveSPI()
+{
+    ADC_savedSPI.CON1 = ADC_SPIxCON1;
+    ADC_savedSPI.CON2 = ADC_SPIxCON2;
+    ADC_savedSPI.STAT = ADC_SPIxSTAT;
+}
+/******************************************************************************/
+
+void ADC_restoreSPI()
+{
+    // Disable the SPI
+    ADC_SPIxSTATbits.SPIEN = 0;
+
+    // Write back the saved configuration
+    ADC_SPIxCON1 = ADC_savedSPI.CON1;
+    ADC_SPIxCON2 = ADC_savedSPI.CON2;
+    ADC_SPIxSTAT = ADC_savedSPI.STAT;
+}
+/******************************************************************************/
+
+void ADC_configSPI(void)
+{
+    // Make sure the ADC pins have been initialized correctly
+    if(!ADC_IsInited)
+    {
+        ADC16_CS_TRIS = OUTPUT_PIN;
+        ADC16_CS_IO = AL_FALSE;
+
+        ADC32_CS_TRIS = OUTPUT_PIN;
+        ADC32_CS_IO = AL_FALSE;
+
+        ADC_IsInited = TRUE;
+    }
+
+    // Disable the SPI to reconfigure for the ADC
+    ADC_SPIxSTATbits.SPIEN = 0;
+
+    ADC_saveSPI();
+
+    // This assumes a 40Mhz instruction clock to get 1.25MHz on SPI
+    ADC_SPIxCON1 = 0x0522;
+    // Bits 15-13 = 000  Unimplemented
+    // Bit 12 = 0        SCK pin is controlled by SPI
+    // Bit 11 = 0        SDO pin is controlled by SPI
+    // Bit 10 = 1        16 bit data mode(16 clks per write)
+    // Bit 9 = 0         Sample in middle of output time
+    // Bit 8 = 1         Output data changes at falling edge
+    // Bit 7 = 0         Not used in master mode
+    // Bit 6 = 0         SCK is active high
+    // Bit 5 = 1         SPI is in master mode
+    // Bits 4-2 = 000    Secondary clock prescalar 8:1
+    // Bits 1-0 = 11     Primary clock prescalar 1:1
+
+    ADC_SPIxCON2 = 0x0000;  // Framing is not used, keep this register cleared
+                            // for it to stay disabled
+
+    // Reenable the SPI, clearing any overflow flags.
+    ADC_SPIxSTAT = 0x8000;
+}
+/******************************************************************************/
+
+void ADC_ScatterGatherData(int adcSel, UINT16* buff)
+{
+    ADC_configSPI();
+
+    volatile UINT16 adcADDR;      // shifted address to send to ADC
+    volatile UINT16 nextAddr;     // counter for pre-shifted address
+
+    while(ADC_SPIxSTATbits.SPITBF);    // Make sure the buffer is ready
+
+    if (adcSel == 0 ){   // IF it is a 0 then check 16volt rail else 32
+                                        // prepare to send by lowering CS
+        ADC16_CS_IO = AL_TRUE;
+    } else {
+        ADC32_CS_IO = AL_TRUE;
+    }
+
+    for (nextAddr = 1; nextAddr <= 5; nextAddr++)
+    {
+        adcADDR = (nextAddr % 5) << 11;
+        // Send out the adc address to read next (0-7 in bits 12,11,10)
+        // and fill buffer with current address
+        ADC_SPIxBUF = adcADDR;
+
+        while(!ADC_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
+
+        // copy the ADC value from the buffer and trim off trailing zeroes
+        *(buff+((nextAddr-1)*NUM_ADC_SAMPLES)) = (ADC_SPIxBUF >> 2);
+    }
+
+    if (adcSel == 0) {       // ADC array now has fresh data
+        ADC16_CS_IO = AL_FALSE;
+    }else{
+       ADC32_CS_IO = AL_FALSE;
+    }
+
+    // Put the SPI back how it was
+    ADC_restoreSPI();
+}
+
+/******************************************************************************/
+
+#endif
+
+
+
+
 // Paul - read basically this whole file I left the ISR I used commented on the
 // bottom so you can see some fixed point math examples.
 
+
 void xADCTaskInit(void)
 {
+	UINT16 i = 0;
+
     // Allocate the mutex used for SPI access control
     hCommonSPIMutex = xSemaphoreCreateMutex();
 
@@ -35,9 +168,6 @@ void xADCTaskInit(void)
     // Set your DAC voltages here, you can also do it in the initrailconfig. I
     // did it in the BDCMC equivalent of init rail config, but this looks cleaner here
     //DAC_SetOutput(rail1, ((float)gRailConfig.MaxCurrent16*gain / pow(2,10)) or something like that.
-    
-    // Setup any SPI specific stuff you need here for the A/D's
-    // InitADC();
 
     // Fill the MAVG's now. You still have exclusive access to spi here since
     // the scheduler isn't running yet
@@ -45,6 +175,23 @@ void xADCTaskInit(void)
     // First, poll ADC's to get ADC_MAVG_QUEUE_LENGTH measurements
     // Next, call MAVG_Init(&vrail16MAVG[0], dataYouGotFor16VRail0, ADC_MAVG_QUEUE_LENGTH)
     // for every filter.
+     for (i=0; i < NUM_ADC_SAMPLES; i++)
+     {
+         ADC_ScatterGatherData(ADC_RAIL_16, &ADC16Val[0][i]);
+         ADC_ScatterGatherData(ADC_RAIL_32, &ADC32Val[0][i]);
+     }
+
+	MAVG_Init(&current16MAVG, &ADC16Val[0][0], ADC_MAVG_QUEUE_LENGTH);
+    MAVG_Init(&current32MAVG, &ADC32Val[0][0], ADC_MAVG_QUEUE_LENGTH);
+   
+   // Otherwise we update the filters
+   for (i=1; i < NUM_ADCS ; i++)
+   {
+       // Update the adc's moving average filter
+       MAVG_Init(&vrail16MAVG[i-1], &ADC16Val[i][0], ADC_MAVG_QUEUE_LENGTH);
+       MAVG_Init(&vrail32MAVG[i-1], &ADC32Val[i][0], ADC_MAVG_QUEUE_LENGTH);
+       
+   }
 
     // Setup the period value for the task
     gADCPeriod = ((1000 / ADC_RATE) / portTICK_RATE_MS);
@@ -58,6 +205,7 @@ void xADCTaskInit(void)
 void taskADC(void* pvParameter)
 {
     portTickType previousWakeTime;
+    int i = 0;
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
         a constant publishing frequency */
@@ -71,20 +219,37 @@ void taskADC(void* pvParameter)
 
         // Pull in the latest ADC sample and call continue. Get the spi exclusively first
         xSemaphoreTake(hCommonSPIMutex, portMAX_DELAY); // This blocks until the semaphore is free
-        {
-            // ADCRead...
+        {            
+            for (i=0; i < NUM_ADC_SAMPLES; i++)
+            {
+                ADC_ScatterGatherData(ADC_RAIL_16, &ADC16Val[0][i]);
+                ADC_ScatterGatherData(ADC_RAIL_32, &ADC32Val[0][i]);
+            }
         }
         xSemaphoreGive(hCommonSPIMutex);
 
-        //When you get about 50 or 100 samples, call update on the MAVG filters
-       // if(counter++ % 100 != 99)
-         //   continue;
+         MAVG_Update(&current16MAVG, &ADC16Val[0][0], NUM_ADC_SAMPLES);
+         gRailData.Current16 = (Q7_9)((current16MAVG.CurrentAvg*ADC_CURRENT16_APB) >> 6);
+
+         MAVG_Update(&current32MAVG, &ADC32Val[0][0], NUM_ADC_SAMPLES);
+         gRailData.Current32 = (Q6_10)((current32MAVG.CurrentAvg*ADC_CURRENT32_APB) >> 5);
 
         // Otherwise we update the filters
-        //MAVG_Update(&vrail16MAVG[0], datayoupulledin, numberofsamples);
-        // vrail16MAVG[0].CurrentAvg will now have the latest filtered data
-        // you would put into gRailData, and then publish through your packet.
-        // Rinse and repeat
+        for (i=1; i < NUM_ADCS ; i++)
+        {
+            // Update the adc's moving average filter
+            MAVG_Update(&vrail16MAVG[i-1], &ADC16Val[i][0], NUM_ADC_SAMPLES);
+
+            // Copy the latest average to the message data struct
+            // Q10_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q6_10 in the rail
+            // struct, so shift to generate final result
+            gRailData.VRail16[i-1] = (Q6_10)((vrail16MAVG[i-1].CurrentAvg*ADC_VRAIL16_BPV) >> 5);
+
+
+            MAVG_Update(&vrail32MAVG[i-1], &ADC32Val[i][0], NUM_ADC_SAMPLES);
+            gRailData.VRail32[i-1] = (Q6_10)((vrail32MAVG[i-1].CurrentAvg*ADC_VRAIL32_BPV) >> 5);
+        }
+
     }
 
     /* Should the task implementation ever break out of the above loop
@@ -168,54 +333,3 @@ void SaveRailConfig(RailConfig* railCfg)
     EROM_WriteInt16((d + sizeof(RailConfig)), chk);
 }
 
-/*
-void __attribute__((interrupt, no_auto_psv)) _DMA5Interrupt(void)
-{
-    LED = LED_ON;
-
-    // The first time through is an initialization run really
-    if(!adcMAVGsInited)
-    {
-        if(ADCCurrentDMABuffer == 0)
-        {
-            MAVG_Init(&vrailMAVG, &ADCBufferA.ADC1CH0[0], ADC_MAVG_QUEUE_LENGTH);
-            MAVG_Init(&currentMAVG, &ADCBufferA.ADC1CH1[0], ADC_MAVG_QUEUE_LENGTH);
-        }
-        else
-        {
-            MAVG_Init(&vrailMAVG, &ADCBufferB.ADC1CH0[0], ADC_MAVG_QUEUE_LENGTH);
-            MAVG_Init(&currentMAVG, &ADCBufferB.ADC1CH1[0], ADC_MAVG_QUEUE_LENGTH);
-        }
-        adcMAVGsInited = TRUE;
-        goto ADC_DONE;
-    }
-
-    // Update the moving average
-    if(ADCCurrentDMABuffer == 0)
-    {
-        MAVG_Update(&vrailMAVG, &ADCBufferA.ADC1CH0[0], ADC_DMA_BUFFER_SIZE);
-        MAVG_Update(&currentMAVG, &ADCBufferA.ADC1CH1[0], ADC_DMA_BUFFER_SIZE);
-    }
-    else
-    {
-        MAVG_Update(&vrailMAVG, &ADCBufferB.ADC1CH0[0], ADC_DMA_BUFFER_SIZE);
-        MAVG_Update(&currentMAVG, &ADCBufferB.ADC1CH1[0], ADC_DMA_BUFFER_SIZE);
-    }    
-
-    if(hMotorData)
-    {
-        // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q6_10 in the motor
-        // struct, so shift to generate final result
-        hMotorData->VRail = (Q6_10)((vrailMAVG.CurrentAvg*ADC_VRAIL_BPV) >> 5);
-        // Q12_0(ADC reading)*Q1_15(bits/v)=QX_15. We store Q4_12 in the motor
-        // struct, so shift to generate final result
-        hMotorData->Current = (Q4_12)((currentMAVG.CurrentAvg*ADC_CURRENT_BPA) >> 3);
-    }
-
-ADC_DONE:
-    ADCCurrentDMABuffer ^= 1; // Toggle to other buffer
-    IFS3bits.DMA5IF = 0;    // Clear the DMA0 interrupt flag
-
-    LED = LED_OFF;
-}
-*/

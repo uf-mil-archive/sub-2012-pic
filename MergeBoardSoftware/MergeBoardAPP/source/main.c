@@ -20,7 +20,7 @@
 //UINT16 FanMinus;
 //UINT16 FanPlus;
 
-#include "cheesyUART.h"
+//#include "cheesyUART.h"
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_OFF & POSCMD_EC)
@@ -39,8 +39,8 @@ static void clockInit(void);
 /**********************/
 /*  Global Variables  */
 /**********************/
-extern UINT16 ADC16Val[5];
-extern UINT16 ADC32Val[5];
+//extern UINT16 ADC16Val[5];
+//extern UINT16 ADC32Val[5];
 
 //I2C_DRV i2cfan = I2C_FANDRV_DEFAULTS;
 // FANCTRLR;
@@ -76,7 +76,7 @@ int main(void)
 
     clockInit();                // Set the clock frequency
     ioMap();                    // Initialize pins
-    UARTInit();                 // initialize UART
+    //UARTInit();                 // initialize UART
 //    hallSwInit() ;              // Initialize HALL SW interupts
 
 //    DAC_SetOutput(.5, 1);      //Set 32V Side DAC ouput
@@ -89,8 +89,8 @@ int main(void)
     int i=0;         // temp var for delay loop
     int j=0;
 
-    UINT16 FanVal = 1;
-    unsigned int tachVal=0;
+  //  UINT16 FanVal = 1;
+   // unsigned int tachVal=0;
 
    // FanMinus=0;
    // FanPlus=0;
@@ -99,7 +99,7 @@ int main(void)
 //        I2Cinit(&i2cfan);
  //       i2cfan.oData = &FANCTRLR;
 
-        FanVal = 75;
+//        FanVal = 75;
         //FanOpenLoop(&i2cfan);
         //FanSetRPM(&i2cfan,FanVal);
 
@@ -109,19 +109,20 @@ int main(void)
     /***************/
     /** MAIN LOOP **/
     /***************/
+    // test
     for(;;)
     {
 
        //ADC_getData(16);
        //ADC_getData(32);
        //DAC_SetOutput(0.5, 16);
-       //LED ^= 1  ;
-
+       LED ^= 1  ;
+//       ENET_SW = TURN_ON ;
        // tachVal = FanReadTach(&i2cfan);
 
-        UARTSendChar( (char)tachVal );
+        //UARTSendChar( (char)tachVal );
 
-         UARTSendChar( 0 );
+        // UARTSendChar( 0 );
 
        for (i=0; i<10000; i++){ 
             for (j=0; j<100; j++){  Nop(); }  //delay loop
