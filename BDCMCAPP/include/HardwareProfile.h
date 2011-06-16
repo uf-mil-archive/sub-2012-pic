@@ -6,7 +6,7 @@
 #endif // Allowable processors
 
 // The version number of this application number
-#define APP_VERSION		0x01
+#define APP_VERSION		0x02
 
 // This will force update the bootloader's IP/MAC to keep them in
 // sync with the application

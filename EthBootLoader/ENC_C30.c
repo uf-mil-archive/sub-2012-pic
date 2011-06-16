@@ -83,7 +83,7 @@
 //	Define Cypher/Decypher Constants
 ////////////////////////////////////////////////////////////////////////////
 #define XTEA_KEY "MILMILMILMILMILM"  		// must be exactly 16 bytes long
-#define XTEA_ITERATIONS (WORD)16			// number of decipher iterations
+#define XTEA_ITERATIONS (WORD)1				// number of decipher iterations
 #define XTEA_DATA_LEN_ASCII 48				// fixed length record size (ASCII)
 #define XTEA_DATA_LEN XTEA_DATA_LEN_ASCII/2	// hex record length
 #define XTEA_DELTA 0x9E3779B9
