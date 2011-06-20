@@ -452,6 +452,7 @@ void BROLInit(void)
 {
     INT16 i;
     float hMax;
+	float i_pow;
 
     // HardMax is a Q6_10 in the structure, but we use Q6_26 in the
     // tables. This is for precision when dividing later.
@@ -459,28 +460,28 @@ void BROLInit(void)
 
     MTR_FTable[0] = 0;
     // Build the forward table
-    for(i = 1; i <= 100; i++)
+    for(i = 1, i_pow=1.0/100.0; i <= 100; i++, i_pow=i/100.0)
     {
         MTR_FTable[i] = 
-               (Q6_26)(hMax*(BROLMotorData.FCoeff[5]*pow(i,5) +
-                BROLMotorData.FCoeff[4]*pow(i,4) +
-                BROLMotorData.FCoeff[3]*pow(i,3) +
-                BROLMotorData.FCoeff[2]*pow(i,2) +
-                BROLMotorData.FCoeff[1]*i +
-                BROLMotorData.FCoeff[0]) / 100.0);
+               (Q6_26)(hMax*(BROLMotorData.FCoeff[5]*pow(i_pow,5) +
+                BROLMotorData.FCoeff[4]*pow(i_pow,4) +
+                BROLMotorData.FCoeff[3]*pow(i_pow,3) +
+                BROLMotorData.FCoeff[2]*pow(i_pow,2) +
+                BROLMotorData.FCoeff[1]*i_pow +
+                BROLMotorData.FCoeff[0]));
     }
 
     MTR_RTable[0] = 0;
     // Build the reverse table
-    for(i = 1; i <= 100; i++)
+    for(i = 1, i_pow=1.0/100.0; i <= 100; i++,i_pow=i/100.0)
     {
         MTR_RTable[i] = 
-                (Q6_26)(hMax*(BROLMotorData.RCoeff[5]*pow(i,5) +
-                BROLMotorData.RCoeff[4]*pow(i,4) +
-                BROLMotorData.RCoeff[3]*pow(i,3) +
-                BROLMotorData.RCoeff[2]*pow(i,2) +
-                BROLMotorData.RCoeff[1]*i +
-                BROLMotorData.RCoeff[0]) / 100.0);
+                (Q6_26)(hMax*(BROLMotorData.RCoeff[5]*pow(i_pow,5) +
+                BROLMotorData.RCoeff[4]*pow(i_pow,4) +
+                BROLMotorData.RCoeff[3]*pow(i_pow,3) +
+                BROLMotorData.RCoeff[2]*pow(i_pow,2) +
+                BROLMotorData.RCoeff[1]*i_pow +
+                BROLMotorData.RCoeff[0]));
     }
 }
 
