@@ -24,9 +24,9 @@
 // isn't in that range, its invalid.
 
 // then the relation between depth for freshwater and pressure
-// (.432psi per foot = 1.417322834645669136psi/m)
+// (.432psi per foot = 1.417322834645669136psi/m => 0.70555555555555563288444444444445 m/psi) 
 #ifdef FRESHWATER    
-    #define PRESSURE_TO_DEPTH   ((Q6_10)(1.4173228346*pow(2,10)))
+    #define PRESSURE_TO_DEPTH   ((Q6_10)(0.70555555555555563288444444444445*pow(2,10)))
 #endif
 
 // The Thermistor Gain
