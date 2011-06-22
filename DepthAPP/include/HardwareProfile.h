@@ -6,7 +6,7 @@
 #endif // Allowable processors
 
 // The version number of this application number
-#define APP_VERSION		0x01
+#define APP_VERSION		0x02
 #define FRESHWATER
 /*
  *  Timers 5 is used by FreeRTOS. Timer 1 is
