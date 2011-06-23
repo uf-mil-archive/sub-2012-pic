@@ -272,7 +272,7 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
 
         // Paul - Packet contents go here, big endian calls
         //Added flags
-        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)gRailData.flags;
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)gRailData.state;
 
         //adding Current16 -> Voltage16 -> Current32 -> Voltage32
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current16, &tmplength);
@@ -295,7 +295,7 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
 
         // Paul - Packet contents go here, big endian calls
         //Added flags
-        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)gRailData.flags;
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)gRailData.state;
 
         //adding Current16 -> Voltage16 -> Current32 -> Voltage32
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current16, &tmplength);

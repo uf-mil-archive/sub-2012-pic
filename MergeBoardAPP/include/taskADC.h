@@ -47,7 +47,9 @@
 #define STACK_SIZE_ADC     (configMINIMAL_STACK_SIZE * 4)
 
 // Global Flag masks
-#define MERGE_FLAGMASK_KILLSW   (1 << 0)
+#define MERGE_FLAGMASK_CURRENT_RAILSTATE (1 << 0)
+#define MERGE_FLAGMASK_PREV_KILLSTATE    (1 << 1)
+#define MERGE_FLAGMASK_PREV_ONOFFSTATE   (1 << 2)
 
 // defines for the 16 and 32 volt slection
 #define ADC_RAIL_16 0
@@ -62,7 +64,7 @@
 // have a RailData or something struct, defined like this
 typedef struct
 {
-    BYTE  flags;       // Useful flags/etc.
+    BYTE  state;       // current state of the EStop ; on/off/ ; Rails
     Q6_10 VRail32[4];   // The 4 32V measurements
     Q6_10 Current32;    // 32V current measurement
     Q6_10 VRail16[4];   // The 4 32V measurements

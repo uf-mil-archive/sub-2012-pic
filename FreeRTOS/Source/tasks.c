@@ -1991,6 +1991,7 @@ static void prvCheckTasksWaitingTermination( void )
 		}
 	}
 	#endif
+
 }
 /*-----------------------------------------------------------*/
 

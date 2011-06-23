@@ -6,6 +6,7 @@ static portBASE_TYPE gADCPeriod;
 
 xSemaphoreHandle hCommonSPIMutex;
 xTaskHandle hADCTask;
+
 RailData gRailData;
 RailConfig gRailConfig;
 
@@ -82,8 +83,9 @@ void ADC_configSPI(void)
 
     ADC_saveSPI();
 
-    // This assumes a 40Mhz instruction clock to get 1.25MHz on SPI
-    ADC_SPIxCON1 = 0x0522;
+    // This assumes a 40Mhz instruction clock to get Divided SPI Clock
+    //ADC_SPIxCON1 = 0x0522;   //... 0010 0010   1.25MHz
+    ADC_SPIxCON1 = 0x0532;   //... 0011 0010   2.5MHz
     // Bits 15-13 = 000  Unimplemented
     // Bit 12 = 0        SCK pin is controlled by SPI
     // Bit 11 = 0        SDO pin is controlled by SPI
@@ -93,8 +95,9 @@ void ADC_configSPI(void)
     // Bit 7 = 0         Not used in master mode
     // Bit 6 = 0         SCK is active high
     // Bit 5 = 1         SPI is in master mode
-    // Bits 4-2 = 000    Secondary clock prescalar 8:1
-    // Bits 1-0 = 11     Primary clock prescalar 1:1
+    // Bits 4-2 = 100    Secondary clock prescalar 4:1 for 2.5MHz
+    // Bits 4-2 = 000    Secondary clock prescalar 8:1 for 1.25 MHz
+    // Bits 1-0 = 10     Primary clock prescalar 4:1
 
     ADC_SPIxCON2 = 0x0000;  // Framing is not used, keep this register cleared
                             // for it to stay disabled
@@ -106,6 +109,8 @@ void ADC_configSPI(void)
 
 void ADC_ScatterGatherData(int adcSel, UINT16* buff)
 {
+    //LED ^= 1;       //LED blink to test timming
+
     ADC_configSPI();
 
     volatile UINT16 adcADDR;      // shifted address to send to ADC
@@ -141,6 +146,7 @@ void ADC_ScatterGatherData(int adcSel, UINT16* buff)
 
     // Put the SPI back how it was
     ADC_restoreSPI();
+   // LED ^= 1;       //LED blink to test timming
 }
 
 /******************************************************************************/

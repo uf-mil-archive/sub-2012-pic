@@ -110,7 +110,7 @@ int main(void)
        ADC_getData(16);
        //ADC_getData(32);
        //DAC_SetOutput(0.5, 16);
-       //LED ^= 1  ;
+       LED ^= 1  ;
 
        // tachVal = FanReadTach(&i2cfan);
 

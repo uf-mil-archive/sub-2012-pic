@@ -14,6 +14,6 @@
 
 
 void hallSwInit();      // Initialize the change notification interupt
-void __attribute__ ((__interrupt__)) _CNInterrupt(void);
+void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void);
 
 #endif

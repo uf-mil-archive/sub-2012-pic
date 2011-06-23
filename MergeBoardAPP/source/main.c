@@ -14,6 +14,7 @@
 #include "taskPublisher.h"
 #include "messages.h"
 #include "HallSwitches.h"
+#include "buzzer.h"
 
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
@@ -60,6 +61,7 @@ int main(void)
     clockInit();
     ioMap();
     hallSwInit() ;              // Initialize HALL SW interupts
+	buzzerInit();
 
     BUZZER = BUZZER_OFF;        // initial state of buzzer is off
     LED = LED_OFF;              // initial state of debug LED is off
