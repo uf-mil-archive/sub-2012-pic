@@ -302,7 +302,6 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
             LostSubscribers();  // Turn off the publishing
         }
     }
-
     // This is an undervolt condition, override the desired speed
     if(hMotorData->MinVoltage > hMotorData->VRail)
     {
@@ -317,6 +316,13 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
         hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
     }   
 
+    // In ESTOP - this one has highest priority
+    if(hMotorData->Flags & MTR_FLAGMASK_ESTOP)
+    {
+        hMotorData->ReferenceInput = 0;
+        hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
+    }
+
     // Call the controller
     controller();
 }
@@ -330,6 +336,14 @@ inline void FeedHeartbeat(void)
 inline void ReferenceChanged(void)
 {
     hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
+}
+
+inline void ESTOPChanged(INT16 state)
+{
+    if(state)
+        hMotorData->Flags |= MTR_FLAGMASK_ESTOP;
+    else
+        hMotorData->Flags &= ~MTR_FLAGMASK_ESTOP;
 }
 
 /*********************************************************************

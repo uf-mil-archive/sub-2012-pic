@@ -194,7 +194,7 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
     {
         if(length == MSG_ESTOP_LENGTH)
         {
-            // Handle estop
+            ESTOPChanged(rBuf[5]);
         }
         return;
     }
