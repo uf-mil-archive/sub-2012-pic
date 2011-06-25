@@ -18,8 +18,10 @@
    the max value the ADC can put out is 0b0000 1111 1111 1111*/
 #define ADC_MAX_VAL             (0x3FF)
 // The VRail Voltage divider gain
-#define ADC_VRAIL16_GAIN          (1.0/4.0)
-#define ADC_VRAIL32_GAIN          (100.0/798.0)
+//#define ADC_VRAIL16_GAIN  (1.0/4.0)       // should be this
+#define ADC_VRAIL16_GAIN    (3.944/16.01)   // but is actually this
+//#define ADC_VRAIL32_GAIN    (100.0/798.0)
+#define ADC_VRAIL32_GAIN    (100.0/798.0)
 // The Current Divider Gain
 #define ADC_CURRENT16_GAIN        (4.0/40.0)
 #define ADC_CURRENT32_GAIN        (3.0/60.0)
@@ -40,13 +42,13 @@
 #define ADC_CURRENT32_APB         ((Q1_15)((ADC_CURRENT32_MMA / ADC_MAX_VAL) * 32767))
 
 // Paul - these should be the fractional (fixed point) representations of you constants
-#define DEFAULT_MAX_CURRENT16   25
+#define DEFAULT_MAX_CURRENT16   ((Q7_9)(25<<9))     //25 AMPS in Q7_9
 #define DEFAULT_MAX_VOLTAGE16   ((Q6_10)(17 << 10)) // 17 volts in Q6_10
 #define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(14.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 #define DEFAULT_WARN_VOLTAGE16  ((Q6_10)(14.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 
 
-#define DEFAULT_MAX_CURRENT32   40
+#define DEFAULT_MAX_CURRENT32   ((Q6_10)(40 << 10))  // 40 AMPS in Q6_10
 #define DEFAULT_MAX_VOLTAGE32   ((Q6_10)(34 << 10)) // 17 volts in Q6_10
 #define DEFAULT_MIN_VOLTAGE32   ((Q6_10)(29.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 #define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(29.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
@@ -56,10 +58,10 @@
 #define STACK_SIZE_ADC     (configMINIMAL_STACK_SIZE * 4)
 
 // Global Flag masks
-#define MERGE_FLAGMASK_RAILSTATE 	(1 << 0)
-#define MERGE_FLAGMASK_ONOFFSTATE  	(1 << 1)
-#define MERGE_FLAGMASK_KILLSTATE   	(1 << 2)
-
+#define MERGE_STATE_MASK_RAIL16 	(1 << 0)
+#define MERGE_STATE_MASK_ONOFFSW  	(1 << 1)
+#define MERGE_STATE_MASK_ESTOPSW   	(1 << 2)
+#define MERGE_STATE_MASK_RAIL32 	(1 << 0)
 
 // defines for the 16 and 32 volt slection
 #define ADC_RAIL_16 0
@@ -69,11 +71,25 @@
 #define NUM_ADC_SAMPLES   50
 
 #define OVER_CURRRENT_DELAY_MS 	250
-#define OVER_CURRENT_DELAY 		OVER_CURRRENT_DELAY_MS * ADC_RATE / 1000
+#define OVER_CURRENT_DELAY      OVER_CURRRENT_DELAY_MS * ADC_RATE / 1000
+
+// defines used wth RailControl helper function
+#define CONTROL_RAIL_16     0
+#define CONTROL_RAIL_32     1
+#define CONTROL_RAIL_BOTH   2
+
+//#define TURN_OFF    0     //already defined in hardware.h
+//#define TURN_ON     1     //already defined in hardware.h
 
 typedef struct
 {
-    BYTE  state;       // current state of the EStop ; on/off/ ; Rails
+    BYTE  state;        // current state of the EStop ; on/off/ ; Rails
+                        // Bits 7:4 - N/A
+                        // Bit  3   - 32 Rail ON/OFF State (1 = 32V Rail has Power ; 0 = 32V Rail has no powewr)
+                        // Bit  2   - EStop Hall SW State (1= Enabled ; 0= Running Sub)
+                        // Bit  1   - On/OFF Hall SW State (1 = ON ; 0= OFF)
+                        // Bit  0   - 16V Rail ON/OFF State (1 = 16V Rail has Power ; 0 = 16V Rail has no powewr)
+
     Q6_10 VRail32[4];   // The 4 32V measurements
     Q6_10 Current32;    // 32V current measurement
     Q6_10 VRail16[4];   // The 4 32V measurements
@@ -87,11 +103,11 @@ typedef struct
     Q7_9 MaxCurrent16;
     Q6_10 MinVoltage16;
     Q6_10 MaxVoltage16;
-	Q6_10 WarnVoltage16;
+    Q6_10 WarnVoltage16;
     Q6_10 MaxCurrent32;
     Q6_10 MinVoltage32;
     Q6_10 MaxVoltage32;
-	Q6_10 WarnVoltage32;
+    Q6_10 WarnVoltage32;
     UINT16 BaudDiv;     // The baud rate divisor
 }RailConfig;
 
@@ -104,5 +120,6 @@ extern RailConfig gRailConfig;
 void xADCTaskInit(void);
 void taskADC(void* pvParameter);
 void SaveRailConfig(RailConfig* railCfg);
+void RailControl(UINT8 rail, UINT8 action);
 
 #endif // ADC_H

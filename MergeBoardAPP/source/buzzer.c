@@ -6,82 +6,104 @@ SongData gSongData;
 
 void __attribute__((__interrupt__, no_auto_psv)) _T4Interrupt(void)
 {
-	IFS1bits.T4IF = 0; // Clear Timer1 Interrupt Flag
+    IFS1bits.T4IF = 0; // Clear Timer1 Interrupt Flag
 
-	if (gSongData.count >= 20 || gSongData.songs[gSongData.song][gSongData.count] == 4	) {
-		gSongData.count = 0;
-		BUZZER = TURN_OFF;
-		T4CONbits.TON = 0; // Stop Timer		
-		TMR4 = 0x00; // Clear timer register
-		PR4 = 0;
-	
-	}else {
+    if (gSongData.songs[gSongData.song][gSongData.count] == SONG_STOP_PLAYING ||
+		PR4 < SONG_START_DELAY) {
+        BUZZER = TURN_OFF;
+        T4CONbits.TON = 0; // Stop Timer
+        gSongData.count = 0;
+        TMR4 = 0x00; // Clear timer register
+        PR4 = SONG_START_DELAY;
 
-		if (gSongData.count%2 == 0 )
-			BUZZER = TURN_ON;
-		else 
-			BUZZER = TURN_OFF;
+    }else {
+        
+        //check the command
+        if (gSongData.songs[gSongData.song][gSongData.count] == SONG_BUZZ)
+            BUZZER = TURN_ON;
+        else
+            BUZZER = TURN_OFF;
 
-		PR4 = gSongData.songs[gSongData.song][gSongData.count];		
-		gSongData.count++;
-	}
+        gSongData.count++;
+
+        //set the duration
+        PR4 = gSongData.songs[gSongData.song][gSongData.count];
+
+        gSongData.count++;
+    }
 }
 
 
 void buzzerInit()
 {
 	gSongData.song = 0;
-	
-	// LOW POWER Song
-	gSongData.songs[0][0] = 65000;
-	gSongData.songs[0][1] = 65000/4;
-	gSongData.songs[0][2] = 65000;
-	gSongData.songs[0][3] = 65000/4;
-	gSongData.songs[0][4] = 65000;
-	gSongData.songs[0][5] = 65000/4;
-	gSongData.songs[0][6] = 65000;
-	gSongData.songs[0][7] = 65000/4;
-	gSongData.songs[0][8] = 65000;
-	gSongData.songs[0][9] = STOP_PLAYING_SONG;
+
+        // LOW POWER Song
+	gSongData.songs[LOWPOWER_SONG][0] = SONG_BUZZ   ;
+	gSongData.songs[LOWPOWER_SONG][1] = SONG_DELAY3 ;
+	gSongData.songs[LOWPOWER_SONG][2] = SONG_QUIET  ;
+	gSongData.songs[LOWPOWER_SONG][3] = SONG_DELAY2 ;
+	gSongData.songs[LOWPOWER_SONG][4] = SONG_BUZZ   ;
+	gSongData.songs[LOWPOWER_SONG][5] = SONG_DELAY3 ;
+	gSongData.songs[LOWPOWER_SONG][6] = SONG_QUIET  ;
+	gSongData.songs[LOWPOWER_SONG][7] = SONG_DELAY2 ;
+	gSongData.songs[LOWPOWER_SONG][8] = SONG_BUZZ   ;
+	gSongData.songs[LOWPOWER_SONG][9] = SONG_DELAY3 ;
+        gSongData.songs[LOWPOWER_SONG][10] = SONG_QUIET  ;
+	gSongData.songs[LOWPOWER_SONG][11] = SONG_DELAY2 ;
+	gSongData.songs[LOWPOWER_SONG][12] = SONG_BUZZ   ;
+	gSongData.songs[LOWPOWER_SONG][13] = SONG_DELAY3 ;
+	gSongData.songs[LOWPOWER_SONG][14] = SONG_QUIET  ;
+	gSongData.songs[LOWPOWER_SONG][15] = SONG_DELAY2 ;
+	gSongData.songs[LOWPOWER_SONG][16] = SONG_BUZZ   ;
+	gSongData.songs[LOWPOWER_SONG][17] = SONG_DELAY3 ;
+        gSongData.songs[LOWPOWER_SONG][18] = SONG_STOP_PLAYING  ;
 	
 	// BAD POWER Song
-	gSongData.songs[1][0] = 65000/2;
-	gSongData.songs[1][1] = 65000/6;
-	gSongData.songs[1][2] = 65000/2;
-	gSongData.songs[1][3] = 65000/6;
-	gSongData.songs[1][4] = 65000/2;
-	gSongData.songs[1][5] = STOP_PLAYING_SONG ;
+	gSongData.songs[BADPOWER_SONG][0] = SONG_BUZZ   ;
+	gSongData.songs[BADPOWER_SONG][1] = SONG_DELAY2 ;
+	gSongData.songs[BADPOWER_SONG][2] = SONG_QUIET  ;
+	gSongData.songs[BADPOWER_SONG][3] = SONG_DELAY2 ;
+       	gSongData.songs[BADPOWER_SONG][4] = SONG_BUZZ   ;
+	gSongData.songs[BADPOWER_SONG][5] = SONG_DELAY2 ;
+	gSongData.songs[BADPOWER_SONG][6] = SONG_QUIET  ;
+	gSongData.songs[BADPOWER_SONG][7] = SONG_DELAY2 ;
+	gSongData.songs[BADPOWER_SONG][8] = SONG_BUZZ   ;
+	gSongData.songs[BADPOWER_SONG][9] = SONG_DELAY2 ;
+	gSongData.songs[BADPOWER_SONG][10] = SONG_QUIET  ;
+	gSongData.songs[BADPOWER_SONG][11] = SONG_DELAY2 ;
+	gSongData.songs[BADPOWER_SONG][12] = SONG_STOP_PLAYING ;
 	
 	//ON Song
-	gSongData.songs[2][0] = 65000;
-	gSongData.songs[2][1] = 1;
-	gSongData.songs[2][2] = 65000;
-	gSongData.songs[2][3] = 65000;
-	gSongData.songs[2][4] = 65000;
-	gSongData.songs[2][5] = 1;
-	gSongData.songs[2][6] = 65000;
-	gSongData.songs[2][7] =  STOP_PLAYING_SONG;
+	gSongData.songs[ON_SONG][0] =  SONG_BUZZ   ;
+	gSongData.songs[ON_SONG][1] = SONG_DELAY4 ;
+	gSongData.songs[ON_SONG][2] = SONG_QUIET   ;
+	gSongData.songs[ON_SONG][3] = SONG_DELAY4 ;
+	gSongData.songs[ON_SONG][4] = SONG_BUZZ  ;
+	gSongData.songs[ON_SONG][5] = SONG_DELAY4 ;
+        gSongData.songs[ON_SONG][8] = SONG_STOP_PLAYING  ;
 
 	//OFF Song
-	gSongData.songs[3][0] = 1;
-	gSongData.songs[3][1] = 1;
-	gSongData.songs[3][2] = 65000;
-	gSongData.songs[3][3] = 1;
-	gSongData.songs[3][4] = 65000;
-	gSongData.songs[3][5] = STOP_PLAYING_SONG;
+	gSongData.songs[OFF_SONG][0] = SONG_BUZZ   ;
+	gSongData.songs[OFF_SONG][1] = SONG_DELAY4 ;
+	gSongData.songs[OFF_SONG][2] = SONG_BUZZ   ;
+	gSongData.songs[OFF_SONG][3] = SONG_DELAY4 ;
+	gSongData.songs[OFF_SONG][4] = SONG_STOP_PLAYING  ;
 
 	//ESTOP ON
-	gSongData.songs[4][0] = 65000/3;
-	gSongData.songs[4][1] = 65000/3;
-	gSongData.songs[4][2] = STOP_PLAYING_SONG;
+	gSongData.songs[ESTOP_ON_SONG][0] = SONG_BUZZ   ;
+	gSongData.songs[ESTOP_ON_SONG][1] = SONG_DELAY1 ;
+	gSongData.songs[ESTOP_ON_SONG][2] = SONG_STOP_PLAYING;
 	
 	//ESTOP OFF
-	gSongData.songs[5][0] = 65000/3;
-	gSongData.songs[5][1] = 65000/3;
-	gSongData.songs[5][2] = 65000/3;
-	gSongData.songs[5][3] = 65000/3;
-	gSongData.songs[5][4] =  STOP_PLAYING_SONG;
-
+	gSongData.songs[ESTOP_OFF_SONG][0] = SONG_BUZZ  ;
+	gSongData.songs[ESTOP_OFF_SONG][1] = SONG_DELAY1 ;
+        gSongData.songs[ESTOP_OFF_SONG][2] = SONG_QUIET  ;
+	gSongData.songs[ESTOP_OFF_SONG][3] = SONG_DELAY1 ;
+	gSongData.songs[ESTOP_OFF_SONG][4] = SONG_BUZZ  ;
+	gSongData.songs[ESTOP_OFF_SONG][5] = SONG_DELAY1 ;
+        gSongData.songs[ESTOP_OFF_SONG][6] = SONG_STOP_PLAYING ;
+	
 
 	T4CONbits.TON = 0; // Disable Timer
 	T4CONbits.TCS = 0; // Select internal instruction cycle clock 
@@ -99,7 +121,7 @@ void buzz(int song){
 	
 	gSongData.song = song;
 	gSongData.count = 0;
-	PR4 = 1;
+	PR4 = SONG_START_DELAY;
 	TMR4 = 0x00; // Clear timer register
 	T4CONbits.TON = 1; // Start/Stop Timer
 }

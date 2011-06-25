@@ -276,9 +276,9 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
 
         //adding Current16 -> Voltage16 -> Current32 -> Voltage32
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current16, &tmplength);
-        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail16[4], &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail16[0], &tmplength);
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current32, &tmplength);
-        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail32[4], &tmplength);
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail32[0], &tmplength);
     }
     else    // Little Endian
     {
@@ -299,9 +299,9 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
 
         //adding Current16 -> Voltage16 -> Current32 -> Voltage32
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current16, &tmplength);
-        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail16[4], &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail16[0], &tmplength);
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.Current32, &tmplength);
-        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail32[4], &tmplength);
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gRailData.VRail32[0], &tmplength);
     }
 
     // Calculate the checksum
@@ -352,7 +352,7 @@ INT16 BuildOutgoingESTOPPacket(BYTE** pkt, INT16 tickCount)
         gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)MSG_ESTOP;
 
 		// Insert ESTOP State
-		gOutgoingBuffers.scratchBuf[tmplength++] = (gRailData.state & MERGE_FLAGMASK_KILLSTATE) ? 0xFF : 0x00;
+		gOutgoingBuffers.scratchBuf[tmplength++] = (gRailData.state & MERGE_STATE_MASK_ESTOPSW) ? 0xFF : 0x00;
     }
     else    // Little Endian
     {
@@ -366,7 +366,7 @@ INT16 BuildOutgoingESTOPPacket(BYTE** pkt, INT16 tickCount)
 
 		// Insert ESTOP State
 		// Insert ESTOP State
-		gOutgoingBuffers.scratchBuf[tmplength++] = (gRailData.state & MERGE_FLAGMASK_KILLSTATE) ? 0xFF : 0x00;
+		gOutgoingBuffers.scratchBuf[tmplength++] = (gRailData.state & MERGE_STATE_MASK_ESTOPSW) ? 0xFF : 0x00;
     }
     // Calculate the checksum
     temp = CRC16Checksum(&gOutgoingBuffers.scratchBuf[0],

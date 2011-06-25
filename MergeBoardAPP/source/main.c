@@ -13,7 +13,7 @@
 #include "taskTCPIP.h"
 #include "taskPublisher.h"
 #include "messages.h"
-#include "mcp4821.h"
+//#include "mcp4821.h"
 #include "HallSwitches.h"
 #include "buzzer.h"
 
@@ -71,6 +71,8 @@ int main(void)
 
     LED_TRIS = OUTPUT_PIN;
     LED = LED_OFF;
+
+   // buzz(LOWPOWER_SONG);
 
 //	EROM_Clear();  // Erases the entire EEPROM
 

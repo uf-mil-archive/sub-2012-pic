@@ -10,8 +10,6 @@
 #include "p33Fxxxx.h"
 
 
-
-
 /************************Change Notification ISR*******************************/
 // behaviors for the hall effect switches live here.
 //
@@ -22,63 +20,56 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
     BYTE currentState = 0;
     BYTE previousState = 0;
     
-    previousState = gRailData.state & 7;
+    previousState = gRailData.state & 15;
 
     //handle active low Hall Switches here
-    currentState = ( (~(KILLSW<<2)&4) | (~(ONOFFSW<<1)&2) | (gRailData.state&1) )&7;
-
+    currentState = ( (~(KILLSW<<2)&4) | (~(ONOFFSW<<1)&2) | (gRailData.state&9) )&15;
     
-    if ((gRailData.state & MERGE_FLAGMASK_RAILSTATE) > 0){	   //if rail is currently on
+    if ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0){	   //if rail is currently on
 
         //rail is currently on
-        if ((currentState>>1) == 2 && (previousState>>1) == 3){
-                //turn sub off
-                RAIL16 = TURN_OFF;
-                RAIL32 = TURN_OFF;
-                //set rail flag = off
-                currentState &= ~1 ;
-				buzz(OFF_SONG);
-	    }//end rail on check
+        if (((currentState>>1)&3) == 2 && ((previousState>>1)&3) == 3){
+            //turn sub off
+            RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
+            currentState &= ~9 ;
+        }//end rail on check
 		
-		//buzzer for Estop
-			if ((currentState>>2) == 1 && (previousState>>2) == 0)
-				buzz(ESTOP_ON_SONG);
-			else
-			if ((currentState>>2) == 0 && (previousState>>2) == 1)
-				buzz(ESTOP_OFF_SONG);
-
-    }else{  
+            //buzzer for Estop
+            if (((currentState>>2)&1) == 1 && ((previousState>>2)&1) == 0)
+                buzz(ESTOP_ON_SONG);
+            else
+            if (((currentState>>2)&1) == 0 && ((previousState>>2)&1) == 1)
+                buzz(ESTOP_OFF_SONG);
+    }else{
         //rail is currently off
-        if ((currentState>>1) == 3 && (previousState>>1) == 2){
-                //turn sub on
+        if (((currentState>>1)&3) == 3 && ((previousState>>1)&3) == 2){
+            //turn sub on
                 
-				// Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
-				Q6_10 temp16 = gRailData.VRail16[1];
-				temp16 = (gRailData.VRail16[2] > temp16) ? gRailData.VRail16[2] : temp16;
-				temp16 = (gRailData.VRail16[3] > temp16) ? gRailData.VRail16[3] : temp16;
+            // Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
+            Q6_10 temp16 = gRailData.VRail16[1];
+            temp16 = (gRailData.VRail16[2] > temp16) ? gRailData.VRail16[2] : temp16;
+            temp16 = (gRailData.VRail16[3] > temp16) ? gRailData.VRail16[3] : temp16;
 
-				Q6_10 temp32 = gRailData.VRail32[1];
-				temp32 = (gRailData.VRail32[2] > temp32) ? gRailData.VRail32[2] : temp32;
-				temp32 = (gRailData.VRail32[3] > temp32) ? gRailData.VRail32[3] : temp32;
+            Q6_10 temp32 = gRailData.VRail32[1];
+            temp32 = (gRailData.VRail32[2] > temp32) ? gRailData.VRail32[2] : temp32;
+            temp32 = (gRailData.VRail32[3] > temp32) ? gRailData.VRail32[3] : temp32;
 
+            //Turn on 16 volt rail if it is within Range
+            if (temp16 >= gRailConfig.MinVoltage16 && temp16  <= gRailConfig.MaxVoltage16){
+                RailControl(CONTROL_RAIL_16, TURN_ON);
+                currentState |= 1;	//set rail16 flag = on
+                //Turn on 32 volt rail if it is within Range
+                if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
+                    RailControl(CONTROL_RAIL_32, TURN_ON);
+                    currentState |= 8;	//set rail32 flag = on
+                }else{
+                    // 32volt rail has bad power
+                    //  buzz(BADPOWER_SONG);
+                }
 
-				//Turn on 16 volt rail if it is within Range
-				if (temp16 >= gRailConfig.MinVoltage16 && temp16  <= gRailConfig.MaxVoltage16){
-					RAIL16 = TURN_ON;
-					currentState |= 1;		//set rail flag = on
-
-					buzz(ON_SONG);	//BUZZ for ON state
-					
-					//Turn on 32 volt rail if it is within Range
-					if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
-						RAIL32 = TURN_ON;
-					}else{
-					//	buzz(BADPOWER_SONG);
-					}
-					
-				}else{
-					buzz(BADPOWER_SONG);       //BUZZ For incorrect Power on 16V Rail
-				}
+            }else{
+                buzz(BADPOWER_SONG);       //BUZZ For incorrect Power on 16V Rail
+            }
         }//end rail off check    
     }
 

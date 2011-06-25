@@ -255,65 +255,66 @@ void taskADC(void* pvParameter)
             gRailData.VRail32[i-1] = (Q6_10)((vrail32MAVG[i-1].CurrentAvg*ADC_VRAIL32_BPV) >> 5);
         }
 
-		/***************************/
-		/** Check for low voltage **/
+            /***************************/
+            /** Check for low voltage **/
 	    /***************************/
 		
-			// Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
-			highestVoltage16 = gRailData.VRail16[1];
-			highestVoltage16 = (gRailData.VRail16[2] > highestVoltage16) ? gRailData.VRail16[2] : highestVoltage16;
-			highestVoltage16 = (gRailData.VRail16[3] > highestVoltage16) ? gRailData.VRail16[3] : highestVoltage16;
-	
-			highestVoltage32 = gRailData.VRail32[1];
-			highestVoltage32 = (gRailData.VRail32[2] > highestVoltage32) ? gRailData.VRail32[2] : highestVoltage32;
-			highestVoltage32 = (gRailData.VRail32[3] > highestVoltage32) ? gRailData.VRail32[3] : highestVoltage32;
+            // Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
+            highestVoltage16 = gRailData.VRail16[1];
+            highestVoltage16 = (gRailData.VRail16[2] > highestVoltage16) ? gRailData.VRail16[2] : highestVoltage16;
+            highestVoltage16 = (gRailData.VRail16[3] > highestVoltage16) ? gRailData.VRail16[3] : highestVoltage16;
 
-		if ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16)){
-				RAIL32 = TURN_OFF;
-			 	RAIL16 = TURN_OFF;
-                gRailData.state &= ~1 ;		//chage the rail output state flag to off
-				buzz(OFF_SONG);
-				warningBuzzerDelay=0;
-		}
-		else if ((gRailData.state&1 == 1) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
-			 	RAIL32 = TURN_OFF;
-		}
-		
-		if ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) {
-			if (warningBuzzerDelay == 0) buzz(LOWPOWER_SONG);
-			if (warningBuzzerDelay >= 250) warningBuzzerDelay = 0;
-			else warningBuzzerDelay++;
-		}
+            highestVoltage32 = gRailData.VRail32[1];
+            highestVoltage32 = (gRailData.VRail32[2] > highestVoltage32) ? gRailData.VRail32[2] : highestVoltage32;
+            highestVoltage32 = (gRailData.VRail32[3] > highestVoltage32) ? gRailData.VRail32[3] : highestVoltage32;
 
-		/****************************/
-		/** Check for over-current **/
-	    /****************************/
-		if ((gRailData.state&1 == 1) && (gRailData.Current16 > gRailConfig.MaxCurrent16)){
-				if (overCurrentDelayCntr_Rail16 >= OVER_CURRENT_DELAY) {
-					RAIL32 = TURN_OFF;
-				 	RAIL16 = TURN_OFF;
-	                gRailData.state &= ~1 ;		//change the rail output state flag to off
-					buzz(OFF_SONG);
-					overCurrentDelayCntr_Rail16 = 0;
-					overCurrentDelayCntr_Rail32 = 0;
-				}else{
-					overCurrentDelayCntr_Rail16++;
-				}
-		}else{
-			overCurrentDelayCntr_Rail16 = 0;
-		}
+            if ( (gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
+                RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
+                warningBuzzerDelay=0;
+            }
+            else if ((gRailData.state&8 == 1) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
+                RailControl(CONTROL_RAIL_32, TURN_OFF);
+            
+			}else{
+                if ( ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
+                     ((gRailData.state&8 == 1) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
 
-		if ((gRailData.state&1 == 1) && (gRailData.Current32 > gRailConfig.MaxCurrent32)){
-				if (overCurrentDelayCntr_Rail32 >= OVER_CURRENT_DELAY) {
-					RAIL32 = TURN_OFF;
-					buzz(OFF_SONG);
-					overCurrentDelayCntr_Rail32 = 0;
-				}else{
-					overCurrentDelayCntr_Rail32++;
-				}
-		}else{
-			overCurrentDelayCntr_Rail32 = 0;
-		}
+                if (warningBuzzerDelay >= 250){
+                        buzz(LOWPOWER_SONG);
+                        warningBuzzerDelay = 0;
+                    }else warningBuzzerDelay++;
+                }else warningBuzzerDelay = 0;
+            }
+
+
+	/****************************/
+	/** Check for over-current **/
+	/****************************/
+      
+            if (gRailData.Current16 > gRailConfig.MaxCurrent16)
+            {
+                if (overCurrentDelayCntr_Rail16 >= OVER_CURRENT_DELAY) {
+                    RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
+                }else{
+                    overCurrentDelayCntr_Rail16++;
+                }
+            }else{
+                    overCurrentDelayCntr_Rail16 = 0;
+            }
+
+            if (gRailData.Current32 > gRailConfig.MaxCurrent32){
+                if (overCurrentDelayCntr_Rail32 >= OVER_CURRENT_DELAY) {
+                    RailControl(CONTROL_RAIL_32, TURN_OFF);
+
+                }else{
+                    overCurrentDelayCntr_Rail32++;
+                }
+            }else{
+                overCurrentDelayCntr_Rail32 = 0;
+                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == TURN_ON) &&
+                     ((gRailData.state & MERGE_STATE_MASK_RAIL32) == TURN_OFF) )
+                    RailControl(CONTROL_RAIL_32, TURN_ON);
+            }
 
 
     }
@@ -369,7 +370,7 @@ CONFIG_DEFAULT_RAIL:
     gRailConfig.MaxVoltage16 = DEFAULT_MAX_VOLTAGE16;
     gRailConfig.MinVoltage16 = DEFAULT_MIN_VOLTAGE16;
     gRailConfig.WarnVoltage16 = DEFAULT_WARN_VOLTAGE16;
-	gRailConfig.MaxCurrent32 = DEFAULT_MAX_CURRENT32;
+    gRailConfig.MaxCurrent32 = DEFAULT_MAX_CURRENT32;
     gRailConfig.MaxVoltage32 = DEFAULT_MAX_VOLTAGE32;
     gRailConfig.MinVoltage32 = DEFAULT_MIN_VOLTAGE32;
     gRailConfig.WarnVoltage32 = DEFAULT_WARN_VOLTAGE32;
@@ -404,4 +405,55 @@ void SaveRailConfig(RailConfig* railCfg)
     // Write the checksum
     EROM_WriteInt16((d + sizeof(RailConfig)), chk);
 }
+
+
+void RailControl(UINT8 rail, UINT8 action){
+    // rail = 0 is 16V Rail but turns off both
+    // rail = 1 is 32V Rail
+    // rail = 2 is BOTH Rails
+
+    // action = 0 is off
+    // action = 1 is on
+
+    switch (rail)
+    {
+        case 0:
+                RAIL32 = action;        // turn on/off 32 volt Rail
+                RAIL16 = action;        //turn on/off 16 Volt Rail
+
+                if (action == 0){
+                    gRailData.state &= ~9 ;	//change the rail16 and rail32 state flag to off
+                    buzz(OFF_SONG);
+                }else{
+                    gRailData.state |= 9 ;     //chage the rail16 and rail32 state flag to on
+                    buzz(ON_SONG);
+                }
+                break;
+        case 1:
+                RAIL32 = action;
+                if (action == 0){
+                    gRailData.state &= ~8 ;	//change the rail32 state flag to off
+                    buzz(OFF_SONG);
+                }else{
+                    gRailData.state |= 8 ;     //chage the rail32 state flag to on
+                    buzz(ON_SONG);
+                }
+                break;
+
+        case 2:
+                RAIL32 = action;
+                RAIL16 = action;
+
+                 if (action == 0){
+                    gRailData.state &= ~9 ;	//change the rail16 and rail32 state flag to off
+                    buzz(OFF_SONG);
+                }else{
+                    gRailData.state |= 9 ;     //chage the rail16 and rail32 state flag to on
+                    buzz(ON_SONG);
+                }
+                break;
+    }//end Switch
+
+}//end function
+
 
