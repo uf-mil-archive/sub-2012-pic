@@ -10,6 +10,9 @@
 
 #include "HardwareProfile.h"
 #include "GenericTypeDefs.h"
+#include "buzzer.h"
+#include "taskADC.h"
+#include "fixMath.h"
 
 
 

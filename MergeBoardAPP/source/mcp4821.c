@@ -49,8 +49,12 @@ void DAC_configSPI(void)
     {
         DAC_LD_TRIS = OUTPUT_PIN;
         DAC_LD_IO = AL_FALSE;
-        DAC_CS_TRIS = OUTPUT_PIN;
-        DAC_CS_IO = AL_FALSE;
+        
+		DAC16_CS_TRIS = OUTPUT_PIN;
+        DAC16_CS_IO = AL_FALSE;
+
+        DAC32_CS_TRIS = OUTPUT_PIN;
+        DAC32_CS_IO = AL_FALSE;
 
         DAC_IsInited = TRUE;
     }
@@ -81,7 +85,7 @@ void DAC_configSPI(void)
     DAC_SPIxSTAT = 0x8000;
 }
 
-void DAC_SetOutput(float voltage)
+void DAC_SetOutput(float voltage, UINT16 dacSel)
 {
     DAC_LD_IO = AL_TRUE;    // Load when CS is deasserted
 
@@ -103,7 +107,10 @@ void DAC_SetOutput(float voltage)
 
     while(DAC_SPIxSTATbits.SPITBF);     // Make sure the buffer is ready
 
-    DAC_CS_IO = AL_TRUE;
+	if (dacSel == DAC_RAIL_16)
+        DAC16_CS_IO = AL_TRUE;
+    else
+        DAC32_CS_IO = AL_TRUE;
 
     // Send out the voltage and command nibble
     DAC_SPIxBUF = dacReg;
@@ -114,7 +121,8 @@ void DAC_SetOutput(float voltage)
     (void)dummy;                         // stays clear
     DAC_SPIxSTATbits.SPIROV = 0;
 
-    DAC_CS_IO = AL_FALSE;   // DAC has new voltage
+	DAC16_CS_IO = AL_FALSE;
+    DAC32_CS_IO = AL_FALSE;   // DAC has new voltage
     DAC_LD_IO = AL_FALSE;    // Leave this high to help with current draw
     
     // Put the SPI back how it was
@@ -129,14 +137,18 @@ void DAC_Shutdown()
 
     while(DAC_SPIxSTATbits.SPITBF);     // Make sure the buffer is ready
 
-    DAC_CS_IO = AL_TRUE;
+    if (dacSel == DAC_RAIL_16)
+    	DAC16_CS_IO = AL_TRUE;
+    else
+        DAC32_CS_IO = AL_TRUE;
 
     // Send out the turn off command
     DAC_SPIxBUF = 0x2000;
 
     while(!DAC_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
 
-    DAC_CS_IO = AL_FALSE;   // DAC is now off
+	DAC16_CS_IO = AL_FALSE;
+    DAC32_CS_IO = AL_FALSE;   // DAC has new voltage
     DAC_LD_IO = AL_FALSE;    // Leave this high to help with current draw
 
     // Put the SPI back how it was

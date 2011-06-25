@@ -324,5 +324,69 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
     return tmplength;
 }
 
+INT16 BuildOutgoingESTOPPacket(BYTE** pkt, INT16 tickCount)
+{
+    INT16 tmplength = 0;
+    INT16 temp = 0;
+
+    // Handle buffer switching first
+    gOutgoingBuffers.CurrentBuffer =
+            ((gOutgoingBuffers.CurrentBuffer + 1) % MSG_NUM_OUTGOING_BUFFERS);
+ 
+    // Increment the current packet number
+    gOutgoingMsgData.OutgoingCount++;
+
+    // Start with the source address - its never the escape character so add it directly
+    gOutgoingBuffers.scratchBuf[tmplength++] = gCommonMsgData.Address;    // I'm the source
+    // Next add the destination address - its never the escape character so add it directly
+    gOutgoingBuffers.scratchBuf[tmplength++] = gCommonMsgData.MultiCastAddress;
+
+    if(gCommonMsgData.Endianess == MSG_ENDIANESS_BIG) // Big Endian
+    {
+        // Insert the packet number
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength],
+                gOutgoingMsgData.OutgoingCount,
+                &tmplength);
+
+        // Insert TypeCode
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)MSG_ESTOP;
+
+		// Insert ESTOP State
+		gOutgoingBuffers.scratchBuf[tmplength++] = (gRailData.state & MERGE_FLAGMASK_KILLSTATE) ? 0xFF : 0x00;
+    }
+    else    // Little Endian
+    {
+        // Insert the packet number
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength],
+                gOutgoingMsgData.OutgoingCount,
+                &tmplength);
+
+        // Insert TypeCode
+        gOutgoingBuffers.scratchBuf[tmplength++] = (BYTE)MSG_ESTOP;
+
+		// Insert ESTOP State
+		// Insert ESTOP State
+		gOutgoingBuffers.scratchBuf[tmplength++] = (gRailData.state & MERGE_FLAGMASK_KILLSTATE) ? 0xFF : 0x00;
+    }
+    // Calculate the checksum
+    temp = CRC16Checksum(&gOutgoingBuffers.scratchBuf[0],
+            tmplength);
+
+    if(gCommonMsgData.Endianess == MSG_ENDIANESS_BIG) // Big Endian
+        AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], temp, &tmplength);
+    else
+        AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], temp, &tmplength);
+
+    tmplength = BuildEscapedPacket(&gOutgoingBuffers.scratchBuf[0],
+            &(gOutgoingBuffers.Buffers[gOutgoingBuffers.CurrentBuffer][0]),
+            tmplength);
+
+    // Point to the newly escaped packet
+    *pkt = &(gOutgoingBuffers.Buffers[gOutgoingBuffers.CurrentBuffer][0]);
+
+    // This function returns the total count of bytes in the buffer
+    return tmplength;
+	return tmplength;
+}
 
 

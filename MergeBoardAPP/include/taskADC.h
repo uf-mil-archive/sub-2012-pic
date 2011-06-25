@@ -5,6 +5,7 @@
 #include "taskUART.h"
 #include "fixMath.h"
 #include "mavg.h"
+#include "buzzer.h"
 
 #include <math.h>   // for pow
 
@@ -39,17 +40,26 @@
 #define ADC_CURRENT32_APB         ((Q1_15)((ADC_CURRENT32_MMA / ADC_MAX_VAL) * 32767))
 
 // Paul - these should be the fractional (fixed point) representations of you constants
-#define DEFAULT_MAX_CURRENT16   0
+#define DEFAULT_MAX_CURRENT16   25
 #define DEFAULT_MAX_VOLTAGE16   ((Q6_10)(17 << 10)) // 17 volts in Q6_10
-#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(13.12345*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(14.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_WARN_VOLTAGE16  ((Q6_10)(14.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+
+
+#define DEFAULT_MAX_CURRENT32   40
+#define DEFAULT_MAX_VOLTAGE32   ((Q6_10)(34 << 10)) // 17 volts in Q6_10
+#define DEFAULT_MIN_VOLTAGE32   ((Q6_10)(29.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(29.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+
 
 // FreeRTOS defines
 #define STACK_SIZE_ADC     (configMINIMAL_STACK_SIZE * 4)
 
 // Global Flag masks
-#define MERGE_FLAGMASK_CURRENT_RAILSTATE (1 << 0)
-#define MERGE_FLAGMASK_PREV_KILLSTATE    (1 << 1)
-#define MERGE_FLAGMASK_PREV_ONOFFSTATE   (1 << 2)
+#define MERGE_FLAGMASK_RAILSTATE 	(1 << 0)
+#define MERGE_FLAGMASK_ONOFFSTATE  	(1 << 1)
+#define MERGE_FLAGMASK_KILLSTATE   	(1 << 2)
+
 
 // defines for the 16 and 32 volt slection
 #define ADC_RAIL_16 0
@@ -58,10 +68,9 @@
 #define NUM_ADCS          5
 #define NUM_ADC_SAMPLES   50
 
+#define OVER_CURRRENT_DELAY_MS 	250
+#define OVER_CURRENT_DELAY 		OVER_CURRRENT_DELAY_MS * ADC_RATE / 1000
 
-// Paul - The functionality of your board is predominantly ADC
-// conversions, so like I had a motordata struct in BDCMC, you'll
-// have a RailData or something struct, defined like this
 typedef struct
 {
     BYTE  state;       // current state of the EStop ; on/off/ ; Rails
@@ -75,12 +84,14 @@ typedef struct
 // Configuration options can go here
 typedef struct
 {
-    Q6_10 MaxCurrent16;
+    Q7_9 MaxCurrent16;
     Q6_10 MinVoltage16;
     Q6_10 MaxVoltage16;
+	Q6_10 WarnVoltage16;
     Q6_10 MaxCurrent32;
     Q6_10 MinVoltage32;
     Q6_10 MaxVoltage32;
+	Q6_10 WarnVoltage32;
     UINT16 BaudDiv;     // The baud rate divisor
 }RailConfig;
 

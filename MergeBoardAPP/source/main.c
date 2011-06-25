@@ -13,8 +13,10 @@
 #include "taskTCPIP.h"
 #include "taskPublisher.h"
 #include "messages.h"
+#include "mcp4821.h"
 #include "HallSwitches.h"
 #include "buzzer.h"
+
 
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
@@ -31,8 +33,6 @@ static void clockInit(void);
 /**********************/
 /*  Global Variables  */
 /**********************/
-extern UINT16 ADC16Val[5];
-extern UINT16 ADC32Val[5];
 //I2C_DRV i2cfan = I2C_FANDRV_DEFAULTS;
 
 
@@ -62,10 +62,12 @@ int main(void)
     ioMap();
     hallSwInit() ;              // Initialize HALL SW interupts
 	buzzerInit();
+//	DAC_SetOutput(2.5, DAC_RAIL_16);	
+//	DAC_SetOutput(2.0, DAC_RAIL_32);
+	
 
     BUZZER = BUZZER_OFF;        // initial state of buzzer is off
     LED = LED_OFF;              // initial state of debug LED is off
-
 
     LED_TRIS = OUTPUT_PIN;
     LED = LED_OFF;

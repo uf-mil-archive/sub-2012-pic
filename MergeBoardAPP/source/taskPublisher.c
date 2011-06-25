@@ -59,13 +59,6 @@ void taskPublisher(void* pvParameter)
         // broadcast UDP, and then your standard packet which you will send to
         // the controlling device.
 
-
-        // Paul - Check here to see if you have valid structs to publish from, no
-        // reading null pointers!
-        //if(!hMotorData) // Nothing to publish - this is also necessary since
-                        // the packet builders don't check if motor data is valid.
-        //    continue;
-
         BYTE* packet, estopPacket;
         length = BuildOutgoingPacket(&packet, previousWakeTime);
 
@@ -74,14 +67,13 @@ void taskPublisher(void* pvParameter)
         // a timer to force this to publish at a reduced rate from normal, for instance,
         // 20Hz, or even 10Hz. You will most likely run this loop at about 100Hz.
 
-        //estopLength = BuildOutgoingESTOPPacket(&estopPacket, previousWakeTime);
-        //UDPSend(estopPacket, estopLength, MSG_SENDER_BROADCAST, MSG_DONT_FREE_BUFFER); // Send over UDP broadcast
+
+        estopLength = BuildOutgoingESTOPPacket(&estopPacket, previousWakeTime);
+        UDPSend(estopPacket, estopLength, MSG_SENDER_BROADCAST, MSG_DONT_FREE_BUFFER); // Send over UDP broadcast
         
         // Publish to who?
         if(gOutgoingMsgData.Subscribers & MSG_SENDER_UART)
-            COMSend(packet, length, MSG_DONT_FREE_BUFFER); // Send over UART
-
-	
+            COMSend(packet, length, MSG_DONT_FREE_BUFFER); // Send over UART	
 
         if(gOutgoingMsgData.Subscribers & MSG_SENDER_ETH)
             UDPSend(packet, length, MSG_SENDER_ETH, MSG_DONT_FREE_BUFFER); // Send over UDP

@@ -109,7 +109,7 @@ void ADC_configSPI(void)
 
 void ADC_ScatterGatherData(int adcSel, UINT16* buff)
 {
-    //LED ^= 1;       //LED blink to test timming
+   
 
     ADC_configSPI();
 
@@ -145,19 +145,15 @@ void ADC_ScatterGatherData(int adcSel, UINT16* buff)
     }
 
     // Put the SPI back how it was
+ 	
+	   
     ADC_restoreSPI();
-   // LED ^= 1;       //LED blink to test timming
+
 }
 
 /******************************************************************************/
 
 #endif
-
-
-
-
-// Paul - read basically this whole file I left the ISR I used commented on the
-// bottom so you can see some fixed point math examples.
 
 
 void xADCTaskInit(void)
@@ -195,8 +191,7 @@ void xADCTaskInit(void)
    {
        // Update the adc's moving average filter
        MAVG_Init(&vrail16MAVG[i-1], &ADC16Val[i][0], ADC_MAVG_QUEUE_LENGTH);
-       MAVG_Init(&vrail32MAVG[i-1], &ADC32Val[i][0], ADC_MAVG_QUEUE_LENGTH);
-       
+       MAVG_Init(&vrail32MAVG[i-1], &ADC32Val[i][0], ADC_MAVG_QUEUE_LENGTH);   
    }
 
     // Setup the period value for the task
@@ -212,6 +207,10 @@ void taskADC(void* pvParameter)
 {
     portTickType previousWakeTime;
     int i = 0;
+	Q6_10 highestVoltage16, highestVoltage32;
+	UINT16 warningBuzzerDelay = 0;
+	UINT16 overCurrentDelayCntr_Rail16 = 0;
+	UINT16 overCurrentDelayCntr_Rail32 = 0;
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
         a constant publishing frequency */
@@ -255,6 +254,67 @@ void taskADC(void* pvParameter)
             MAVG_Update(&vrail32MAVG[i-1], &ADC32Val[i][0], NUM_ADC_SAMPLES);
             gRailData.VRail32[i-1] = (Q6_10)((vrail32MAVG[i-1].CurrentAvg*ADC_VRAIL32_BPV) >> 5);
         }
+
+		/***************************/
+		/** Check for low voltage **/
+	    /***************************/
+		
+			// Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
+			highestVoltage16 = gRailData.VRail16[1];
+			highestVoltage16 = (gRailData.VRail16[2] > highestVoltage16) ? gRailData.VRail16[2] : highestVoltage16;
+			highestVoltage16 = (gRailData.VRail16[3] > highestVoltage16) ? gRailData.VRail16[3] : highestVoltage16;
+	
+			highestVoltage32 = gRailData.VRail32[1];
+			highestVoltage32 = (gRailData.VRail32[2] > highestVoltage32) ? gRailData.VRail32[2] : highestVoltage32;
+			highestVoltage32 = (gRailData.VRail32[3] > highestVoltage32) ? gRailData.VRail32[3] : highestVoltage32;
+
+		if ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16)){
+				RAIL32 = TURN_OFF;
+			 	RAIL16 = TURN_OFF;
+                gRailData.state &= ~1 ;		//chage the rail output state flag to off
+				buzz(OFF_SONG);
+				warningBuzzerDelay=0;
+		}
+		else if ((gRailData.state&1 == 1) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
+			 	RAIL32 = TURN_OFF;
+		}
+		
+		if ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) {
+			if (warningBuzzerDelay == 0) buzz(LOWPOWER_SONG);
+			if (warningBuzzerDelay >= 250) warningBuzzerDelay = 0;
+			else warningBuzzerDelay++;
+		}
+
+		/****************************/
+		/** Check for over-current **/
+	    /****************************/
+		if ((gRailData.state&1 == 1) && (gRailData.Current16 > gRailConfig.MaxCurrent16)){
+				if (overCurrentDelayCntr_Rail16 >= OVER_CURRENT_DELAY) {
+					RAIL32 = TURN_OFF;
+				 	RAIL16 = TURN_OFF;
+	                gRailData.state &= ~1 ;		//change the rail output state flag to off
+					buzz(OFF_SONG);
+					overCurrentDelayCntr_Rail16 = 0;
+					overCurrentDelayCntr_Rail32 = 0;
+				}else{
+					overCurrentDelayCntr_Rail16++;
+				}
+		}else{
+			overCurrentDelayCntr_Rail16 = 0;
+		}
+
+		if ((gRailData.state&1 == 1) && (gRailData.Current32 > gRailConfig.MaxCurrent32)){
+				if (overCurrentDelayCntr_Rail32 >= OVER_CURRENT_DELAY) {
+					RAIL32 = TURN_OFF;
+					buzz(OFF_SONG);
+					overCurrentDelayCntr_Rail32 = 0;
+				}else{
+					overCurrentDelayCntr_Rail32++;
+				}
+		}else{
+			overCurrentDelayCntr_Rail32 = 0;
+		}
+
 
     }
 
@@ -308,6 +368,12 @@ CONFIG_DEFAULT_RAIL:
     gRailConfig.MaxCurrent16 = DEFAULT_MAX_CURRENT16;
     gRailConfig.MaxVoltage16 = DEFAULT_MAX_VOLTAGE16;
     gRailConfig.MinVoltage16 = DEFAULT_MIN_VOLTAGE16;
+    gRailConfig.WarnVoltage16 = DEFAULT_WARN_VOLTAGE16;
+	gRailConfig.MaxCurrent32 = DEFAULT_MAX_CURRENT32;
+    gRailConfig.MaxVoltage32 = DEFAULT_MAX_VOLTAGE32;
+    gRailConfig.MinVoltage32 = DEFAULT_MIN_VOLTAGE32;
+    gRailConfig.WarnVoltage32 = DEFAULT_WARN_VOLTAGE32;
+
 
     // Save these settings into the EEPROM
     SaveRailConfig(&gRailConfig);

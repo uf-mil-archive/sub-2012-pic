@@ -30,10 +30,10 @@
 #define MSG_ESCAPE      0x7D
 #define MSG_ESCAPE_XOR  0x20
 
-#define MSG_MAX_LENGTH  20            // The longest message is 30 bytes not including
+#define MSG_MAX_LENGTH  30            // The longest message is 30 bytes not including
                                         // flags or escape characters.
-#define MSG_NUM_OUTGOING_BUFFERS   5    // Number of outgoing buffers
-#define MSG_NUM_INCOMING_BUFFERS   5    // Number of incoming buffers per device
+#define MSG_NUM_OUTGOING_BUFFERS   10    // Number of outgoing buffers
+#define MSG_NUM_INCOMING_BUFFERS   10    // Number of incoming buffers per device
 
 #define MSG_SENDER_UART         1
 #define MSG_SENDER_ETH          2
@@ -120,6 +120,7 @@ UINT16 CRC16Checksum(BYTE* data, INT16 numberOfBytes);
 void CRC16Init(void);
 void ParseNewPacket(BYTE buf[], INT16 length, INT16 transport);
 INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount);
+INT16 BuildOutgoingESTOPPacket(BYTE** pkt, INT16 tickCount);
 void InitCommonMessageData(void);
 void SaveCommonMessageData(CommonMessagingData *cmnData);
 
