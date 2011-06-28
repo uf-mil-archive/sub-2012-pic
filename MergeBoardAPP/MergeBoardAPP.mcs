@@ -1,0 +1,501 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\blockingDelay.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File001]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\CustomHTTPApp.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File002]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\main.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File003]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\mavg.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File004]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\mcp25XX640A.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File005]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\mcp4821.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File006]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\MergeBoardWebPage.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={DE18EB1A-B46B-486B-B96F-A811A635DFAC}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-as.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g
+TraceCmdString=
+DebugOptions=
+[File007]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\messages.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File008]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\simplequeue.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File009]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\taskParser.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File010]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\taskPublisher.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File011]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\taskTCPIP.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File012]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\taskUART.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File013]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\Tick.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File014]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\list.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File015]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\queue.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File016]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\tasks.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File017]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\heap_3.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File018]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\port.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File019]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\portasm_dsPIC.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={DE18EB1A-B46B-486B-B96F-A811A635DFAC}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-as.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g
+TraceCmdString=
+DebugOptions=
+[File020]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\ARP.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File021]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\DNS.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File022]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\ENC28J60.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File023]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\Helpers.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File024]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\HTTP2.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File025]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\ICMP.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File026]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\IP.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File027]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\MPFS2.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File028]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\NBNS.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File029]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\StackTsk.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File030]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\TCP.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File031]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\UDP.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File032]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\taskADC.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File033]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\HallSwitches.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File034]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\buzzer.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File035]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\obj\OverCurrentProtection.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File036]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\MergeBoardAPP.cof
+Folder=Output
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=8094 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[File037]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\MergeBoardAPP\MergeBoardAPP.hex
+Folder=Output
+DeviceName=dsPIC33FJ128MC804
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\blockingDelay.c|source\CustomHTTPApp.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\MergeBoardWebPage.s|source\messages.c|source\simplequeue.c|source\taskParser.c|source\taskPublisher.c|source\taskTCPIP.c|source\taskUART.c|source\Tick.c|..\FreeRTOS\Source\list.c|..\FreeRTOS\Source\queue.c|..\FreeRTOS\Source\tasks.c|..\FreeRTOS\Source\portable\MemMang\heap_3.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\port.c|..\FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC\portasm_dsPIC.S|..\Microchip\TCPIP Stack\ARP.c|..\Microchip\TCPIP Stack\DNS.c|..\Microchip\TCPIP Stack\ENC28J60.c|..\Microchip\TCPIP Stack\Helpers.c|..\Microchip\TCPIP Stack\HTTP2.c|..\Microchip\TCPIP Stack\ICMP.c|..\Microchip\TCPIP Stack\IP.c|..\Microchip\TCPIP Stack\MPFS2.c|..\Microchip\TCPIP Stack\NBNS.c|..\Microchip\TCPIP Stack\StackTsk.c|..\Microchip\TCPIP Stack\TCP.c|..\Microchip\TCPIP Stack\UDP.c|source\taskADC.c|source\HallSwitches.c|source\buzzer.c|source\OverCurrentProtection.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=8094 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[TOOL_LOC_STAMPS]
+tool_loc{DE18EB1A-B46B-486B-B96F-A811A635DFAC}=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-as.exe
+tool_loc{069BD372-6CA0-40D4-BF2F-5DC806D05083}=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+tool_loc{433C3D55-811D-409D-A6BF-159CF9355B42}=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ld.exe

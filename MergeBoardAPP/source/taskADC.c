@@ -272,12 +272,12 @@ void taskADC(void* pvParameter)
                 RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
                 warningBuzzerDelay=0;
             }
-            else if ((gRailData.state&8 == 1) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
+            else if ((gRailData.state&8 == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
                 RailControl(CONTROL_RAIL_32, TURN_OFF);
             
 			}else{
                 if ( ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
-                     ((gRailData.state&8 == 1) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
+                     ((gRailData.state&8 == 8) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
 
                 if (warningBuzzerDelay >= 250){
                         buzz(LOWPOWER_SONG);
@@ -418,7 +418,6 @@ void RailControl(UINT8 rail, UINT8 action){
     switch (rail)
     {
         case 0:
-                RAIL32 = action;        // turn on/off 32 volt Rail
                 RAIL16 = action;        //turn on/off 16 Volt Rail
 
                 if (action == 0){

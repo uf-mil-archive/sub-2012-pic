@@ -44,7 +44,7 @@ extern UINT16 ADC16Val[5];
 //extern UINT16 ADC32Val[5];
 
 //I2C_DRV i2cfan = I2C_FANDRV_DEFAULTS;
-// FANCTRLR;
+//FANCTRLR;
 //UINT16 FanMinus;
 //UINT16 FanPlus;
 
@@ -78,16 +78,15 @@ int main(void)
     clockInit();                // Set the clock frequency
     ioMap();                    // Initialize pins
     hallSwInit() ;              // Initialize HALL SW interupts
-    UARTInit();                 // initialize UART
+//    UARTInit();                 // initialize UART
 
 
-    DAC_SetOutput(.5, 16);      //Set 32V Side DAC ouput
-    DAC_SetOutput(2.0, 32);      //Set 16V Side DAC ouput
+    //DAC_SetOutput(4.0, 16);      //Set 32V Side DAC ouput
+    //DAC_SetOutput(4.0, 32);      //Set 16V Side DAC ouput
 
     BUZZER = BUZZER_OFF;        // initial state of buzzer is off
     LED = LED_OFF;              // initial state of debug LED is off
  
-
     int i=0;         // temp var for delay loop
     int j=0;
 

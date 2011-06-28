@@ -1,0 +1,34 @@
+~inc:header.inc~
+<div id="content">
+
+<h2>Welcome!</h2>
+<p>This site controls configuration of this motor control module. For any
+settings to take effect, the board must be reset using the reset link. 
+More information is available on the wiki.</p>
+
+<h2>Current Status</h2>
+
+<div class="networkinfo">
+	<fieldset> 
+	<legend>Component Information</legend>
+		<div class="status"><div class="label">Host Name</div><div class="text">~config_hostname~</div></div>
+		<div class="status"><div class="label">IP Address</div><div class="text">~config_ip~</div></div>
+		<div class="status"><div class="label">MAC Address</div><div class="text">~config_mac~</div></div>
+		<div class="status"><div class="label">TCP/IP Stack Version</div><div class="text">~version~</div></div>
+		<div class="status"><div class="label">Build Date</div><div class="text">~builddate~</div></div>
+	</fieldset>			
+</div>
+
+<div class="realtimeinfo">
+	<fieldset> 
+		<legend>RTOS Stack Information</legend>
+		<div class="status"><div class="label">TCP/IP</div><div class="text">~task_stack(0)~</div></div>
+		<div class="status"><div class="label">UART</div><div class="text">~task_stack(1)~</div></div>
+		<div class="status"><div class="label">Publisher</div><div class="text">~task_stack(2)~</div></div>
+		<div class="status"><div class="label">MessageParser</div><div class="text">~task_stack(3)~</div></div>
+	</fieldset>
+</div>
+
+</div>
+
+~inc:footer.inc~
