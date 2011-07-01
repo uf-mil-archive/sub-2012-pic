@@ -2,13 +2,7 @@
 #define ADC_H
 
 #include "p33FJ128MC804.h"
-//#include "taskUART.h"
-#include "FreeRTOSConfig.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "semphr.h"
-
+#include "taskUART.h"
 #include "fixMath.h"
 #include "mavg.h"
 #include "buzzer.h"
@@ -48,16 +42,16 @@
 #define ADC_CURRENT32_APB         ((Q1_15)((ADC_CURRENT32_MMA / ADC_MAX_VAL) * 32767))
 
 // Paul - these should be the fractional (fixed point) representations of you constants
-#define DEFAULT_MAX_CURRENT16   ((Q7_9)(25<<9))     //25 AMPS in Q7_9
-#define DEFAULT_MAX_VOLTAGE16   ((Q6_10)(17 << 10)) // 17 volts in Q6_10
-#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(14.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
-#define DEFAULT_WARN_VOLTAGE16  ((Q6_10)(14.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_MAX_CURRENT16   ((Q7_9)(40<<9))     //40 AMPS in Q7_9
+#define DEFAULT_MAX_VOLTAGE16   ((Q6_10)(17.250*pow(2,10))) // 17 volts in Q6_10
+#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(13.250*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_WARN_VOLTAGE16  ((Q6_10)(13.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 
 
-#define DEFAULT_MAX_CURRENT32   ((Q6_10)(40 << 10))  // 40 AMPS in Q6_10
+#define DEFAULT_MAX_CURRENT32   ((Q6_10)(55 << 10)) // 55 AMPS in Q6_10
 #define DEFAULT_MAX_VOLTAGE32   ((Q6_10)(34 << 10)) // 17 volts in Q6_10
-#define DEFAULT_MIN_VOLTAGE32   ((Q6_10)(29.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
-#define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(29.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_MIN_VOLTAGE32   ((Q6_10)(26.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(27.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 
 
 // FreeRTOS defines
@@ -123,9 +117,9 @@ extern xTaskHandle hADCTask;
 extern RailData gRailData;
 extern RailConfig gRailConfig;
 
-static void xADCTaskInit(void);
-static void taskADC(void* pvParameter);
-static void SaveRailConfig(RailConfig* railCfg);
+void xADCTaskInit(void);
+void taskADC(void* pvParameter);
+void SaveRailConfig(RailConfig* railCfg);
 void RailControl(UINT8 rail, UINT8 action);
 
 #endif // ADC_H

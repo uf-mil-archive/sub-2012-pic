@@ -18,31 +18,22 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
 {
     IFS1bits.CNIF = 0;      // Clear CN interrupt
     BYTE currentState = 0;
-    BYTE previousState = 0;
     
-    previousState = gRailData.state & 15;
-
     //handle active low Hall Switches here
-    currentState = ( (~(KILLSW<<2)&4) | (~(ONOFFSW<<1)&2) | (gRailData.state&9) )&15;
+    currentState = ( ((~(ONOFFSW<<1))&2) | (gRailData.state&9) )&11;
     
-    if ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0){	   //if rail is currently on
+    if ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0){   //if rail is currently on
 
         //rail is currently on
-        if (((currentState>>1)&3) == 2 && ((previousState>>1)&3) == 3){
+        if (((currentState>>1)&1) == 0){
             //turn sub off
             RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
             currentState &= ~9 ;
         }//end rail on check
 		
-            //buzzer for Estop
-            if (((currentState>>2)&1) == 1 && ((previousState>>2)&1) == 0)
-                buzz(ESTOP_ON_SONG);
-            else
-            if (((currentState>>2)&1) == 0 && ((previousState>>2)&1) == 1)
-                buzz(ESTOP_OFF_SONG);
     }else{
         //rail is currently off
-        if (((currentState>>1)&3) == 3 && ((previousState>>1)&3) == 2){
+        if (((currentState>>1)&1) == 1){
             //turn sub on
                 
             // Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
@@ -84,14 +75,12 @@ void hallSwInit(void)
 {
     // set Kill and ON/Off switch as inputs and enable
     // the Change Notification interupt on thier pins
-    KILLSW_TRIS = INPUT_PIN;
-    KILLSW_CN   = CN_ENABLE;
 
     ONOFFSW_TRIS = INPUT_PIN;
     ONOFFSW_CN   = CN_ENABLE;
 
     gRailData.state = 0 ;
-    gRailData.state = ( (~(KILLSW << 2)&4) | (~(ONOFFSW << 1)&2) )&7 ;
+    gRailData.state = (~(ONOFFSW << 1))&2 ;
     
     INTCON1bits.NSTDIS = 1;     // disable Interupt nesting
     SRbits.IPL = 0;             //  CPU priority level is 8

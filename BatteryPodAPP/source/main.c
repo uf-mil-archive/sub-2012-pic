@@ -82,10 +82,10 @@ int main(void)
     //// This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.
     xADCTaskInit();
-    xUARTTaskInit();
-    xTCPIPTaskInit();
-    xParserTaskInit();
-    xPublisherTaskInit();
+    //xUARTTaskInit();
+   // xTCPIPTaskInit();
+   // xParserTaskInit();
+   // xPublisherTaskInit();
 
     vTaskStartScheduler();
 

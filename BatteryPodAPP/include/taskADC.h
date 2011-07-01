@@ -19,7 +19,7 @@
 #define ADC_MAX_VAL             (0x3FF)
 // The VRail Voltage divider gain
 //#define ADC_VRAIL16_GAIN  (1.0/4.0)       // should be this
-#define ADC_VRAIL16_GAIN    (3.944/16.01)   // but is actually this
+#define ADC_VRAIL16_GAIN    (3.976/16.01)   // but is actually this
 //#define ADC_VRAIL32_GAIN    (100.0/798.0)
 #define ADC_VRAIL32_GAIN    (100.0/798.0)
 // The Current Divider Gain
@@ -44,14 +44,14 @@
 // Paul - these should be the fractional (fixed point) representations of you constants
 #define DEFAULT_MAX_CURRENT16   ((Q7_9)(40<<9))     //40 AMPS in Q7_9
 #define DEFAULT_MAX_VOLTAGE16   ((Q6_10)(17.250*pow(2,10))) // 17 volts in Q6_10
-#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(13.250*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(12.900*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 #define DEFAULT_WARN_VOLTAGE16  ((Q6_10)(13.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 
 
 #define DEFAULT_MAX_CURRENT32   ((Q6_10)(55 << 10)) // 55 AMPS in Q6_10
 #define DEFAULT_MAX_VOLTAGE32   ((Q6_10)(34 << 10)) // 17 volts in Q6_10
-#define DEFAULT_MIN_VOLTAGE32   ((Q6_10)(26.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
-#define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(27.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_MIN_VOLTAGE32   ((Q6_10)(26.100*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+#define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(26.750*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 
 
 // FreeRTOS defines

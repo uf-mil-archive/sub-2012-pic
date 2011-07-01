@@ -1,6 +1,5 @@
 #include "taskADC.h"
 #include "mcp4821.h"
-#include "mcp25XX640A.h"
 
 static volatile BOOL adcMAVGsInited = FALSE;
 static portBASE_TYPE gADCPeriod;
@@ -31,12 +30,12 @@ static void InitRailConfig(void);
 
 #if defined(ADC16_CS_IO) || defined(ADC32_CS_IO)
 
-static UINT16 ADC16Val [NUM_ADCS][NUM_ADC_SAMPLES];     //array for ADC16 values
-static UINT16 ADC32Val [NUM_ADCS][NUM_ADC_SAMPLES];     //array for ADC32 values
+UINT16 ADC16Val [NUM_ADCS][NUM_ADC_SAMPLES];     //array for ADC16 values
+UINT16 ADC32Val [NUM_ADCS][NUM_ADC_SAMPLES];     //array for ADC32 values
 
-static INT16 ADC_IsInited = 0;
+INT16 ADC_IsInited = 0;
 
-static struct SavedSPI
+struct SavedSPI
 {
     UINT16 CON1;
     UINT16 CON2;
@@ -45,7 +44,7 @@ static struct SavedSPI
 
 /******************************************************************************/
 
-static void ADC_saveSPI()
+void ADC_saveSPI()
 {
     ADC_savedSPI.CON1 = ADC_SPIxCON1;
     ADC_savedSPI.CON2 = ADC_SPIxCON2;
@@ -53,7 +52,7 @@ static void ADC_saveSPI()
 }
 /******************************************************************************/
 
-static void ADC_restoreSPI()
+void ADC_restoreSPI()
 {
     // Disable the SPI
     ADC_SPIxSTATbits.SPIEN = 0;
@@ -65,7 +64,7 @@ static void ADC_restoreSPI()
 }
 /******************************************************************************/
 
-static void ADC_configSPI(void)
+void ADC_configSPI(void)
 {
     // Make sure the ADC pins have been initialized correctly
     if(!ADC_IsInited)
@@ -259,7 +258,7 @@ void taskADC(void* pvParameter)
             /***************************/
             /** Check for low voltage **/
 	    /***************************/
-		
+
             // Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
             highestVoltage16 = gRailData.VRail16[1];
             highestVoltage16 = (gRailData.VRail16[2] > highestVoltage16) ? gRailData.VRail16[2] : highestVoltage16;
@@ -273,25 +272,29 @@ void taskADC(void* pvParameter)
                 RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
                 warningBuzzerDelay=0;
             }
-            else if ((gRailData.state&8 == 1) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
-                RailControl(CONTROL_RAIL_32, TURN_OFF);
-            
-			}else{
-                if ( ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
-                     ((gRailData.state&8 == 1) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
+            else{ 
+					if (((gRailData.state)&8 == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32))
+	                RailControl(CONTROL_RAIL_32, TURN_OFF);
+            	}
+            if ( ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
+                 ((gRailData.state&8 == 8) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
 
-                if (warningBuzzerDelay >= 250){
-                        buzz(LOWPOWER_SONG);
-                        warningBuzzerDelay = 0;
-                    }else warningBuzzerDelay++;
-                }else warningBuzzerDelay = 0;
-            }
+	            if (warningBuzzerDelay >= 250){
+	                    buzz(LOWPOWER_SONG);
+	                    warningBuzzerDelay = 0;
+				}else{
+	                    warningBuzzerDelay++;
+					 }
+            }else{
+                	warningBuzzerDelay = 0;
+            	 }   
+            
 
 
 	/****************************/
 	/** Check for over-current **/
 	/****************************/
-      
+ 
             if (gRailData.Current16 > gRailConfig.MaxCurrent16)
             {
                 if (overCurrentDelayCntr_Rail16 >= OVER_CURRENT_DELAY) {
@@ -318,7 +321,7 @@ void taskADC(void* pvParameter)
             }
 
 
-    }
+    }//end task loop
 
     /* Should the task implementation ever break out of the above loop
     then the task must be deleted before reaching the end of this function.
@@ -409,7 +412,7 @@ void SaveRailConfig(RailConfig* railCfg)
 
 
 void RailControl(UINT8 rail, UINT8 action){
-    // rail = 0 is 16V Rail but turns off both
+    // rail = 0 is 16V 
     // rail = 1 is 32V Rail
     // rail = 2 is BOTH Rails
 
@@ -419,14 +422,13 @@ void RailControl(UINT8 rail, UINT8 action){
     switch (rail)
     {
         case 0:
-                RAIL32 = action;        // turn on/off 32 volt Rail
                 RAIL16 = action;        //turn on/off 16 Volt Rail
 
                 if (action == 0){
-                    gRailData.state &= ~9 ;	//change the rail16 and rail32 state flag to off
+                    gRailData.state &= ~1 ;	//change the rail16 and rail32 state flag to off
                     buzz(OFF_SONG);
                 }else{
-                    gRailData.state |= 9 ;     //chage the rail16 and rail32 state flag to on
+                    gRailData.state |= 1 ;     //chage the rail16 and rail32 state flag to on
                     buzz(ON_SONG);
                 }
                 break;
@@ -434,7 +436,7 @@ void RailControl(UINT8 rail, UINT8 action){
                 RAIL32 = action;
                 if (action == 0){
                     gRailData.state &= ~8 ;	//change the rail32 state flag to off
-                    buzz(OFF_SONG);
+                   // buzz(OFF_SONG);
                 }else{
                     gRailData.state |= 8 ;     //chage the rail32 state flag to on
                     buzz(ON_SONG);

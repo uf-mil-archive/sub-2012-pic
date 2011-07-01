@@ -59,7 +59,7 @@ void taskPublisher(void* pvParameter)
         // broadcast UDP, and then your standard packet which you will send to
         // the controlling device.
 
-        BYTE* packet, estopPacket;
+        BYTE* packet, *estopPacket;
         length = BuildOutgoingPacket(&packet, previousWakeTime);
 
         // Paul - Build estop packet here - always publish this, even if you don't have

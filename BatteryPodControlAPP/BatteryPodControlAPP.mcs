@@ -2,19 +2,6 @@
 MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
 Version=1.0
 [File000]
-Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\adc108s022.o
-Folder=Intermediary
-DeviceName=dsPIC33FJ128MC804
-LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
-LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
-LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
-PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
-SuiteArgsString=
-ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
-TraceCmdString=
-DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File001]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\blockingDelay.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -22,12 +9,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File002]
+[File001]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\buzzer.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -35,25 +22,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File003]
-Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\cheesyUART.o
-Folder=Intermediary
-DeviceName=dsPIC33FJ128MC804
-LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
-LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
-LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
-PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
-SuiteArgsString=
-ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
-TraceCmdString=
-DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File004]
+[File002]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\HallSwitches.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -61,12 +35,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File005]
+[File003]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\main.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -74,12 +48,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File006]
+[File004]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\mavg.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -87,12 +61,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File007]
+[File005]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\mcp25XX640A.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -100,12 +74,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File008]
+[File006]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\mcp4821.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -113,12 +87,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File009]
+[File007]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\OverCurrentProtection.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -126,12 +100,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File010]
+[File008]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\simplequeue.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -139,12 +113,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File011]
+[File009]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\taskADC.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -152,12 +126,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File012]
+[File010]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\Tick.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -165,12 +139,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File013]
+[File011]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\croutine.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -178,12 +152,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File014]
+[File012]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\list.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -191,12 +165,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File015]
+[File013]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\queue.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -204,12 +178,12 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1
-[File016]
+[File014]
 Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\BatteryPodControlAPP\obj\tasks.o
 Folder=Intermediary
 DeviceName=dsPIC33FJ128MC804
@@ -217,7 +191,7 @@ LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
 PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS/Source/portable/MPLAB/PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|source\adc108s022.c|source\blockingDelay.c|source\buzzer.c|source\cheesyUART.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|source\blockingDelay.c|source\buzzer.c|source\HallSwitches.c|source\main.c|source\mavg.c|source\mcp25XX640A.c|source\mcp4821.c|source\OverCurrentProtection.c|source\simplequeue.c|source\taskADC.c|source\Tick.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\croutine.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\list.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\queue.c|C:\Users\Paul\Desktop\Repositories\subjugator_pic\FreeRTOS\Source\tasks.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
 TraceCmdString=

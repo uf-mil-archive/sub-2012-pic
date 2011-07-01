@@ -26,7 +26,7 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
 
         //rail is currently on
         if (((currentState>>1)&1) == 0){
-            //turn sub off
+            //turn POD off
             RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
             currentState &= ~9 ;
         }//end rail on check
@@ -35,7 +35,7 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
         //rail is currently off
         if (((currentState>>1)&1) == 1){
             //turn sub on
-                
+
             // Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
             Q6_10 temp16 = gRailData.VRail16[1];
             temp16 = (gRailData.VRail16[2] > temp16) ? gRailData.VRail16[2] : temp16;

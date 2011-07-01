@@ -10,8 +10,8 @@
 #include "queue.h"
 #include "semphr.h"
 
-//#include "messages.h"
-//#include "taskParser.h"
+#include "messages.h"
+#include "taskParser.h"
 #include "mcp25XX640A.h"
 
 #include <string.h>

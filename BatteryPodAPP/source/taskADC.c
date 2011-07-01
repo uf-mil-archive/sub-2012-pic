@@ -121,34 +121,41 @@ void ADC_ScatterGatherData(int adcSel, UINT16* buff)
     if (adcSel == 0 ){   // IF it is a 0 then check 16volt rail else 32
                                         // prepare to send by lowering CS
         ADC16_CS_IO = AL_TRUE;
+
+        for (nextAddr = 1; nextAddr <= 5; nextAddr++)
+        {
+            adcADDR = (nextAddr % 5) << 11;
+            // Send out the adc address to read next (0-7 in bits 12,11,10)
+            // and fill buffer with current address
+            ADC_SPIxBUF = adcADDR;
+
+            while(!ADC_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
+
+            // copy the ADC value from the buffer and trim off trailing zeroes
+            *(buff+((nextAddr-1)*NUM_ADC_SAMPLES)) = (ADC_SPIxBUF >> 2);
+        }
+
     } else {
         ADC32_CS_IO = AL_TRUE;
-    }
+        for (nextAddr = 1; nextAddr <= 4; nextAddr++)
+        {
+            adcADDR = (nextAddr % 4) << 11;
+            // Send out the adc address to read next (0-7 in bits 12,11,10)
+            // and fill buffer with current address
+            ADC_SPIxBUF = adcADDR;
 
-    for (nextAddr = 1; nextAddr <= 5; nextAddr++)
-    {
-        adcADDR = (nextAddr % 5) << 11;
-        // Send out the adc address to read next (0-7 in bits 12,11,10)
-        // and fill buffer with current address
-        ADC_SPIxBUF = adcADDR;
+            while(!ADC_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
 
-        while(!ADC_SPIxSTATbits.SPIRBF);    // Wait for transmission to complete
-
-        // copy the ADC value from the buffer and trim off trailing zeroes
-        *(buff+((nextAddr-1)*NUM_ADC_SAMPLES)) = (ADC_SPIxBUF >> 2);
-    }
-
-    if (adcSel == 0) {       // ADC array now has fresh data
-        ADC16_CS_IO = AL_FALSE;
-    }else{
-       ADC32_CS_IO = AL_FALSE;
-    }
-
+            // copy the ADC value from the buffer and trim off trailing zeroes
+            *(buff+((nextAddr-1)*NUM_ADC_SAMPLES)) = (ADC_SPIxBUF >> 2);
+        }
+    }//end 32Volt read
+   
+    ADC16_CS_IO = AL_FALSE;
+    ADC32_CS_IO = AL_FALSE;
+    
     // Put the SPI back how it was
- 	
-	   
     ADC_restoreSPI();
-
 }
 
 /******************************************************************************/
@@ -184,7 +191,7 @@ void xADCTaskInit(void)
      }
 
 	MAVG_Init(&current16MAVG, &ADC16Val[0][0], ADC_MAVG_QUEUE_LENGTH);
-    MAVG_Init(&current32MAVG, &ADC32Val[0][0], ADC_MAVG_QUEUE_LENGTH);
+        MAVG_Init(&current32MAVG, &ADC32Val[0][0], ADC_MAVG_QUEUE_LENGTH);
    
    // Otherwise we update the filters
    for (i=1; i < NUM_ADCS ; i++)
@@ -264,27 +271,28 @@ void taskADC(void* pvParameter)
             highestVoltage16 = (gRailData.VRail16[2] > highestVoltage16) ? gRailData.VRail16[2] : highestVoltage16;
             highestVoltage16 = (gRailData.VRail16[3] > highestVoltage16) ? gRailData.VRail16[3] : highestVoltage16;
 
-            highestVoltage32 = gRailData.VRail32[1];
-            highestVoltage32 = (gRailData.VRail32[2] > highestVoltage32) ? gRailData.VRail32[2] : highestVoltage32;
-            highestVoltage32 = (gRailData.VRail32[3] > highestVoltage32) ? gRailData.VRail32[3] : highestVoltage32;
+            highestVoltage32 = gRailData.VRail32[2];
 
-            if ( (gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
+            //check if 16 Volt inputs are below the absolute minimum
+            // If so, shut off both rails
+            if ( (((gRailData.state)&1) == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
                 RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
                 warningBuzzerDelay=0;
             }
-            else{ 
-					if (((gRailData.state)&8 == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32))
-	                RailControl(CONTROL_RAIL_32, TURN_OFF);
-            	}
-            if ( ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
-                 ((gRailData.state&8 == 8) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
+            //check the 32v rail for critically low power
+            else if ((((gRailData.state)&8) == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32)) {
+                    RailControl(CONTROL_RAIL_32, TURN_OFF);
+            }
+
+            if ( ((((gRailData.state)&1) == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
+                 ((((gRailData.state)&8) == 8) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
 
 	            if (warningBuzzerDelay >= 250){
-	                    buzz(LOWPOWER_SONG);
-	                    warningBuzzerDelay = 0;
-				}else{
-	                    warningBuzzerDelay++;
-					 }
+	                buzz(LOWPOWER_SONG);
+	                warningBuzzerDelay = 0;
+                    }else{
+                        warningBuzzerDelay++;
+                    }
             }else{
                 	warningBuzzerDelay = 0;
             	 }   
@@ -294,7 +302,7 @@ void taskADC(void* pvParameter)
 	/****************************/
 	/** Check for over-current **/
 	/****************************/
- 
+
             if (gRailData.Current16 > gRailConfig.MaxCurrent16)
             {
                 if (overCurrentDelayCntr_Rail16 >= OVER_CURRENT_DELAY) {
@@ -315,8 +323,10 @@ void taskADC(void* pvParameter)
                 }
             }else{
                 overCurrentDelayCntr_Rail32 = 0;
-                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == TURN_ON) &&
-                     ((gRailData.state & MERGE_STATE_MASK_RAIL32) == TURN_OFF) )
+                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == TURN_ON ) &&
+                     ((gRailData.state & MERGE_STATE_MASK_RAIL32) == TURN_OFF) &&
+                      (highestVoltage32 > gRailConfig.MinVoltage32) )
+
                     RailControl(CONTROL_RAIL_32, TURN_ON);
             }
 
@@ -436,7 +446,7 @@ void RailControl(UINT8 rail, UINT8 action){
                 RAIL32 = action;
                 if (action == 0){
                     gRailData.state &= ~8 ;	//change the rail32 state flag to off
-                   // buzz(OFF_SONG);
+                   buzz(OFF_SONG);
                 }else{
                     gRailData.state |= 8 ;     //chage the rail32 state flag to on
                     buzz(ON_SONG);

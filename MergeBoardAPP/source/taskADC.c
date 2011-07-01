@@ -211,6 +211,9 @@ void taskADC(void* pvParameter)
 	UINT16 warningBuzzerDelay = 0;
 	UINT16 overCurrentDelayCntr_Rail16 = 0;
 	UINT16 overCurrentDelayCntr_Rail32 = 0;
+	UINT16 cutoffLowVoltageCntr_Rail16 = 0;
+	UINT16 cutoffLowVoltageCntr_Rail32 = 0;
+	UINT16 cutonCntr_Rail32 = 0;
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
         a constant publishing frequency */
@@ -268,23 +271,44 @@ void taskADC(void* pvParameter)
             highestVoltage32 = (gRailData.VRail32[2] > highestVoltage32) ? gRailData.VRail32[2] : highestVoltage32;
             highestVoltage32 = (gRailData.VRail32[3] > highestVoltage32) ? gRailData.VRail32[3] : highestVoltage32;
 
-            if ( (gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
-                RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
-                warningBuzzerDelay=0;
+            if ( (((gRailData.state)&1) == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
+                
+				if (cutoffLowVoltageCntr_Rail16 >= CUTOFF_LOW_VOLTAGE16_DELAY){
+					RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
+					cutoffLowVoltageCntr_Rail32 = 0;
+					cutoffLowVoltageCntr_Rail16 = 0;
+                	warningBuzzerDelay=0;
+				}else{
+					cutoffLowVoltageCntr_Rail16++;
+				}
             }
-            else if ((gRailData.state&8 == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
-                RailControl(CONTROL_RAIL_32, TURN_OFF);
-            
-			}else{
-                if ( ((gRailData.state&1 == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
-                     ((gRailData.state&8 == 8) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
+            else if ((((gRailData.state)&8) == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
+                if (cutoffLowVoltageCntr_Rail32 >= CUTOFF_LOW_VOLTAGE32_DELAY){
+					RailControl(CONTROL_RAIL_32, TURN_OFF);
+					cutoffLowVoltageCntr_Rail32 = 0;
+				}else{
+					cutoffLowVoltageCntr_Rail32++;
+				}
 
-                if (warningBuzzerDelay >= 250){
-                        buzz(LOWPOWER_SONG);
-                        warningBuzzerDelay = 0;
-                    }else warningBuzzerDelay++;
-                }else warningBuzzerDelay = 0;
-            }
+			}else{
+				cutoffLowVoltageCntr_Rail16 = 0 ;
+				cutoffLowVoltageCntr_Rail32 = 0 ;
+			}
+         
+			// Low Voltage Warning Buzzer
+   			if ( ((((gRailData.state)&1) > 0) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
+                 ((((gRailData.state)&8) > 0) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) )
+			{
+	            if (warningBuzzerDelay >= 250){
+	                     buzz(LOWPOWER_SONG);
+	                     warningBuzzerDelay = 0;
+	            }else{
+					warningBuzzerDelay++;
+				}
+            }else{
+					warningBuzzerDelay = 0;
+			}
+         
 
 
 	/****************************/
@@ -311,13 +335,23 @@ void taskADC(void* pvParameter)
                 }
             }else{
                 overCurrentDelayCntr_Rail32 = 0;
-                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == TURN_ON) &&
-                     ((gRailData.state & MERGE_STATE_MASK_RAIL32) == TURN_OFF) )
-                    RailControl(CONTROL_RAIL_32, TURN_ON);
+                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == 1) && 
+					 ((gRailData.state & MERGE_STATE_MASK_RAIL32) == 0) && 
+					  (highestVoltage32 > gRailConfig.MinVoltage32) )
+				{				 	
+					if (cutonCntr_Rail32 >= CUTON_AFTER_LOW_VOLTAGE32_DELAY){
+						RailControl(CONTROL_RAIL_32, TURN_ON);
+						cutonCntr_Rail32=0;
+					}else{
+						cutonCntr_Rail32++;
+					}
+				}else{
+					cutonCntr_Rail32 = 0;
+				}
             }
 
 
-    }
+    }//end task
 
     /* Should the task implementation ever break out of the above loop
     then the task must be deleted before reaching the end of this function.
@@ -421,10 +455,10 @@ void RailControl(UINT8 rail, UINT8 action){
                 RAIL16 = action;        //turn on/off 16 Volt Rail
 
                 if (action == 0){
-                    gRailData.state &= ~9 ;	//change the rail16 and rail32 state flag to off
+                    gRailData.state &= ~1 ;	//change the rail16 and rail32 state flag to off
                     buzz(OFF_SONG);
                 }else{
-                    gRailData.state |= 9 ;     //chage the rail16 and rail32 state flag to on
+                    gRailData.state |= 1 ;     //chage the rail16 and rail32 state flag to on
                     buzz(ON_SONG);
                 }
                 break;
@@ -432,10 +466,10 @@ void RailControl(UINT8 rail, UINT8 action){
                 RAIL32 = action;
                 if (action == 0){
                     gRailData.state &= ~8 ;	//change the rail32 state flag to off
-                    buzz(OFF_SONG);
+                    //buzz(OFF_SONG);
                 }else{
                     gRailData.state |= 8 ;     //chage the rail32 state flag to on
-                    buzz(ON_SONG);
+                   // buzz(ON_SONG);
                 }
                 break;
 

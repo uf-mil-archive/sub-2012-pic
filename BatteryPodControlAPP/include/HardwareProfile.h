@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Merge Board Hardware Profile
+// Battery Pod Hardware Profile
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifndef HARDWARE_PROFILE_H
@@ -39,28 +39,24 @@
 //******************************************************************/
 
 //****************************** LED *******************************/
-#define LED_TRIS    TRISAbits.TRISA1   // LED TRIS
-#define LED         LATAbits.LATA1     // LED IO
-#define LED_ON      1                  // The LED is configured
-#define LED_OFF     0                  // to turn on with a high output
-//******************************************************************/
+#define LED_TRIS    TRISBbits.TRISB2   // LED TRIS
+#define LED         LATBbits.LATB2     // LED IO
+#define LED_ON      1                   // The LED is configured
+#define LED_OFF     0                   // to turn on with a high output//******************************************************************/
 
 //*************************** BUZZER *******************************/
-#define BUZZER_TRIS    TRISBbits.TRISB13   // Buzzer TRIS
-#define BUZZER         LATBbits.LATB13     // Buzzer IO
+#define BUZZER_TRIS    TRISBbits.TRISB10   // Buzzer TRIS
+#define BUZZER         LATBbits.LATB10     // Buzzer IO
 #define BUZZER_ON      1                   // The Buzzer is configured
 #define BUZZER_OFF     0                   // to turn on with a high output
 //******************************************************************/
 
 //******************** HighSide Drivers ****************************/
-#define RAIL16_TRIS    TRISCbits.TRISC8   // 16V Rail Control TRIS
-#define RAIL16         LATCbits.LATC8     // 16V Rail IO
+#define RAIL16_TRIS    TRISBbits.TRISB7   // 16V Rail Control TRIS
+#define RAIL16         LATBbits.LATB7     // 16V Rail IO
 
 #define RAIL32_TRIS    TRISAbits.TRISA9   // 32V Rail TRIS
 #define RAIL32         LATAbits.LATA9    // 32V Rail IO
-
-#define ENET_SW_TRIS    TRISAbits.TRISA3   // Ethernet Switch TRIS
-#define ENET_SW         LATAbits.LATA3     // Ethernet Switch IO
 
 #define TURN_ON      1                   // Turn on the highside drivers with
 #define TURN_OFF     0                   // a high output
@@ -75,29 +71,30 @@
 //          the 'KILL' state and a '0' is Run. Likewise, a '1' on the ON/OFF
 //          SW pin should be considered the 'OFF' state and a '0' the Run state.
 //
-#define KILLSW_TRIS     TRISBbits.TRISB15     // Kill Switch TRIS
-#define KILLSW          PORTBbits.RB15        // Kill Switch IO
-#define KILLSW_CN       CNEN1bits.CN11IE      // KillSW Change notification
+#define ONOFFSW_TRIS     TRISBbits.TRISB11     // Kill Switch TRIS
+#define ONOFFSW          PORTBbits.RB11        // Kill Switch IO
+#define ONOFFSW_CN       CNEN1bits.CN15IE      // KillSW Change notification
 #define CN_ENABLE   1                         // value to enable CN interupt
-
-#define ONOFFSW_TRIS    TRISBbits.TRISB14   // On/Off Switch TRIS
-#define ONOFFSW         PORTBbits.RB14      // ON/Off Switch IO
-#define ONOFFSW_CN      CNEN1bits.CN12IE    // On/Off Change noticacation
 //******************************************************************/
 
 //*************** Overcurrent Protection Interupts *****************/
-//  Fault16 is on INT0
-//  Fault32 is on INT1
+//  Fault16 is on INT1
+//  Fault32 is on INT2
 //
-#define FAULT16_TRIS    TRISBbits.TRISB7    // Fault16 TRIS
-#define FAULT16         PORTBbits.RB7       // Fault16 IO
+#define FAULT16_TRIS    TRISCbits.TRISC9    // Fault16 TRIS
+#define FAULT16         PORTCbits.RC9       // Fault16 IO
 
-#define FAULT32_TRIS    TRISBbits.TRISB11   // Fault16 TRIS
-#define FAULT32         PORTBbits.RB11      // Fault16 IO
+#define FAULT32_TRIS    TRISBbits.TRIS5    // Fault32 TRIS
+#define FAULT32         PORTBbits.RB5      // Fault32 IO
 
-// Define PPS INT1 Pin for Fault32
-#define FAULT32_PIN	11			//
-#define FAULT32_PINREG	RPINR0bits.INT1R	// The register where INT1
+// Define PPS INT1 Pin for Fault16
+#define FAULT16_PIN	25			//
+#define FAULT61_PINREG	RPINR0bits.INT1R	// The register where INT1
+						// pin is assigned
+// Define PPS INT2 Pin for Fault32
+#define FAULT32_PIN	5			//
+#define FAULT32_PINREG	RPINR1bits.INT2R	// The register where INT2
+						// pin is assigned
 //******************************************************************/
 
 //********************* I/O pin definitions ************************/
@@ -127,8 +124,8 @@
 // share the same SPI bus.
 
 // The EEPROM digital pins
-#define EROM_CS_TRIS    TRISBbits.TRISB10    // The EEPROM Chip Select TRIS
-#define EROM_CS_IO	LATBbits.LATB10      // The EEPROM Chip Select IO
+#define EROM_CS_TRIS    TRISAbits.TRISA10    // The EEPROM Chip Select TRIS
+#define EROM_CS_IO	LATAbits.LATA10      // The EEPROM Chip Select IO
 
 #define EROM_SPINUM	1   // You must define this number and the proper
                             // SDI PPS register below
@@ -190,11 +187,11 @@
 //********************* ADC SPI *****************************/
 
 // The ADC digital pins
-#define ADC16_CS_TRIS   TRISCbits.TRISC9    // The ADC16 Chip Select TRIS
-#define ADC16_CS_IO     LATCbits.LATC9      //The ADC16 Chip Select IO
+#define ADC16_CS_TRIS   TRISCbits.TRISC8    // The ADC16 Chip Select TRIS
+#define ADC16_CS_IO     LATCbits.LATC8      //The ADC16 Chip Select IO
 
-#define ADC32_CS_TRIS   TRISBbits.TRISB5  // The ADC32 Chip Select TRIS
-#define ADC32_CS_IO     LATBbits.LATB5      //The ADC32 Chip Select IO
+#define ADC32_CS_TRIS   TRISBbits.TRISB4  // The ADC32 Chip Select TRIS
+#define ADC32_CS_IO     LATBbits.LATB4      //The ADC32 Chip Select IO
 
 #define ADC_SPINUM	1   // You must define this number and the proper
                             // SDI PPS register below
@@ -290,8 +287,8 @@
 #define COM_UxTXIPRIORITY	IPC7bits.U2TXIP
 
 // Define PPS UART pins
-#define COM_UTX_PIN         RPOR11bits.RP23R 	    // COM UART TX pin RP22
-#define COM_URX_PIN         22              	    // COM UART RX pin RP23
+#define COM_UTX_PIN         RPOR8bits.RP16R 	    // COM UART TX pin
+#define COM_URX_PIN         17              	    // COM UART RX pin
 #define COM_URX_PINREG      RPINR19bits.U2RXR       // The register where the
                                                     // RX pin is assigned
 

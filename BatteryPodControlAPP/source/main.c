@@ -1,21 +1,21 @@
 ////////////////////////////////////////////////////////////////////////////////
-// BatterPod Board Main
+// Merge Board Main
 ////////////////////////////////////////////////////////////////////////////////
 #include "p33Fxxxx.h"
 #include "HardwareProfile.h"
 
-//#include "FreeRTOS.h"
-//#include "task.h"
-//#include "queue.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
 
-//#include "taskUART.h"
-//#include "taskParser.h"
-//#include "taskTCPIP.h"
-//#include "taskPublisher.h"
-//#include "messages.h"
+#include "taskUART.h"
+#include "taskParser.h"
+#include "taskTCPIP.h"
+#include "taskPublisher.h"
+#include "messages.h"
 //#include "mcp4821.h"
-//#include "HallSwitches.h"
-//#include "buzzer.h"
+#include "HallSwitches.h"
+#include "buzzer.h"
 
 
 // Configuration Bits
@@ -58,10 +58,10 @@ void _ISR __attribute__((__no_auto_psv__)) _StackError(void)
 int main(void)
 {
     /* These should be the first two calls in main - always!*/
-   // clockInit();
-   // ioMap();
-    //hallSwInit() ;              // Initialize HALL SW interupts
-    //buzzerInit();
+    clockInit();
+    ioMap();
+    hallSwInit() ;              // Initialize HALL SW interupts
+	buzzerInit();
 //	DAC_SetOutput(2.5, DAC_RAIL_16);	
 //	DAC_SetOutput(2.0, DAC_RAIL_32);
 	
@@ -72,20 +72,22 @@ int main(void)
     LED_TRIS = OUTPUT_PIN;
     LED = LED_OFF;
 
+   // buzz(LOWPOWER_SONG);
+
 //	EROM_Clear();  // Erases the entire EEPROM
 
-    //CRC16Init();    // Just get this ready for later. Doesn't hurt to be called here
-    //InitCommonMessageData();
+    CRC16Init();    // Just get this ready for later. Doesn't hurt to be called here
+    InitCommonMessageData();
 
     //// This task is started first(!) so the UART Queue exists and we can begin
     // printing boot messages, etc.
-    //xADCTaskInit();
-    //xUARTTaskInit();
-    //xTCPIPTaskInit();
-    //xParserTaskInit();
-   // xPublisherTaskInit();
+    xADCTaskInit();
+    xUARTTaskInit();
+    xTCPIPTaskInit();
+    xParserTaskInit();
+    xPublisherTaskInit();
 
-    //vTaskStartScheduler();
+    vTaskStartScheduler();
 
     return 1;
 }
@@ -122,9 +124,6 @@ void ioMap(void)
     RAIL32_TRIS = OUTPUT_PIN ;   //32V Rail Control
     RAIL32 = TURN_OFF;
 
-    ENET_SW_TRIS = OUTPUT_PIN;   //Ethernet Switch Control
-    ENET_SW = TURN_OFF;
-
     /********** Initialize the open drain pins ***************/
     ODCA = ODCACONFIG;
     ODCB = ODCBCONFIG;
@@ -135,6 +134,7 @@ void ioMap(void)
 
 
     /********** ENC SPI ***************/
+/*
     // Inputs
     ENC_SDI_PINREG = ENC_SDI_PIN;
     // Outputs
@@ -142,15 +142,14 @@ void ioMap(void)
     #if defined ENC_SDO_PIN
         ENC_SDO_PIN = ENC_SPIxSDO_IO;
     #endif
+*/
 
     /********** Multiple Devices SPI ***************/
     // Inputs
     EROM_SDI_PINREG = EROM_SDI_PIN;
     // Outputs
     EROM_SCK_PIN = EROM_SPIxSCK_IO;
-    #if defined EROM_SDO_PIN
-        EROM_SDO_PIN = EROM_SPIxSDO_IO;
-    #endif
+    EROM_SDO_PIN = EROM_SPIxSDO_IO;
 
     /********** Communication UART ***************/
     // Inputs
@@ -158,7 +157,6 @@ void ioMap(void)
     // Outputs
     COM_UTX_PIN = COM_UxTX_IO;
 
-    //TRISCbits.TRISC7 = 0;   // UART TX TRIS for cheesyUART
 
     // Lock the IOLOCK bit so that the IO is not accidentally changed.
     __builtin_write_OSCCONL(OSCCON | 0x0040);
@@ -171,7 +169,7 @@ void vApplicationStackOverflowHook( void )
     /* Look at pxCurrentTCB to see which task overflowed its stack. */
     while (1)
     {
-        //portNOP();
+        portNOP();
     }
 }
 

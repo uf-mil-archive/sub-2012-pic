@@ -91,7 +91,7 @@ void hallSwInit(void)
     ONOFFSW_CN   = CN_ENABLE;
 
     gRailData.state = 0 ;
-    gRailData.state = ( (~(KILLSW << 2)&4) | (~(ONOFFSW << 1)&2) )&7 ;
+    gRailData.state = ( (~(KILLSW << 2)&4) | (~(ONOFFSW << 1)&2) )&15 ;
     
     INTCON1bits.NSTDIS = 1;     // disable Interupt nesting
     SRbits.IPL = 0;             //  CPU priority level is 8
