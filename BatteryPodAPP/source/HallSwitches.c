@@ -22,9 +22,9 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
     //handle active low Hall Switches here
     currentState = ( ((~(ONOFFSW<<1))&2) | (gRailData.state&9) )&11;
     
-    if ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0){   //if rail is currently on
+    if ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0  ||  (gRailData.state & MERGE_STATE_MASK_RAIL32) > 0){   // a Rail is currently on
 
-        //rail is currently on
+        //16V or 32V rail is currently on... Turn them off
         if (((currentState>>1)&1) == 0){
             //turn POD off
             RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
@@ -49,18 +49,18 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
             if (temp16 >= gRailConfig.MinVoltage16 && temp16  <= gRailConfig.MaxVoltage16){
                 RailControl(CONTROL_RAIL_16, TURN_ON);
                 currentState |= 1;	//set rail16 flag = on
-                //Turn on 32 volt rail if it is within Range
-                if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
-                    RailControl(CONTROL_RAIL_32, TURN_ON);
-                    currentState |= 8;	//set rail32 flag = on
-                }else{
-                    // 32volt rail has bad power
-                    //  buzz(BADPOWER_SONG);
-                }
-
             }else{
                 buzz(BADPOWER_SONG);       //BUZZ For incorrect Power on 16V Rail
-            }
+            }//enf 16 volt turnon routine
+
+            //Turn on 32volt Rail if it is within Range
+            if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
+                RailControl(CONTROL_RAIL_32, TURN_ON);
+                currentState |= 8;	//set rail32 flag = on
+            }else{
+                buzz(BADPOWER_SONG);       //BUZZ For incorrect Power on 16V Rail
+            }//end 32v turn on routine
+
         }//end rail off check    
     }
 

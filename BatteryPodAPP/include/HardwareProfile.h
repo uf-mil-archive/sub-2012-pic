@@ -12,6 +12,13 @@
 // The version number of this application number
 #define APP_VERSION		0x04
 
+// The battery pods have a jumper to select whether the digital power is supplied
+// from the 32V Rail or the 16 volt Rail. The code will default to a 16v
+// as the digital supply so YOU MUST UNCOMMENT this define if you want to use 32V
+
+//#define SUPPLY_DIGITAL_POWER_FROM_32V_RAIL 0
+
+
 /*
  *  Timers 1,2,3, and 5 are used by FreeRTOS and the tcp/ip stack. Timer 1 is
  *  also used in the blocking delay routines

@@ -216,8 +216,12 @@ void taskADC(void* pvParameter)
     int i = 0;
 	Q6_10 highestVoltage16, highestVoltage32;
 	UINT16 warningBuzzerDelay = 0;
-	UINT16 overCurrentDelayCntr_Rail16 = 0;
+        UINT16 overCurrentDelayCntr_Rail16 = 0;
 	UINT16 overCurrentDelayCntr_Rail32 = 0;
+	UINT16 cutoffLowVoltageCntr_Rail16 = 0;
+	UINT16 cutoffLowVoltageCntr_Rail32 = 0;
+	UINT16 cutonCntr_Rail32 = 0;
+
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
         a constant publishing frequency */
@@ -273,30 +277,44 @@ void taskADC(void* pvParameter)
 
             highestVoltage32 = gRailData.VRail32[2];
 
-            //check if 16 Volt inputs are below the absolute minimum
-            // If so, shut off both rails
-            if ( (((gRailData.state)&1) == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
-                RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
-                warningBuzzerDelay=0;
+            //check if 16 Volt inputs are below the absolute minimum... Turn 16V off if below
+           if ( (((gRailData.state)&1) == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
+
+                if (cutoffLowVoltageCntr_Rail16 >= CUTOFF_LOW_VOLTAGE16_DELAY){
+                    RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
+                    cutoffLowVoltageCntr_Rail32 = 0;
+                    cutoffLowVoltageCntr_Rail16 = 0;
+                    warningBuzzerDelay=0;
+                }else{
+                    cutoffLowVoltageCntr_Rail16++;
+                }
             }
-            //check the 32v rail for critically low power
-            else if ((((gRailData.state)&8) == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32)) {
+            else if ((((gRailData.state)&8) == 8) && (highestVoltage32 <= gRailConfig.MinVoltage32)){
+                if (cutoffLowVoltageCntr_Rail32 >= CUTOFF_LOW_VOLTAGE32_DELAY){
                     RailControl(CONTROL_RAIL_32, TURN_OFF);
+                    cutoffLowVoltageCntr_Rail32 = 0;
+                }else{
+                    cutoffLowVoltageCntr_Rail32++;
+                }
+
+            }else{
+                cutoffLowVoltageCntr_Rail16 = 0 ;
+                cutoffLowVoltageCntr_Rail32 = 0 ;
             }
 
-            if ( ((((gRailData.state)&1) == 1) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
-                 ((((gRailData.state)&8) == 8) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) ){
-
-	            if (warningBuzzerDelay >= 250){
-	                buzz(LOWPOWER_SONG);
-	                warningBuzzerDelay = 0;
-                    }else{
-                        warningBuzzerDelay++;
-                    }
+            // Low Voltage Warning Buzzer
+            if ( ((((gRailData.state)&1) > 0) && (highestVoltage16 <= gRailConfig.WarnVoltage16 )) ||
+                 ((((gRailData.state)&8) > 0) && (highestVoltage32 <= gRailConfig.WarnVoltage32 )) )
+            {
+                if (warningBuzzerDelay >= 250){
+                     buzz(LOWPOWER_SONG);
+                    warningBuzzerDelay = 0;
+                }else{
+                    warningBuzzerDelay++;
+                }
             }else{
-                	warningBuzzerDelay = 0;
-            	 }   
-            
+                warningBuzzerDelay = 0;
+            }
 
 
 	/****************************/
@@ -323,13 +341,20 @@ void taskADC(void* pvParameter)
                 }
             }else{
                 overCurrentDelayCntr_Rail32 = 0;
-                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == TURN_ON ) &&
-                     ((gRailData.state & MERGE_STATE_MASK_RAIL32) == TURN_OFF) &&
+                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0) &&
+                     ((gRailData.state & MERGE_STATE_MASK_RAIL32) == 0) &&
                       (highestVoltage32 > gRailConfig.MinVoltage32) )
-
-                    RailControl(CONTROL_RAIL_32, TURN_ON);
+                {
+                    if (cutonCntr_Rail32 >= CUTON_AFTER_LOW_VOLTAGE32_DELAY){
+                        RailControl(CONTROL_RAIL_32, TURN_ON);
+                        cutonCntr_Rail32=0;
+                    }else{
+                        cutonCntr_Rail32++;
+                    }
+                }else{
+                    cutonCntr_Rail32 = 0;
+                }
             }
-
 
     }//end task loop
 
