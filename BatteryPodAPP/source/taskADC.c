@@ -341,6 +341,7 @@ void taskADC(void* pvParameter)
                 }
             }else{
                 overCurrentDelayCntr_Rail32 = 0;
+            /* NO Need to turn Battery Pods back on
                 if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0) &&
                      ((gRailData.state & MERGE_STATE_MASK_RAIL32) == 0) &&
                       (highestVoltage32 > gRailConfig.MinVoltage32) )
@@ -354,6 +355,7 @@ void taskADC(void* pvParameter)
                 }else{
                     cutonCntr_Rail32 = 0;
                 }
+            */
             }
 
     }//end task loop
