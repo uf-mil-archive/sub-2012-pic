@@ -16,6 +16,7 @@
 //#include "mcp4821.h"
 #include "HallSwitches.h"
 #include "buzzer.h"
+#include "I2C_FanControl.h"
 
 
 // Configuration Bits
@@ -33,7 +34,6 @@ static void clockInit(void);
 /**********************/
 /*  Global Variables  */
 /**********************/
-//I2C_DRV i2cfan = I2C_FANDRV_DEFAULTS;
 
 
 // C30 Exception Handlers
@@ -61,7 +61,10 @@ int main(void)
     clockInit();
     ioMap();
     hallSwInit() ;              // Initialize HALL SW interupts
-	buzzerInit();
+    buzzerInit();
+    I2Cinit(&i2cfan);
+    i2cfan.oData = &fanData;
+
 //	DAC_SetOutput(2.5, DAC_RAIL_16);	
 //	DAC_SetOutput(2.0, DAC_RAIL_32);
 	
@@ -72,7 +75,7 @@ int main(void)
     LED_TRIS = OUTPUT_PIN;
     LED = LED_OFF;
 
-   // buzz(LOWPOWER_SONG);
+    FanFullOff(&i2cfan);
 
 //	EROM_Clear();  // Erases the entire EEPROM
 

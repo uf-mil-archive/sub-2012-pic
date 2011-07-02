@@ -83,9 +83,6 @@
 #define NUM_ADCS          5
 #define NUM_ADC_SAMPLES   50
 
-#define OVER_CURRRENT_DELAY_MS 	250
-#define OVER_CURRENT_DELAY      OVER_CURRRENT_DELAY_MS * ADC_RATE / 1000
-
 // defines used wth RailControl helper function
 #define CONTROL_RAIL_16     0
 #define CONTROL_RAIL_32     1

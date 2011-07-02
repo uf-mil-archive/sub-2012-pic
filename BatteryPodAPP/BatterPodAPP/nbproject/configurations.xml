@@ -32,6 +32,7 @@
       <itemPath>../include/HTTPPrint.h</itemPath>
       <itemPath>../include/HallSwitches.h</itemPath>
       <itemPath>../include/HardwareProfile.h</itemPath>
+      <itemPath>../include/I2C_FanControl.h</itemPath>
       <itemPath>../include/TCPIPConfig.h</itemPath>
       <itemPath>../include/Tick.h</itemPath>
       <itemPath>../include/blockingDelay.h</itemPath>
@@ -87,6 +88,7 @@
       </logicalFolder>
       <itemPath>../source/CustomHTTPApp.c</itemPath>
       <itemPath>../source/HallSwitches.c</itemPath>
+      <itemPath>../source/I2C_FanControl.c</itemPath>
       <itemPath>../source/MergeBoardWebPage.s</itemPath>
       <itemPath>../source/Tick.c</itemPath>
       <itemPath>../source/blockingDelay.c</itemPath>
@@ -182,8 +184,8 @@
         <property key="enable-handles" value="true"/>
         <property key="enable-data-init" value="true"/>
         <property key="secure-flash" value="no_flash"/>
-        <property key="boot-write-protect" value="no_write_protect"/>
         <property key="boot-flash" value="no_flash"/>
+        <property key="boot-write-protect" value="no_write_protect"/>
         <property key="report-memory-usage" value="true"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="input-libraries" value=""/>

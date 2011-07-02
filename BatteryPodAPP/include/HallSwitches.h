@@ -13,6 +13,7 @@
 #include "buzzer.h"
 #include "taskADC.h"
 #include "fixMath.h"
+#include "I2C_FanControl.h"
 
 
 

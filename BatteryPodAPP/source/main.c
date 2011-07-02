@@ -16,6 +16,7 @@
 //#include "mcp4821.h"
 #include "HallSwitches.h"
 #include "buzzer.h"
+#include "I2C_FanControl.h"
 
 
 // Configuration Bits
@@ -61,7 +62,11 @@ int main(void)
     clockInit();
     ioMap();
     hallSwInit() ;              // Initialize HALL SW interupts
-	buzzerInit();
+    buzzerInit();
+    I2Cinit(&i2cfan);
+
+    FanFullOff(&i2cfan);
+
 //	DAC_SetOutput(2.5, DAC_RAIL_16);	
 //	DAC_SetOutput(2.0, DAC_RAIL_32);
 	

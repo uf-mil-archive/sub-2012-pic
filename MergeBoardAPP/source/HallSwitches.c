@@ -31,15 +31,10 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
         if (((currentState>>1)&3) == 2 && ((previousState>>1)&3) == 3){
             //turn sub off
             RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
+            FanFullOff(&i2cfan);
             currentState &= ~9 ;
         }//end rail on check
-		
-            //buzzer for Estop
-            if (((currentState>>2)&1) == 1 && ((previousState>>2)&1) == 0)
-                buzz(ESTOP_ON_SONG);
-            else
-            if (((currentState>>2)&1) == 0 && ((previousState>>2)&1) == 1)
-                buzz(ESTOP_OFF_SONG);
+	
     }else{
         //rail is currently off
         if (((currentState>>1)&3) == 3 && ((previousState>>1)&3) == 2){
@@ -57,6 +52,7 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
             //Turn on 16 volt rail if it is within Range
             if (temp16 >= gRailConfig.MinVoltage16 && temp16  <= gRailConfig.MaxVoltage16){
                 RailControl(CONTROL_RAIL_16, TURN_ON);
+                FanFullOn(&i2cfan);
                 currentState |= 1;	//set rail16 flag = on
                 //Turn on 32 volt rail if it is within Range
                 if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
@@ -71,7 +67,13 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
                 buzz(BADPOWER_SONG);       //BUZZ For incorrect Power on 16V Rail
             }
         }//end rail off check    
-    }
+    }//end Rail off routine
+
+    //buzzer for Estop
+    if (((currentState>>2)&1) == 1 && ((previousState>>2)&1) == 0)
+        buzz(ESTOP_ON_SONG);
+    else if (((currentState>>2)&1) == 0 && ((previousState>>2)&1) == 1)
+        buzz(ESTOP_OFF_SONG);
 
     //save states
     gRailData.state = currentState;
