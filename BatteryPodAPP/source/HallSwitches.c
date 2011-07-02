@@ -56,7 +56,6 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
             //Turn on 32volt Rail if it is within Range
             if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
                 RailControl(CONTROL_RAIL_32, TURN_ON);
-                FanFullOn(&i2cfan);
                 currentState |= 8;	//set rail32 flag = on
             }else{
                 buzz(BADPOWER_SONG);       //BUZZ For incorrect Power on 16V Rail
