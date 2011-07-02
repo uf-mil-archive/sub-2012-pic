@@ -58,7 +58,7 @@ void FanFullOff(I2C_DRV *i2c){
             I2Cdrv(i2c);
             if (i2c->cmd==I2C_ERR) break;
         }
-        
+       
         return;
 }
 

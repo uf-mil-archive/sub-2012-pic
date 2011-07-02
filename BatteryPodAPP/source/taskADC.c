@@ -220,7 +220,8 @@ void taskADC(void* pvParameter)
 	UINT16 overCurrentDelayCntr_Rail32 = 0;
 	UINT16 cutoffLowVoltageCntr_Rail16 = 0;
 	UINT16 cutoffLowVoltageCntr_Rail32 = 0;
-	UINT16 cutonCntr_Rail32 = 0;
+	UINT16 PreviousState16 = (gRailData.state & MERGE_STATE_MASK_RAIL16 );
+        UINT16 PreviousState32 = (gRailData.state & MERGE_STATE_MASK_RAIL32 );
 
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
@@ -358,6 +359,18 @@ void taskADC(void* pvParameter)
             */
             }
 
+        //Control Fans
+            if ( (PreviousState16 != gRailData.state & MERGE_STATE_MASK_RAIL16) || (PreviousState32 != gRailData.state & MERGE_STATE_MASK_RAIL32) )
+            {
+                PreviousState16 = (gRailData.state & MERGE_STATE_MASK_RAIL16);
+                PreviousState32 = (gRailData.state & MERGE_STATE_MASK_RAIL16);
+                if ( (gRailData.state & MERGE_STATE_MASK_ESTOPSW == 0) || (gRailData.state & MERGE_STATE_MASK_ONOFFSW  == 0) ){
+                    FanFullOff(&i2cfan);
+                }else{
+                    FanFullOn(&i2cfan);
+                }
+                
+            }//end Fan control
     }//end task loop
 
     /* Should the task implementation ever break out of the above loop

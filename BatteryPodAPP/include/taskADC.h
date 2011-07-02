@@ -6,6 +6,7 @@
 #include "fixMath.h"
 #include "mavg.h"
 #include "buzzer.h"
+#include "I2C_FanControl.h"
 
 #include <math.h>   // for pow
 

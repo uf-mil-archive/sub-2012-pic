@@ -30,8 +30,7 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
         //rail is currently on
         if (((currentState>>1)&3) == 2 && ((previousState>>1)&3) == 3){
             //turn sub off
-            RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
-            FanFullOff(&i2cfan);
+            RailControl(CONTROL_RAIL_BOTH, TURN_OFF);            
             currentState &= ~9 ;
         }//end rail on check
 	
@@ -52,7 +51,6 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
             //Turn on 16 volt rail if it is within Range
             if (temp16 >= gRailConfig.MinVoltage16 && temp16  <= gRailConfig.MaxVoltage16){
                 RailControl(CONTROL_RAIL_16, TURN_ON);
-                FanFullOn(&i2cfan);
                 currentState |= 1;	//set rail16 flag = on
                 //Turn on 32 volt rail if it is within Range
                 if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
