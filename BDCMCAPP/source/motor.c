@@ -161,7 +161,7 @@ REFDONE:
 		if(interpV > HardMaxVoltage6_26)
 			interpV = HardMaxVoltage6_26; 
 	
-        BROLMotorData.ReferenceDuty = (INT16)((interpV * MTR_MAX_DUTY) >> 16);
+        BROLMotorData.ReferenceDuty = (INT16)((interpV / BROLMotorData.VRail * MTR_MAX_DUTY) >> 16);
         
 		// Clamp the reference value between
         // the acceptable PWM range which is limited by hardware
