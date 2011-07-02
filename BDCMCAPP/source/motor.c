@@ -5,6 +5,9 @@
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
 
 MotorData BROLMotorData;
+UINT32 HardMaxVoltage6_26; // this should be inside the motor struct,
+							// but if I change it there we have to reset
+							// all the motor settings and we don't have time for that.
 
 void (*controller)(void) = NULL;
 MotorData *hMotorData = NULL;
@@ -103,7 +106,7 @@ void BrushedDCOpenLoop(void)
         // Check for 0 reference, no interpolation
         if(unsDesired == 0)
         {
-            BROLMotorData.ReferenceDuty = 0;
+            interpV = 0;
             goto REFDONE;
         }
         
@@ -116,15 +119,11 @@ void BrushedDCOpenLoop(void)
             // fractional portion.
             if(direction != 0)  // Reverse 
             {
-                BROLMotorData.ReferenceDuty = 
-                (INT16)
-                (((MTR_RTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
+				interpV = MTR_RTable[100];
             }
             else    // Forward
             {
-                BROLMotorData.ReferenceDuty =
-                (INT16)
-                (((MTR_FTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
+				interpV = MTR_FTable[100];
             }
 
             goto REFDONE;
@@ -148,10 +147,6 @@ void BrushedDCOpenLoop(void)
             // (Q6_26 / Q7_8)= QX_18*Q7_8 = QX_26
             interpV = MTR_RTable[index] +
                 (xdel0*((MTR_RTable[index+1] - MTR_RTable[index]) >> 8));
-
-            BROLMotorData.ReferenceDuty =
-                (INT16)
-                (((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
         }
         else    // Forward
         {
@@ -159,14 +154,16 @@ void BrushedDCOpenLoop(void)
             // (Q6_26 / Q7_8)= QX_18*Q7_8 = QX_26
             interpV = MTR_FTable[index] +
                 (xdel0*((MTR_FTable[index+1] - MTR_FTable[index]) >> 8));
-
-            BROLMotorData.ReferenceDuty =
-            (INT16)
-            (((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
         }
 
 REFDONE:  
-        // Clamp the reference value between
+		// Clamp interpV into the maximum motor voltage	
+		if(interpV > HardMaxVoltage6_26)
+			interpV = HardMaxVoltage6_26; 
+	
+        BROLMotorData.ReferenceDuty = (INT16)((interpV * MTR_MAX_DUTY) >> 16);
+        
+		// Clamp the reference value between
         // the acceptable PWM range which is limited by hardware
         if(BROLMotorData.ReferenceDuty > MTR_MAX_PWM_PERC)
             BROLMotorData.ReferenceDuty = MTR_MAX_PWM_PERC;
@@ -425,8 +422,10 @@ void GetMotorDataFromEROM(MotorData** motor)
                 BROLInit();     // This directly operates on the global brushed open loop variable
                 controller = &BrushedDCOpenLoop;// Set the controller callback
                 *motor = &BROLMotorData;    // Set the handle to the correct instance
-                break;
+           		HardMaxVoltage6_26 = ((UINT32)BROLMotorData.HardMaxVoltage) << 16;
+				break;
         }
+
 
         return;
     }
@@ -443,9 +442,11 @@ CONFIG_DEFAULT_MOTOR:
             16);
 
     BROLMotorData.HardMaxVoltage = MTR_DEFAULT_HMAXV;
+    HardMaxVoltage6_26 = ((UINT32)BROLMotorData.HardMaxVoltage) << 16;
     BROLMotorData.MinVoltage = MTR_DEFAULT_MINV;
     BROLMotorData.MaxCurrent = MTR_DEFAULT_MAXCURRENT;
     BROLMotorData.MaxSlew = MTR_DEFAULT_MAXSLEW;
+
 
     // The default force curves are linear
     BROLMotorData.FCoeff[1] = 1.0f;
