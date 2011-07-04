@@ -5,6 +5,9 @@
 // Minimum PWM duty cycle due to deadtime is 6%, max 94%
 
 MotorData BROLMotorData;
+UINT32 HardMaxVoltage6_26; // this should be inside the motor struct,
+							// but if I change it there we have to reset
+							// all the motor settings and we don't have time for that.
 
 void (*controller)(void) = NULL;
 MotorData *hMotorData = NULL;
@@ -103,7 +106,7 @@ void BrushedDCOpenLoop(void)
         // Check for 0 reference, no interpolation
         if(unsDesired == 0)
         {
-            BROLMotorData.ReferenceDuty = 0;
+            interpV = 0;
             goto REFDONE;
         }
         
@@ -116,15 +119,11 @@ void BrushedDCOpenLoop(void)
             // fractional portion.
             if(direction != 0)  // Reverse 
             {
-                BROLMotorData.ReferenceDuty = 
-                (INT16)
-                (((MTR_RTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
+				interpV = MTR_RTable[100];
             }
             else    // Forward
             {
-                BROLMotorData.ReferenceDuty =
-                (INT16)
-                (((MTR_FTable[100] / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
+				interpV = MTR_FTable[100];
             }
 
             goto REFDONE;
@@ -148,10 +147,6 @@ void BrushedDCOpenLoop(void)
             // (Q6_26 / Q7_8)= QX_18*Q7_8 = QX_26
             interpV = MTR_RTable[index] +
                 (xdel0*((MTR_RTable[index+1] - MTR_RTable[index]) >> 8));
-
-            BROLMotorData.ReferenceDuty =
-                (INT16)
-                (((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
         }
         else    // Forward
         {
@@ -159,14 +154,16 @@ void BrushedDCOpenLoop(void)
             // (Q6_26 / Q7_8)= QX_18*Q7_8 = QX_26
             interpV = MTR_FTable[index] +
                 (xdel0*((MTR_FTable[index+1] - MTR_FTable[index]) >> 8));
-
-            BROLMotorData.ReferenceDuty =
-            (INT16)
-            (((interpV / BROLMotorData.VRail) * MTR_MAX_DUTY) >> 16);
         }
 
 REFDONE:  
-        // Clamp the reference value between
+		// Clamp interpV into the maximum motor voltage	
+		if(interpV > HardMaxVoltage6_26)
+			interpV = HardMaxVoltage6_26; 
+	
+        BROLMotorData.ReferenceDuty = (INT16)((interpV / BROLMotorData.VRail * MTR_MAX_DUTY) >> 16);
+        
+		// Clamp the reference value between
         // the acceptable PWM range which is limited by hardware
         if(BROLMotorData.ReferenceDuty > MTR_MAX_PWM_PERC)
             BROLMotorData.ReferenceDuty = MTR_MAX_PWM_PERC;
@@ -302,7 +299,6 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
             LostSubscribers();  // Turn off the publishing
         }
     }
-
     // This is an undervolt condition, override the desired speed
     if(hMotorData->MinVoltage > hMotorData->VRail)
     {
@@ -317,6 +313,13 @@ void __attribute__((__interrupt__, auto_psv)) _MPWM1Interrupt( void )
         hMotorData->Flags &= ~MTR_FLAGMASK_UNDERVOLTAGE;
     }   
 
+    // In ESTOP - this one has highest priority
+    if(hMotorData->Flags & MTR_FLAGMASK_ESTOP)
+    {
+        hMotorData->ReferenceInput = 0;
+        hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
+    }
+
     // Call the controller
     controller();
 }
@@ -330,6 +333,14 @@ inline void FeedHeartbeat(void)
 inline void ReferenceChanged(void)
 {
     hMotorData->Flags |= MTR_FLAGMASK_REFCHANGED;
+}
+
+inline void ESTOPChanged(INT16 state)
+{
+    if(state)
+        hMotorData->Flags |= MTR_FLAGMASK_ESTOP;
+    else
+        hMotorData->Flags &= ~MTR_FLAGMASK_ESTOP;
 }
 
 /*********************************************************************
@@ -411,8 +422,10 @@ void GetMotorDataFromEROM(MotorData** motor)
                 BROLInit();     // This directly operates on the global brushed open loop variable
                 controller = &BrushedDCOpenLoop;// Set the controller callback
                 *motor = &BROLMotorData;    // Set the handle to the correct instance
-                break;
+           		HardMaxVoltage6_26 = ((UINT32)BROLMotorData.HardMaxVoltage) << 16;
+				break;
         }
+
 
         return;
     }
@@ -429,9 +442,11 @@ CONFIG_DEFAULT_MOTOR:
             16);
 
     BROLMotorData.HardMaxVoltage = MTR_DEFAULT_HMAXV;
+    HardMaxVoltage6_26 = ((UINT32)BROLMotorData.HardMaxVoltage) << 16;
     BROLMotorData.MinVoltage = MTR_DEFAULT_MINV;
     BROLMotorData.MaxCurrent = MTR_DEFAULT_MAXCURRENT;
     BROLMotorData.MaxSlew = MTR_DEFAULT_MAXSLEW;
+
 
     // The default force curves are linear
     BROLMotorData.FCoeff[1] = 1.0f;
@@ -452,6 +467,7 @@ void BROLInit(void)
 {
     INT16 i;
     float hMax;
+	float i_pow;
 
     // HardMax is a Q6_10 in the structure, but we use Q6_26 in the
     // tables. This is for precision when dividing later.
@@ -459,28 +475,28 @@ void BROLInit(void)
 
     MTR_FTable[0] = 0;
     // Build the forward table
-    for(i = 1; i <= 100; i++)
+    for(i = 1, i_pow=1.0/100.0; i <= 100; i++, i_pow=i/100.0)
     {
         MTR_FTable[i] = 
-               (Q6_26)(hMax*(BROLMotorData.FCoeff[5]*pow(i,5) +
-                BROLMotorData.FCoeff[4]*pow(i,4) +
-                BROLMotorData.FCoeff[3]*pow(i,3) +
-                BROLMotorData.FCoeff[2]*pow(i,2) +
-                BROLMotorData.FCoeff[1]*i +
-                BROLMotorData.FCoeff[0]) / 100.0);
+               (Q6_26)(hMax*(BROLMotorData.FCoeff[5]*pow(i_pow,5) +
+                BROLMotorData.FCoeff[4]*pow(i_pow,4) +
+                BROLMotorData.FCoeff[3]*pow(i_pow,3) +
+                BROLMotorData.FCoeff[2]*pow(i_pow,2) +
+                BROLMotorData.FCoeff[1]*i_pow +
+                BROLMotorData.FCoeff[0]));
     }
 
     MTR_RTable[0] = 0;
     // Build the reverse table
-    for(i = 1; i <= 100; i++)
+    for(i = 1, i_pow=1.0/100.0; i <= 100; i++,i_pow=i/100.0)
     {
         MTR_RTable[i] = 
-                (Q6_26)(hMax*(BROLMotorData.RCoeff[5]*pow(i,5) +
-                BROLMotorData.RCoeff[4]*pow(i,4) +
-                BROLMotorData.RCoeff[3]*pow(i,3) +
-                BROLMotorData.RCoeff[2]*pow(i,2) +
-                BROLMotorData.RCoeff[1]*i +
-                BROLMotorData.RCoeff[0]) / 100.0);
+                (Q6_26)(hMax*(BROLMotorData.RCoeff[5]*pow(i_pow,5) +
+                BROLMotorData.RCoeff[4]*pow(i_pow,4) +
+                BROLMotorData.RCoeff[3]*pow(i_pow,3) +
+                BROLMotorData.RCoeff[2]*pow(i_pow,2) +
+                BROLMotorData.RCoeff[1]*i_pow +
+                BROLMotorData.RCoeff[0]));
     }
 }
 

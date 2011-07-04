@@ -165,6 +165,9 @@
 	_FWDT(FWDTEN_OFF)
 	_FICD(ICS_PGD3 & JTAGEN_OFF)
 	_FPOR(PWMPIN_ON & HPOL_ON & LPOL_ON & ALTI2C_OFF) 
+#else if defined MERGE
+	// Merge bits go here
+	#error No config for merge yet
 #else
 	#error Main.c missing config fuses
 #endif

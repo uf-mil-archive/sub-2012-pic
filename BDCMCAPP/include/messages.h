@@ -41,7 +41,7 @@
 #define MSG_FEED_HEARTBEAT_LENGTH   7   // Length of the packet including 2 byte checksum
 
 #define MSG_ESTOP           101     // ESTOP Packet
-#define MSG_ESTOP_LENGTH    7       // Length of the packet including 2 byte checksum
+#define MSG_ESTOP_LENGTH    8       // Length of the packet including 2 byte checksum
 
 #define MSG_RESET           127     // Reset Packet
 #define MSG_RESET_LENGTH    7       // Length of the packet including 2 byte checksum

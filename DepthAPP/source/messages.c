@@ -280,6 +280,9 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
         // Insert the tick count
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
 
+		// Insert the flags
+		gOutgoingBuffers.scratchBuf[tmplength++] = gSensorData.Flags;
+
         // Insert the depth
         AddBEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.Depth, &tmplength);
 
@@ -304,6 +307,9 @@ INT16 BuildOutgoingPacket(BYTE** pkt, INT16 tickCount)
 
         // Insert the tick count
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], tickCount, &tmplength);
+
+		// Insert the flags
+		gOutgoingBuffers.scratchBuf[tmplength++] = gSensorData.Flags;
 
         // Insert the depth
         AddLEIntToPacket(&gOutgoingBuffers.scratchBuf[tmplength], gSensorData.Depth, &tmplength);

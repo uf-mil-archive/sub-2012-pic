@@ -67,6 +67,7 @@
 #define MTR_FLAGMASK_UNDERVOLTAGE   (1 << 4)
 #define MTR_FLAGMASK_OVERCURRENT    (1 << 5)
 #define MTR_FLAGMASK_REFCHANGED     (1 << 6)
+#define MTR_FLAGMASK_ESTOP          (1 << 7)
 
 typedef struct MotorDataDefinition
 {
@@ -96,6 +97,7 @@ void ChargeBootStraps(void);
 // These functions require a valid hMotorData structure before calling!
 inline void FeedHeartbeat(void);
 inline void ReferenceChanged(void);
+inline void ESTOPChanged(INT16 state);
 void SaveMotorConfig(MotorData* mCfg);
 
 #endif // MOTOR_H
