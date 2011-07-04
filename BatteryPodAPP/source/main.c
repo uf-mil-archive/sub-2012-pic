@@ -65,6 +65,7 @@ int main(void)
     buzzerInit();
     I2Cinit(&i2cfan);
 
+//    FanFullOn(&i2cfan);
     FanFullOff(&i2cfan);
 
 //	DAC_SetOutput(2.5, DAC_RAIL_16);	
@@ -76,8 +77,6 @@ int main(void)
 
     LED_TRIS = OUTPUT_PIN;
     LED = LED_OFF;
-
-   // buzz(LOWPOWER_SONG);
 
 //	EROM_Clear();  // Erases the entire EEPROM
 

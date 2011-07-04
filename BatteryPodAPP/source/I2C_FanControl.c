@@ -181,6 +181,7 @@ void I2Cinit(I2C_DRV *i2c)
     i2c->oData = &fanData;
 
     I2C1CONbits.A10M=0;     //Slave device has a 7 bit Address
+//    I2C1CONbits.I2CSIDL=0;   // Continue module operation in Idle mode
     I2C1CONbits.SCLREL=1;   //Release Clock
     I2C1BRG=300;            //set I2C BAUD Rate to roughly 100kHz
 
@@ -188,6 +189,7 @@ void I2Cinit(I2C_DRV *i2c)
     //I2C1ADD=FANCNTRL_ADDR;  //Set the Slave Address
     I2C1MSK=0;              //Disable Adress Masking
 
+//    IPC4bits.SI2C1IP = 7;   // Set interrupt priority to 6
     I2C1CONbits.I2CEN=1;    //enable the i2C module
     IEC1bits.MI2C1IE = 1;   //Enable I2C1 Master Event Interrupts
     IFS1bits.MI2C1IF = 0;   //Clear I2C1 Interupt Flag

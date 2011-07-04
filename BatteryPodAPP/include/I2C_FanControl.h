@@ -70,6 +70,7 @@ typedef struct {
 
 extern I2C_DRV i2cfan;
 extern I2C_FAN_DATA fanData;
+extern unsigned int jDone;
 
 
 void __attribute__((interrupt, no_auto_psv)) _MI2C1Interrupt(void);
