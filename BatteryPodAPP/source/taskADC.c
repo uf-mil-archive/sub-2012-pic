@@ -359,13 +359,23 @@ void taskADC(void* pvParameter)
             */
             }
 
-        //Control Fans
-                if ( (gRailData.state & MERGE_STATE_MASK_ONOFFSW) == 0)
-                {
+        /*****************/
+	/** Fan Control **/
+	/*****************/
+
+            //check for a state change on teh rails so I2C isn't writing 50 times a sec
+            if ( (PreviousState16 != (gRailData.state & MERGE_STATE_MASK_RAIL16)) || (PreviousState32 != (gRailData.state & MERGE_STATE_MASK_RAIL32)) )
+            {
+                //if one of the rails changed check to see if the
+                PreviousState16 = (gRailData.state & MERGE_STATE_MASK_RAIL16);
+                PreviousState32 = (gRailData.state & MERGE_STATE_MASK_RAIL32);
+                if ( (gRailData.state & MERGE_STATE_MASK_ONOFFSW  == 0) ){
                     FanFullOff(&i2cfan);
                 }else{
                     FanFullOn(&i2cfan);
                 }
+            }//end Fan control
+
     }//end task loop
 
     /* Should the task implementation ever break out of the above loop
