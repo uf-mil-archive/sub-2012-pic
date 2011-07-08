@@ -13,6 +13,7 @@
 #include "buzzer.h"
 #include "taskADC.h"
 #include "fixMath.h"
+#include "I2C_FanControl.h"
 
 void hallSwInit();      // Initialize the change notification interupt
 void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void);

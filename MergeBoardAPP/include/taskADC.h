@@ -45,15 +45,21 @@
 
 // Paul - these should be the fractional (fixed point) representations of you constants
 #define DEFAULT_MAX_CURRENT16   ((Q7_9)(35<<9))     //25 AMPS in Q7_9
-#define DEFAULT_MAX_VOLTAGE16   ((Q6_10)(17 << 10)) // 17 volts in Q6_10
-#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(13.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+//#define DEFAULT_MAX_VOLTAGE16   ((Q6_10)(17 << 10)) // 17 volts in Q6_10
+//#define DEFAULT_MIN_VOLTAGE16   ((Q6_10)(13.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
 #define DEFAULT_WARN_VOLTAGE16  ((Q6_10)(14.000*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+
+#define DEFAULT_MAX_VOLTAGE16   (Q6_10)(50<<10)
+#define DEFAULT_MIN_VOLTAGE16   (Q6_10)(1<<10)
 
 
 #define DEFAULT_MAX_CURRENT32   ((Q6_10)(45 << 10))  // 40 AMPS in Q6_10
-#define DEFAULT_MAX_VOLTAGE32   ((Q6_10)(34 << 10)) // 17 volts in Q6_10
+///#define DEFAULT_MAX_VOLTAGE32   ((Q6_10)(34 << 10)) // 17 volts in Q6_10
 #define DEFAULT_MIN_VOLTAGE32   ((Q6_10)(26.500*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
-#define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(27.300*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+//#define DEFAULT_WARN_VOLTAGE32  ((Q6_10)(27.300*pow(2,10))) // 13.12345 in Q6_10. If you want a decimal, you have to do it like this
+
+#define DEFAULT_MAX_VOLTAGE32   (Q6_10)(50<<10)
+#define DEFAULT_MIN_VOLTAGE32   (Q6_10)(1<<10)
 
 
 // FreeRTOS defines

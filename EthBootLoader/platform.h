@@ -16,8 +16,8 @@
 //////////////////////////////////////////////////////////////////////////
 //		Select the target platform
 //////////////////////////////////////////////////////////////////////////
-#define BDCMC
-//#define MERGE
+//#define BDCMC
+#define MERGE
 
 ///////////////////////////////////////////////////////////////////////////
 //		Specify the debug code to be included
@@ -172,7 +172,7 @@
 	#define XTAL_FREQ 		10000000
 	#define PLLMODE			8
 	
-	#define AD1PCFGL_Def	0xFFF0	// Default Analog pin configuration
+	#define AD1PCFGL_Def	0xFFFF	// Default Analog pin configuration
 	
 	#define CONSOLE_BAUDRATE	115200
 	
@@ -182,46 +182,53 @@
 	// Map RP's properly
 	#define USE_IO_MAPPING	
 	// UART RP
-	#define UART2_RX_RP			21
-	#define UART2_TX_RPR		RPOR3bits.RP7R	
+	#define UART2_RX_RP			22
+	#define UART2_TX_RPR		RPOR11bits.RP23R	
 	// ENCSPI RP
-	#define SPI2_SDI_RP			24
-	#define SPI2_CLK_RPR		RPOR11bits.RP22R
-	#define SPI2_SDO_RPR		RPOR11bits.RP23R
+	#define SPI2_SDI_RP			18
+	#define SPI2_CLK_RPR		RPOR8bits.RP16R
+	#define SPI2_SDO_RPR		RPOR8bits.RP17R
 
 	///////////////////////////////////////////////////////////////////////////
 	//		Default I/O configuration
 	///////////////////////////////////////////////////////////////////////////
-	#define	PA_DefData		0b0000011100011000
-	#define	PA_DefTRIS		0b1111100011100111
-		//	10		LED
-		//	9		EROM_WP
-		//	8		DAC_CS
-		//	4		EROM_CS
-		//	3		DA_LD
-	
+	#define	PA_DefData		0b0000000000001000
+	#define	PA_DefTRIS		0b1111110111100101
+		//  9	RAIL_CNTRL_32
+		//  4	DAC_CS_32
+		//  3	NETWORK_HUB_CNTRL
+		//  1	LED
 
-	#define	PB_DefData		0b0000001100000000
-	#define	PB_DefTRIS		0b0000000001111111
-		//	15	PWM		Turn this off!
-		//	14	PWM		Turn this off!
-		//	13	PWM		Turn this off!
-		//	12	PWM		Turn this off!
-		//	11	PWM		Turn this off!
-		//	10	PWM		Turn this off!
-		//	9	ENC_CS	
-		//	8	ENC_RESET
-		//	7	CONSOLE TX
-		//	4	EROMSPI_SDI	
+	#define	PB_DefData		0b0000010001101100
+	#define	PB_DefTRIS		0b1101101110010011
+		//	15	KILLSW
+		//	14  ONOFFSW
+		//  13	BUZZER
+		//  11  FAULT32
+		//  10  ROM_CS
+		//	9	I2C_DAT
+		//	8	I2C_CLK
+		//	7	FAULT16
+		//  6	DAC_CS_16
+		//	5	ADC_CS_32
+		//	4	ENCD_INT
+		//	3	ENC_CS
+		//	2	ENC_RESET
 
-	#define	PC_DefData		0b0000000000000000
-	#define	PC_DefTRIS		0b1111111100100111	
-		//	8		ENCSPI_SDI	
-		//  7		ENCSPI_SDO	
-		//  6 		ENCSPI_CLK	
-		//	5		CONSOLE RX
-		// 	4		EROMSPI_SDO
-		//	3		EROMSPI_CLK
+	#define	PC_DefData		0b0000001000000000
+	#define	PC_DefTRIS		0b1111110010001100
+
+
+		//	9	ADC_CS_16
+		//	8	RAIL_CNTRL_16
+		//	7	USB_RX
+		//	6	USB_TX
+		//	5	SPI_MOSI
+		//	4	SPI_SCK
+		//	3	SPI_MISO
+		//	2	ENC_SDO
+		//	1	ENC_SDI
+		//	0	ENC_SCK
 
 	///////////////////////////////////////////////////////////////////////////
 	// define ENC SPI bus low and high speed prescalars
@@ -229,13 +236,13 @@
 	#define ENC_SPI_PRESCALE_PRI 2  	// Primary Scaler = 1:2
 	#define ENC_SPI_PRESCALE_SEC 7		// Secondary Scaler = 1:1
 	#define ENC_SPI_PORT	2
-	#define	ENC_CS			LATBbits.LATB9	// ENC Chip Select Active low
+	#define	ENC_CS			LATBbits.LATB3	// ENC Chip Select Active low
 
 	///////////////////////////////////////////////////////////////////////////
 	//		Status LEDs
 	///////////////////////////////////////////////////////////////////////////
-	#define LED_Status			LATAbits.LATA10
-	#define LED_Status_TRIS		TRISAbits.TRISA10
+	#define LED_Status			LATAbits.LATA1
+	#define LED_Status_TRIS		TRISAbits.TRISA1
 	#define LED0 				LED_Status
 	#define LED0_TRIS 			LED_Status_TRIS
 
@@ -254,19 +261,16 @@
         // share the same SPI bus.
 
         // The EEPROM digital pins
-        #define EROM_CS_TRIS    TRISAbits.TRISA4    // The EEPROM Chip Select TRIS
-        #define EROM_CS_IO	LATAbits.LATA4      // The EEPROM Chip Select IO
-
-        #define EROM_WP_TRIS	TRISAbits.TRISA9    // The EEPROM Write Protect TRIS
-        #define EROM_WP_IO	LATAbits.LATA9      // The EEPROM Write Protect IO
+        #define EROM_CS_TRIS    TRISBbits.TRISB10    // The EEPROM Chip Select TRIS
+        #define EROM_CS_IO	LATBbits.LATB10      // The EEPROM Chip Select IO
 
         #define EROM_SPINUM	1   // You must define this number and the proper
                                     // SDI PPS register below
 
         // Define PPS SPI Pins
-        #define EROM_SDO_PIN    RPOR10bits.RP20R    // EEPROM SPI Data Out pin RP20
-        #define EROM_SCK_PIN    RPOR9bits.RP19R     // EEPROM SPI Clock pin RP19
-        #define EROM_SDI_PIN	4                   // EEPROM SPI Data In pin RP4
+        #define EROM_SDO_PIN    RPOR10bits.RP21R    // EEPROM SPI Data Out pin RP20
+        #define EROM_SCK_PIN    RPOR10bits.RP20R      // EEPROM SPI Clock pin RP19
+        #define EROM_SDI_PIN	19                   // EEPROM SPI Data In pin RP4
         #define EROM_SDI_PINREG RPINR20bits.SDI1R   // The register where SDI
                                                     // pin is assigned
 

@@ -23,14 +23,15 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
     previousState = gRailData.state & 15;
 
     //handle active low Hall Switches here
-    currentState = ( (~(KILLSW<<2)&4) | (~(ONOFFSW<<1)&2) | (gRailData.state&9) )&15;
+    currentState = ( ((KILLSW<<2)&4) | (~(ONOFFSW<<1)&2) | (gRailData.state&9) )&15;
     
     if ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0){	   //if rail is currently on
 
         //rail is currently on
         if (((currentState>>1)&3) == 2 && ((previousState>>1)&3) == 3){
             //turn sub off
-            RailControl(CONTROL_RAIL_BOTH, TURN_OFF);            
+            RailControl(CONTROL_RAIL_BOTH, TURN_OFF);
+            FanFullOff(&i2cfan);
             currentState &= ~9 ;
         }//end rail on check
 	
@@ -51,10 +52,12 @@ void __attribute__ ((__interrupt__, auto_psv)) _CNInterrupt(void)
             //Turn on 16 volt rail if it is within Range
             if (temp16 >= gRailConfig.MinVoltage16 && temp16  <= gRailConfig.MaxVoltage16){
                 RailControl(CONTROL_RAIL_16, TURN_ON);
+                FanFullOn(&i2cfan);
                 currentState |= 1;	//set rail16 flag = on
                 //Turn on 32 volt rail if it is within Range
                 if (temp32 >= gRailConfig.MinVoltage32 && temp32 <= gRailConfig.MaxVoltage32){
                     RailControl(CONTROL_RAIL_32, TURN_ON);
+                    FanFullOn(&i2cfan);
                     currentState |= 8;	//set rail32 flag = on
                 }else{
                     // 32volt rail has bad power
@@ -91,7 +94,7 @@ void hallSwInit(void)
     ONOFFSW_CN   = CN_ENABLE;
 
     gRailData.state = 0 ;
-    gRailData.state = ( (~(KILLSW << 2)&4) | (~(ONOFFSW << 1)&2) )&15 ;
+    gRailData.state = ( ((KILLSW << 2)&4) | (~(ONOFFSW << 1)&2) )&15 ;
     
     INTCON1bits.NSTDIS = 1;     // disable Interupt nesting
     SRbits.IPL = 0;             //  CPU priority level is 8

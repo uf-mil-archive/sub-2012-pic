@@ -167,6 +167,7 @@ void xADCTaskInit(void)
 {
 	UINT16 i = 0;
 
+        
     // Allocate the mutex used for SPI access control
     hCommonSPIMutex = xSemaphoreCreateMutex();
 
@@ -220,8 +221,6 @@ void taskADC(void* pvParameter)
 	UINT16 overCurrentDelayCntr_Rail32 = 0;
 	UINT16 cutoffLowVoltageCntr_Rail16 = 0;
 	UINT16 cutoffLowVoltageCntr_Rail32 = 0;
-	UINT16 PreviousState16 = (gRailData.state & MERGE_STATE_MASK_RAIL16 );
-        UINT16 PreviousState32 = (gRailData.state & MERGE_STATE_MASK_RAIL32 );
 
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
@@ -342,43 +341,16 @@ void taskADC(void* pvParameter)
                 }
             }else{
                 overCurrentDelayCntr_Rail32 = 0;
-            /* NO Need to turn Battery Pods back on
-                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) > 0) &&
-                     ((gRailData.state & MERGE_STATE_MASK_RAIL32) == 0) &&
-                      (highestVoltage32 > gRailConfig.MinVoltage32) )
-                {
-                    if (cutonCntr_Rail32 >= CUTON_AFTER_LOW_VOLTAGE32_DELAY){
-                        RailControl(CONTROL_RAIL_32, TURN_ON);
-                        cutonCntr_Rail32=0;
-                    }else{
-                        cutonCntr_Rail32++;
-                    }
-                }else{
-                    cutonCntr_Rail32 = 0;
-                }
-            */
             }
 
-    /*****************/
+        /*****************/
 	/** Fan Control **/
 	/*****************/
-/*
-            //check for a state change on teh rails so I2C isn't writing 50 times a sec
-            if ( (PreviousState16 != (gRailData.state & MERGE_STATE_MASK_RAIL16)) || (PreviousState32 != (gRailData.state & MERGE_STATE_MASK_RAIL32)) )
-            {
-                //if one of the rails changed check to see if the
-                PreviousState16 = (gRailData.state & MERGE_STATE_MASK_RAIL16);
-                PreviousState32 = (gRailData.state & MERGE_STATE_MASK_RAIL32);
-                if ( (gRailData.state & MERGE_STATE_MASK_ONOFFSW  == 0) ){
-					I2Cinit(&i2cfan);
-                    FanFullOff(&i2cfan);
-                }else{
-                //i2cfan.oData = &fanData;    
-	    			I2Cinit(&i2cfan);
-					FanFullOn(&i2cfan);
-                }
-            }//end Fan control
-*/
+
+        if (i2cfan.cmd != I2C_IDLE && i2cfan.cmd != I2C_ERR){
+            I2Cdrv(&i2cfan);
+        }
+
     }//end task loop
 
     /* Should the task implementation ever break out of the above loop

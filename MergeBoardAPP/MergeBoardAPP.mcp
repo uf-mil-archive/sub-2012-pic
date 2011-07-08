@@ -102,6 +102,7 @@ file_074=.
 file_075=.
 file_076=.
 file_077=.
+file_078=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -181,6 +182,7 @@ file_074=no
 file_075=no
 file_076=no
 file_077=no
+file_078=no
 [OTHER_FILES]
 file_000=no
 file_001=no
@@ -260,6 +262,7 @@ file_074=no
 file_075=no
 file_076=no
 file_077=no
+file_078=no
 [FILE_INFO]
 file_000=source\blockingDelay.c
 file_001=source\CustomHTTPApp.c
@@ -339,6 +342,7 @@ file_074=include\HallSwitches.h
 file_075=include\buzzer.h
 file_076=include\OverCurrentProtection.h
 file_077=include\I2C_FanControl.h
+file_078=p33FJ128MC804_ETHAPP.gld
 [SUITE_INFO]
 suite_guid={479DDE59-4D56-455E-855E-FFF59A3DB57E}
 suite_state=

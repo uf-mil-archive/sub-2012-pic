@@ -192,6 +192,15 @@ void ParseNewPacket(BYTE rBuf[], INT16 length, INT16 transport)
         }
         return;
     }
+	else if(rBuf[4] == MSG_RESET)
+    {
+        if(length == MSG_RESET_LENGTH)
+        {
+            // Reset the device, this is most likely to get into bootloader mode
+            asm("reset");
+        }
+        return;
+    }
 
     // Check if type code is merge board specific
 

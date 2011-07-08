@@ -39,25 +39,25 @@ void FanFullOn(I2C_DRV *i2cDRV){
         i2cDRV->oData->reg = FANCON;
         i2cDRV->oData->buff = 0b000010;    // FULLON, 5 Volts, prescaler = 4
 
-        while(i2cDRV->cmd!=I2C_IDLE && i2cDRV->cmd != I2C_ERR){
-            I2Cdrv(i2cDRV);
-        }
+        //while(i2cDRV->cmd!=I2C_IDLE && i2cDRV->cmd != I2C_ERR){
+        //    I2Cdrv(i2cDRV);
+        //}
 
 }
 
 
 void FanFullOff(I2C_DRV *i2c){
 
-        //set fan to FULL ON
+        //set fan to FULL OFF
         i2c->cmd = I2C_WRITE;
         i2c->oData->addr = FANCNTRL_ADDR;
         i2c->oData->reg = FANCON;
         i2c->oData->buff = 0b010010;    // FULLOFF, 5 Volts, prescaler = 4
 
-        while(i2c->cmd!=I2C_IDLE){
-            I2Cdrv(i2c);
-            if (i2c->cmd==I2C_ERR) break;
-        }
+        //while(i2c->cmd!=I2C_IDLE){
+        //    I2Cdrv(i2c);
+        //    if (i2c->cmd==I2C_ERR) break;
+        //}
        
         return;
 }

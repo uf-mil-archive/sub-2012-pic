@@ -214,9 +214,6 @@ void taskADC(void* pvParameter)
 	UINT16 cutoffLowVoltageCntr_Rail16 = 0;
 	UINT16 cutoffLowVoltageCntr_Rail32 = 0;
 	UINT16 cutonCntr_Rail32 = 0;
-       	UINT16 PreviousState16 = (gRailData.state & MERGE_STATE_MASK_RAIL16 );
-        UINT16 PreviousState32 = (gRailData.state & MERGE_STATE_MASK_RAIL32 );
-
 
     /*  Initialize the frequency counter. Using vTaskDelayUntil guarantees
         a constant publishing frequency */
@@ -264,7 +261,7 @@ void taskADC(void* pvParameter)
             /***************************/
             /** Check for low voltage **/
 	    /***************************/
-		
+	/*
             // Find max Supply Voltages for 16 and 32 volt rail and store to a temp var
             highestVoltage16 = gRailData.VRail16[1];
             highestVoltage16 = (gRailData.VRail16[2] > highestVoltage16) ? gRailData.VRail16[2] : highestVoltage16;
@@ -273,6 +270,7 @@ void taskADC(void* pvParameter)
             highestVoltage32 = gRailData.VRail32[1];
             highestVoltage32 = (gRailData.VRail32[2] > highestVoltage32) ? gRailData.VRail32[2] : highestVoltage32;
             highestVoltage32 = (gRailData.VRail32[3] > highestVoltage32) ? gRailData.VRail32[3] : highestVoltage32;
+
 
             if ( (((gRailData.state)&1) == 1) && (highestVoltage16 <= gRailConfig.MinVoltage16) ){
                 
@@ -312,7 +310,7 @@ void taskADC(void* pvParameter)
 					warningBuzzerDelay = 0;
 			}
          
-
+*/
 
 	/****************************/
 	/** Check for over-current **/
@@ -338,34 +336,27 @@ void taskADC(void* pvParameter)
                 }
             }else{
                 overCurrentDelayCntr_Rail32 = 0;
-                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == 1) && 
-					 ((gRailData.state & MERGE_STATE_MASK_RAIL32) == 0) && 
-					  (highestVoltage32 > gRailConfig.MinVoltage32) )
-				{				 	
-					if (cutonCntr_Rail32 >= CUTON_AFTER_LOW_VOLTAGE32_DELAY){
-						RailControl(CONTROL_RAIL_32, TURN_ON);
-						cutonCntr_Rail32=0;
-					}else{
-						cutonCntr_Rail32++;
-					}
-				}else{
-					cutonCntr_Rail32 = 0;
-				}
+                if ( ((gRailData.state & MERGE_STATE_MASK_RAIL16) == 1) && ((gRailData.state & MERGE_STATE_MASK_RAIL32) == 0))
+		{				 	
+                    if (cutonCntr_Rail32 >= CUTON_AFTER_LOW_VOLTAGE32_DELAY){
+                            RailControl(CONTROL_RAIL_32, TURN_ON);
+                            cutonCntr_Rail32=0;
+                    }else{
+                            cutonCntr_Rail32++;
+                    }
+                }else{
+                    cutonCntr_Rail32 = 0;
+		}
             }
 
-            //Control Fans
-            if ( (PreviousState16 != gRailData.state & MERGE_STATE_MASK_RAIL16) || (PreviousState32 != gRailData.state & MERGE_STATE_MASK_RAIL32) )
-            {
-                PreviousState16 = (gRailData.state & MERGE_STATE_MASK_RAIL16);
-                PreviousState32 = (gRailData.state & MERGE_STATE_MASK_RAIL16);
-                if ( (gRailData.state & MERGE_STATE_MASK_ESTOPSW == 0) || (gRailData.state & MERGE_STATE_MASK_ONOFFSW  == 0) ){
-                    FanFullOff(&i2cfan);
-                }else{
-                    FanFullOn(&i2cfan);
-                }
+        /*****************/
+	/** Fan Control **/
+	/*****************/
 
-            }//end Fan control
-    }//end task
+        if (i2cfan.cmd != I2C_IDLE && i2cfan.cmd != I2C_ERR){
+            I2Cdrv(&i2cfan);
+        }
+  }//end task
 
     /* Should the task implementation ever break out of the above loop
     then the task must be deleted before reaching the end of this function.

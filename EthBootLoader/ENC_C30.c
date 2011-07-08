@@ -165,9 +165,13 @@
 	_FWDT(FWDTEN_OFF)
 	_FICD(ICS_PGD3 & JTAGEN_OFF)
 	_FPOR(PWMPIN_ON & HPOL_ON & LPOL_ON & ALTI2C_OFF) 
-#else if defined MERGE
-	// Merge bits go here
-	#error No config for merge yet
+#elif defined MERGE
+	// Configuration Bits
+	_FOSCSEL(IESO_OFF & FNOSC_FRC)
+	_FOSC(FCKSM_CSECMD & OSCIOFNC_OFF & POSCMD_EC)
+	_FWDT(FWDTEN_OFF)
+	_FICD(JTAGEN_OFF)
+	_FPOR(PWMPIN_ON & HPOL_ON & LPOL_ON & ALTI2C_OFF)
 #else
 	#error Main.c missing config fuses
 #endif
@@ -190,9 +194,13 @@
 ////////////////////////////////////////////////////////////
 // 		Setup the User's Application Jump Vector Table
 ///////////////////////////////////////////////////////////////////////////
+#ifndef MERGE
 BYTE MAC[] __attribute__((space(prog))) __attribute__ ((address(P_MAC))) = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
 IP_ADDR Def_IP __attribute__ ((space(prog))) __attribute__ ((address(P_Def_IP))) = {192,168,1,200};
-
+#else
+BYTE MAC[] __attribute__((space(prog))) __attribute__ ((address(P_MAC))) = {0x00, 0x04, 0xA3, 0x00, 0x44, 0xFA};
+IP_ADDR Def_IP __attribute__ ((space(prog))) __attribute__ ((address(P_Def_IP))) = {192,168,1,60};
+#endif
 
 ///////////////////////////////////////////////////////////////////////////
 // Shadow RAM Area used to build the page contents to be written to program
