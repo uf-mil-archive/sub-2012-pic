@@ -1,0 +1,58 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\ActuatorAPP\obj\I2C_Control.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\I2C_Control.c|source\main.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File001]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\ActuatorAPP\obj\main.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128MC802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\I2C_Control.c|source\main.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -DMPLAB_DSPIC_PORT -mlarge-code -mlarge-data -O1 -msmart-io=2
+TraceCmdString=
+DebugOptions=
+[File002]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\ActuatorAPP\ActuatorAPP.cof
+Folder=Output
+DeviceName=dsPIC33FJ128MC802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\I2C_Control.c|source\main.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=8094 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[File003]
+Location=C:\Users\Paul\Desktop\Repositories\subjugator_pic\ActuatorAPP\ActuatorAPP.hex
+Folder=Output
+DeviceName=dsPIC33FJ128MC802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)|./obj||$(AINDIR)||$(INCDIR)|./include;../Microchip/Include;../FreeRTOS\Source\portable\MPLAB\PIC24_dsPIC;../FreeRTOS/Source/include||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|source\I2C_Control.c|source\main.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=8094 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[TOOL_LOC_STAMPS]
+tool_loc{069BD372-6CA0-40D4-BF2F-5DC806D05083}=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-gcc.exe
+tool_loc{433C3D55-811D-409D-A6BF-159CF9355B42}=C:\Program Files (x86)\Microchip\MPLAB C30\bin\pic30-ld.exe
