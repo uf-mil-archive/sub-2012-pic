@@ -5,6 +5,31 @@
 #include "HardwareProfile.h"
 #include "cheesyUART.h"
 
+
+#define OFF     0
+#define ON      1
+#define DISABLE 2
+
+#define BALLDROPPER     CTRL1
+#define SHOOTER_LEFT    CTRL2
+#define SHOOTER_RIGHT   CTRL3
+#define GRABBER_LEFT    CTRL4
+#define GRABBER_RIGHT   CTRL5
+
+#define BALLDROP_TIMEOUT 5      //in seconds
+#define SHOOTER_TIMEOUT 5
+#define GRABBER_TIMEOUT 5 
+
+#define BALLDROP_DISABLE_TIMEOUT 5      //in seconds
+#define SHOOTER_DISABLE_TIMEOUT 5      //in seconds
+#define GRABBER_DISABLE_TIMEOUT 5      //in seconds
+
+#define BALLDROPPER_MASK    (1<<0)
+#define SHOOTER_LEFT_MASK   (1<<1)
+#define SHOOTER_RIGHT_MASK  (1<<2)
+#define GRABBER_LEFT_MASK   (1<<3)
+#define GRABBER_RIGHT_MASK  (1<<4)
+
 // Configuration Bits
 _FOSCSEL(IESO_OFF & FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_ON & POSCMD_EC)
@@ -23,7 +48,9 @@ void timerInit(void);
 /**********************/
 /*  Global Variables  */
 /**********************/
+BYTE actuators;
 BYTE timerFlag;
+
 
 // C30 Exception Handlers
 // If your code gets here, you either tried to read or write
@@ -54,12 +81,159 @@ int main(void)
 
     LED = LED_OFF;              // initial state of debug LED is off
 
+    // Sates for Actuators
+   
+    BYTE ballDropState      = OFF;
+    BYTE shooterLeftState   = OFF;
+    BYTE shooterRightState  = OFF;
+    BYTE grabberLeftState   = OFF;
+    BYTE grabberRightState  = OFF;
+
+    int ballDropOnTimer = 0;
+    int ballDropDisableTimer = 0;
+    int shooterLeftOnTimer = 0;
+    int shooterLeftDisableTimer = 0;
+    int shooterRightOnTimer = 0;
+    int shooterRightDisableTimer = 0;
+    int grabberLeftOnTimer = 0;
+    int grabberLeftDisableTimer = 0;
+    int grabberRightOnTimer = 0;
+    int grabberRightDisableTimer = 0;
+
     /*LOOP*/
     for(;;){
      
     if (timerFlag) {
         timerFlag = 0;
         UARTSendChar((char)LIMITSW);
+
+        //ball Droper timeout delays
+        if (ballDropState == ON){
+            ballDropOnTimer++;
+        }else{
+            ballDropOnTimer = 0;
+        }
+
+        if(ballDropState == DISABLE) {
+            ballDropDisableTimer++;
+        }else{
+            ballDropDisableTimer = 0;
+        }
+
+        //shooter left timeout delays
+        if (shooterLeftState == ON){
+            shooterLeftOnTimer++;
+        }else{
+            shooterLeftOnTimer = 0;
+        }
+
+        if(shooterLeftState == DISABLE) {
+            shooterLeftDisableTimer++;
+        }else{
+            shooterLeftDisableTimer = 0;
+        }
+
+        //shooter right timeout delays
+        if (shooterRightState == ON){
+            shooterRightOnTimer++;
+        }else{
+            shooterRightOnTimer = 0;
+        }
+
+        if(shooterRightState == DISABLE) {
+            shooterRightDisableTimer++;
+        }else{
+            shooterRightDisableTimer = 0;
+        }
+
+       //grabber left timeout delays
+        if (grabberLeftState == ON){
+            grabberLeftOnTimer++;
+        }else{
+            grabberLeftOnTimer = 0;
+        }
+
+        if(grabberLeftState == DISABLE) {
+            grabberLeftDisableTimer++;
+        }else{
+            grabberLeftDisableTimer = 0;
+        }
+
+        //grabber right timeout delays
+        if (grabberRightState == ON){
+            grabberRightOnTimer++;
+        }else{
+            grabberRightOnTimer = 0;
+        }
+
+        if(grabberRightState == DISABLE) {
+            grabberRightDisableTimer++;
+        }else{
+            grabberRightDisableTimer = 0;
+        }
+
+
+    }//end timer routine
+
+    //balldropper timeout logic
+    if (ballDropState == ON && ballDropOnTimer == (50 * BALLDROP_TIMEOUT)){
+        ballDropState = DISABLE;
+        BALLDROPPER = OFF;
+    }else if (ballDropState == DISABLE && ballDropDisableTimer == (50 * BALLDROP_DISABLE_TIMEOUT)){
+        ballDropState = OFF;
+        BALLDROPPER = OFF;
+    }else if (ballDropState != DISABLE){
+        ballDropState = ((actuators & BALLDROPPER_MASK) > 0) ? ON:OFF;
+        BALLDROPPER = ((actuators & BALLDROPPER_MASK) > 0) ? ON:OFF;
+    }
+   
+    //shooterleft timeout logic
+    if (shooterLeftState == ON && shooterLeftOnTimer == (50 * SHOOTER_TIMEOUT)){
+        shooterLeftState = DISABLE;
+        SHOOTER_LEFT = OFF;
+    }else if (shooterLeftState == DISABLE && shooterLeftDisableTimer == SHOOTER_DISABLE_TIMEOUT){
+        shooterLeftState = OFF;
+        SHOOTER_LEFT = OFF;
+    }else if (shooterLeftState != DISABLE){
+        shooterLeftState = ((actuators & SHOOTER_LEFT_MASK) > 0) ? ON:OFF;
+        SHOOTER_LEFT = ((actuators & SHOOTER_LEFT_MASK) > 0) ? ON:OFF;
+    }
+
+    //shooterright timeout logic
+    if (shooterRightState == ON && shooterRightOnTimer == (50 * SHOOTER_TIMEOUT)){
+        shooterRightState = DISABLE;
+        SHOOTER_RIGHT = OFF;
+    }else if (shooterRightState == DISABLE && shooterRightDisableTimer == SHOOTER_DISABLE_TIMEOUT){
+        shooterRightState = OFF;
+        SHOOTER_RIGHT = OFF;
+    }else if (shooterRightState != DISABLE){
+        shooterRightState = ((actuators & SHOOTER_RIGHT_MASK) > 0) ? ON:OFF;
+        SHOOTER_RIGHT = ((actuators & SHOOTER_RIGHT_MASK) > 0) ? ON:OFF;
+    }
+
+
+    //grabberleft timeout logic
+    if (grabberLeftState == ON && grabberLeftOnTimer == (50 * GRABBER_TIMEOUT)){
+        grabberLeftState = DISABLE;
+        GRABBER_LEFT = OFF;
+    }else if (grabberLeftState == DISABLE && grabberLeftDisableTimer == GRABBER_DISABLE_TIMEOUT){
+        grabberLeftState = OFF;
+        GRABBER_LEFT = OFF;
+    }else if (grabberLeftState != DISABLE){
+        grabberLeftState = ((actuators & GRABBER_LEFT_MASK) > 0) ? ON:OFF;
+        GRABBER_LEFT = ((actuators & GRABBER_LEFT_MASK) > 0) ? ON:OFF;
+    }
+
+    //grabbberright timeout logic
+    if (grabberRightState == ON && grabberRightOnTimer == (50 * GRABBER_TIMEOUT)){
+        grabberRightState = DISABLE;
+        GRABBER_RIGHT = OFF;
+    }else if (grabberRightState == DISABLE && grabberRightDisableTimer == GRABBER_DISABLE_TIMEOUT){
+        grabberRightState = OFF;
+        GRABBER_RIGHT = OFF;
+    }else if (grabberRightState != DISABLE){
+        grabberRightState = ((actuators & GRABBER_RIGHT_MASK) > 0) ? ON:OFF;
+        GRABBER_RIGHT = ((actuators & GRABBER_RIGHT_MASK) > 0) ? ON:OFF;
     }
 
     }//end main loop

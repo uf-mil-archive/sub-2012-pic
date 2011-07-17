@@ -61,7 +61,6 @@ void UARTSendString(char* s)
     return;
 }
 
-
 void __attribute__((__interrupt__, auto_psv)) _U2RXInterrupt(void)
 {
     COM_UxRXIFLAG = 0;  // Clear the interrupt flag
@@ -71,14 +70,7 @@ void __attribute__((__interrupt__, auto_psv)) _U2RXInterrupt(void)
     if((COM_UxSTA & 0xC) > 0) return;
 
     //Get Byte from buffer
-    BYTE actuators = COM_UxRXREG;
-    UARTSendChar((char)actuators);
-
-    CTRL1 = ((actuators & ACTUATOR1_MASK) > 0) ? 1:0;
-    CTRL2 = ((actuators & ACTUATOR2_MASK) > 0) ? 1:0;
-    CTRL3 = ((actuators & ACTUATOR3_MASK) > 0) ? 1:0;
-    CTRL4 = ((actuators & ACTUATOR4_MASK) > 0) ? 1:0;
-    CTRL5 = ((actuators & ACTUATOR5_MASK) > 0) ? 1:0;
+    actuators = COM_UxRXREG;
 
     return;
 }
