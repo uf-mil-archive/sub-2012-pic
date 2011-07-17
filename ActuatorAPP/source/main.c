@@ -5,10 +5,11 @@
 #include "HardwareProfile.h"
 #include "cheesyUART.h"
 
-
 #define OFF     0
 #define ON      1
 #define DISABLE 2
+
+#define SEND_RATE 50        //in Hertz
 
 #define BALLDROPPER     CTRL1
 #define SHOOTER_LEFT    CTRL2
@@ -16,13 +17,15 @@
 #define GRABBER_LEFT    CTRL4
 #define GRABBER_RIGHT   CTRL5
 
+
+
 #define BALLDROP_TIMEOUT 5      //in seconds
-#define SHOOTER_TIMEOUT 5
-#define GRABBER_TIMEOUT 5 
+#define SHOOTER_TIMEOUT  5
+#define GRABBER_TIMEOUT  45
 
 #define BALLDROP_DISABLE_TIMEOUT 5      //in seconds
-#define SHOOTER_DISABLE_TIMEOUT 5      //in seconds
-#define GRABBER_DISABLE_TIMEOUT 5      //in seconds
+#define SHOOTER_DISABLE_TIMEOUT  5      //in seconds
+#define GRABBER_DISABLE_TIMEOUT  10     //in seconds
 
 #define BALLDROPPER_MASK    (1<<0)
 #define SHOOTER_LEFT_MASK   (1<<1)
@@ -89,15 +92,15 @@ int main(void)
     BYTE grabberLeftState   = OFF;
     BYTE grabberRightState  = OFF;
 
-    int ballDropOnTimer = 0;
-    int ballDropDisableTimer = 0;
-    int shooterLeftOnTimer = 0;
-    int shooterLeftDisableTimer = 0;
-    int shooterRightOnTimer = 0;
+    int ballDropOnTimer          = 0;
+    int ballDropDisableTimer     = 0;
+    int shooterLeftOnTimer       = 0;
+    int shooterLeftDisableTimer  = 0;
+    int shooterRightOnTimer      = 0;
     int shooterRightDisableTimer = 0;
-    int grabberLeftOnTimer = 0;
-    int grabberLeftDisableTimer = 0;
-    int grabberRightOnTimer = 0;
+    int grabberLeftOnTimer       = 0;
+    int grabberLeftDisableTimer  = 0;
+    int grabberRightOnTimer      = 0;
     int grabberRightDisableTimer = 0;
 
     /*LOOP*/
@@ -106,6 +109,7 @@ int main(void)
     if (timerFlag) {
         timerFlag = 0;
         UARTSendChar((char)LIMITSW);
+
 
         //ball Droper timeout delays
         if (ballDropState == ON){
@@ -128,7 +132,7 @@ int main(void)
         }
 
         if(shooterLeftState == DISABLE) {
-            shooterLeftDisableTimer++;
+           // shooterLeftDisableTimer++;
         }else{
             shooterLeftDisableTimer = 0;
         }
@@ -173,13 +177,15 @@ int main(void)
         }
 
 
+
     }//end timer routine
 
     //balldropper timeout logic
-    if (ballDropState == ON && ballDropOnTimer == (50 * BALLDROP_TIMEOUT)){
+
+    if (ballDropState == ON && ballDropOnTimer == (SEND_RATE * BALLDROP_TIMEOUT)){
         ballDropState = DISABLE;
         BALLDROPPER = OFF;
-    }else if (ballDropState == DISABLE && ballDropDisableTimer == (50 * BALLDROP_DISABLE_TIMEOUT)){
+    }else if (ballDropState == DISABLE && ballDropDisableTimer == (SEND_RATE * BALLDROP_DISABLE_TIMEOUT)){
         ballDropState = OFF;
         BALLDROPPER = OFF;
     }else if (ballDropState != DISABLE){
@@ -187,11 +193,14 @@ int main(void)
         BALLDROPPER = ((actuators & BALLDROPPER_MASK) > 0) ? ON:OFF;
     }
    
+
     //shooterleft timeout logic
-    if (shooterLeftState == ON && shooterLeftOnTimer == (50 * SHOOTER_TIMEOUT)){
+    if (shooterLeftState == ON && shooterLeftOnTimer == (SEND_RATE * SHOOTER_TIMEOUT)){
+        shooterLeftOnTimer = 0;
         shooterLeftState = DISABLE;
         SHOOTER_LEFT = OFF;
-    }else if (shooterLeftState == DISABLE && shooterLeftDisableTimer == SHOOTER_DISABLE_TIMEOUT){
+    }else if (shooterLeftState == DISABLE && shooterLeftDisableTimer == (SEND_RATE * SHOOTER_DISABLE_TIMEOUT)){
+        shooterLeftDisableTimer = 0;
         shooterLeftState = OFF;
         SHOOTER_LEFT = OFF;
     }else if (shooterLeftState != DISABLE){
@@ -199,11 +208,12 @@ int main(void)
         SHOOTER_LEFT = ((actuators & SHOOTER_LEFT_MASK) > 0) ? ON:OFF;
     }
 
+
     //shooterright timeout logic
-    if (shooterRightState == ON && shooterRightOnTimer == (50 * SHOOTER_TIMEOUT)){
+    if (shooterRightState == ON && shooterRightOnTimer == (SEND_RATE * SHOOTER_TIMEOUT)){
         shooterRightState = DISABLE;
         SHOOTER_RIGHT = OFF;
-    }else if (shooterRightState == DISABLE && shooterRightDisableTimer == SHOOTER_DISABLE_TIMEOUT){
+    }else if (shooterRightState == DISABLE && shooterRightDisableTimer == (SEND_RATE * SHOOTER_DISABLE_TIMEOUT)){
         shooterRightState = OFF;
         SHOOTER_RIGHT = OFF;
     }else if (shooterRightState != DISABLE){
@@ -213,10 +223,10 @@ int main(void)
 
 
     //grabberleft timeout logic
-    if (grabberLeftState == ON && grabberLeftOnTimer == (50 * GRABBER_TIMEOUT)){
+    if (grabberLeftState == ON && grabberLeftOnTimer == (SEND_RATE * GRABBER_TIMEOUT)){
         grabberLeftState = DISABLE;
         GRABBER_LEFT = OFF;
-    }else if (grabberLeftState == DISABLE && grabberLeftDisableTimer == GRABBER_DISABLE_TIMEOUT){
+    }else if (grabberLeftState == DISABLE && grabberLeftDisableTimer == (SEND_RATE * GRABBER_DISABLE_TIMEOUT)){
         grabberLeftState = OFF;
         GRABBER_LEFT = OFF;
     }else if (grabberLeftState != DISABLE){
@@ -225,10 +235,10 @@ int main(void)
     }
 
     //grabbberright timeout logic
-    if (grabberRightState == ON && grabberRightOnTimer == (50 * GRABBER_TIMEOUT)){
+    if (grabberRightState == ON && grabberRightOnTimer == (SEND_RATE * GRABBER_TIMEOUT)){
         grabberRightState = DISABLE;
         GRABBER_RIGHT = OFF;
-    }else if (grabberRightState == DISABLE && grabberRightDisableTimer == GRABBER_DISABLE_TIMEOUT){
+    }else if (grabberRightState == DISABLE && grabberRightDisableTimer == (SEND_RATE * GRABBER_DISABLE_TIMEOUT)){
         grabberRightState = OFF;
         GRABBER_RIGHT = OFF;
     }else if (grabberRightState != DISABLE){
