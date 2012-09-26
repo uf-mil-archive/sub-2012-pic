@@ -85,12 +85,13 @@ int main(void)
     LED = LED_OFF;              // initial state of debug LED is off
 
     // Sates for Actuators
-   
+
     BYTE ballDropState      = OFF;
     BYTE shooterLeftState   = OFF;
     BYTE shooterRightState  = OFF;
     BYTE grabberLeftState   = OFF;
     BYTE grabberRightState  = OFF;
+    BYTE states             = OFF;
 
     int ballDropOnTimer          = 0;
     int ballDropDisableTimer     = 0;
@@ -105,11 +106,11 @@ int main(void)
 
     /*LOOP*/
     for(;;){
-     
+
+        states = (LIMITSW << 0) | (BALLDROPPER << 1) | (SHOOTER_LEFT << 2) | (SHOOTER_RIGHT << 3) | (GRABBER_LEFT << 4) | (GRABBER_RIGHT << 5);
     if (timerFlag) {
         timerFlag = 0;
-        UARTSendChar((char)LIMITSW);
-
+        UARTSendChar( (char)states);
 
         //ball Droper timeout delays
         if (ballDropState == ON){

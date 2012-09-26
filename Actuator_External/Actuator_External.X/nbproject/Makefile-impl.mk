@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=BatterPodAPP
+PROJECTNAME=Actuator_External.X
 
 # Active Configuration
 DEFAULTCONF=default
